@@ -7,8 +7,5 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Matthew Butler",
-  "license": "MIT",
-  "dependencies": {
-    "lodash": "^4.17.21"
-  }
+  "license": "MIT"
 }

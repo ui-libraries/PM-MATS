@@ -1,4 +1,34 @@
-const fs = require('fs');
+import { data } from './pm'
+import { SVG } from '@svgdotjs/svg.js'
+
+
+class NodeVisualizer {
+  constructor(node) {
+    this.node = node;
+  }
+
+  draw(containerId, color) {
+    // Define circle attributes
+    const circleRadius = 10;
+    const circleX = 15;
+    const circleY = 15;
+
+    const draw = SVG().addTo(`#${containerId}`).size('100%', '100%');
+    const circle = draw.circle(circleRadius * 2).move(circleX, circleY).fill('red');
+
+    const text = draw.text(this.node.properties.number.toString()).font({ fill: 'black', family: 'Inconsolata', size: 12 });
+    const textBox = text.bbox();    
+
+    // Calculate positions for centering the text above the circle. 
+    const textX = circleX + circleRadius - textBox.width / 2;
+    const textY = circleY - textBox.height;
+    text.move(textX, textY);
+    
+    circle.on('click', () => {
+        console.log(`Node ${this.node.id} was clicked!`);
+    });
+  }
+}
 
 class Node {
     constructor(id, properties = {}) {
@@ -18,18 +48,14 @@ class Node {
 }
 
 class Graph {
-    constructor(filePath) {
+    constructor() {
         this.nodes = {};
-        if (filePath) {
-            this._loadJson(filePath);
-        }
+        this._loadJson();
+        
     }
 
-    _loadJson(filePath) {
-        let data = fs.readFileSync(filePath);
-        let jsonData = JSON.parse(data);
-    
-        jsonData.forEach(obj => {
+    _loadJson() {   
+        data.forEach(obj => {
             if (obj.type === "node") {
                 this._insertNode(obj);
             } else if (obj.type === "relationship" && obj.label === "Proves") {
@@ -112,6 +138,7 @@ class Graph {
         return parentId;
     }
 
+    /*
     toJsonFile(filename) {
         let jsonContent = JSON.stringify(this.nodes, null, 2);
     
@@ -122,7 +149,7 @@ class Graph {
             }
             console.log("JSON file has been saved.");
         });
-    }
+    } */
 
     getNodesByProperties(desiredProperties) {
         let matchingNodes = [];
@@ -149,9 +176,12 @@ class Graph {
 }
 
 let pm = new Graph('pm.json');
-let node = pm.getNodeByNumber('2.5');
+let node = pm.getNodeByNumber('2.521');
 let children = pm.getChildrenIdsByNumber('2.5');
 console.log(children);
 
 console.log(pm.getParentIdByNumber('2.37'));
 console.log(pm.getNodesByProperties({"page":"105"}));
+
+let visualizer = new NodeVisualizer(node);
+visualizer.draw('canvas');
