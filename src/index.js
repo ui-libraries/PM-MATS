@@ -3,23 +3,49 @@ import { SVG } from '@svgdotjs/svg.js'
 
 
 class NodeVisualizer {
-  constructor(node) {
+  constructor(node, x = 0, y = 0) {
     this.node = node;
+    this.x = x;
+    this.y = y;
+  }
+
+  getLevel() {
+    const decimalPart = this.node.properties.number.split('.')[1];
+    return decimalPart ? decimalPart.length : 0;
+  }
+
+  getPosition() {
+    // Define constants for vertical and horizontal spacing
+    const VERTICAL_SPACING = 50;
+    const HORIZONTAL_SPACING = 50;
+
+    // Calculate new position based on level
+    const level = this.getLevel();
+
+    if (level === 0) {
+      // If the node is a root node (level 0), leave its position as is
+      return [this.x, this.y];
+    } else if (level % 2 === 1) {
+      // If the level is odd, position the node vertically
+      return [this.x, this.y + VERTICAL_SPACING];
+    } else {
+      // If the level is even, position the node horizontally
+      return [this.x + HORIZONTAL_SPACING, this.y];
+    }
   }
 
   draw(containerId, color) {
+    const [x, y] = this.getPosition();
     // Define circle attributes
     const circleRadius = 10;
     const circleX = 15;
     const circleY = 15;
 
     const draw = SVG().addTo(`#${containerId}`).size('100%', '100%');
-    const circle = draw.circle(circleRadius * 2).move(circleX, circleY).fill('red');
-
+    const circle = draw.circle(circleRadius * 2).move(circleX, circleY).fill('red').move(x, y);
     const text = draw.text(this.node.properties.number.toString()).font({ fill: 'black', family: 'Inconsolata', size: 12 });
-    const textBox = text.bbox();    
-
-    // Calculate positions for centering the text above the circle. 
+    
+    const textBox = text.bbox(); 
     const textX = circleX + circleRadius - textBox.width / 2;
     const textY = circleY - textBox.height;
     text.move(textX, textY);
@@ -177,6 +203,7 @@ class Graph {
 
 let pm = new Graph('pm.json');
 let node = pm.getNodeByNumber('2.521');
+let node2 = pm.getNodeByNumber('2.52');
 let children = pm.getChildrenIdsByNumber('2.5');
 console.log(children);
 
@@ -184,4 +211,7 @@ console.log(pm.getParentIdByNumber('2.37'));
 console.log(pm.getNodesByProperties({"page":"105"}));
 
 let visualizer = new NodeVisualizer(node);
+let visualizer2 = new NodeVisualizer(node2);
 visualizer.draw('canvas');
+visualizer2.draw('canvas');
+console.log(visualizer.getLevel())
