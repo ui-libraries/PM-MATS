@@ -1,11 +1,49 @@
 {
-  "name": "principia-data",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "skeleton",
+  "version": "0.1.0",
+  "description": "A barebones starter project for modern javascript development",
+  "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "webpack --config webpack.config.js",
+    "prepublishOnly": "npm run build",
+    "watch": "webpack --watch",
+    "webpack": "webpack",
+    "start": "webpack --watch & webpack-dev-server --open-page 'webpack-dev-server/dist'",
+    "test": "mocha --require babel-core/register --require ./test/config.js --recursive",
+    "test:watch": "npm test -- --watch",
+    "document": "documentation build src/** -f html -o docs --shallow"
   },
   "author": "Matthew Butler",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-preset-env": "^1.7.0",
+    "chai": "^4.2.0",
+    "documentation": "^14.0.1",
+    "mocha": "^10.0.0",
+    "webpack": "^4.28.4",
+    "webpack-cli": "^3.2.1",
+    "webpack-dev-server": "^3.7.2"
+  },
+  "babel": {
+    "presets": [
+      [
+        "env",
+        {
+          "targets": {
+            "browsers": [
+              ">0.25%",
+              "not ie 11",
+              "not op_mini all"
+            ]
+          }
+        }
+      ]
+    ]
+  },
+  "dependencies": {
+    "@svgdotjs/svg.js": "^3.2.0"
+  }
 }
