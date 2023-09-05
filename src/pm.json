@@ -1,4 +1,4 @@
-export data = [{"type":"node","id":"0","labels":["Prop"],"properties":{"volume":"1","chapter":"1","number":"1.01","part":"1","section":"A","page":"94","type":"Df"}},
+[{"type":"node","id":"0","labels":["Prop"],"properties":{"volume":"1","chapter":"1","number":"1.01","part":"1","section":"A","page":"94","type":"Df"}},
 {"type":"node","id":"1","labels":["Prop"],"properties":{"volume":"1","chapter":"1","number":"1.1","part":"1","section":"A","page":"94","type":"Df"}},
 {"type":"node","id":"2","labels":["Prop"],"properties":{"volume":"1","chapter":"1","number":"1.11","part":"1","section":"A","page":"95","type":"Pp"}},
 {"type":"node","id":"3","labels":["Prop"],"properties":{"volume":"1","chapter":"1","number":"1.2","part":"1","name":"Taut","section":"A","page":"96","type":"Pp"}},
