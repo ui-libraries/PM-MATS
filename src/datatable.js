@@ -25,7 +25,7 @@ export let table = new DataTable('#principia-table', {
                 // Create input element
                 let input = document.createElement('input')
                 input.placeholder = title;
-                column.footer().replaceChildren(input)
+                column.header().replaceChildren(input)
  
                 // Event listener for user input
                 input.addEventListener('keyup', () => {
