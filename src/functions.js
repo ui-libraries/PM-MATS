@@ -2,63 +2,68 @@ import { data } from './pm'
 import { SVG } from '@svgdotjs/svg.js'
 
 export class NodeVisualizer {
-  constructor(node, x = 0, y = 0) {
-    this.node = node
-    this.x = x
-    this.y = y
-  }
-
-  getLevel() {
-    const decimalPart = this.node.properties.number.split('.')[1]
-    return decimalPart ? decimalPart.length : 0
-  }
-
-  getPosition() {
-    // Define constants for vertical and horizontal spacing
-    const VERTICAL_SPACING = 50
-    const HORIZONTAL_SPACING = 50
-
-    // Calculate new position based on level
-    const level = this.getLevel()
-
-    if (level === 0) {
-      // If the node is a root node (level 0), leave its position as is
-      return [this.x, this.y]
-    } else if (level % 2 === 1) {
-      // If the level is odd, position the node vertically
-      return [this.x, this.y + VERTICAL_SPACING]
-    } else {
-      // If the level is even, position the node horizontally
-      return [this.x + HORIZONTAL_SPACING, this.y]
+    constructor(node, x = 0, y = 0) {
+        this.node = node
+        this.x = x
+        this.y = y
     }
-  }
 
-  draw(containerId, color) {
-    const [x, y] = this.getPosition()
-    // Define circle attributes
-    const circleRadius = 10
-  
-    const draw = SVG().addTo(`#${containerId}`).size('100%', '100%')
-    const circle = draw.circle(circleRadius * 2).move(x, y).fill(color || 'red')
-    const text = draw.text(this.node.properties.number.toString()).font({ fill: 'black', family: 'Inconsolata', size: 12 })
-    
-    // Get the text box to find its dimensions
-    const textBox = text.bbox() 
-  
-    // Calculate positions for centering the text above the circle
-    const textX = x + circleRadius - textBox.width / 2
-    const textY = y - textBox.height
-  
-    // Move the text to the calculated position
-    text.move(textX, textY)
-    
-    circle.on('click', () => {
-        console.log(`Node ${this.node.id} was clicked!`)
-    })
-  }}
+    getLevel() {
+        const decimalPart = this.node.properties.number.split('.')[1]
+        return decimalPart ? decimalPart.length : 0
+    }
+
+    getPosition() {
+        // Define constants for vertical and horizontal spacing
+        const VERTICAL_SPACING = 50
+        const HORIZONTAL_SPACING = 50
+
+        // Calculate new position based on level
+        const level = this.getLevel()
+
+        if (level === 0) {
+            // If the node is a root node (level 0), leave its position as is
+            return [this.x, this.y]
+        } else if (level % 2 === 1) {
+            // If the level is odd, position the node vertically
+            return [this.x, this.y + VERTICAL_SPACING]
+        } else {
+            // If the level is even, position the node horizontally
+            return [this.x + HORIZONTAL_SPACING, this.y]
+        }
+    }
+
+    draw(containerId, color) {
+        const [x, y] = this.getPosition()
+        // Define circle attributes
+        const circleRadius = 10
+
+        const draw = SVG().addTo(`#${containerId}`).size('100%', '100%')
+        const circle = draw.circle(circleRadius * 2).move(x, y).fill(color || 'red')
+        const text = draw.text(this.node.properties.number.toString()).font({
+            fill: 'black',
+            family: 'Inconsolata',
+            size: 12
+        })
+
+        // Get the text box to find its dimensions
+        const textBox = text.bbox()
+
+        // Calculate positions for centering the text above the circle
+        const textX = x + circleRadius - textBox.width / 2
+        const textY = y - textBox.height
+
+        // Move the text to the calculated position
+        text.move(textX, textY)
+
+        circle.on('click', () => {
+            console.log(`Node ${this.node.id} was clicked!`)
+        })
+    }
+}
   
 
-class Node {
+export class Node {
     constructor(id, properties = {}) {
         this.id = id
         this.properties = properties
