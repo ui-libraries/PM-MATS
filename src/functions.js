@@ -1,18 +1,39 @@
 import { data } from './pm'
 import { SVG } from '@svgdotjs/svg.js'
 
+/**
+ * Class to visualize a Node object in 2D space.
+ * It can calculate the position of a node based on its level, and draw it on a given SVG container.
+ */
 export class NodeVisualizer {
+    /**
+     * Creates a new NodeVisualizer object.
+     * @param {Object} node - The Node object to visualize.
+     * @param {number} [x=0] - The initial x-coordinate.
+     * @param {number} [y=0] - The initial y-coordinate.
+     */
     constructor(node, x = 0, y = 0) {
         this.node = node
         this.x = x
         this.y = y
     }
 
+    /**
+     * Get the level of the node based on the decimal part of its number property.
+     * @return {number} The level of the node.
+     */
     getLevel() {
         const decimalPart = this.node.properties.number.split('.')[1]
         return decimalPart ? decimalPart.length : 0
     }
 
+    /**
+     * Calculate the position [x, y] of the node based on its level.
+     * - Level 0 nodes remain at their initial position.
+     * - Odd level nodes are positioned vertically.
+     * - Even level nodes are positioned horizontally.
+     * @return {Array.<number, number>} An array containing the new x and y coordinates.
+     */
     getPosition() {
         // Define constants for vertical and horizontal spacing
         const VERTICAL_SPACING = 50
@@ -32,7 +53,15 @@ export class NodeVisualizer {
             return [this.x + HORIZONTAL_SPACING, this.y]
         }
     }
-
+    
+    /**
+     * Draw the node in the given SVG container.
+     * - Creates a circle at the node's position.
+     * - Adds a number label above the circle.
+     * - Sets up a click event listener on the circle.
+     * @param {string} containerId - The id of the SVG container where the node will be drawn.
+     * @param {string} [color] - The color to fill the circle. Defaults to 'red'.
+     */
     draw(containerId, color) {
         const [x, y] = this.getPosition()
         // Define circle attributes

@@ -1,41 +1,7 @@
 import { expect } from 'chai'
-import sinon from 'sinon'
-import { JSDOM } from 'jsdom'
 import { NodeVisualizer, Node, Graph } from '../src/functions'
-import { data } from '../src/pm'
 
-// Mock the global document and window objects
-const dom = new JSDOM('<!doctype html><html><body></body></html>')
-global.document = dom.window.document
-global.window = dom.window
-
-// Describe the NodeVisualizer tests
-/*
 describe('NodeVisualizer', () => {
-
-    let svgMock
-    beforeEach(() => {
-        svgMock = sinon.stub().returns({
-            addTo: sinon.stub().returnsThis(),
-            size: sinon.stub().returnsThis(),
-            circle: sinon.stub().returnsThis(),
-            move: sinon.stub().returnsThis(),
-            fill: sinon.stub().returnsThis(),
-            text: sinon.stub().returns({
-                font: sinon.stub().returnsThis(),
-                bbox: sinon.stub().returns({
-                    width: 10,
-                    height: 10
-                }),
-                move: sinon.stub().returnsThis()
-            }),
-            on: sinon.stub().returnsThis()
-        })
-
-        // Mock the SVG() function globally
-        global.SVG = svgMock
-    })
-
     describe('getLevel', () => {
         it('should return 0 for integer numbers', () => {
             const node = { properties: { number: '3' } }
@@ -69,19 +35,7 @@ describe('NodeVisualizer', () => {
             expect(visualizer.getPosition()).to.deep.equal([60, 20])
         })
     })
-
-    describe('draw', () => {
-        it('should draw a circle and text elements', () => {
-            const node = { id: '1', properties: { number: '42' } }
-            const visualizer = new NodeVisualizer(node)
-
-            visualizer.draw('containerId', 'blue')
-
-            expect(svgMock.called).to.be.true
-        })
-    })
 })
-*/
 
 describe('Node', () => {
     let nodeA, nodeB
@@ -172,7 +126,5 @@ describe('Graph', () => {
       expect(nodes).to.have.lengthOf(0)
     })
   })
-
-  // Additional test cases for edge cases, invalid inputs, etc.
 })
 

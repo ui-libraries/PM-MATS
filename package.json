@@ -1,5 +1,5 @@
 {
-  "name": "roll",
+  "name": "principia",
   "module": "index.js",
   "type": "module",
   "scripts": {
@@ -8,9 +8,7 @@
   },
   "devDependencies": {
     "chai": "^4.3.9",
-    "documentation": "^14.0.2",
-    "jsdom": "^22.1.0",
-    "sinon": "^16.0.0"
+    "documentation": "^14.0.2"
   },
   "dependencies": {
     "@svgdotjs/svg.js": "svgdotjs/svg.js",
