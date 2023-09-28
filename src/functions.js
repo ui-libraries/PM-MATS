@@ -165,7 +165,7 @@ export class Graph {
         })
     
         if (parentId === null) {
-            console.log(`No parent node exists for the number ${number}`)
+            // console.log(`No parent node exists for the number ${number}`)
         }
     
         return parentId

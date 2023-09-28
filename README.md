@@ -1,10 +1,8 @@
-# skeleton
-A barebones starter project for modern javascript development
+# roll
+A no-fillings bun starter project
 
-babel + webpack + mocha + chai + documentationjs
+`bun start` - compile source and watch
 
-`npm start` - compile source and run dev server
+`bun test` - run unit tests
 
-`npm test` - run unit tests
-
-`npm run-script document` - generate docs for all comments in valid JSDoc format
+`bun document` - generate docs for all comments in valid JSDoc format
