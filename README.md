@@ -2,9 +2,11 @@
 principia mathematica editorial apparatus
 
 # roll
-A no-fillings bun starter project
+A no-fillings bun starter project. https://bun.sh/
 
-`bun start` - compile source and watch
+`bun install` - install project dependencies
+
+`bun start` - compile source
 
 `bun test` - run unit tests
 
