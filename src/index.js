@@ -21,3 +21,4 @@ children: 51,52,54,55,56,57
 Array(5)0: Node {id: '36', properties: {…}, proves: Array(5), provenBy: Array(4)}1: Node {id: '37', properties: {…}, proves: Array(0), provenBy: Array(0)}2: Node {id: '38', properties: {…}, proves: Array(0), provenBy: Array(3)}3: Node {id: '39', properties: {…}, proves: Array(0), provenBy: Array(3)}4: Node {id: '40', properties: {…}, proves: Array(6), provenBy: Array(3)}length: 5[[Prototype]]: Array(0)
 3
 */
+

@@ -35,25 +35,20 @@ export class NodeVisualizer {
      * @return {Array.<number, number>} An array containing the new x and y coordinates.
      */
     getPosition() {
-        // Define constants for vertical and horizontal spacing
         const VERTICAL_SPACING = 50
         const HORIZONTAL_SPACING = 50
 
-        // Calculate new position based on level
         const level = this.getLevel()
 
         if (level === 0) {
-            // If the node is a root node (level 0), leave its position as is
             return [this.x, this.y]
         } else if (level % 2 === 1) {
-            // If the level is odd, position the node vertically
             return [this.x, this.y + VERTICAL_SPACING]
         } else {
-            // If the level is even, position the node horizontally
             return [this.x + HORIZONTAL_SPACING, this.y]
         }
     }
-    
+
     /**
      * Draw the node in the given SVG container.
      * - Creates a circle at the node's position.
@@ -64,7 +59,6 @@ export class NodeVisualizer {
      */
     draw(containerId, color) {
         const [x, y] = this.getPosition()
-        // Define circle attributes
         const circleRadius = 10
 
         const draw = SVG().addTo(`#${containerId}`).size('100%', '100%')
@@ -75,14 +69,10 @@ export class NodeVisualizer {
             size: 12
         })
 
-        // Get the text box to find its dimensions
         const textBox = text.bbox()
-
-        // Calculate positions for centering the text above the circle
         const textX = x + circleRadius - textBox.width / 2
         const textY = y - textBox.height
 
-        // Move the text to the calculated position
         text.move(textX, textY)
 
         circle.on('click', () => {
@@ -90,9 +80,23 @@ export class NodeVisualizer {
         })
     }
 }
+
   
 
+/**
+ * Represents a Node in a graph, including its properties and relationships.
+ * @class
+ */
 export class Node {
+    /**
+     * Creates a new Node.
+     * @param {string} id - The unique identifier for the Node.
+     * @param {Object} [properties={}] - Additional properties of the Node.
+     * @property {string} id - The unique identifier for the Node.
+     * @property {Object} properties - Additional properties of the Node.
+     * @property {Array<string>} proves - An array of Node IDs that this Node proves.
+     * @property {Array<string>} provenBy - An array of Node IDs that prove this Node.
+     */
     constructor(id, properties = {}) {
         this.id = id
         this.properties = properties
@@ -100,22 +104,42 @@ export class Node {
         this.provenBy = []
     }
 
+    /**
+     * Adds a Node ID to the 'proves' array, indicating a directed edge from this Node to another.
+     * @param {Node} node - The Node that this Node proves.
+     */
     addProof(node) {
         this.proves.push(node.id)
     }
 
+    /**
+     * Adds a Node ID to the 'provenBy' array, indicating a directed edge from another Node to this Node.
+     * @param {Node} node - The Node that proves this Node.
+     */
     addProofFor(node) {
         this.provenBy.push(node.id)
     }
 }
 
+/**
+ * Represents a Graph containing nodes and their relationships.
+ * @class
+ */
 export class Graph {
+        /**
+     * Creates a new Graph and loads data into it.
+     * @property {Object<string, Node>} nodes - Object storing nodes, indexed by their IDs.
+     */
     constructor() {
         this.nodes = {}
-        this._loadJson()
-        
+        this._loadJson()   
     }
 
+        /**
+     * Private method to load JSON data into the Graph.
+     * Populates the nodes and sets up relationships.
+     * @private
+     */
     _loadJson() {   
         data.forEach(obj => {
             if (obj.type === "node") {
@@ -132,11 +156,21 @@ export class Graph {
         })
     }
 
+    /**
+     * Inserts a new node into the Graph.
+     * @param {Object} obj - Object representing the node.
+     * @private
+     */
     _insertNode(obj) {
         let node = new Node(obj.id, obj.properties)
         this.nodes[node.id] = node
     }
 
+    /**
+     * Retrieves a Node by its number property.
+     * @param {string} number - The number property to look for.
+     * @returns {Node|null} The Node with the matching number or null.
+     */
     getNodeByNumber(number) {
         for (let id in this.nodes) {
             let node = this.nodes[id]
@@ -147,10 +181,20 @@ export class Graph {
         return null
     }
 
+    /**
+     * Retrieves a Node by its ID.
+     * @param {string} id - The ID of the node.
+     * @returns {Node|null} The Node with the matching ID or null.
+     */
     getNodeById(id) {
         return this.nodes[id] || null
     }
 
+    /**
+     * Gets children IDs based on the node's number.
+     * @param {string} number - The number property of the parent node.
+     * @returns {Array<string>} Array of IDs of child nodes.
+     */
     getChildrenIdsByNumber(number) {
         let childrenIds = []
     
@@ -173,6 +217,11 @@ export class Graph {
         return childrenIds
     }
 
+    /**
+     * Gets the parent ID of a node based on its number.
+     * @param {string} number - The number property of the node.
+     * @returns {string|null} The ID of the parent node or null.
+     */
     getParentIdByNumber(number) {
         let inputNodeExists = Object.values(this.nodes).some(node => node.properties.number === number)
         if (!inputNodeExists) {
@@ -213,6 +262,11 @@ export class Graph {
         })
     } */
 
+    /**
+     * Gets nodes that match specified properties.
+     * @param {Object} desiredProperties - Object containing properties to match.
+     * @returns {Array<Node>} An array of Nodes that match the desired properties.
+     */
     getNodesByProperties(desiredProperties) {
         let matchingNodes = []
     
