@@ -172,7 +172,7 @@ describe('Graph', () => {
             expect(node201).to.have.property('vertical').that.is.an('array')
             expect(node201.horizontal).to.include.members(['2.02', '2.03', '2.04', '2.05', '2.06', '2.07', '2.08'])
             expect(node201.vertical).to.include.members(['2.11', '2.21', '2.31', '2.41', '2.51', '2.61'])
-            //fs.writeFileSync('adjacencyList.json', JSON.stringify(adjacencyList, null, 4))
+            fs.writeFileSync('adjacencyList.json', JSON.stringify(adjacencyList, null, 4))
         })
     })
     describe('generateLowestNumbers', () => {

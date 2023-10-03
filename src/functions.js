@@ -317,54 +317,95 @@ export class Graph {
     createAdjacencyList() {
         const adjList = {}
         const allNumbers = Object.values(this.nodes).map(node => node.properties.number)
-
+    
+        // Create a set of ghost nodes for integral values
+        const ghostNodes = new Set(allNumbers.map(num => num.split('.')[0]))
+    
         Object.values(this.nodes).forEach(node => {
             const nodeNumber = node.properties.number
             const horizontal = []
             const vertical = []
-
-            const [nodeIntegral, nodeDecimal] = nodeNumber.split(".")
+    
+            const [nodeIntegral, nodeDecimal] = nodeNumber.split('.')
             const isNodeEvenDecimal = nodeDecimal.length % 2 === 0
-
+    
+            // If the node has one decimal place, add it to the vertical list of its corresponding ghost node
+            if (nodeDecimal.length === 1) {
+                if (!adjList[nodeIntegral]) {
+                    adjList[nodeIntegral] = { horizontal: [], vertical: [] }
+                }
+                adjList[nodeIntegral].vertical.push(nodeNumber)
+            }
+    
             allNumbers.forEach(otherNumber => {
-                if (nodeNumber === otherNumber) return // Skip self
-
-                const [otherIntegral, otherDecimal] = otherNumber.split(".")
+                if (nodeNumber === otherNumber) return
+    
+                const [otherIntegral, otherDecimal] = otherNumber.split('.')
                 const isOtherEvenDecimal = otherDecimal.length % 2 === 0
-
+    
+                // Special case: If a number has only one decimal place
+                if (nodeDecimal.length === 1 && otherIntegral === nodeIntegral) {
+                    if (otherDecimal.startsWith(nodeDecimal)) {
+                        horizontal.push(otherNumber)
+                    }
+                    if (otherDecimal.length === 1 && nodeDecimal !== otherDecimal) {
+                        vertical.push(otherNumber)
+                    }
+                }
+    
                 if (isNodeEvenDecimal && isOtherEvenDecimal) {
-                    // Check for horizontal neighbors
+                    // Horizontal neighbors
                     if (nodeIntegral === otherIntegral) {
                         const nodePrefix = nodeDecimal.slice(0, -1)
                         const otherPrefix = otherDecimal.slice(0, -1)
-
+    
                         if (nodePrefix === otherPrefix && nodeDecimal !== otherDecimal) {
                             horizontal.push(otherNumber)
                         }
                     }
-
-                    // Check for vertical neighbors
+    
+                    // Vertical neighbors
                     if (nodeIntegral === otherIntegral) {
                         const nodeFirstDigit = nodeDecimal.slice(0, 1)
                         const otherFirstDigit = otherDecimal.slice(0, 1)
                         const nodeSuffix = nodeDecimal.slice(1)
                         const otherSuffix = otherDecimal.slice(1)
-
+    
                         if (nodeFirstDigit !== otherFirstDigit && nodeSuffix === otherSuffix) {
                             vertical.push(otherNumber)
                         }
                     }
                 }
             })
-
+    
             adjList[nodeNumber] = {
                 horizontal,
                 vertical
             }
         })
-
+    
+        // Add horizontal children for ghost nodes
+        ghostNodes.forEach(ghostNode => {
+            if (!adjList[ghostNode]) {
+                adjList[ghostNode] = { horizontal: [], vertical: [] }
+            }
+    
+            allNumbers.forEach(otherNumber => {
+                const [otherIntegral, otherDecimal] = otherNumber.split('.')
+                const firstDecimalDigit = otherDecimal[0]
+    
+                if (otherIntegral === ghostNode && firstDecimalDigit === '0' && otherDecimal.length % 2 === 0) {
+                    adjList[ghostNode].horizontal.push(otherNumber)
+                }
+            })
+        })
+    
         return adjList
     }
+    
+    
+    
+    
 
     /**
      * Generates the lowest possible decimal number for each whole number in the graph.
