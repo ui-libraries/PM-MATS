@@ -62,27 +62,47 @@ export class NodeVisualizer {
      * @param {string} [color] - The color to fill the circle. Defaults to 'red'.
      */
     draw(containerId, color) {
-        const [x, y] = this.getPosition()
-        const circleRadius = 10
-
-        const draw = SVG().addTo(`#${containerId}`).size('100%', '100%')
-        const circle = draw.circle(circleRadius * 2).move(x, y).fill(color || 'red')
+        // Create a new SVG element inside the specified container
+        const draw = SVG().addTo(`#${containerId}`);
+        
+        // Add a circle element
+        const circleRadius = 10;
+        const circle = draw.circle(circleRadius * 2).move(this.x, this.y).fill(color || 'red');
+      
+        // Add a text element
         const text = draw.text(this.node.properties.number.toString()).font({
-            fill: 'black',
-            family: 'Inconsolata',
-            size: 12
-        })
-
-        const textBox = text.bbox()
-        const textX = x + circleRadius - textBox.width / 2
-        const textY = y - textBox.height
-
-        text.move(textX, textY)
-
+          fill: 'black',
+          family: 'Inconsolata',
+          size: 12
+        });
+      
+        // Calculate the text position
+        const textBox = text.bbox();
+        const textX = this.x + circleRadius - textBox.width / 2;
+        const textY = this.y - textBox.height;
+        
+        // Move the text to its calculated position
+        text.move(textX, textY);
+      
+        // Calculate the bounding box for the SVG content
+        const bbox = draw.bbox();
+        
+        // Resize the SVG and its viewbox to match the bounding box
+        draw.size(bbox.width, bbox.height).viewbox(bbox.x, bbox.y, bbox.width, bbox.height);
+        
+        // Update the SVG element's style to exactly fit its content and place it absolutely
+        draw.node.style.width = `${bbox.width}px`;
+        draw.node.style.height = `${bbox.height}px`;
+        draw.node.style.position = 'absolute';
+        draw.node.style.left = `${this.x}px`;
+        draw.node.style.top = `${this.y}px`;
+      
+        // Attach a click event listener to the circle
         circle.on('click', () => {
-            console.log(`Node ${this.node.id} was clicked!`)
-        })
-    }
+          console.log(`Node ${this.node.properties.number} was clicked! At x: ${this.x}, y: ${this.y}`);
+        });
+      }
+      
 }
 
 
@@ -432,3 +452,70 @@ export class Graph {
     } 
 
 }
+
+export class GraphVisualizer {
+  constructor(graph, adjacencyList) {
+    this.graph = graph
+    this.adjacencyList = adjacencyList
+    this.coordinates = {}  // To store x, y coordinates of nodes
+  }
+
+  visualize() {
+    let x = 0  // Initialize x-coordinate
+    const yForWholeNumbers = 0  // y-coordinate for whole number "ghost nodes"
+    let y  // y-coordinate for other nodes
+    const horizontalSpacing = 50  // 50-pixel spacing between horizontal nodes
+    const verticalSpacing = 50  // 50-pixel spacing between vertical nodes
+    const columnSpacing = 70  // 70-pixel spacing between columns
+
+    // Sort the keys of adjacencyList numerically
+    const sortedRootNumbers = Object.keys(this.adjacencyList).sort((a, b) => parseFloat(a) - parseFloat(b))
+
+    for (const rootNumber of sortedRootNumbers) {
+      if (!rootNumber.includes('.')) {  // Only consider whole numbers
+
+        // Reset y-coordinate for new whole number
+        y = yForWholeNumbers
+
+        // Place the ghost node
+        this.coordinates[rootNumber] = { x, y }
+        
+        // Initialize the furthest x for this column as the x of the ghost node
+        let furthestX = x;
+
+        // Place nodes in the horizontal list
+        this.adjacencyList[rootNumber].horizontal.forEach(neighborNumber => {
+          x += horizontalSpacing
+          this.coordinates[neighborNumber] = { x, y }
+          const node = this.graph.getNodeByNumber(neighborNumber)
+          new NodeVisualizer(node, x, y).draw('canvas')  // Replace 'canvas' with actual container ID if needed
+
+          // Update the furthest x for this column
+          furthestX = Math.max(furthestX, x);
+        })
+
+        // Reset y-coordinate for vertical list and x-coordinate back to ghost node
+        y = yForWholeNumbers
+        x = this.coordinates[rootNumber].x
+
+        // Place nodes in the vertical list
+        this.adjacencyList[rootNumber].vertical.forEach(neighborNumber => {
+          y += verticalSpacing
+          this.coordinates[neighborNumber] = { x, y }
+          const node = this.graph.getNodeByNumber(neighborNumber)
+          new NodeVisualizer(node, x, y).draw('canvas')  // Replace 'canvas' with actual container ID if needed
+        })
+
+        // Set x for the next column based on the furthest x in the current column
+        x = furthestX + columnSpacing;
+      }
+    }
+    
+    return this.coordinates
+  }
+}
+
+  
+  
+
+  
