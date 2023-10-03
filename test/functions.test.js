@@ -175,4 +175,16 @@ describe('Graph', () => {
             //fs.writeFileSync('adjacencyList.json', JSON.stringify(adjacencyList, null, 4))
         })
     })
+    describe('generateLowestNumbers', () => {
+        it('should return the lowest number for each integral', () => {
+            const lowestNumbers = graph.generateLowestNumbers()
+            expect(lowestNumbers).to.include({
+                '1': '1.01',
+                '2': '2.01',
+                '3': '3.01',
+                '4': '4.01',
+                '5': '5.1'
+            })
+        })
+    })
 })

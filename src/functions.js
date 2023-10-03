@@ -366,4 +366,28 @@ export class Graph {
         return adjList
     }
 
+    /**
+     * Generates the lowest possible decimal number for each whole number in the graph.
+     * Assumes all numbers in the graph have a decimal part (e.g., no "1", "2", "3", etc.).
+     *
+     * @returns {Object} An object mapping each whole number to its lowest possible decimal extension.
+     */
+    generateLowestNumbers() {
+        const lowestNumbers = {}
+        const allNumbers = Object.values(this.nodes).map(node => node.properties.number)
+
+        allNumbers.forEach(number => {
+            const [integral] = number.split(".")
+            if (!lowestNumbers[integral]) {
+                lowestNumbers[integral] = number
+            } else {
+                if (parseFloat(number) < parseFloat(lowestNumbers[integral])) {
+                    lowestNumbers[integral] = number
+                }
+            }
+        })
+
+        return lowestNumbers
+    } 
+
 }
