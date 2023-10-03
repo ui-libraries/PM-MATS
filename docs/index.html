@@ -144,6 +144,12 @@
                         #getNodesByProperties
                       </a></li>
                       
+                      <li><a
+                        href='#graphcreateadjacencylist'
+                        class='regular pre-open'>
+                        #createAdjacencyList
+                      </a></li>
+                      
                     </ul>
                   
                   
@@ -1031,6 +1037,74 @@ It can calculate the position of a node based on its level, and draw it on a giv
       <div class='py1 quiet mt1 prose-big'>Returns</div>
       <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="#node">Node</a>></code>:
         An array of Nodes that match the desired properties.
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='graphcreateadjacencylist'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>createAdjacencyList()</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+
+  <p>Creates an adjacency list for the graph based on node numbers.
+Each node number is split into its integral and decimal parts to determine
+horizontal and vertical neighbors.</p>
+<p>Horizontal neighbors share the same integral part and have the same number of
+decimal places (always even), but differ in the last decimal digit.
+For example, 2.01 and 2.02 are horizontal neighbors.</p>
+<p>Vertical neighbors also have the same integral part and have the same number
+of decimal places (always even). The first decimal digit is different between them,
+but the remaining digits match.
+For example, 2.01 and 2.11 are vertical neighbors.</p>
+<p>The resulting adjacency list is an object where keys are node numbers
+and values are objects containing arrays of horizontal and vertical neighbors.</p>
+
+    <div class='pre p1 fill-light mt0'>createAdjacencyList(): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></code>:
+        An adjacency list, keyed by node number, containing horizontal and vertical neighbors.
 
       
     

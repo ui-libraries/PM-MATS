@@ -1,4 +1,4 @@
-import { data } from './pm'
+import data from './pm.json'
 import { SVG } from '@svgdotjs/svg.js'
 
 /**
@@ -23,6 +23,10 @@ export class NodeVisualizer {
      * @return {number} The level of the node.
      */
     getLevel() {
+        if (!this.node) {
+            console.error("Node is undefined")
+            return
+        }
         const decimalPart = this.node.properties.number.split('.')[1]
         return decimalPart ? decimalPart.length : 0
     }
@@ -81,7 +85,7 @@ export class NodeVisualizer {
     }
 }
 
-  
+
 
 /**
  * Represents a Node in a graph, including its properties and relationships.
@@ -126,28 +130,28 @@ export class Node {
  * @class
  */
 export class Graph {
-        /**
+    /**
      * Creates a new Graph and loads data into it.
      * @property {Object<string, Node>} nodes - Object storing nodes, indexed by their IDs.
      */
     constructor() {
         this.nodes = {}
-        this._loadJson()   
+        this._loadJson()
     }
 
-        /**
+    /**
      * Private method to load JSON data into the Graph.
      * Populates the nodes and sets up relationships.
      * @private
      */
-    _loadJson() {   
+    _loadJson() {
         data.forEach(obj => {
             if (obj.type === "node") {
                 this._insertNode(obj)
             } else if (obj.type === "relationship" && obj.label === "Proves") {
                 let startNode = this.nodes[obj.start.id]
                 let endNode = this.nodes[obj.end.id]
-    
+
                 if (startNode && endNode) {
                     startNode.addProof(endNode)
                     endNode.addProofFor(startNode)
@@ -155,6 +159,7 @@ export class Graph {
             }
         })
     }
+
 
     /**
      * Inserts a new node into the Graph.
@@ -197,23 +202,23 @@ export class Graph {
      */
     getChildrenIdsByNumber(number) {
         let childrenIds = []
-    
+
         let numberParts = number.split('')
-    
+
         Object.values(this.nodes).forEach(node => {
             let nodeNumberParts = node.properties.number.split('')
             let matches = nodeNumberParts.slice(0, numberParts.length).every((part, index) => part === numberParts[index])
-    
+
             if (matches && nodeNumberParts.length === numberParts.length + 1) {
                 childrenIds.push(node.id)
             }
         })
-    
+
         // Sort by decimal number (so "2.01" comes before "2.1")
         childrenIds.sort((a, b) => {
             return parseFloat(this.nodes[a].properties.number) - parseFloat(this.nodes[b].properties.number)
         })
-    
+
         return childrenIds
     }
 
@@ -228,24 +233,24 @@ export class Graph {
             console.log(`No node exists with the number ${number}`)
             return null
         }
-    
+
         let parentNumber
         let numberParts = number.split(".")
         if (numberParts[1] && numberParts[1].length > 1) {
             parentNumber = `${numberParts[0]}.${numberParts[1].slice(0, -1)}`
         }
-    
+
         let parentId = null
         Object.values(this.nodes).forEach(node => {
             if (node.properties.number === parentNumber) {
                 parentId = node.id
             }
         })
-    
+
         if (parentId === null) {
             // console.log(`No parent node exists for the number ${number}`)
         }
-    
+
         return parentId
     }
 
@@ -269,10 +274,10 @@ export class Graph {
      */
     getNodesByProperties(desiredProperties) {
         let matchingNodes = []
-    
+
         Object.values(this.nodes).forEach(node => {
             let matchesAll = true
-            
+
             // Check if the node contains all properties from desiredProperties
             for (let property in desiredProperties) {
                 if (node.properties[property] !== desiredProperties[property]) {
@@ -280,13 +285,85 @@ export class Graph {
                     break
                 }
             }
-    
+
             // If the node matches all desired properties, add it to matchingNodes
             if (matchesAll) {
                 matchingNodes.push(node)
             }
         })
-    
+
         return matchingNodes
     }
+
+    /**
+     * Creates an adjacency list for the graph based on node numbers.
+     * Each node number is split into its integral and decimal parts to determine
+     * horizontal and vertical neighbors.
+     *
+     * Horizontal neighbors share the same integral part and have the same number of
+     * decimal places (always even), but differ in the last decimal digit.
+     * For example, 2.01 and 2.02 are horizontal neighbors.
+     *
+     * Vertical neighbors also have the same integral part and have the same number
+     * of decimal places (always even). The first decimal digit is different between them,
+     * but the remaining digits match.
+     * For example, 2.01 and 2.11 are vertical neighbors.
+     * 
+     * The resulting adjacency list is an object where keys are node numbers
+     * and values are objects containing arrays of horizontal and vertical neighbors.
+     *
+     * @returns {Object} An adjacency list, keyed by node number, containing horizontal and vertical neighbors.
+     */
+    createAdjacencyList() {
+        const adjList = {}
+        const allNumbers = Object.values(this.nodes).map(node => node.properties.number)
+
+        Object.values(this.nodes).forEach(node => {
+            const nodeNumber = node.properties.number
+            const horizontal = []
+            const vertical = []
+
+            const [nodeIntegral, nodeDecimal] = nodeNumber.split(".")
+            const isNodeEvenDecimal = nodeDecimal.length % 2 === 0
+
+            allNumbers.forEach(otherNumber => {
+                if (nodeNumber === otherNumber) return // Skip self
+
+                const [otherIntegral, otherDecimal] = otherNumber.split(".")
+                const isOtherEvenDecimal = otherDecimal.length % 2 === 0
+
+                if (isNodeEvenDecimal && isOtherEvenDecimal) {
+                    // Check for horizontal neighbors
+                    if (nodeIntegral === otherIntegral) {
+                        const nodePrefix = nodeDecimal.slice(0, -1)
+                        const otherPrefix = otherDecimal.slice(0, -1)
+
+                        if (nodePrefix === otherPrefix && nodeDecimal !== otherDecimal) {
+                            horizontal.push(otherNumber)
+                        }
+                    }
+
+                    // Check for vertical neighbors
+                    if (nodeIntegral === otherIntegral) {
+                        const nodeFirstDigit = nodeDecimal.slice(0, 1)
+                        const otherFirstDigit = otherDecimal.slice(0, 1)
+                        const nodeSuffix = nodeDecimal.slice(1)
+                        const otherSuffix = otherDecimal.slice(1)
+
+                        if (nodeFirstDigit !== otherFirstDigit && nodeSuffix === otherSuffix) {
+                            vertical.push(otherNumber)
+                        }
+                    }
+                }
+            })
+
+            adjList[nodeNumber] = {
+                horizontal,
+                vertical
+            }
+        })
+
+        return adjList
+    }
+
 }
