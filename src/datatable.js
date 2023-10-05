@@ -13,7 +13,26 @@ export let table = new DataTable('#principia-table', {
         { data: 'properties.section', title: 'Section' },
         { data: 'properties.volume', title: 'Volume' },
         { data: 'properties.chapter', title: 'Chapter' },
-        { data: 'properties.part', title: 'Part' }
+        { data: 'properties.part', title: 'Part' },
+        { 
+            data: 'provenBy', 
+            title: 'Proven By', 
+            render: function(data, type, row) { 
+                return '<div style="max-width: 100px; overflow-x: auto;">' + (data || "") + '</div>';
+            }
+        },
+        { 
+            data: 'proves', 
+            title: 'Proves', 
+            render: function(data, type, row) { 
+                return '<div style="max-width: 100px; overflow-x: auto;">' + (data || "") + '</div>';
+            }  
+        }
+    ],    
+    columnDefs: [
+        { width: '100px', targets: 8 },  // Targets first column
+        { width: '150px', targets: 9 },  // Targets second column
+        // ... and so on for other specific columns
     ],
     initComplete: function () {
         this.api()
@@ -24,7 +43,7 @@ export let table = new DataTable('#principia-table', {
  
                 // Create input element
                 let input = document.createElement('input')
-                input.placeholder = title;
+                input.placeholder = title
                 column.header().replaceChildren(input)
  
                 // Event listener for user input
@@ -36,6 +55,38 @@ export let table = new DataTable('#principia-table', {
             })
     }
 })
+
+/*
+$(document).ready(function() {
+    $("tbody tr").each(function() {
+        $(this).find("td:nth-last-child(1), td:nth-last-child(2)").each(function() {
+            var originalContent = $(this).text().trim()
+
+            // Only create a dropdown if there's data in the cell
+            if (originalContent) {
+                var values = originalContent.split(',')
+
+                var dropdownHtml = '<select class="custom-dropdown">'
+                values.forEach(function(value) {
+                    dropdownHtml += '<option value="' + value.trim() + '">' + value.trim() + '</option>'
+                })
+                dropdownHtml += '</select>'
+
+                $(this).html(dropdownHtml)
+            }
+        })
+    })
+})
+*/
+
+
+
+
+
+
+
+
+
 
 
 
