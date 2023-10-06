@@ -18,7 +18,7 @@ export let table = new DataTable('#principia-table', {
             data: 'provenBy', 
             title: 'Proven By', 
             render: function(data, type, row) { 
-                return '<div style="max-width: 100px; overflow-x: auto;">' + (data || "") + '</div>';
+                return '<div style="max-width: 200px; overflow-x: auto;">' + (data || "") + '</div>';
             }
         },
         { 

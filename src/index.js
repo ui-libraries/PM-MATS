@@ -1,22 +1,12 @@
 import { Graph, NodeVisualizer, GraphVisualizer } from './functions'
 import { table } from './datatable.js'
 
-//const graph = new Graph()
-//const adjacencyList = graph.createAdjacencyList()  // Assuming you have this method in your graph class
-//const graphVisualizer = new GraphVisualizer(graph, adjacencyList)
-//graphVisualizer.visualize()
-
+const graph = new Graph()
+const adjacencyList = graph.createAdjacencyList()  // Assuming you have this method in your graph class
+const graphVisualizer = new GraphVisualizer(graph, adjacencyList)
+graphVisualizer.visualize()
 
 /*
-let n = graph.getNodeById('12')
-let v = new NodeVisualizer(n, 10, 10)
-v.draw('canvas', 'red')
-
-let nn2 = graph.getNodeById('19')
-let v2 = new NodeVisualizer(nn2, 40, 10)
-v2.draw('canvas', 'blue')
-*/
-
 const width = 1200
 const height = 800
 
@@ -74,7 +64,5 @@ d3.json("pm.json").then(data => {
     
     // Add more rendering logic here for links or node labels as needed
 })
-
-
-    
+*/
 

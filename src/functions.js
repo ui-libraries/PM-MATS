@@ -133,7 +133,7 @@ export class Node {
      * @param {Node} node - The Node that this Node proves.
      */
     addProof(node) {
-        this.proves.push(node.id)
+        this.proves.push(node.properties.number) 
     }
 
     /**
@@ -141,7 +141,7 @@ export class Node {
      * @param {Node} node - The Node that proves this Node.
      */
     addProofFor(node) {
-        this.provenBy.push(node.id)
+        this.provenBy.push(node.properties.number)
     }
 }
 
