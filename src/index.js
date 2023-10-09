@@ -1,68 +1,57 @@
 import { Graph, NodeVisualizer, GraphVisualizer } from './functions'
 import { table } from './datatable.js'
+import data from './pm.json'
 
-const graph = new Graph()
-const adjacencyList = graph.createAdjacencyList()  // Assuming you have this method in your graph class
-const graphVisualizer = new GraphVisualizer(graph, adjacencyList)
-graphVisualizer.visualize()
-
-/*
-const width = 1200
-const height = 800
-
-const svg = d3.select("body").append("svg")
-    .attr("width", width)
-    .attr("height", height)
-    .append("g")
-    .attr("transform", "translate(40,40)")
-
-function customTreeLayout(data) {
-    return data.map(d => {
-        let number = 0 // default to 0
-        if (d.properties && d.properties.number) {
-            number = parseFloat(d.properties.number.split('.')[1])
-        }
-
-        const mantissa = number % 1
-        if (mantissa === 0) {
-            d.x = Math.floor(number)
-            d.y = 0
-        } else {
-            d.x = Math.floor(number) + 0.5
-            d.y = mantissa % 2 === 0 ? -(mantissa * 10) : mantissa * 10
-        }
-        return d
+function branch(chapter, startingX = 0, startingY = 0) {
+    // Filter nodes based on the given chapter
+    let chapter_nodes = data.filter(obj => obj.type === "node" && Math.floor(parseFloat(obj.properties.number)) === chapter)
+    
+    // Sort the nodes by their number property
+    chapter_nodes.sort((a, b) => {
+        let numA = parseFloat(a.properties.number)
+        let numB = parseFloat(b.properties.number)
+        return numA - numB || a.properties.number.localeCompare(b.properties.number)
     })
-}
-    
-    
 
-d3.json("pm.json").then(data => {
-    const nodes = customTreeLayout(data)
-    console.log(nodes.length)
-    
-    svg.selectAll(".node")
-        .data(nodes)
-        .enter().append("circle")
-        .attr("class", "node")
-        .attr("r", 5)
-        .attr("cx", d => d.x * 100)
-        .attr("cy", d => d.y * 100)
-        .style("fill", d => {
-            if (d.properties && d.properties.type) {
-                switch(d.properties.type) {
-                    case "Df": return "red"
-                    // Add other cases if needed
-                    default: return "black"
-                }
-            } else {
-                // Default or error handling color
-                return "grey" 
-            }
-        })
+    let x = startingX
+    let y = startingY
+    let lastPrimaryNode = startingX
+
+    for (let node of chapter_nodes) {
+        console.log(node.properties.number)
         
-    
-    // Add more rendering logic here for links or node labels as needed
-})
-*/
+        let parts = node.properties.number.split(".")
+        let mantissa = parts[1]
+        let mantissaLength = mantissa ? mantissa.length : 0
+
+        if (mantissaLength === 0) {  // For nodes like 2.0, 3.0...
+            node.x = x
+            node.y = y
+        } else if (mantissaLength === 1) {  // For nodes like 2.1, 2.2...
+            y += 50
+            x = lastPrimaryNode
+            node.x = x
+            node.y = y
+        } else if (mantissaLength === 2) {  // For nodes like 2.01, 2.02...
+            x += 50
+            node.x = x
+            node.y = y
+        } else if (mantissaLength === 3) {  // For nodes like 2.621
+            y += 50
+            node.x = x
+            node.y = y
+        }   
+        
+        if (mantissa === '0') {
+            lastPrimaryNode = x
+        }
+
+        new NodeVisualizer(node, node.x, node.y).draw("canvas", "red")
+    }
+
+    return chapter_nodes
+}
+
+branch(2, 0, 0)
+
 
