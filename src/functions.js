@@ -101,11 +101,8 @@ export class NodeVisualizer {
         circle.on('click', () => {
           console.log(`Node ${this.node.properties.number} was clicked! At x: ${this.x}, y: ${this.y}`)
         })
-      }
-      
+      }      
 }
-
-
 
 /**
  * Represents a Node in a graph, including its properties and relationships.
@@ -337,7 +334,101 @@ export class Graph {
         })
 
         return lowestNumbers
-    } 
+    }
+
+    getChapterNumbers() {
+        let chapterNumbers = [...new Set(Object.values(this.nodes).map(node => Math.floor(parseFloat(node.properties.number))))]
+        // sort the chapter numbers
+        chapterNumbers.sort((a, b) => a - b)
+        return chapterNumbers
+    }
+
+    plot(chapter, startingX = 0, startingY = 0) {
+        let maxX = 0
+        // Filter nodes based on the given chapter
+        let chapter_nodes = data.filter(obj => obj.type === "node" && Math.floor(parseFloat(obj.properties.number)) === chapter)
+    
+        // Extract nodes with a mantissa length of 1
+        let primaryNodes = chapter_nodes.filter(node => {
+            let mantissa = node.properties.number.split(".")[1]
+            return mantissa && mantissa.length === 1
+        })
+    
+        // Extract the actual mantissa values
+        let mantissaValues = primaryNodes.map(node => node.properties.number.split(".")[1])
+    
+        // Find missing mantissa values
+        for (let i = 0; i < 10; i++) {
+            if (!mantissaValues.includes(i.toString())) {
+                // Insert a placeholder node for the missing mantissa value
+                chapter_nodes.push({
+                    type: "node",
+                    properties: {
+                        number: chapter + "." + i,
+                        isPlaceholder: true  // Property to ensure it's not displayed
+                    }
+                })
+            }
+        }
+    
+        // Re-sort the nodes by their number property
+        chapter_nodes.sort((a, b) => {
+            let numA = parseFloat(a.properties.number)
+            let numB = parseFloat(b.properties.number)
+            return numA - numB || a.properties.number.localeCompare(b.properties.number)
+        })
+        let x = startingX
+        let y = startingY
+        let lastPrimaryNode = startingX
+        let currentRootNodeNum = chapter
+    
+        for (let node of chapter_nodes) {
+            node.rootNode = false            
+            let parts = node.properties.number.split(".")
+            let mantissa = parts[1]
+            let mantissaLength = mantissa ? mantissa.length : 0
+    
+            if (mantissaLength === 0) {
+                node.x = x
+                node.y = y
+            } else if (mantissaLength === 1) {
+                y += 50
+                x = lastPrimaryNode
+                node.x = x
+                node.y = y
+                node.rootNode = true
+            } else if (mantissaLength === 2) {
+                x += 50
+                node.x = x
+                node.y = y
+                let lastRootNode = chapter_nodes.filter(n => n.rootNode && n.properties.number.split(".")[1][0] === mantissa[0]).pop()
+                let rootNum
+                if (lastRootNode) {
+                    node.y = lastRootNode.y                
+                }            
+            } else if (mantissaLength === 3) {
+                y += 50
+                node.x = x
+                node.y = y
+            }   
+            
+            if (mantissa === '0') {
+                lastPrimaryNode = x
+            }
+
+            if (node.x > maxX) {
+                maxX = node.x
+            }
+    
+            if (!node.properties.isPlaceholder) {
+                new NodeVisualizer(node, node.x, node.y).draw("canvas", "red")
+            }
+        }
+
+        console.log(maxX)
+    
+        return maxX
+    }
 
 }
 
