@@ -336,6 +336,17 @@ export class Graph {
         return lowestNumbers
     }
 
+    /**
+     * Retrieves a sorted list of unique chapter numbers present in the nodes.
+     *
+     * @function
+     * @name getChapterNumbers
+     * @returns {number[]} - An array of sorted unique chapter numbers.
+     *
+     * @example
+     * const chapters = getChapterNumbers();
+     * console.log(chapters); // [1, 2, 3, ...]
+     */
     getChapterNumbers() {
         let chapterNumbers = [...new Set(Object.values(this.nodes).map(node => Math.floor(parseFloat(node.properties.number))))]
         // sort the chapter numbers
@@ -343,6 +354,21 @@ export class Graph {
         return chapterNumbers
     }
 
+    /**
+     * Plots nodes based on the provided chapter number and starting coordinates.
+     * This method will also insert placeholders for missing nodes with a mantissa length of 1.
+     * 
+     * @function
+     * @name plot
+     * @param {number} chapter - The chapter number to be plotted.
+     * @param {number} [startingX=0] - The starting X-coordinate for the plotting.
+     * @param {number} [startingY=0] - The starting Y-coordinate for the plotting.
+     * @returns {number} - Returns the largest X-coordinate value found during the plotting.
+     * 
+     * @example
+     * plot(2);
+     * plot(3, 150, 150);
+     */
     plot(chapter, startingX = 0, startingY = 0) {
         let maxX = 0
         // Filter nodes based on the given chapter
