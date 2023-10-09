@@ -339,8 +339,6 @@ export class Graph {
     /**
      * Retrieves a sorted list of unique chapter numbers present in the nodes.
      *
-     * @function
-     * @name getChapterNumbers
      * @returns {number[]} - An array of sorted unique chapter numbers.
      *
      * @example
@@ -358,8 +356,6 @@ export class Graph {
      * Plots nodes based on the provided chapter number and starting coordinates.
      * This method will also insert placeholders for missing nodes with a mantissa length of 1.
      * 
-     * @function
-     * @name plot
      * @param {number} chapter - The chapter number to be plotted.
      * @param {number} [startingX=0] - The starting X-coordinate for the plotting.
      * @param {number} [startingY=0] - The starting Y-coordinate for the plotting.
