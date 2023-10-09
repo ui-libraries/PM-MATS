@@ -1,5 +1,7 @@
 import data from './pm.json'
-import { SVG } from '@svgdotjs/svg.js'
+import {
+    SVG
+} from '@svgdotjs/svg.js'
 
 /**
  * Class to visualize a Node object in 2D space.
@@ -64,44 +66,44 @@ export class NodeVisualizer {
     draw(containerId, color) {
         // Create a new SVG element inside the specified container
         const draw = SVG().addTo(`#${containerId}`)
-        
+
         // Add a circle element
         const circleRadius = 10
         const circle = draw.circle(circleRadius * 2).move(this.x, this.y).fill(color || 'red')
-      
+
         // Add a text element
         const text = draw.text(this.node.properties.number.toString()).font({
-          fill: 'black',
-          family: 'Inconsolata',
-          size: 12
+            fill: 'black',
+            family: 'Inconsolata',
+            size: 12
         })
-      
+
         // Calculate the text position
         const textBox = text.bbox()
         const textX = this.x + circleRadius - textBox.width / 2
         const textY = this.y - textBox.height
-        
+
         // Move the text to its calculated position
         text.move(textX, textY)
-      
+
         // Calculate the bounding box for the SVG content
         const bbox = draw.bbox()
-        
+
         // Resize the SVG and its viewbox to match the bounding box
         draw.size(bbox.width, bbox.height).viewbox(bbox.x, bbox.y, bbox.width, bbox.height)
-        
+
         // Update the SVG element's style to exactly fit its content and place it absolutely
         draw.node.style.width = `${bbox.width}px`
         draw.node.style.height = `${bbox.height}px`
         draw.node.style.position = 'absolute'
         draw.node.style.left = `${this.x}px`
         draw.node.style.top = `${this.y}px`
-      
+
         // Attach a click event listener to the circle
         circle.on('click', () => {
-          console.log(`Node ${this.node.properties.number} was clicked! At x: ${this.x}, y: ${this.y}`)
+            console.log(`Node ${this.node.properties.number} was clicked! At x: ${this.x}, y: ${this.y}`)
         })
-      }      
+    }
 }
 
 /**
@@ -130,7 +132,7 @@ export class Node {
      * @param {Node} node - The Node that this Node proves.
      */
     addProof(node) {
-        this.proves.push(node.properties.number) 
+        this.proves.push(node.properties.number)
     }
 
     /**
@@ -369,16 +371,16 @@ export class Graph {
         let maxX = 0
         // Filter nodes based on the given chapter
         let chapter_nodes = data.filter(obj => obj.type === "node" && Math.floor(parseFloat(obj.properties.number)) === chapter)
-    
+
         // Extract nodes with a mantissa length of 1
         let primaryNodes = chapter_nodes.filter(node => {
             let mantissa = node.properties.number.split(".")[1]
             return mantissa && mantissa.length === 1
         })
-    
+
         // Extract the actual mantissa values
         let mantissaValues = primaryNodes.map(node => node.properties.number.split(".")[1])
-    
+
         // Find missing mantissa values
         for (let i = 0; i < 10; i++) {
             if (!mantissaValues.includes(i.toString())) {
@@ -387,12 +389,12 @@ export class Graph {
                     type: "node",
                     properties: {
                         number: chapter + "." + i,
-                        isPlaceholder: true  // Property to ensure it's not displayed
+                        isPlaceholder: true // Property to ensure it's not displayed
                     }
                 })
             }
         }
-    
+
         // Re-sort the nodes by their number property
         chapter_nodes.sort((a, b) => {
             let numA = parseFloat(a.properties.number)
@@ -403,13 +405,13 @@ export class Graph {
         let y = startingY
         let lastPrimaryNode = startingX
         let currentRootNodeNum = chapter
-    
+
         for (let node of chapter_nodes) {
-            node.rootNode = false            
+            node.rootNode = false
             let parts = node.properties.number.split(".")
             let mantissa = parts[1]
             let mantissaLength = mantissa ? mantissa.length : 0
-    
+
             if (mantissaLength === 0) {
                 node.x = x
                 node.y = y
@@ -426,14 +428,14 @@ export class Graph {
                 let lastRootNode = chapter_nodes.filter(n => n.rootNode && n.properties.number.split(".")[1][0] === mantissa[0]).pop()
                 let rootNum
                 if (lastRootNode) {
-                    node.y = lastRootNode.y                
-                }            
+                    node.y = lastRootNode.y
+                }
             } else if (mantissaLength === 3) {
                 y += 50
                 node.x = x
                 node.y = y
-            }   
-            
+            }
+
             if (mantissa === '0') {
                 lastPrimaryNode = x
             }
@@ -441,20 +443,15 @@ export class Graph {
             if (node.x > maxX) {
                 maxX = node.x
             }
-    
+
             if (!node.properties.isPlaceholder) {
                 new NodeVisualizer(node, node.x, node.y).draw("canvas", "red")
             }
         }
 
         console.log(maxX)
-    
+
         return maxX
     }
 
 }
-
-  
-  
-
-  
