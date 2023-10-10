@@ -1198,7 +1198,7 @@ Assumes all numbers in the graph have a decimal part (e.g., no "1", "2", "3", et
       <div class="clearfix small pointer toggle-sibling">
         <div class="py1 contain">
             <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>plot(chapter, startingX, startingY)</span>
+            <span class='code strong strong truncate'>plot(chapter, startingX, startingY, color)</span>
         </div>
       </div>
       <div class="clearfix display-none toggle-target">
@@ -1209,7 +1209,7 @@ Assumes all numbers in the graph have a decimal part (e.g., no "1", "2", "3", et
   <p>Plots nodes based on the provided chapter number and starting coordinates.
 This method will also insert placeholders for missing nodes with a mantissa length of 1.</p>
 
-    <div class='pre p1 fill-light mt0'>plot(chapter: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, startingX: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, startingY: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></div>
+    <div class='pre p1 fill-light mt0'>plot(chapter: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, startingX: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, startingY: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, color: any): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></div>
   
   
 
@@ -1249,6 +1249,14 @@ This method will also insert placeholders for missing nodes with a mantissa leng
             = <code>0</code>)</code>
 	    The starting Y-coordinate for the plotting.
 
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>color</span> <code class='quiet'>(any)</code>
+	    
           </div>
           
         </div>
