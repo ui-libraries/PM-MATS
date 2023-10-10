@@ -6,7 +6,6 @@ import {
     Node,
     Graph
 } from '../src/functions'
-import fs from 'fs'
 
 describe('NodeVisualizer', () => {
     describe('getLevel', () => {
@@ -79,7 +78,7 @@ describe('Node', () => {
     describe('addProof', () => {
         it('should add a node ID to the proves array', () => {
             nodeA.addProof(nodeB)
-            expect(nodeA.proves).to.deep.equal(['B'])
+            expect(nodeA.proves).to.deep.equal(['43'])
         })
 
         it('should not affect the provenBy array', () => {
@@ -91,7 +90,7 @@ describe('Node', () => {
     describe('addProofFor', () => {
         it('should add a node ID to the provenBy array', () => {
             nodeA.addProofFor(nodeB)
-            expect(nodeA.provenBy).to.deep.equal(['B'])
+            expect(nodeA.provenBy).to.deep.equal(['43'])
         })
 
         it('should not affect the proves array', () => {
@@ -160,31 +159,6 @@ describe('Graph', () => {
                 chapter: "999"
             })
             expect(nodes).to.have.lengthOf(0)
-        })
-    })
-    describe('createAdjacencyList', () => {
-        it('should return an adjacency list', () => {
-            const adjacencyList = graph.createAdjacencyList()
-            expect(adjacencyList).to.be.an('object')
-            expect(adjacencyList).to.have.property('2.01')
-            const node201 = adjacencyList['2.01']
-            expect(node201).to.have.property('horizontal').that.is.an('array')
-            expect(node201).to.have.property('vertical').that.is.an('array')
-            expect(node201.horizontal).to.include.members(['2.02', '2.03', '2.04', '2.05', '2.06', '2.07', '2.08'])
-            expect(node201.vertical).to.include.members(['2.11', '2.21', '2.31', '2.41', '2.51', '2.61'])
-            fs.writeFileSync('adjacencyList.json', JSON.stringify(adjacencyList, null, 4))
-        })
-    })
-    describe('generateLowestNumbers', () => {
-        it('should return the lowest number for each integral', () => {
-            const lowestNumbers = graph.generateLowestNumbers()
-            expect(lowestNumbers).to.include({
-                '1': '1.01',
-                '2': '2.01',
-                '3': '3.01',
-                '4': '4.01',
-                '5': '5.1'
-            })
         })
     })
 })

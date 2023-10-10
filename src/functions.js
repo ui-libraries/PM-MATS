@@ -102,6 +102,7 @@ export class NodeVisualizer {
         // Attach a click event listener to the circle
         circle.on('click', () => {
             console.log(`Node ${this.node.properties.number} was clicked! At x: ${this.x}, y: ${this.y}`)
+            console.log(this.node)
         })
     }
 }
@@ -315,37 +316,13 @@ export class Graph {
     }
 
     /**
-     * Generates the lowest possible decimal number for each whole number in the graph.
-     * Assumes all numbers in the graph have a decimal part (e.g., no "1", "2", "3", etc.).
-     *
-     * @returns {Object} An object mapping each whole number to its lowest possible decimal extension.
-     */
-    generateLowestNumbers() {
-        const lowestNumbers = {}
-        const allNumbers = Object.values(this.nodes).map(node => node.properties.number)
-
-        allNumbers.forEach(number => {
-            const [integral] = number.split(".")
-            if (!lowestNumbers[integral]) {
-                lowestNumbers[integral] = number
-            } else {
-                if (parseFloat(number) < parseFloat(lowestNumbers[integral])) {
-                    lowestNumbers[integral] = number
-                }
-            }
-        })
-
-        return lowestNumbers
-    }
-
-    /**
      * Retrieves a sorted list of unique chapter numbers present in the nodes.
      *
      * @returns {number[]} - An array of sorted unique chapter numbers.
      *
      * @example
-     * const chapters = getChapterNumbers();
-     * console.log(chapters); // [1, 2, 3, ...]
+     * const chapters = getChapterNumbers()
+     * console.log(chapters) // [1, 2, 3, ...]
      */
     getChapterNumbers() {
         let chapterNumbers = [...new Set(Object.values(this.nodes).map(node => Math.floor(parseFloat(node.properties.number))))]
@@ -364,98 +341,96 @@ export class Graph {
      * @returns {number} - Returns the largest X-coordinate value found during the plotting.
      * 
      * @example
-     * plot(2);
-     * plot(3, 150, 150);
+     * plot(2)
+     * plot(3, 150, 150)
      */
     plot(chapter, startingX = 0, startingY = 0, color) {
-        let maxX = 0;
-        let x = startingX;
-        let y = startingY;
-        let lastPrimaryNode = startingX;
-        let mantissaSet = new Set();
-    
-        // Create a set for quick lookups and simultaneously filter for the given chapter
-        let chapter_nodes = data.filter(obj => {
-            if (obj.type !== "node" || Math.floor(parseFloat(obj.properties.number)) !== chapter) {
-                return false;
+        let maxX = 0
+        let chapter_nodes = []
+        // Filter nodes based on the given chapter
+        for (let node of Object.values(this.nodes)) {
+            if (node.properties.chapter === chapter.toString()) {
+                chapter_nodes.push(node)
             }
+        }
+        
+        // Extract nodes with a mantissa length of 1
+        let primaryNodes = chapter_nodes.filter(node => {
+            let mantissa = node.properties.number.split(".")[1]
+            return mantissa && mantissa.length === 1
+        })
     
-            let parts = obj.properties.number.split(".");
-            let mantissa = parts[1];
+        // Extract the actual mantissa values
+        let mantissaValues = primaryNodes.map(node => node.properties.number.split(".")[1])
     
-            if (mantissa && mantissa.length === 1) {
-                mantissaSet.add(mantissa);
-            }
-    
-            return true;
-        });
-    
-        // Add placeholder nodes for missing mantissas
+        // Find missing mantissa values
         for (let i = 0; i < 10; i++) {
-            if (!mantissaSet.has(i.toString())) {
+            if (!mantissaValues.includes(i.toString())) {
+                // Insert a placeholder node for the missing mantissa value
                 chapter_nodes.push({
                     type: "node",
                     properties: {
                         number: chapter + "." + i,
-                        isPlaceholder: true
+                        isPlaceholder: true // Property to ensure it's not displayed
                     }
-                });
+                })
             }
         }
     
-        // Sort the nodes
-        chapter_nodes.sort((a, b) => parseFloat(a.properties.number) - parseFloat(b.properties.number) || a.properties.number.localeCompare(b.properties.number));
-    
-        // Create a cache for root nodes
-        let rootNodeCache = {};
+        // Re-sort the nodes by their number property
+        chapter_nodes.sort((a, b) => {
+            let numA = parseFloat(a.properties.number)
+            let numB = parseFloat(b.properties.number)
+            return numA - numB || a.properties.number.localeCompare(b.properties.number)
+        })
+        let x = startingX
+        let y = startingY
+        let lastPrimaryNode = startingX
+        let currentRootNodeNum = chapter
     
         for (let node of chapter_nodes) {
-            node.rootNode = false;
-            let parts = node.properties.number.split(".");
-            let mantissa = parts[1];
-            let mantissaLength = mantissa ? mantissa.length : 0;
+            node.rootNode = false
+            let parts = node.properties.number.split(".")
+            let mantissa = parts[1]
+            let mantissaLength = mantissa ? mantissa.length : 0
     
             if (mantissaLength === 0) {
-                node.x = x;
-                node.y = y;
+                node.x = x
+                node.y = y
             } else if (mantissaLength === 1) {
-                y += 50;
-                x = lastPrimaryNode;
-                node.x = x;
-                node.y = y;
-                node.rootNode = true;
-                rootNodeCache[mantissa[0]] = node;  // Cache this root node
+                y += 50
+                x = lastPrimaryNode
+                node.x = x
+                node.y = y
+                node.rootNode = true
             } else if (mantissaLength === 2) {
-                x += 50;
-                node.x = x;
-                node.y = y;
-    
-                let lastRootNode = rootNodeCache[mantissa[0]];
+                x += 50
+                node.x = x
+                node.y = y
+                let lastRootNode = chapter_nodes.filter(n => n.rootNode && n.properties.number.split(".")[1][0] === mantissa[0]).pop()
+                let rootNum
                 if (lastRootNode) {
-                    node.y = lastRootNode.y;
-                } else {
-                    y += 50;  // In case there's no rootNode cached for this mantissa
+                    node.y = lastRootNode.y
                 }
             } else if (mantissaLength === 3) {
-                y += 50;
-                node.x = x;
-                node.y = y;
+                y += 50
+                node.x = x
+                node.y = y
             }
     
             if (mantissa === '0') {
-                lastPrimaryNode = x;
+                lastPrimaryNode = x
             }
     
             if (node.x > maxX) {
-                maxX = node.x;
+                maxX = node.x
             }
     
             if (!node.properties.isPlaceholder) {
-                new NodeVisualizer(node, node.x, node.y).draw("canvas", color);
+                new NodeVisualizer(node, node.x, node.y).draw("canvas", color)
             }
         }
 
-        // return both chapter_nodes and maxX
-        return [chapter_nodes, maxX];
+        return [chapter_nodes, maxX]
     }
 }

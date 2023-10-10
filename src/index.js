@@ -17,27 +17,38 @@ chapterNumbers.forEach(chapter => {
 })
 */
 
-function processAllChapters() {
-    let allChapterData = {};
+function processChapters(num = null) {
+    let allChapterData = {}
 
-    for (let chapter of allChapters) { // assuming allChapters is an array of all your chapter numbers
-        let [returnedChapterNodes, returnedMaxX] = pm.plot(chapter, x, 0);
+    if (!num) {
 
+        for (let chapter of allChapters) { // assuming allChapters is an array of all your chapter numbers
+            let [returnedChapterNodes, returnedMaxX] = pm.plot(chapter, x, 0)
+            
+
+            // Save the data for this chapter
+            allChapterData[chapter] = returnedChapterNodes
+
+            x = returnedMaxX + 100
+        }
+    } else {
+        let [returnedChapterNodes, returnedMaxX] = pm.plot(num, x, 0)
         // Save the data for this chapter
-        allChapterData[chapter] = returnedChapterNodes;
+        allChapterData[num] = returnedChapterNodes
 
         x = returnedMaxX + 100
     }
 
     // After looping through all chapters, save allChapterData to a file
-    const jsonString = JSON.stringify(allChapterData, null, 2);
-    const blob = new Blob([jsonString], { type: "application/json" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'all_chapter_nodes.json';
-    a.click();
-    URL.revokeObjectURL(url);
+    const jsonString = JSON.stringify(allChapterData, null, 2)
+    const blob = new Blob([jsonString], { type: "application/json" })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = 'all_chapter_nodes.json'
+    a.click()
+    URL.revokeObjectURL(url)
+
 }
 
-processAllChapters();
+processChapters()
