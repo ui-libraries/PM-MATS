@@ -3,7 +3,17 @@
     height: 100%;
 }
 
+#title {
+    margin-top: 0px;
+    margin-bottom: 10px;
+}
+
 svg {
     margin: 0;
     padding: 0;
+}
+
+.export-btn {
+    margin-top: 0px;
+    margin-bottom: 10px;
 }

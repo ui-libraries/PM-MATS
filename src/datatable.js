@@ -1,10 +1,32 @@
 import DataTable from 'datatables.net-dt'
+import 'datatables.net-buttons'
 import { Graph } from './functions'
 let pm = new Graph('pm.json')
 let data = Object.values(pm.nodes)
+
+function exportData (){
+    const jsonString = JSON.stringify(data, null, 2)
+    const blob = new Blob([jsonString], { type: "application/json" })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = 'principia-mathematica.json'
+    a.click()
+    URL.revokeObjectURL(url)
+}
  
 export let table = new DataTable('#principia-table', {
     data: data,
+    dom: 'Blfrtip',
+    buttons: [
+        {
+            text: 'Export data',
+            className: 'btn export-btn',
+            action: function ( e, dt, node, config ) {
+                exportData()
+            }
+        }
+    ],
     columns: [
         { data: 'id', title: 'ID' },
         { data: 'properties.type', title: 'Type' },
@@ -55,30 +77,6 @@ export let table = new DataTable('#principia-table', {
             })
     }
 })
-
-/*
-$(document).ready(function() {
-    $("tbody tr").each(function() {
-        $(this).find("td:nth-last-child(1), td:nth-last-child(2)").each(function() {
-            var originalContent = $(this).text().trim()
-
-            // Only create a dropdown if there's data in the cell
-            if (originalContent) {
-                var values = originalContent.split(',')
-
-                var dropdownHtml = '<select class="custom-dropdown">'
-                values.forEach(function(value) {
-                    dropdownHtml += '<option value="' + value.trim() + '">' + value.trim() + '</option>'
-                })
-                dropdownHtml += '</select>'
-
-                $(this).html(dropdownHtml)
-            }
-        })
-    })
-})
-*/
-
 
 
 
