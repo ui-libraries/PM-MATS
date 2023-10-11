@@ -21,41 +21,6 @@ export class NodeVisualizer {
     }
 
     /**
-     * Get the level of the node based on the decimal part of its number property.
-     * @return {number} The level of the node.
-     */
-    getLevel() {
-        if (!this.node) {
-            console.error("Node is undefined")
-            return
-        }
-        const decimalPart = this.node.properties.number.split('.')[1]
-        return decimalPart ? decimalPart.length : 0
-    }
-
-    /**
-     * Calculate the position [x, y] of the node based on its level.
-     * - Level 0 nodes remain at their initial position.
-     * - Odd level nodes are positioned vertically.
-     * - Even level nodes are positioned horizontally.
-     * @return {Array.<number, number>} An array containing the new x and y coordinates.
-     */
-    getPosition() {
-        const VERTICAL_SPACING = 50
-        const HORIZONTAL_SPACING = 50
-
-        const level = this.getLevel()
-
-        if (level === 0) {
-            return [this.x, this.y]
-        } else if (level % 2 === 1) {
-            return [this.x, this.y + VERTICAL_SPACING]
-        } else {
-            return [this.x + HORIZONTAL_SPACING, this.y]
-        }
-    }
-
-    /**
      * Draw the node in the given SVG container.
      * - Creates a circle at the node's position.
      * - Adds a number label above the circle.

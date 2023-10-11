@@ -50,11 +50,6 @@ export let table = new DataTable('#principia-table', {
                 return '<div style="max-width: 100px; overflow-x: auto;">' + (data || "") + '</div>';
             }  
         }
-    ],    
-    columnDefs: [
-        { width: '100px', targets: 8 },  // Targets first column
-        { width: '150px', targets: 9 },  // Targets second column
-        // ... and so on for other specific columns
     ],
     initComplete: function () {
         this.api()
