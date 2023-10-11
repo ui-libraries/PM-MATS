@@ -22,22 +22,21 @@ function processChapters(num = null) {
 
     if (!num) {
 
-        for (let chapter of allChapters) { // assuming allChapters is an array of all your chapter numbers
-            let [returnedChapterNodes, returnedMaxX] = pm.plot(chapter, x, 0)
-            
-
+        for (let chapter of allChapters) {
+            let [returnedChapterNodes, returnedMaxX] = pm.plot(chapter, x, 0) 
             // Save the data for this chapter
             allChapterData[chapter] = returnedChapterNodes
-
             x = returnedMaxX + 100
         }
     } else {
         let [returnedChapterNodes, returnedMaxX] = pm.plot(num, x, 0)
         // Save the data for this chapter
         allChapterData[num] = returnedChapterNodes
-
         x = returnedMaxX + 100
     }
+
+    //need to iterate over allChapterData. This is showing chapter 3
+    pm.drawNodes(allChapterData[3], "red")
 
     // After looping through all chapters, save allChapterData to a file
     const jsonString = JSON.stringify(allChapterData, null, 2)

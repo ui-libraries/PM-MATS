@@ -161,4 +161,16 @@ describe('Graph', () => {
             expect(nodes).to.have.lengthOf(0)
         })
     })
+
+    describe('plot', function() {
+        it('should return expected maxX for chapter 2', function() {
+            const [chapterNodes, maxX] = graph.plot(1, 0, 0)
+            expect(maxX).to.equal(100)
+        })
+
+        it('should insert placeholders for missing mantissa nodes', function() {
+            const [chapterNodes, maxX] = graph.plot(1, 0, 0)
+            expect(chapterNodes.length).to.equal(14)
+        })
+    })
 })

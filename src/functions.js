@@ -425,12 +425,21 @@ export class Graph {
             if (node.x > maxX) {
                 maxX = node.x
             }
-    
+        }
+        return [chapter_nodes, maxX]        
+    }
+
+    /**
+     * Renders nodes to a canvas element.
+     *
+     * @param {Array<Object>} chapter_nodes - An array of node objects to be drawn. Each node object should have properties including 'x', 'y', and 'isPlaceholder'.
+     * @param {string} color - The color to be used when drawing the nodes.
+     */
+    drawNodes(chapter_nodes, color) {
+        chapter_nodes.forEach(node => {
             if (!node.properties.isPlaceholder) {
                 new NodeVisualizer(node, node.x, node.y).draw("canvas", color)
             }
-        }
-
-        return [chapter_nodes, maxX]
-    }
+        })
+    }   
 }
