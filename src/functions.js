@@ -8,67 +8,37 @@ import {
  * It can calculate the position of a node based on its level, and draw it on a given SVG container.
  */
 export class NodeVisualizer {
-    /**
-     * Creates a new NodeVisualizer object.
-     * @param {Object} node - The Node object to visualize.
-     * @param {number} [x=0] - The initial x-coordinate.
-     * @param {number} [y=0] - The initial y-coordinate.
-     */
+    // No changes here
     constructor(node, x = 0, y = 0) {
         this.node = node
         this.x = x
         this.y = y
     }
 
-    /**
-     * Draw the node in the given SVG container.
-     * - Creates a circle at the node's position.
-     * - Adds a number label above the circle.
-     * - Sets up a click event listener on the circle.
-     * @param {string} containerId - The id of the SVG container where the node will be drawn.
-     * @param {string} [color] - The color to fill the circle. Defaults to 'red'.
-     */
-    draw(containerId, color) {
-        // Create a new SVG element inside the specified container
-        const draw = SVG().addTo(`#${containerId}`)
+    draw(draw, color = 'red') {
+        // Create a group for each node
+        const group = draw.group()
+        group.translate(this.x, this.y)
 
-        // Add a circle element
+        // Add a circle element to the group
         const circleRadius = 10
-        const circle = draw.circle(circleRadius * 2).move(this.x, this.y).fill(color || 'red')
+        group.circle(circleRadius * 2).fill(color)
 
-        // Add a text element
-        const text = draw.text(this.node.properties.number.toString()).font({
+        // Add a text element to the group
+        const text = group.text(this.node.properties.number.toString()).font({
             fill: 'black',
             family: 'Inconsolata',
             size: 12
         })
 
-        // Calculate the text position
+        // Calculate the text position and move it
         const textBox = text.bbox()
-        const textX = this.x + circleRadius - textBox.width / 2
-        const textY = this.y - textBox.height
-
-        // Move the text to its calculated position
+        const textX = circleRadius - textBox.width / 2
+        const textY = -textBox.height
         text.move(textX, textY)
 
-        // Calculate the bounding box for the SVG content
-        const bbox = draw.bbox()
-
-        // Resize the SVG and its viewbox to match the bounding box
-        draw.size(bbox.width, bbox.height).viewbox(bbox.x, bbox.y, bbox.width, bbox.height)
-
-        // Update the SVG element's style to exactly fit its content and place it absolutely
-        draw.node.style.width = `${bbox.width}px`
-        draw.node.style.height = `${bbox.height}px`
-        draw.node.style.position = 'absolute'
-        draw.node.style.left = `${this.x}px`
-        draw.node.style.top = `${this.y}px`
-
-        // Attach a click event listener to the circle
-        circle.on('click', () => {
-            console.log(`Node ${this.node.properties.number} was clicked! At x: ${this.x}, y: ${this.y}`)
-            console.log(this.node)
-        })
+        // Attach metadata to the group for event delegation
+        group.node.dataset.id = this.node.id
     }
 }
 
@@ -310,6 +280,7 @@ export class Graph {
      * plot(3, 150, 150)
      */
     plot(chapter, startingX = 0, startingY = 0, color) {
+        //console.log(this.nodes)
         let maxX = 0
         let chapter_nodes = []
         // Filter nodes based on the given chapter
@@ -408,3 +379,75 @@ export class Graph {
         })
     }   
 }
+
+export class D3Visualizer {
+    constructor(svgSelector, data, options = {}) {
+      this.svg = d3.select(svgSelector)
+      this.data = data
+      this.xOffset = options.xOffset || 20
+      this.yOffset = options.yOffset || 20
+      this.circleRadius = options.circleRadius || 5
+      this.circleFill = options.circleFill || 'blue'
+      this.textFontSize = options.textFontSize || 12
+      this.textFill = options.textFill || 'black'
+      this.init()
+    }
+  
+    init() {
+      // Calculate minimum and maximum x and y coordinates
+      let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity
+      Object.keys(this.data).forEach(chapter => {
+        this.data[chapter].forEach(d => {
+          if (!d.properties.isPlaceholder) {
+            minX = Math.min(minX, d.x)
+            maxX = Math.max(maxX, d.x)
+            minY = Math.min(minY, d.y)
+            maxY = Math.max(maxY, d.y)
+          }
+        })
+      })
+  
+      // Calculate SVG dimensions
+      const svgWidth = maxX - minX + this.xOffset
+      const svgHeight = maxY - minY + this.yOffset
+  
+      // Set SVG dimensions
+      this.svg.attr('width', svgWidth)
+              .attr('height', svgHeight)
+  
+      this.drawCircles(minX, minY)
+      this.drawTextLabels(minX, minY)
+    }
+  
+    drawCircles(minX, minY) {
+      const circles = this.svg.selectAll('circle')
+        .data(Object.values(this.data).flat())
+        .enter()
+        .append('circle')
+        .filter(d => !d.properties.isPlaceholder)
+        .attr('cx', d => d.x - minX + this.xOffset)
+        .attr('cy', d => d.y - minY + this.yOffset)
+        .attr('r', this.circleRadius)
+        .attr('fill', this.circleFill)
+  
+      // Add click event handling for each circle
+      circles.on('click', (event, d) => {
+        console.log(`Clicked circle with data:`, d)
+      })
+    }
+  
+    drawTextLabels(minX, minY) {
+      this.svg.selectAll('text')
+        .data(Object.values(this.data).flat())
+        .enter()
+        .append('text')
+        .filter(d => !d.properties.isPlaceholder)
+        .attr('x', d => d.x - minX + this.xOffset)
+        .attr('y', d => d.y - minY - 10 + this.yOffset)
+        .text(d => d.properties.number)
+        .attr('text-anchor', 'middle')
+        .attr('font-size', this.textFontSize)
+        .attr('fill', this.textFill)
+    }
+}
+  

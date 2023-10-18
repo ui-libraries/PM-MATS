@@ -1,41 +1,54 @@
-import { Graph, NodeVisualizer } from './functions'
+import { Graph, NodeVisualizer, D3Visualizer } from './functions'
 import { table } from './datatable.js'
-/* import coords_data from '../output/pm_coordinates.json'
 
-let start = performance.now()
-for (let chapterKey in coords_data) {
-    let nodesArray = coords_data[chapterKey];  // This gives you the array of nodes for a specific chapter
-    
-    // Iterate over each node object in the nodesArray
-    nodesArray.forEach(node => {
-        let x = node.x;
-        let y = node.y;
-        
-        // set a timer to see how long this takes:
-        
-        // Draw the no
-        if (!node.properties.isPlaceholder) {
-            new NodeVisualizer(node, x, y).draw("canvas")
-        }
-    })
-}
-let end = performance.now()
-let duration = end - start
-console.log("Drawing took " + duration + " milliseconds") */
+
+
 
 let pm = new Graph()
-//pm.plot(6)
-
 let allChapters = pm.getChapterNumbers()
-//console.log(chapterNumbers)
 let x = 0
 
-/*
-chapterNumbers.forEach(chapter => {
-    let chapterX = pm.plot(chapter, x, 0)
-    x = chapterX + 100
-})
-*/
+function flattenObjectArrays(obj) {
+  const result = {}
+  
+  // Loop through each key of the main object
+  Object.keys(obj).forEach(key => {
+    const subObj = obj[key]
+
+    // Loop through each key of the sub-object
+    Object.keys(subObj).forEach(subKey => {
+      const arr = subObj[subKey]
+
+      // Loop through the array and add each object to the result
+      arr.forEach((item, index) => {
+        result[`${key}_${subKey}_${index}`] = item
+      })
+    })
+  })
+
+  return result
+}
+
+function processChapters(num = null) {
+  let allChapterData = {}
+
+  if (!num) {
+
+      for (let chapter of allChapters) {
+          let [returnedChapterNodes, returnedMaxX] = pm.plot(chapter, x, 0) 
+          // Save the data for this chapter
+          allChapterData[chapter] = returnedChapterNodes
+          x = returnedMaxX + 100
+      }
+  } else {
+      let [returnedChapterNodes, returnedMaxX] = pm.plot(num, x, 0)
+      // Save the data for this chapter
+      allChapterData[num] = returnedChapterNodes
+      x = returnedMaxX + 100
+  }
+
+  return allChapterData
+}
 
 function downloadData(allChapterData) {
         // After looping through all chapters, save allChapterData to a file
@@ -49,33 +62,18 @@ function downloadData(allChapterData) {
         URL.revokeObjectURL(url)
 }
 
-function processChapters(num = null) {
-    let allChapterData = {}
-
-    if (!num) {
-
-        for (let chapter of allChapters) {
-            let [returnedChapterNodes, returnedMaxX] = pm.plot(chapter, x, 0) 
-            // Save the data for this chapter
-            allChapterData[chapter] = returnedChapterNodes
-            x = returnedMaxX + 100
-        }
-    } else {
-        let [returnedChapterNodes, returnedMaxX] = pm.plot(num, x, 0)
-        // Save the data for this chapter
-        allChapterData[num] = returnedChapterNodes
-        x = returnedMaxX + 100
-    }
-
-    for (let node of Object.values(allChapterData)) {
-        node.forEach(node => {
-            if (!node.properties.isPlaceholder) {
-                new NodeVisualizer(node, node.x, node.y).draw("canvas")
-            }
-        })
-    }
-
-    //downloadData(allChapterData)
+function visualizeData(allChapterData) {
+    const visualizer = new D3Visualizer('#canvas', allChapterData, {
+        xOffset: 20,
+        yOffset: 20,
+        circleRadius: 5,
+        circleFill: 'blue',
+        textFontSize: 12,
+        textFill: 'black'
+      })
 }
+const c = processChapters()
+let chapterJson = JSON.stringify(c, null, 2)
 
-processChapters()
+//visualizeData(chapterJson)
+console.log(chapterJson)

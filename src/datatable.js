@@ -38,14 +38,14 @@ export let table = new DataTable('#principia-table', {
         { data: 'properties.part', title: 'Part' },
         { 
             data: 'provenBy', 
-            title: 'Proven By', 
+            title: 'Its proof cites...', 
             render: function(data, type, row) { 
                 return '<div style="max-width: 200px; overflow-x: auto;">' + (data || "") + '</div>';
             }
         },
         { 
             data: 'proves', 
-            title: 'Proves', 
+            title: 'Cited in proof of...', 
             render: function(data, type, row) { 
                 return '<div style="max-width: 100px; overflow-x: auto;">' + (data || "") + '</div>';
             }  
