@@ -29,28 +29,10 @@
                 
                 <li><a
                   href='#nodevisualizer'
-                  class=" toggle-sibling">
+                  class="">
                   NodeVisualizer
-                  <span class='icon'>▸</span>
+                  
                 </a>
-                
-                <div class='toggle-target display-none'>
-                  
-                  
-                    <ul class='list-reset py1-ul pl1'>
-                      <li class='h5'><span>Instance members</span></li>
-                      
-                      <li><a
-                        href='#nodevisualizerdraw'
-                        class='regular pre-open'>
-                        #draw
-                      </a></li>
-                      
-                    </ul>
-                  
-                  
-                  
-                </div>
                 
                 </li>
               
@@ -158,6 +140,16 @@
                 
                 </li>
               
+                
+                <li><a
+                  href='#d3visualizer'
+                  class="">
+                  D3Visualizer
+                  
+                </a>
+                
+                </li>
+              
             </ul>
           </div>
           <div class='mt1 h6 quiet'>
@@ -184,7 +176,7 @@
   <p>Class to visualize a Node object in 2D space.
 It can calculate the position of a node based on its level, and draw it on a given SVG container.</p>
 
-    <div class='pre p1 fill-light mt0'>new NodeVisualizer(node: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>, x: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, y: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</div>
+    <div class='pre p1 fill-light mt0'>new NodeVisualizer(node: any, x: any, y: any)</div>
   
   
 
@@ -201,29 +193,26 @@ It can calculate the position of a node based on its level, and draw it on a giv
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>node</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</code>
-	    The Node object to visualize.
-
+            <span class='code bold'>node</span> <code class='quiet'>(any)</code>
+	    
           </div>
           
         </div>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>x</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>
+            <span class='code bold'>x</span> <code class='quiet'>(any
             = <code>0</code>)</code>
-	    The initial x-coordinate.
-
+	    
           </div>
           
         </div>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>y</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>
+            <span class='code bold'>y</span> <code class='quiet'>(any
             = <code>0</code>)</code>
-	    The initial y-coordinate.
-
+	    
           </div>
           
         </div>
@@ -242,89 +231,6 @@ It can calculate the position of a node based on its level, and draw it on a giv
   
 
   
-
-  
-    <div class='py1 quiet mt1 prose-big'>Instance Members</div>
-    <div class="clearfix">
-  
-    <div class='border-bottom' id='nodevisualizerdraw'>
-      <div class="clearfix small pointer toggle-sibling">
-        <div class="py1 contain">
-            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>draw(containerId, color?)</span>
-        </div>
-      </div>
-      <div class="clearfix display-none toggle-target">
-        <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-
-  <p>Draw the node in the given SVG container.</p>
-<ul>
-<li>Creates a circle at the node's position.</li>
-<li>Adds a number label above the circle.</li>
-<li>Sets up a click event listener on the circle.</li>
-</ul>
-
-    <div class='pre p1 fill-light mt0'>draw(containerId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, color: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>?)</div>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Parameters</div>
-    <div class='prose'>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>containerId</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
-	    The id of the SVG container where the node will be drawn.
-
-          </div>
-          
-        </div>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>color</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>?)</code>
-	    The color to fill the circle. Defaults to 'red'.
-
-          </div>
-          
-        </div>
-      
-    </div>
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-      </div>
-    </div>
-  
-</div>
 
   
 
@@ -1185,6 +1091,172 @@ This method will also insert placeholders for missing nodes with a mantissa leng
     </div>
   
 </div>
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='d3visualizer'>
+      D3Visualizer
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>D3Visualizer Class to create a D3 visualization.</p>
+
+    <div class='pre p1 fill-light mt0'>new D3Visualizer(svgSelector: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, data: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>, options: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>svgSelector</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+            = <code>&#39;canvas&#39;</code>)</code>
+	    The CSS selector to attach the SVG element to.
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>data</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</code>
+	    The data to be visualized.
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>options</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>
+            = <code>{}</code>)</code>
+	    Additional options for customization.
+
+          </div>
+          
+          <table class='mt1 mb2 fixed-table h5 col-12'>
+            <colgroup>
+              <col width='30%' />
+              <col width='70%' />
+            </colgroup>
+            <thead>
+              <tr class='bold fill-light'>
+                <th>Name</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody class='mt1'>
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>options.xOffset</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></code>
+  
+    (default <code>20</code>)
+  </td>
+  <td class='break-word'><span>X-offset for positioning elements.
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>options.yOffset</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></code>
+  
+    (default <code>20</code>)
+  </td>
+  <td class='break-word'><span>Y-offset for positioning elements.
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>options.circleRadius</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></code>
+  
+    (default <code>5</code>)
+  </td>
+  <td class='break-word'><span>The radius of circles in the visualization.
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>options.circleFill</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
+  
+    (default <code>&#39;blue&#39;</code>)
+  </td>
+  <td class='break-word'><span>The fill color for circles.
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>options.textFontSize</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></code>
+  
+    (default <code>12</code>)
+  </td>
+  <td class='break-word'><span>The font size for text labels.
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>options.textFill</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
+  
+    (default <code>&#39;black&#39;</code>)
+  </td>
+  <td class='break-word'><span>The fill color for text.
+</span></td>
+</tr>
+
+
+              
+            </tbody>
+          </table>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
 
   
 

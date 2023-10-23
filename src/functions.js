@@ -289,16 +289,16 @@ export class Graph {
                 chapter_nodes.push(node)
             }
         }
-        
+
         // Extract nodes with a mantissa length of 1
         let primaryNodes = chapter_nodes.filter(node => {
             let mantissa = node.properties.number.split(".")[1]
             return mantissa && mantissa.length === 1
         })
-    
+
         // Extract the actual mantissa values
         let mantissaValues = primaryNodes.map(node => node.properties.number.split(".")[1])
-    
+
         // Find missing mantissa values
         for (let i = 0; i < 10; i++) {
             if (!mantissaValues.includes(i.toString())) {
@@ -312,7 +312,7 @@ export class Graph {
                 })
             }
         }
-    
+
         // Re-sort the nodes by their number property
         chapter_nodes.sort((a, b) => {
             let numA = parseFloat(a.properties.number)
@@ -323,13 +323,13 @@ export class Graph {
         let y = startingY
         let lastPrimaryNode = startingX
         let currentRootNodeNum = chapter
-    
+
         for (let node of chapter_nodes) {
             node.rootNode = false
             let parts = node.properties.number.split(".")
             let mantissa = parts[1]
             let mantissaLength = mantissa ? mantissa.length : 0
-    
+
             if (mantissaLength === 0) {
                 node.x = x
                 node.y = y
@@ -353,16 +353,21 @@ export class Graph {
                 node.x = x
                 node.y = y
             }
-    
+
+            if (node.properties.number === `25.1011`) {
+                node.x = 8350
+                node.y = 150
+            }
+
             if (mantissa === '0') {
                 lastPrimaryNode = x
             }
-    
+
             if (node.x > maxX) {
                 maxX = node.x
             }
         }
-        return [chapter_nodes, maxX]        
+        return [chapter_nodes, maxX]
     }
 
     /**
@@ -377,77 +382,114 @@ export class Graph {
                 new NodeVisualizer(node, node.x, node.y).draw("canvas", color)
             }
         })
-    }   
+    }
 }
 
+/**
+ * D3Visualizer Class to create a D3 visualization.
+ * 
+ * @class
+ * @param {string} [svgSelector='canvas'] - The CSS selector to attach the SVG element to.
+ * @param {Object} data - The data to be visualized.
+ * @param {Object} [options={}] - Additional options for customization.
+ * @param {number} [options.xOffset=20] - X-offset for positioning elements.
+ * @param {number} [options.yOffset=20] - Y-offset for positioning elements.
+ * @param {number} [options.circleRadius=5] - The radius of circles in the visualization.
+ * @param {string} [options.circleFill='blue'] - The fill color for circles.
+ * @param {number} [options.textFontSize=12] - The font size for text labels.
+ * @param {string} [options.textFill='black'] - The fill color for text.
+ */
 export class D3Visualizer {
-    constructor(svgSelector, data, options = {}) {
-      this.svg = d3.select(svgSelector)
-      this.data = data
-      this.xOffset = options.xOffset || 20
-      this.yOffset = options.yOffset || 20
-      this.circleRadius = options.circleRadius || 5
-      this.circleFill = options.circleFill || 'blue'
-      this.textFontSize = options.textFontSize || 12
-      this.textFill = options.textFill || 'black'
-      this.init()
+    constructor(svgSelector = 'canvas', data, options = {}) {
+        this.svg = d3.select(svgSelector)
+        this.data = data
+        this.xOffset = options.xOffset || 20
+        this.yOffset = options.yOffset || 20
+        this.circleRadius = options.circleRadius || 5
+        this.circleFill = options.circleFill || 'blue'
+        this.textFontSize = options.textFontSize || 12
+        this.textFill = options.textFill || 'black'
+        this.init()
     }
-  
+
+    /**
+     * Initializes the visualization by calculating dimensions and drawing elements.
+     * 
+     * @private
+     */
     init() {
-      // Calculate minimum and maximum x and y coordinates
-      let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity
-      Object.keys(this.data).forEach(chapter => {
-        this.data[chapter].forEach(d => {
-          if (!d.properties.isPlaceholder) {
-            minX = Math.min(minX, d.x)
-            maxX = Math.max(maxX, d.x)
-            minY = Math.min(minY, d.y)
-            maxY = Math.max(maxY, d.y)
-          }
+        // Calculate minimum and maximum x and y coordinates
+        let minX = Infinity,
+            maxX = -Infinity,
+            minY = Infinity,
+            maxY = -Infinity
+        Object.keys(this.data).forEach(chapter => {
+            this.data[chapter].forEach(d => {
+                if (!d.properties.isPlaceholder) {
+                    minX = Math.min(minX, d.x)
+                    maxX = Math.max(maxX, d.x)
+                    minY = Math.min(minY, d.y)
+                    maxY = Math.max(maxY, d.y)
+                }
+            })
         })
-      })
-  
-      // Calculate SVG dimensions
-      const svgWidth = maxX - minX + this.xOffset
-      const svgHeight = maxY - minY + this.yOffset
-  
-      // Set SVG dimensions
-      this.svg.attr('width', svgWidth)
-              .attr('height', svgHeight)
-  
-      this.drawCircles(minX, minY)
-      this.drawTextLabels(minX, minY)
+        console.log(`minX: ${minX}, maxX: ${maxX}, minY: ${minY}, maxY: ${maxY}`);
+
+
+        // Calculate SVG dimensions
+        const svgWidth = maxX - minX + this.xOffset
+        const svgHeight = maxY - minY + this.yOffset
+
+        // Set SVG dimensions
+        this.svg.attr('width', svgWidth)
+            .attr('height', svgHeight)
+
+        this.drawCircles(minX, minY)
+        this.drawTextLabels(minX, minY)
     }
-  
+
+    /**
+     * Draws circles on the SVG canvas.
+     * 
+     * @private
+     * @param {number} minX - The minimum X-coordinate in the data.
+     * @param {number} minY - The minimum Y-coordinate in the data.
+     */
     drawCircles(minX, minY) {
-      const circles = this.svg.selectAll('circle')
-        .data(Object.values(this.data).flat())
-        .enter()
-        .append('circle')
-        .filter(d => !d.properties.isPlaceholder)
-        .attr('cx', d => d.x - minX + this.xOffset)
-        .attr('cy', d => d.y - minY + this.yOffset)
-        .attr('r', this.circleRadius)
-        .attr('fill', this.circleFill)
-  
-      // Add click event handling for each circle
-      circles.on('click', (event, d) => {
-        console.log(`Clicked circle with data:`, d)
-      })
+        const circles = this.svg.selectAll('circle')
+            .data(Object.values(this.data).flat())
+            .enter()
+            .append('circle')
+            .filter(d => !d.properties.isPlaceholder)
+            .attr('cx', d => d.x - minX + this.xOffset)
+            .attr('cy', d => d.y - minY + this.yOffset)
+            .attr('r', this.circleRadius)
+            .attr('fill', this.circleFill)
+
+        // Add click event handling for each circle
+        circles.on('click', (event, d) => {
+            console.log(`Clicked circle with data:`, d)
+        })
     }
-  
+
+    /**
+     * Draws text labels on the SVG canvas.
+     * 
+     * @private
+     * @param {number} minX - The minimum X-coordinate in the data.
+     * @param {number} minY - The minimum Y-coordinate in the data.
+     */
     drawTextLabels(minX, minY) {
-      this.svg.selectAll('text')
-        .data(Object.values(this.data).flat())
-        .enter()
-        .append('text')
-        .filter(d => !d.properties.isPlaceholder)
-        .attr('x', d => d.x - minX + this.xOffset)
-        .attr('y', d => d.y - minY - 10 + this.yOffset)
-        .text(d => d.properties.number)
-        .attr('text-anchor', 'middle')
-        .attr('font-size', this.textFontSize)
-        .attr('fill', this.textFill)
+        this.svg.selectAll('text')
+            .data(Object.values(this.data).flat())
+            .enter()
+            .append('text')
+            .filter(d => !d.properties.isPlaceholder)
+            .attr('x', d => d.x - minX + this.xOffset)
+            .attr('y', d => d.y - minY - 10 + this.yOffset)
+            .text(d => d.properties.number)
+            .attr('text-anchor', 'middle')
+            .attr('font-size', this.textFontSize)
+            .attr('fill', this.textFill)
     }
 }
-  

@@ -1,4 +1,4 @@
-const svg = d3.select('#svg-container')
+const svg = d3.select('#canvas')
 
 d3.json('pm_coordinates.json').then(data => {
   // Calculate the minimum and maximum x and y coordinates

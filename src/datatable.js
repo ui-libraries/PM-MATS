@@ -4,7 +4,7 @@ import { Graph } from './functions'
 let pm = new Graph('pm.json')
 let data = Object.values(pm.nodes)
 
-function exportData (){
+function exportJson (){
     const jsonString = JSON.stringify(data, null, 2)
     const blob = new Blob([jsonString], { type: "application/json" })
     const url = URL.createObjectURL(blob)
@@ -13,6 +13,10 @@ function exportData (){
     a.download = 'principia-mathematica.json'
     a.click()
     URL.revokeObjectURL(url)
+}
+
+function exportCsv() {
+
 }
  
 export let table = new DataTable('#principia-table', {
@@ -23,7 +27,7 @@ export let table = new DataTable('#principia-table', {
             text: 'Export data',
             className: 'btn export-btn',
             action: function ( e, dt, node, config ) {
-                exportData()
+                exportCsv()
             }
         }
     ],
