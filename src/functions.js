@@ -386,7 +386,7 @@ export class Graph {
 }
 
 /**
- * D3Visualizer Class to create a D3 visualization.
+ * GraphVisualizer Class to create a D3 visualization.
  * 
  * @class
  * @param {string} [svgSelector='canvas'] - The CSS selector to attach the SVG element to.
@@ -399,7 +399,7 @@ export class Graph {
  * @param {number} [options.textFontSize=12] - The font size for text labels.
  * @param {string} [options.textFill='black'] - The fill color for text.
  */
-export class D3Visualizer {
+export class GraphVisualizer {
     constructor(svgSelector = 'canvas', data, options = {}) {
         this.svg = d3.select(svgSelector)
         this.data = data

@@ -1,7 +1,7 @@
 import {
   Graph,
   NodeVisualizer,
-  D3Visualizer
+  GraphVisualizer
 } from './functions'
 import {
   table
@@ -45,7 +45,7 @@ function downloadData(allChapterData) {
 }
 
 function visualizeData(allChapterData) {
-  const visualizer = new D3Visualizer('#canvas', allChapterData, {
+  const visualizer = new GraphVisualizer('#canvas', allChapterData, {
       xOffset: 20,
       yOffset: 20,
       circleRadius: 5,
