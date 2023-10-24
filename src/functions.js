@@ -280,7 +280,6 @@ export class Graph {
      * plot(3, 150, 150)
      */
     plot(chapter, startingX = 0, startingY = 0, color) {
-        //console.log(this.nodes)
         let maxX = 0
         let chapter_nodes = []
         // Filter nodes based on the given chapter
@@ -322,10 +321,9 @@ export class Graph {
         let x = startingX
         let y = startingY
         let lastPrimaryNode = startingX
-        let currentRootNodeNum = chapter
 
+        // if the chapter is 55, list out all chapter nodes numbers
         for (let node of chapter_nodes) {
-            node.rootNode = false
             let parts = node.properties.number.split(".")
             let mantissa = parts[1]
             let mantissaLength = mantissa ? mantissa.length : 0
@@ -344,7 +342,6 @@ export class Graph {
                 node.x = x
                 node.y = y
                 let lastRootNode = chapter_nodes.filter(n => n.rootNode && n.properties.number.split(".")[1][0] === mantissa[0]).pop()
-                let rootNum
                 if (lastRootNode) {
                     node.y = lastRootNode.y
                 }
@@ -352,8 +349,14 @@ export class Graph {
                 y += 50
                 node.x = x
                 node.y = y
-            }
-
+                let previousNode = chapter_nodes[chapter_nodes.indexOf(node) - 1]
+                // if the mantissa length of previous node is 2, then reset y to the y of the previous node
+                if (previousNode.properties.number.split(".")[1].length === 2) {
+                    y = previousNode.y + 50
+                    node.y = y
+                }
+            } 
+            
             if (node.properties.number === `25.1011`) {
                 node.x = 8350
                 node.y = 150
@@ -433,7 +436,7 @@ export class GraphVisualizer {
                 }
             })
         })
-        console.log(`minX: ${minX}, maxX: ${maxX}, minY: ${minY}, maxY: ${maxY}`);
+        //console.log(`minX: ${minX}, maxX: ${maxX}, minY: ${minY}, maxY: ${maxY}`);
 
 
         // Calculate SVG dimensions
