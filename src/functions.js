@@ -266,21 +266,7 @@ export class Graph {
         return chapterNumbers
     }
 
-    /**
-     * Plots nodes based on the provided chapter number and starting coordinates.
-     * This method will also insert placeholders for missing nodes with a mantissa length of 1.
-     * 
-     * @param {number} chapter - The chapter number to be plotted.
-     * @param {number} [startingX=0] - The starting X-coordinate for the plotting.
-     * @param {number} [startingY=0] - The starting Y-coordinate for the plotting.
-     * @returns {number} - Returns the largest X-coordinate value found during the plotting.
-     * 
-     * @example
-     * plot(2)
-     * plot(3, 150, 150)
-     */
-    plot(chapter, startingX = 0, startingY = 0, color) {
-        let maxX = 0
+    getChapterNodes(chapter) {
         let chapter_nodes = []
         // Filter nodes based on the given chapter
         for (let node of Object.values(this.nodes)) {
@@ -318,11 +304,30 @@ export class Graph {
             let numB = parseFloat(b.properties.number)
             return numA - numB || a.properties.number.localeCompare(b.properties.number)
         })
+        return chapter_nodes
+    }
+
+    /**
+     * Plots nodes based on the provided chapter number and starting coordinates.
+     * This method will also insert placeholders for missing nodes with a mantissa length of 1.
+     * 
+     * @param {number} chapter - The chapter number to be plotted.
+     * @param {number} [startingX=0] - The starting X-coordinate for the plotting.
+     * @param {number} [startingY=0] - The starting Y-coordinate for the plotting.
+     * @returns {number} - Returns the largest X-coordinate value found during the plotting.
+     * 
+     * @example
+     * plot(2)
+     * plot(3, 150, 150)
+     */
+    plot(chapter, startingX = 0, startingY = 0) {
+        let maxX = 0
+        let maxY = 0
         let x = startingX
         let y = startingY
         let lastPrimaryNode = startingX
-
-        // if the chapter is 55, list out all chapter nodes numbers
+        let chapter_nodes = this.getChapterNodes(chapter)
+        
         for (let node of chapter_nodes) {
             let parts = node.properties.number.split(".")
             let mantissa = parts[1]
@@ -355,6 +360,7 @@ export class Graph {
                     y = previousNode.y + 50
                     node.y = y
                 }
+                maxY = y
             } 
             
             if (node.properties.number === `25.1011`) {
