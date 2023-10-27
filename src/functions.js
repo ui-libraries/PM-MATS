@@ -361,6 +361,8 @@ export class Graph {
         let chapter_nodes = this.getChapterNodes(chapter).sort((a, b) => a.properties.number - b.properties.number)
         
         for (let node of chapter_nodes) {
+            let p = node.properties.number.split(".")
+            if (p[1].length === 4) { console.log(node.properties.number) }
             let parts = node.properties.number.split(".")
             let mantissa = parts[1]
             let mantissaLength = mantissa ? mantissa.length : 0
