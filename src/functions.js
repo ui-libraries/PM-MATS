@@ -266,6 +266,27 @@ export class Graph {
         return chapterNumbers
     }
 
+    /**
+     * Fetches the nodes associated with a specific chapter, ensuring that there's a node for every primary mantissa value from 0 to 9.
+     * Missing nodes are represented as placeholders.
+     *
+     * @param {string|number} chapter - The chapter for which the nodes are to be fetched.
+     * @returns {Object[]} An array of node objects associated with the chapter, sorted by their 'number' property.
+     * @property {string} type - The type of the node. In this context, it's always "node".
+     * @property {Object} properties - The properties associated with the node.
+     * @property {string} properties.number - The node's unique identifier in the format "{chapter}.{mantissa}".
+     * @property {boolean} [properties.isPlaceholder=false] - Indicates if the node is a placeholder for a missing primary mantissa value.
+     * 
+     * @example
+     * // Assuming the instance has a nodes property populated as:
+     * // {
+     * //     node1: { properties: { chapter: '1', number: '1.0' } },
+     * //     node2: { properties: { chapter: '1', number: '1.1' } },
+     * //     ... other nodes
+     * // }
+     * getChapterNodes(1);
+     * // Output: Array of nodes for chapter 1, with placeholders for missing primary mantissa values.
+     */
     getChapterNodes(chapter) {
         let chapter_nodes = []
         // Filter nodes based on the given chapter
@@ -308,17 +329,28 @@ export class Graph {
     }
 
     /**
-     * Plots nodes based on the provided chapter number and starting coordinates.
-     * This method will also insert placeholders for missing nodes with a mantissa length of 1.
+     * Plots nodes for a specified chapter on a 2D space. Nodes are positioned based on their 'number' property's mantissa length.
      * 
-     * @param {number} chapter - The chapter number to be plotted.
-     * @param {number} [startingX=0] - The starting X-coordinate for the plotting.
-     * @param {number} [startingY=0] - The starting Y-coordinate for the plotting.
-     * @returns {number} - Returns the largest X-coordinate value found during the plotting.
+     * Nodes with:
+     * - A mantissa length of 0 (like x.0) are treated as primary nodes.
+     * - A mantissa length of 1 are vertically aligned with primary nodes.
+     * - A mantissa length of 2 are horizontally displaced from the previous node.
+     * - A mantissa length of 3 are vertically aligned below their predecessor.
+     * 
+     * Special cases (e.g., the node with the number `25.1011`) are handled uniquely.
+     *
+     * @param {string|number} chapter - The chapter for which the nodes are to be plotted.
+     * @param {number} [startingX=0] - The initial x-coordinate for plotting.
+     * @param {number} [startingY=0] - The initial y-coordinate for plotting.
+     * @returns {[Object[], number]} A tuple where the first element is the array of plotted node objects and the second is the maximum x-coordinate value among the nodes.
+     * 
+     * @property {number} x - The x-coordinate of a node.
+     * @property {number} y - The y-coordinate of a node.
      * 
      * @example
-     * plot(2)
-     * plot(3, 150, 150)
+     * // Given nodes with properties {chapter: '1', number: '1.x'} etc.
+     * plot(1, 0, 0);
+     * // Output: Array of plotted nodes for chapter 1 and the maximum x-coordinate value.
      */
     plot(chapter, startingX = 0, startingY = 0) {
         let maxX = 0
@@ -333,32 +365,40 @@ export class Graph {
             let mantissa = parts[1]
             let mantissaLength = mantissa ? mantissa.length : 0
     
-            if (mantissaLength === 0) {
-                node.x = x
-                node.y = y
-            } else if (mantissaLength === 1) {
-                y = Math.max(y + 50, maxY + 50)
-                x = lastPrimaryNodeX
-                node.x = x
-                node.y = y
-                node.rootNode = true
-            } else if (mantissaLength === 2) {
-                x += 50
-                node.x = x
-                node.y = y
-                let lastRootNode = chapter_nodes.filter(n => n.rootNode && n.properties.number.split(".")[1][0] === mantissa[0]).pop()
-                if (lastRootNode) {
-                    node.y = lastRootNode.y
-                }
-            } else if (mantissaLength === 3) {
-                y += 50
-                node.x = x
-                node.y = y
-                let previousNode = chapter_nodes[chapter_nodes.indexOf(node) - 1]
-                if (previousNode.properties.number.split(".")[1].length === 2) {
-                    y = previousNode.y + 50
+            switch (mantissaLength) {
+                case 0:
+                    node.x = x
                     node.y = y
-                }
+                    break
+    
+                case 1:
+                    y = Math.max(y + 50, maxY + 50)
+                    x = lastPrimaryNodeX
+                    node.x = x
+                    node.y = y
+                    node.rootNode = true
+                    break
+    
+                case 2:
+                    x += 50
+                    node.x = x
+                    node.y = y
+                    let lastRootNode = chapter_nodes.filter(n => n.rootNode && n.properties.number.split(".")[1][0] === mantissa[0]).pop()
+                    if (lastRootNode) {
+                        node.y = lastRootNode.y
+                    }
+                    break
+    
+                case 3:
+                    y += 50
+                    node.x = x
+                    node.y = y
+                    let previousNode = chapter_nodes[chapter_nodes.indexOf(node) - 1]
+                    if (previousNode.properties.number.split(".")[1].length === 2) {
+                        y = previousNode.y + 50
+                        node.y = y
+                    }
+                    break
             }
     
             if (node.properties.number === `25.1011`) {
@@ -380,6 +420,7 @@ export class Graph {
         }
         return [chapter_nodes, maxX]
     }
+    
     
 
     /**
@@ -445,7 +486,7 @@ export class GraphVisualizer {
                 }
             })
         })
-        //console.log(`minX: ${minX}, maxX: ${maxX}, minY: ${minY}, maxY: ${maxY}`);
+        //console.log(`minX: ${minX}, maxX: ${maxX}, minY: ${minY}, maxY: ${maxY}`)
 
 
         // Calculate SVG dimensions

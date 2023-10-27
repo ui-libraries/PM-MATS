@@ -121,6 +121,12 @@
                       </a></li>
                       
                       <li><a
+                        href='#graphgetchapternodes'
+                        class='regular pre-open'>
+                        #getChapterNodes
+                      </a></li>
+                      
+                      <li><a
                         href='#graphplot'
                         class='regular pre-open'>
                         #plot
@@ -911,11 +917,11 @@ It can calculate the position of a node based on its level, and draw it on a giv
       </div>
     </div>
   
-    <div class='border-bottom' id='graphplot'>
+    <div class='border-bottom' id='graphgetchapternodes'>
       <div class="clearfix small pointer toggle-sibling">
         <div class="py1 contain">
             <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>plot(chapter, startingX, startingY, color)</span>
+            <span class='code strong strong truncate'>getChapterNodes(chapter)</span>
         </div>
       </div>
       <div class="clearfix display-none toggle-target">
@@ -923,10 +929,10 @@ It can calculate the position of a node based on its level, and draw it on a giv
 
   
 
-  <p>Plots nodes based on the provided chapter number and starting coordinates.
-This method will also insert placeholders for missing nodes with a mantissa length of 1.</p>
+  <p>Fetches the nodes associated with a specific chapter, ensuring that there's a node for every primary mantissa value from 0 to 9.
+Missing nodes are represented as placeholders.</p>
 
-    <div class='pre p1 fill-light mt0'>plot(chapter: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, startingX: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, startingY: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, color: any): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></div>
+    <div class='pre p1 fill-light mt0'>getChapterNodes(chapter: (<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a> | <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>></div>
   
   
 
@@ -943,37 +949,9 @@ This method will also insert placeholders for missing nodes with a mantissa leng
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>chapter</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
-	    The chapter number to be plotted.
+            <span class='code bold'>chapter</span> <code class='quiet'>((<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a> | <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>))</code>
+	    The chapter for which the nodes are to be fetched.
 
-          </div>
-          
-        </div>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>startingX</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>
-            = <code>0</code>)</code>
-	    The starting X-coordinate for the plotting.
-
-          </div>
-          
-        </div>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>startingY</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>
-            = <code>0</code>)</code>
-	    The starting Y-coordinate for the plotting.
-
-          </div>
-          
-        </div>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>color</span> <code class='quiet'>(any)</code>
-	    
           </div>
           
         </div>
@@ -982,12 +960,45 @@ This method will also insert placeholders for missing nodes with a mantissa leng
   
 
   
+    <div class='py1 quiet mt1 prose-big'>Properties</div>
+    <div>
+      
+        <div class='space-bottom0'>
+          <span class='code bold'>type</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+          : The type of the node. In this context, it's always "node".
+
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <span class='code bold'>properties</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</code>
+          : The properties associated with the node.
+
+          
+            <ul>
+              
+                <li><code>properties.number</code> <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+                  
+                  <p>The node's unique identifier in the format "{chapter}.{mantissa}".</p>
+</li>
+              
+                <li><code>properties.isPlaceholder</code> <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>?
+                  
+                  <p>Indicates if the node is a placeholder for a missing primary mantissa value.</p>
+</li>
+              
+            </ul>
+          
+        </div>
+      
+    </div>
+  
 
   
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></code>:
-        Returns the largest X-coordinate value found during the plotting.
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>></code>:
+        An array of node objects associated with the chapter, sorted by their 'number' property.
 
       
     
@@ -1001,8 +1012,140 @@ This method will also insert placeholders for missing nodes with a mantissa leng
     <div class='py1 quiet mt1 prose-big'>Example</div>
     
       
-      <pre class='p1 overflow-auto round fill-light'><span class="hljs-title function_">plot</span>(<span class="hljs-number">2</span>)
-<span class="hljs-title function_">plot</span>(<span class="hljs-number">3</span>, <span class="hljs-number">150</span>, <span class="hljs-number">150</span>)</pre>
+      <pre class='p1 overflow-auto round fill-light'><span class="hljs-comment">// Assuming the instance has a nodes property populated as:</span>
+<span class="hljs-comment">// {</span>
+<span class="hljs-comment">//     node1: { properties: { chapter: &#x27;1&#x27;, number: &#x27;1.0&#x27; } },</span>
+<span class="hljs-comment">//     node2: { properties: { chapter: &#x27;1&#x27;, number: &#x27;1.1&#x27; } },</span>
+<span class="hljs-comment">//     ... other nodes</span>
+<span class="hljs-comment">// }</span>
+<span class="hljs-title function_">getChapterNodes</span>(<span class="hljs-number">1</span>);
+<span class="hljs-comment">// Output: Array of nodes for chapter 1, with placeholders for missing primary mantissa values.</span></pre>
+    
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='graphplot'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>plot(chapter, startingX, startingY)</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+
+  <p>Plots nodes for a specified chapter on a 2D space. Nodes are positioned based on their 'number' property's mantissa length.</p>
+<p>Nodes with:</p>
+<ul>
+<li>A mantissa length of 0 (like x.0) are treated as primary nodes.</li>
+<li>A mantissa length of 1 are vertically aligned with primary nodes.</li>
+<li>A mantissa length of 2 are horizontally displaced from the previous node.</li>
+<li>A mantissa length of 3 are vertically aligned below their predecessor.</li>
+</ul>
+<p>Special cases (e.g., the node with the number <code>25.1011</code>) are handled uniquely.</p>
+
+    <div class='pre p1 fill-light mt0'>plot(chapter: (<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a> | <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>), startingX: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, startingY: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>): [<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>>, <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>]</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>chapter</span> <code class='quiet'>((<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a> | <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>))</code>
+	    The chapter for which the nodes are to be plotted.
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>startingX</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>
+            = <code>0</code>)</code>
+	    The initial x-coordinate for plotting.
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>startingY</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>
+            = <code>0</code>)</code>
+	    The initial y-coordinate for plotting.
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Properties</div>
+    <div>
+      
+        <div class='space-bottom0'>
+          <span class='code bold'>x</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
+          : The x-coordinate of a node.
+
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <span class='code bold'>y</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
+          : The y-coordinate of a node.
+
+          
+        </div>
+      
+    </div>
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>[<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>>, <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>]</code>:
+        A tuple where the first element is the array of plotted node objects and the second is the maximum x-coordinate value among the nodes.
+
+      
+    
+  
+
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Example</div>
+    
+      
+      <pre class='p1 overflow-auto round fill-light'><span class="hljs-comment">// Given nodes with properties {chapter: &#x27;1&#x27;, number: &#x27;1.x&#x27;} etc.</span>
+<span class="hljs-title function_">plot</span>(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>);
+<span class="hljs-comment">// Output: Array of plotted nodes for chapter 1 and the maximum x-coordinate value.</span></pre>
     
   
 
