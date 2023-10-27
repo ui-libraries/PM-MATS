@@ -325,20 +325,20 @@ export class Graph {
         let maxY = 0
         let x = startingX
         let y = startingY
-        let lastPrimaryNode = startingX
-        let chapter_nodes = this.getChapterNodes(chapter)
+        let lastPrimaryNodeX = startingX
+        let chapter_nodes = this.getChapterNodes(chapter).sort((a, b) => a.properties.number - b.properties.number)
         
         for (let node of chapter_nodes) {
             let parts = node.properties.number.split(".")
             let mantissa = parts[1]
             let mantissaLength = mantissa ? mantissa.length : 0
-
+    
             if (mantissaLength === 0) {
                 node.x = x
                 node.y = y
             } else if (mantissaLength === 1) {
-                y += 50
-                x = lastPrimaryNode
+                y = Math.max(y + 50, maxY + 50)
+                x = lastPrimaryNodeX
                 node.x = x
                 node.y = y
                 node.rootNode = true
@@ -355,29 +355,32 @@ export class Graph {
                 node.x = x
                 node.y = y
                 let previousNode = chapter_nodes[chapter_nodes.indexOf(node) - 1]
-                // if the mantissa length of previous node is 2, then reset y to the y of the previous node
                 if (previousNode.properties.number.split(".")[1].length === 2) {
                     y = previousNode.y + 50
                     node.y = y
                 }
-                maxY = y
-            } 
-            
+            }
+    
             if (node.properties.number === `25.1011`) {
                 node.x = 8350
                 node.y = 150
             }
-
+    
             if (mantissa === '0') {
-                lastPrimaryNode = x
+                lastPrimaryNodeX = x
             }
-
+    
             if (node.x > maxX) {
                 maxX = node.x
+            }
+    
+            if (node.y > maxY) {
+                maxY = node.y
             }
         }
         return [chapter_nodes, maxX]
     }
+    
 
     /**
      * Renders nodes to a canvas element.
