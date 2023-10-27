@@ -423,6 +423,20 @@ export class Graph {
 }
 
 /**
+ * Returns the number of digits after the decimal point for a given number.
+ *
+ * @param {string} number - String representation of a floating point number.
+ * @return {number} - Number of digits after the decimal point.
+ */
+function getDecimalCount(number) {
+    const parts = number.split(".")
+    if (parts.length === 2) {
+        return parts[1].length
+    }
+    return 0
+}
+
+/**
  * GraphVisualizer Class to create a D3 visualization.
  * 
  * @class
@@ -500,8 +514,24 @@ export class GraphVisualizer {
             .filter(d => !d.properties.isPlaceholder)
             .attr('cx', d => d.x - minX + this.xOffset)
             .attr('cy', d => d.y - minY + this.yOffset)
-            .attr('r', this.circleRadius)
-            .attr('fill', this.circleFill)
+            .attr('r', d => {
+                const decimalCount = getDecimalCount(d.properties.number)
+                const radiusIncreaseFactor = 0
+                return this.circleRadius + (decimalCount * radiusIncreaseFactor)
+            })
+            .attr('fill', d => {
+                if (d.properties.type) {
+                    switch (d.properties.type) {
+                        case 'Thm':
+                            return 'red'
+                        case 'Pp':
+                            return 'yellow'
+                        default:
+                            return this.circleFill
+                    }
+                }
+                return this.circleFill
+            })
 
         // Add click event handling for each circle
         circles.on('click', (event, d) => {
