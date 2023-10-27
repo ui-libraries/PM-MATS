@@ -49,7 +49,7 @@ function visualizeData(allChapterData) {
       xOffset: 20,
       yOffset: 20,
       circleRadius: 5,
-      circleFill: 'blue',
+      circleFill: 'black',
       textFontSize: 12,
       textFill: 'black'
   })

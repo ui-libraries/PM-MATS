@@ -1,4 +1,4 @@
-import data from './pm.json'
+import data from './pmdata.json'
 import {
     SVG
 } from '@svgdotjs/svg.js'
@@ -361,8 +361,6 @@ export class Graph {
         let chapter_nodes = this.getChapterNodes(chapter).sort((a, b) => a.properties.number - b.properties.number)
         
         for (let node of chapter_nodes) {
-            let p = node.properties.number.split(".")
-            if (p[1].length === 4) { console.log(node.properties.number) }
             let parts = node.properties.number.split(".")
             let mantissa = parts[1]
             let mantissaLength = mantissa ? mantissa.length : 0
@@ -401,11 +399,20 @@ export class Graph {
                         node.y = y
                     }
                     break
-            }
-    
-            if (node.properties.number === `25.1011`) {
-                node.x = 8350
-                node.y = 150
+                case 4:
+                    node.x = 8350
+                    node.y = 150
+                    /*
+                    25.1011
+                    120.4111
+                    120.4231
+                    120.4232
+                    120.4501
+                    120.4621
+                    120.4622
+                    213.1614
+                    373.1412
+                    */
             }
     
             if (mantissa === '0') {
@@ -528,6 +535,8 @@ export class GraphVisualizer {
                             return 'red'
                         case 'Pp':
                             return 'yellow'
+                        case 'Df':
+                            return 'green'
                         default:
                             return this.circleFill
                     }
