@@ -285,14 +285,13 @@ export class Graph {
                     x = startingX
                     node.x = x
                     node.y = y
-                    node.rootNode = true
                     break
     
                 case 2:
                     x += PAD
                     node.x = x
                     node.y = y
-                    let lastRootNode = chapter_nodes.find(n => n.rootNode && getDecimalPart(n.properties.number) === decimalPart[0])
+                    let lastRootNode = chapter_nodes.find(n => getDecimalPart(n.properties.number) === decimalPart[0])
                     if (lastRootNode) {
                         node.y = lastRootNode.y
                     }
@@ -307,6 +306,7 @@ export class Graph {
                         node.y = y
                     }
                     break
+
                 case 4:
                     // 25.1011, 120.4111, 120.4231, 120.4232, 120.4501, 120.4621, 120.4622, 213.1614, 373.1412
                     x += PAD
