@@ -1,6 +1,6 @@
 import data from './pmdata.json'
 import { Node } from './Node.js'
-import { getDecimalCount, getDecimalPart } from './utils.js'
+import { getDecimalLength, getDecimalPart } from './utils.js'
 
 /**
  * Represents a Graph containing nodes and their relationships.
@@ -266,13 +266,13 @@ export class Graph {
         let maxY = 0
         let x = startingX
         let y = startingY
-        let lastPrimaryNodeX = startingX
-        let chapter_nodes = this.getChapterNodes(chapter)
+        const chapter_nodes = this.getChapterNodes(chapter)
         const PAD = 50
         
         for (let node of chapter_nodes) {
+            let previousNode = chapter_nodes[chapter_nodes.indexOf(node) - 1]
             let decimalPart = getDecimalPart(node.properties.number)
-            let decimalPartLength = getDecimalCount(node.properties.number)
+            let decimalPartLength = getDecimalLength(node.properties.number)
     
             switch (decimalPartLength) {
                 case 0:
@@ -282,7 +282,7 @@ export class Graph {
     
                 case 1:
                     y = Math.max(y + PAD, maxY + PAD)
-                    x = lastPrimaryNodeX
+                    x = startingX
                     node.x = x
                     node.y = y
                     node.rootNode = true
@@ -302,32 +302,23 @@ export class Graph {
                     y += PAD
                     node.x = x
                     node.y = y
-                    let previousNode = chapter_nodes[chapter_nodes.indexOf(node) - 1]
-                    if (getDecimalCount(previousNode.properties.number) === 2) {
+                    if (getDecimalLength(previousNode.properties.number) === 2) {
                         y = previousNode.y + PAD
                         node.y = y
                     }
                     break
                 case 4:
-                    node.x = 8350
-                    node.y = 150
-                    /*
-                    25.1011
-                    120.4111
-                    120.4231
-                    120.4232
-                    120.4501
-                    120.4621
-                    120.4622
-                    213.1614
-                    373.1412
-                    */
-            }
-    
-            if (decimalPart === '0') {
-                lastPrimaryNodeX = x
+                    // 25.1011, 120.4111, 120.4231, 120.4232, 120.4501, 120.4621, 120.4622, 213.1614, 373.1412
+                    x += PAD
+                    node.x = x
+                    node.y = y
+                    if (getDecimalLength(previousNode.properties.number) === 3) {
+                        x = previousNode.x + PAD
+                        node.x = x
+                    }
             }
             
+            // store the x,y boundaries so we can properly space rows and columns
             if (node.x > maxX || node.y > maxY) {
                 maxX = node.x > maxX ? node.x : maxX
                 maxY = node.y > maxY ? node.y : maxY

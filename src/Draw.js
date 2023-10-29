@@ -1,4 +1,4 @@
-import { getDecimalCount } from './utils.js'
+import { getDecimalLength } from './utils.js'
 
 /**
  * Draw Class to create a D3 visualization.
@@ -79,7 +79,7 @@ export class Draw {
             .attr('cx', d => d.x - minX + this.xOffset)
             .attr('cy', d => d.y - minY + this.yOffset)
             .attr('r', d => {
-                const decimalCount = getDecimalCount(d.properties.number)
+                const decimalCount = getDecimalLength(d.properties.number)
                 const radiusIncreaseFactor = 0
                 return this.circleRadius + (decimalCount * radiusIncreaseFactor)
             })

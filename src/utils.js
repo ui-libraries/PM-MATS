@@ -4,7 +4,7 @@
  * @param {string} number - String representation of a floating point number.
  * @return {number} - Number of digits after the decimal point.
  */
-export function getDecimalCount(number) {
+export function getDecimalLength(number) {
     const parts = number.split(".")
     if (parts.length === 2) {
         return parts[1].length
