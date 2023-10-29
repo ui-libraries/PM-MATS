@@ -1,5 +1,10 @@
 body {
     background-color: #F8F0E3;
+    font-family: 'EB Garamond', serif;
+}
+
+.btn {
+    font-family: 'EB Garamond', serif;
 }
 
 #container {
