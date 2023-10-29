@@ -1,18 +1,13 @@
-import {
-  Graph,
-  NodeVisualizer,
-  GraphVisualizer
-} from './functions'
-import {
-  table
-} from './datatable.js'
+import { Graph } from './Graph.js'
+import { Draw } from './Draw.js'
+import { table } from './datatable.js'
 
-let pm = new Graph()
-let allChapters = pm.getChapterNumbers()
-let x = 0
+const pm = new Graph()
 
 function processChapters(num = null) {
+  const allChapters = pm.getChapterNumbers()
   let allChapterData = {}
+  let x = 0
 
   if (!num) {
       for (let chapter of allChapters) {
@@ -30,29 +25,11 @@ function processChapters(num = null) {
   return allChapterData
 }
 
-function downloadData(allChapterData) {
-  // After looping through all chapters, save allChapterData to a file
-  const jsonString = JSON.stringify(allChapterData, null, 2)
-  const blob = new Blob([jsonString], {
-      type: "application/json"
-  })
-  const url = URL.createObjectURL(blob)
-  const a = document.createElement('a')
-  a.href = url
-  a.download = 'all_chapter_nodes.json'
-  a.click()
-  URL.revokeObjectURL(url)
-}
-
-function visualizeData(allChapterData) {
-  const visualizer = new GraphVisualizer('#canvas', allChapterData, {
-      xOffset: 20,
-      yOffset: 20,
-      circleRadius: 5,
-      circleFill: 'black',
-      textFontSize: 12,
-      textFill: 'black'
-  })
-}
-const c = processChapters()
-visualizeData(c)
+new Draw('#container', processChapters(), {
+  xOffset: 20,
+  yOffset: 20,
+  circleRadius: 5,
+  circleFill: 'black',
+  textFontSize: 12,
+  textFill: 'black'
+})

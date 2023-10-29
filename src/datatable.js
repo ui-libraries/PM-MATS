@@ -1,10 +1,10 @@
 import DataTable from 'datatables.net-dt'
 import 'datatables.net-buttons'
-import { Graph } from './functions'
-let pm = new Graph('pm.json')
-let data = Object.values(pm.nodes)
+import { Graph } from './Graph.js'
+const pm = new Graph()
+const data = Object.values(pm.nodes)
 
-function exportJson (){
+function exportJson () {
     const jsonString = JSON.stringify(data, null, 2)
     const blob = new Blob([jsonString], { type: "application/json" })
     const url = URL.createObjectURL(blob)
@@ -13,10 +13,6 @@ function exportJson (){
     a.download = 'principia-mathematica.json'
     a.click()
     URL.revokeObjectURL(url)
-}
-
-function exportCsv() {
-
 }
  
 export let table = new DataTable('#principia-table', {

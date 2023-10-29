@@ -28,45 +28,11 @@
               
                 
                 <li><a
-                  href='#nodevisualizer'
+                  href='#draw'
                   class="">
-                  NodeVisualizer
+                  Draw
                   
                 </a>
-                
-                </li>
-              
-                
-                <li><a
-                  href='#node'
-                  class=" toggle-sibling">
-                  Node
-                  <span class='icon'>▸</span>
-                </a>
-                
-                <div class='toggle-target display-none'>
-                  
-                  
-                    <ul class='list-reset py1-ul pl1'>
-                      <li class='h5'><span>Instance members</span></li>
-                      
-                      <li><a
-                        href='#nodeaddproof'
-                        class='regular pre-open'>
-                        #addProof
-                      </a></li>
-                      
-                      <li><a
-                        href='#nodeaddprooffor'
-                        class='regular pre-open'>
-                        #addProofFor
-                      </a></li>
-                      
-                    </ul>
-                  
-                  
-                  
-                </div>
                 
                 </li>
               
@@ -132,10 +98,38 @@
                         #plot
                       </a></li>
                       
+                    </ul>
+                  
+                  
+                  
+                </div>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#node'
+                  class=" toggle-sibling">
+                  Node
+                  <span class='icon'>▸</span>
+                </a>
+                
+                <div class='toggle-target display-none'>
+                  
+                  
+                    <ul class='list-reset py1-ul pl1'>
+                      <li class='h5'><span>Instance members</span></li>
+                      
                       <li><a
-                        href='#graphdrawnodes'
+                        href='#nodeaddproof'
                         class='regular pre-open'>
-                        #drawNodes
+                        #addProof
+                      </a></li>
+                      
+                      <li><a
+                        href='#nodeaddprooffor'
+                        class='regular pre-open'>
+                        #addProofFor
                       </a></li>
                       
                     </ul>
@@ -148,9 +142,19 @@
               
                 
                 <li><a
-                  href='#graphvisualizer'
+                  href='#getdecimalcount'
                   class="">
-                  GraphVisualizer
+                  getDecimalCount
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#downloaddata'
+                  class="">
+                  downloadData
                   
                 </a>
                 
@@ -171,18 +175,17 @@
   
   <div class='clearfix'>
     
-    <h3 class='fl m0' id='nodevisualizer'>
-      NodeVisualizer
+    <h3 class='fl m0' id='draw'>
+      Draw
     </h3>
     
     
   </div>
   
 
-  <p>Class to visualize a Node object in 2D space.
-It can calculate the position of a node based on its level, and draw it on a given SVG container.</p>
+  <p>Draw Class to create a D3 visualization.</p>
 
-    <div class='pre p1 fill-light mt0'>new NodeVisualizer(node: any, x: any, y: any)</div>
+    <div class='pre p1 fill-light mt0'>new Draw(svgSelector: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, data: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>, options: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</div>
   
   
 
@@ -199,89 +202,9 @@ It can calculate the position of a node based on its level, and draw it on a giv
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>node</span> <code class='quiet'>(any)</code>
-	    
-          </div>
-          
-        </div>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>x</span> <code class='quiet'>(any
-            = <code>0</code>)</code>
-	    
-          </div>
-          
-        </div>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>y</span> <code class='quiet'>(any
-            = <code>0</code>)</code>
-	    
-          </div>
-          
-        </div>
-      
-    </div>
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-          
-        
-          
-          <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    <h3 class='fl m0' id='node'>
-      Node
-    </h3>
-    
-    
-  </div>
-  
-
-  <p>Represents a Node in a graph, including its properties and relationships.</p>
-
-    <div class='pre p1 fill-light mt0'>new Node(id: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, properties: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</div>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Parameters</div>
-    <div class='prose'>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>id</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
-	    The unique identifier for the Node.
+            <span class='code bold'>svgSelector</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+            = <code>&#39;canvas&#39;</code>)</code>
+	    The CSS selector to attach the SVG element to.
 
           </div>
           
@@ -289,11 +212,102 @@ It can calculate the position of a node based on its level, and draw it on a giv
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>properties</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>
+            <span class='code bold'>data</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</code>
+	    The data to be visualized.
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>options</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>
             = <code>{}</code>)</code>
-	    Additional properties of the Node.
+	    Additional options for customization.
 
           </div>
+          
+          <table class='mt1 mb2 fixed-table h5 col-12'>
+            <colgroup>
+              <col width='30%' />
+              <col width='70%' />
+            </colgroup>
+            <thead>
+              <tr class='bold fill-light'>
+                <th>Name</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody class='mt1'>
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>options.xOffset</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></code>
+  
+    (default <code>20</code>)
+  </td>
+  <td class='break-word'><span>X-offset for positioning elements.
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>options.yOffset</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></code>
+  
+    (default <code>20</code>)
+  </td>
+  <td class='break-word'><span>Y-offset for positioning elements.
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>options.circleRadius</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></code>
+  
+    (default <code>5</code>)
+  </td>
+  <td class='break-word'><span>The radius of circles in the visualization.
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>options.circleFill</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
+  
+    (default <code>&#39;blue&#39;</code>)
+  </td>
+  <td class='break-word'><span>The fill color for circles.
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>options.textFontSize</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></code>
+  
+    (default <code>12</code>)
+  </td>
+  <td class='break-word'><span>The font size for text labels.
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>options.textFill</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
+  
+    (default <code>&#39;black&#39;</code>)
+  </td>
+  <td class='break-word'><span>The fill color for text.
+</span></td>
+</tr>
+
+
+              
+            </tbody>
+          </table>
           
         </div>
       
@@ -311,138 +325,6 @@ It can calculate the position of a node based on its level, and draw it on a giv
   
 
   
-
-  
-    <div class='py1 quiet mt1 prose-big'>Instance Members</div>
-    <div class="clearfix">
-  
-    <div class='border-bottom' id='nodeaddproof'>
-      <div class="clearfix small pointer toggle-sibling">
-        <div class="py1 contain">
-            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>addProof(node)</span>
-        </div>
-      </div>
-      <div class="clearfix display-none toggle-target">
-        <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-
-  <p>Adds a Node ID to the 'proves' array, indicating a directed edge from this Node to another.</p>
-
-    <div class='pre p1 fill-light mt0'>addProof(node: <a href="#node">Node</a>)</div>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Parameters</div>
-    <div class='prose'>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>node</span> <code class='quiet'>(<a href="#node">Node</a>)</code>
-	    The Node that this Node proves.
-
-          </div>
-          
-        </div>
-      
-    </div>
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-      </div>
-    </div>
-  
-    <div class='border-bottom' id='nodeaddprooffor'>
-      <div class="clearfix small pointer toggle-sibling">
-        <div class="py1 contain">
-            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>addProofFor(node)</span>
-        </div>
-      </div>
-      <div class="clearfix display-none toggle-target">
-        <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-
-  <p>Adds a Node ID to the 'provenBy' array, indicating a directed edge from another Node to this Node.</p>
-
-    <div class='pre p1 fill-light mt0'>addProofFor(node: <a href="#node">Node</a>)</div>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Parameters</div>
-    <div class='prose'>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>node</span> <code class='quiet'>(<a href="#node">Node</a>)</code>
-	    The Node that proves this Node.
-
-          </div>
-          
-        </div>
-      
-    </div>
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-      </div>
-    </div>
-  
-</div>
 
   
 
@@ -929,7 +811,7 @@ It can calculate the position of a node based on its level, and draw it on a giv
 
   
 
-  <p>Fetches the nodes associated with a specific chapter, ensuring that there's a node for every primary mantissa value from 0 to 9.
+  <p>Fetches the nodes associated with a specific chapter, ensuring that there's a node for every primary decimalPart value from 0 to 9.
 Missing nodes are represented as placeholders.</p>
 
     <div class='pre p1 fill-light mt0'>getChapterNodes(chapter: (<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a> | <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>></div>
@@ -979,12 +861,12 @@ Missing nodes are represented as placeholders.</p>
               
                 <li><code>properties.number</code> <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
                   
-                  <p>The node's unique identifier in the format "{chapter}.{mantissa}".</p>
+                  <p>The node's unique identifier in the format "{chapter}.{decimalPart}".</p>
 </li>
               
                 <li><code>properties.isPlaceholder</code> <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>?
                   
-                  <p>Indicates if the node is a placeholder for a missing primary mantissa value.</p>
+                  <p>Indicates if the node is a placeholder for a missing primary decimalPart value.</p>
 </li>
               
             </ul>
@@ -1019,7 +901,7 @@ Missing nodes are represented as placeholders.</p>
 <span class="hljs-comment">//     ... other nodes</span>
 <span class="hljs-comment">// }</span>
 <span class="hljs-title function_">getChapterNodes</span>(<span class="hljs-number">1</span>);
-<span class="hljs-comment">// Output: Array of nodes for chapter 1, with placeholders for missing primary mantissa values.</span></pre>
+<span class="hljs-comment">// Output: Array of nodes for chapter 1, with placeholders for missing primary decimalPart values.</span></pre>
     
   
 
@@ -1047,13 +929,13 @@ Missing nodes are represented as placeholders.</p>
 
   
 
-  <p>Plots nodes for a specified chapter on a 2D space. Nodes are positioned based on their 'number' property's mantissa length.</p>
+  <p>Plots nodes for a specified chapter on a 2D space. Nodes are positioned based on their 'number' property's decimalPart length.</p>
 <p>Nodes with:</p>
 <ul>
-<li>A mantissa length of 0 (like x.0) are treated as primary nodes.</li>
-<li>A mantissa length of 1 are vertically aligned with primary nodes.</li>
-<li>A mantissa length of 2 are horizontally displaced from the previous node.</li>
-<li>A mantissa length of 3 are vertically aligned below their predecessor.</li>
+<li>A decimalPart length of 0 (like x.0) are treated as primary nodes.</li>
+<li>A decimalPart length of 1 are vertically aligned with primary nodes.</li>
+<li>A decimalPart length of 2 are horizontally displaced from the previous node.</li>
+<li>A decimalPart length of 3 are vertically aligned below their predecessor.</li>
 </ul>
 <p>Special cases (e.g., the node with the number <code>25.1011</code>) are handled uniquely.</p>
 
@@ -1161,21 +1043,34 @@ Missing nodes are represented as placeholders.</p>
       </div>
     </div>
   
-    <div class='border-bottom' id='graphdrawnodes'>
-      <div class="clearfix small pointer toggle-sibling">
-        <div class="py1 contain">
-            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>drawNodes(chapter_nodes, color)</span>
-        </div>
-      </div>
-      <div class="clearfix display-none toggle-target">
-        <section class='p2 mb2 clearfix bg-white minishadow'>
+</div>
 
   
 
-  <p>Renders nodes to a canvas element.</p>
+  
 
-    <div class='pre p1 fill-light mt0'>drawNodes(chapter_nodes: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>>, color: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</div>
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='node'>
+      Node
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Represents a Node in a graph, including its properties and relationships.</p>
+
+    <div class='pre p1 fill-light mt0'>new Node(id: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, properties: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</div>
   
   
 
@@ -1192,8 +1087,8 @@ Missing nodes are represented as placeholders.</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>chapter_nodes</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>>)</code>
-	    An array of node objects to be drawn. Each node object should have properties including 'x', 'y', and 'isPlaceholder'.
+            <span class='code bold'>id</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+	    The unique identifier for the Node.
 
           </div>
           
@@ -1201,8 +1096,129 @@ Missing nodes are represented as placeholders.</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>color</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
-	    The color to be used when drawing the nodes.
+            <span class='code bold'>properties</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>
+            = <code>{}</code>)</code>
+	    Additional properties of the Node.
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Instance Members</div>
+    <div class="clearfix">
+  
+    <div class='border-bottom' id='nodeaddproof'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>addProof(node)</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+
+  <p>Adds a Node ID to the 'proves' array, indicating a directed edge from this Node to another.</p>
+
+    <div class='pre p1 fill-light mt0'>addProof(node: <a href="#node">Node</a>)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>node</span> <code class='quiet'>(<a href="#node">Node</a>)</code>
+	    The Node that this Node proves.
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='nodeaddprooffor'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>addProofFor(node)</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+
+  <p>Adds a Node ID to the 'provenBy' array, indicating a directed edge from another Node to this Node.</p>
+
+    <div class='pre p1 fill-light mt0'>addProofFor(node: <a href="#node">Node</a>)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>node</span> <code class='quiet'>(<a href="#node">Node</a>)</code>
+	    The Node that proves this Node.
 
           </div>
           
@@ -1250,17 +1266,17 @@ Missing nodes are represented as placeholders.</p>
   
   <div class='clearfix'>
     
-    <h3 class='fl m0' id='graphvisualizer'>
-      GraphVisualizer
+    <h3 class='fl m0' id='getdecimalcount'>
+      getDecimalCount
     </h3>
     
     
   </div>
   
 
-  <p>GraphVisualizer Class to create a D3 visualization.</p>
+  <p>Returns the number of digits after the decimal point for a given number.</p>
 
-    <div class='pre p1 fill-light mt0'>new GraphVisualizer(svgSelector: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, data: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>, options: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</div>
+    <div class='pre p1 fill-light mt0'>getDecimalCount(number: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></div>
   
   
 
@@ -1277,112 +1293,82 @@ Missing nodes are represented as placeholders.</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>svgSelector</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
-            = <code>&#39;canvas&#39;</code>)</code>
-	    The CSS selector to attach the SVG element to.
+            <span class='code bold'>number</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+	    String representation of a floating point number.
 
           </div>
           
         </div>
       
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>data</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</code>
-	    The data to be visualized.
+    </div>
+  
 
-          </div>
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></code>:
+        Number of digits after the decimal point.
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
           
-        </div>
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='downloaddata'>
+      downloadData
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Downloads the provided chapter data as a JSON file.</p>
+
+    <div class='pre p1 fill-light mt0'>downloadData(allChapterData: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>>)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>options</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>
-            = <code>{}</code>)</code>
-	    Additional options for customization.
+            <span class='code bold'>allChapterData</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>>)</code>
+	    An array of chapter data objects to be downloaded.
 
           </div>
-          
-          <table class='mt1 mb2 fixed-table h5 col-12'>
-            <colgroup>
-              <col width='30%' />
-              <col width='70%' />
-            </colgroup>
-            <thead>
-              <tr class='bold fill-light'>
-                <th>Name</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody class='mt1'>
-              
-                <tr>
-  <td class='break-word'><span class='code bold'>options.xOffset</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></code>
-  
-    (default <code>20</code>)
-  </td>
-  <td class='break-word'><span>X-offset for positioning elements.
-</span></td>
-</tr>
-
-
-              
-                <tr>
-  <td class='break-word'><span class='code bold'>options.yOffset</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></code>
-  
-    (default <code>20</code>)
-  </td>
-  <td class='break-word'><span>Y-offset for positioning elements.
-</span></td>
-</tr>
-
-
-              
-                <tr>
-  <td class='break-word'><span class='code bold'>options.circleRadius</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></code>
-  
-    (default <code>5</code>)
-  </td>
-  <td class='break-word'><span>The radius of circles in the visualization.
-</span></td>
-</tr>
-
-
-              
-                <tr>
-  <td class='break-word'><span class='code bold'>options.circleFill</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
-  
-    (default <code>&#39;blue&#39;</code>)
-  </td>
-  <td class='break-word'><span>The fill color for circles.
-</span></td>
-</tr>
-
-
-              
-                <tr>
-  <td class='break-word'><span class='code bold'>options.textFontSize</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></code>
-  
-    (default <code>12</code>)
-  </td>
-  <td class='break-word'><span>The font size for text labels.
-</span></td>
-</tr>
-
-
-              
-                <tr>
-  <td class='break-word'><span class='code bold'>options.textFill</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
-  
-    (default <code>&#39;black&#39;</code>)
-  </td>
-  <td class='break-word'><span>The fill color for text.
-</span></td>
-</tr>
-
-
-              
-            </tbody>
-          </table>
           
         </div>
       
@@ -1395,6 +1381,14 @@ Missing nodes are represented as placeholders.</p>
 
   
 
+  
+    <div class='py1 quiet mt1 prose-big'>Throws</div>
+    <ul>
+      
+        <li><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Error">Error</a>: Throws an error if the browser does not support Blob or URL.createObjectURL.
+</li>
+      
+    </ul>
   
 
   

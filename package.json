@@ -4,14 +4,13 @@
   "type": "module",
   "scripts": {
     "start": "bun build --minify src/index.js --watch --outfile ./dist/js/bundle.js",
-    "docs": "documentation build src/** -f html -o docs --shallow"
+    "docs": "documentation build src/** -f html -o docs"
   },
   "devDependencies": {
     "chai": "^4.3.9",
     "documentation": "^14.0.2"
   },
   "dependencies": {
-    "@svgdotjs/svg.js": "svgdotjs/svg.js",
     "datatables.net": "^1.13.6",
     "datatables.net-buttons": "^2.4.2",
     "datatables.net-dt": "^1.13.6"
