@@ -1,5 +1,6 @@
 import data from './pmdata.json'
 import { Node } from './Node.js'
+import { getDecimalCount, getDecimalPart } from './utils.js'
 
 /**
  * Represents a Graph containing nodes and their relationships.
@@ -266,13 +267,12 @@ export class Graph {
         let x = startingX
         let y = startingY
         let lastPrimaryNodeX = startingX
-        let chapter_nodes = this.getChapterNodes(chapter).sort((a, b) => a.properties.number - b.properties.number)
-        const SPACE = 50
+        let chapter_nodes = this.getChapterNodes(chapter)
+        const PAD = 50
         
         for (let node of chapter_nodes) {
-            let parts = node.properties.number.split(".")
-            let decimalPart = parts[1]
-            let decimalPartLength = decimalPart ? decimalPart.length : 0
+            let decimalPart = getDecimalPart(node.properties.number)
+            let decimalPartLength = getDecimalCount(node.properties.number)
     
             switch (decimalPartLength) {
                 case 0:
@@ -281,7 +281,7 @@ export class Graph {
                     break
     
                 case 1:
-                    y = Math.max(y + SPACE, maxY + SPACE)
+                    y = Math.max(y + PAD, maxY + PAD)
                     x = lastPrimaryNodeX
                     node.x = x
                     node.y = y
@@ -289,22 +289,22 @@ export class Graph {
                     break
     
                 case 2:
-                    x += SPACE
+                    x += PAD
                     node.x = x
                     node.y = y
-                    let lastRootNode = chapter_nodes.filter(n => n.rootNode && n.properties.number.split(".")[1][0] === decimalPart[0]).pop()
+                    let lastRootNode = chapter_nodes.find(n => n.rootNode && getDecimalPart(n.properties.number) === decimalPart[0])
                     if (lastRootNode) {
                         node.y = lastRootNode.y
                     }
                     break
     
                 case 3:
-                    y += SPACE
+                    y += PAD
                     node.x = x
                     node.y = y
                     let previousNode = chapter_nodes[chapter_nodes.indexOf(node) - 1]
-                    if (previousNode.properties.number.split(".")[1].length === 2) {
-                        y = previousNode.y + SPACE
+                    if (getDecimalCount(previousNode.properties.number) === 2) {
+                        y = previousNode.y + PAD
                         node.y = y
                     }
                     break
@@ -327,14 +327,12 @@ export class Graph {
             if (decimalPart === '0') {
                 lastPrimaryNodeX = x
             }
-    
-            if (node.x > maxX) {
-                maxX = node.x
+            
+            if (node.x > maxX || node.y > maxY) {
+                maxX = node.x > maxX ? node.x : maxX
+                maxY = node.y > maxY ? node.y : maxY
             }
-    
-            if (node.y > maxY) {
-                maxY = node.y
-            }
+            
         }
         return [chapter_nodes, maxX]
     }

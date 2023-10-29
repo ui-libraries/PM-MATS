@@ -12,6 +12,14 @@ export function getDecimalCount(number) {
     return 0
 }
 
+export function getDecimalPart(number) {
+    const parts = number.split(".")
+    if (parts.length === 2) {
+        return parts[1]
+    }
+    return null
+}
+
 /**
  * Downloads the provided chapter data as a JSON file.
  *
