@@ -1,4 +1,4 @@
-import { getDecimalLength } from './utils.js'
+import { getDecimalLength, getDecimalPart } from './utils.js'
 
 /**
  * Draw Class to create a D3 visualization.
@@ -50,8 +50,6 @@ export class Draw {
                 }
             })
         })
-        //console.log(`minX: ${minX}, maxX: ${maxX}, minY: ${minY}, maxY: ${maxY}`)
-
 
         // Calculate SVG dimensions
         const svgWidth = maxX - minX + this.xOffset
@@ -63,6 +61,7 @@ export class Draw {
 
         this._drawShape(this.shape, minX, minY)
         this._drawTextLabels(minX, minY)
+        this._drawChapterMarker(minX, minY)
     }
 
     /**
@@ -103,30 +102,34 @@ export class Draw {
                       return this.size + (decimalCount * radiusIncreaseFactor)
                   })
         } else if (shapeType === 'rect') {
-            shapes.attr('x', d => d.x - minX + this.xOffset)
-                  .attr('y', d => d.y - minY + this.yOffset)
+            shapes.attr('x', d => d.x - minX + this.xOffset - this.size)
+                  .attr('y', d => d.y - minY + this.yOffset - this.size)
                   .attr('width', this.size * 2)
                   .attr('height', this.size * 2)
         } else if (shapeType === 'ellipse') {
             shapes.attr('cx', d => d.x - minX + this.xOffset)
                   .attr('cy', d => d.y - minY + this.yOffset)
-                  .attr('rx', 15)  // Default x-radius, adapt as needed
-                  .attr('ry', 10)  // Default y-radius, adapt as needed
+                  .attr('rx', this.size)  // Adapt the x-radius as needed
+                  .attr('ry', this.size * 0.7)  // Adapt the y-radius as needed
         } else if (shapeType === 'polygon') {
-            // Example for a triangle, adapt the points for other polygons
+            // Generalized for an equilateral triangle, but can be modified for other polygons
             shapes.attr('points', d => {
-                const x = d.x - minX + this.xOffset;
-                const y = d.y - minY + this.yOffset;
-                return `${x},${y-10} ${x-10},${y+10} ${x+10},${y+10}`;
+                const x = d.x - minX + this.xOffset
+                const y = d.y - minY + this.yOffset
+                const halfWidth = this.size
+                return [
+                    `${x},${y - this.size}`,
+                    `${x - halfWidth},${y + halfWidth}`,
+                    `${x + halfWidth},${y + halfWidth}`
+                ].join(' ')
             })
         }
-    
+
         // Add click event handling for each shape
         shapes.on('click', (event, d) => {
             console.log(`Clicked ${shapeType} with data:`, d)
         })
     }
-    
 
     /**
      * Draws text labels on the SVG canvas.
@@ -148,5 +151,58 @@ export class Draw {
             .attr('font-size', this.textFontSize)
             .attr('fill', this.textFill)
             .attr('font-family', 'EB Garamond, serif')
+    }
+
+    /**
+     * Draws the special circle with an asterisk and number inside.
+     * 
+     * @private
+     * @param {number} minX - The minimum X-coordinate in the data.
+     * @param {number} minY - The minimum Y-coordinate in the data.
+     */
+    _drawChapterMarker(minX, minY) {
+        const specialNodes = Object.values(this.data).flat().filter(d => {
+            const decimalPart = getDecimalPart(d.properties.number)
+            if (decimalPart) {
+                return decimalPart === '0'
+            }
+            return false
+        })
+
+        // Create circles for special nodes
+        const circles = this.svg.selectAll('.special-circle')
+            .data(specialNodes)
+            .enter()
+            .append('circle')
+            .attr('class', 'special-circle')
+            .attr('cx', d => d.x - minX + this.xOffset)
+            .attr('cy', d => d.y - minY + this.yOffset)
+            .attr('r', 17)
+            .attr('fill', 'none')
+            .attr('stroke', 'black')
+            .attr('stroke-width', 5)
+
+        // Create text for special nodes
+        const texts = this.svg.selectAll('.special-text')
+            .data(specialNodes)
+            .enter()
+            .append('text')
+            .attr('class', 'special-text')
+            .attr('x', d => d.x - minX + this.xOffset)
+            .attr('y', d => d.y - minY + this.yOffset)
+            .attr('font-family', 'EB Garamond, serif')
+            .attr('font-size', '12px')
+            .attr('fill', 'black')
+            .attr('text-anchor', 'middle')
+            .attr('dominant-baseline', 'central')
+
+        // Create tspans for the ❋ character
+        texts.append('tspan')
+            .text('❋')
+
+        // Create tspans for the node's number
+        texts.append('tspan')
+            .attr('dx', '-1')
+            .text(d => d.properties.number.split('.')[0])
     }
 }

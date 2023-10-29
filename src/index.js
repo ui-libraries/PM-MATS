@@ -14,13 +14,13 @@ function processChapters(num = null) {
           let [returnedChapterNodes, returnedMaxX] = pm.plot(chapter, x, 0)
           // Save the data for this chapter
           allChapterData[chapter] = returnedChapterNodes
-          x = returnedMaxX + 100
+          x = returnedMaxX + 200
       }
   } else {
       let [returnedChapterNodes, returnedMaxX] = pm.plot(num, x, 0)
       // Save the data for this chapter
       allChapterData[num] = returnedChapterNodes
-      x = returnedMaxX + 100
+      x = returnedMaxX + 200
   }
   return allChapterData
 }

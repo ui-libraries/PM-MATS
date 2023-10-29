@@ -105,7 +105,7 @@ describe('Graph', () => {
     })
 
     describe('plot', function() {
-        it('should return expected maxX for chapter 2', function() {
+        it('should return expected maxX for chapter 1', function() {
             const [chapterNodes, maxX] = graph.plot(1, 0, 0)
             expect(maxX).to.equal(100)
         })
