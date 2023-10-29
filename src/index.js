@@ -28,8 +28,9 @@ function processChapters(num = null) {
 new Draw('#container', processChapters(), {
   xOffset: 20,
   yOffset: 20,
-  circleRadius: 5,
-  circleFill: 'black',
+  shape: 'circle',
+  size: 5,
+  fill: '#CC5500',
   textFontSize: 12,
   textFill: 'black'
 })

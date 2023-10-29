@@ -9,8 +9,9 @@ import { getDecimalLength } from './utils.js'
  * @param {Object} [options={}] - Additional options for customization.
  * @param {number} [options.xOffset=20] - X-offset for positioning elements.
  * @param {number} [options.yOffset=20] - Y-offset for positioning elements.
- * @param {number} [options.circleRadius=5] - The radius of circles in the visualization.
- * @param {string} [options.circleFill='blue'] - The fill color for circles.
+ * @param {string} [options.shape='circle'] - The shape to be drawn. Can be 'circle', 'rect', 'ellipse', or 'polygon'.
+ * @param {number} [options.size=5] - The radius of circle or half rect width.
+ * @param {string} [options.fill='blue'] - The fill color for shapes.
  * @param {number} [options.textFontSize=12] - The font size for text labels.
  * @param {string} [options.textFill='black'] - The fill color for text.
  */
@@ -20,8 +21,9 @@ export class Draw {
         this.data = data
         this.xOffset = options.xOffset || 20
         this.yOffset = options.yOffset || 20
-        this.circleRadius = options.circleRadius || 5
-        this.circleFill = options.circleFill || 'blue'
+        this.shape = options.shape || 'circle'
+        this.size = options.size || 5
+        this.fill = options.fill || 'blue'
         this.textFontSize = options.textFontSize || 12
         this.textFill = options.textFill || 'black'
         this.init()
@@ -59,51 +61,72 @@ export class Draw {
         this.svg.attr('width', svgWidth)
             .attr('height', svgHeight)
 
-        this._drawCircles(minX, minY)
+        this._drawShape(this.shape, minX, minY)
         this._drawTextLabels(minX, minY)
     }
 
     /**
-     * Draws circles on the SVG canvas.
+     * Draws shapes on the SVG canvas.
      * 
      * @private
      * @param {number} minX - The minimum X-coordinate in the data.
      * @param {number} minY - The minimum Y-coordinate in the data.
      */
-    _drawCircles(minX, minY) {
-        const circles = this.svg.selectAll('circle')
+    _drawShape(shapeType, minX, minY) {
+        const shapes = this.svg.selectAll(shapeType)
             .data(Object.values(this.data).flat())
             .enter()
-            .append('circle')
+            .append(shapeType)
             .filter(d => !d.properties.isPlaceholder)
-            .attr('cx', d => d.x - minX + this.xOffset)
-            .attr('cy', d => d.y - minY + this.yOffset)
-            .attr('r', d => {
-                const decimalCount = getDecimalLength(d.properties.number)
-                const radiusIncreaseFactor = 0
-                return this.circleRadius + (decimalCount * radiusIncreaseFactor)
-            })
             .attr('fill', d => {
                 if (d.properties.type) {
                     switch (d.properties.type) {
                         case 'Thm':
-                            return 'red'
+                            return this.fill
                         case 'Pp':
-                            return 'yellow'
+                            return '#f005e0'
                         case 'Df':
-                            return 'green'
+                            return '#05e0f0'
                         default:
-                            return this.circleFill
+                            return this.fill
                     }
                 }
-                return this.circleFill
+                return this.fill
             })
-
-        // Add click event handling for each circle
-        circles.on('click', (event, d) => {
-            console.log(`Clicked circle with data:`, d)
+    
+        if (shapeType === 'circle') {
+            shapes.attr('cx', d => d.x - minX + this.xOffset)
+                  .attr('cy', d => d.y - minY + this.yOffset)
+                  .attr('r', d => {
+                      const decimalCount = getDecimalLength(d.properties.number)
+                      const radiusIncreaseFactor = 0
+                      return this.size + (decimalCount * radiusIncreaseFactor)
+                  })
+        } else if (shapeType === 'rect') {
+            shapes.attr('x', d => d.x - minX + this.xOffset)
+                  .attr('y', d => d.y - minY + this.yOffset)
+                  .attr('width', this.size * 2)
+                  .attr('height', this.size * 2)
+        } else if (shapeType === 'ellipse') {
+            shapes.attr('cx', d => d.x - minX + this.xOffset)
+                  .attr('cy', d => d.y - minY + this.yOffset)
+                  .attr('rx', 15)  // Default x-radius, adapt as needed
+                  .attr('ry', 10)  // Default y-radius, adapt as needed
+        } else if (shapeType === 'polygon') {
+            // Example for a triangle, adapt the points for other polygons
+            shapes.attr('points', d => {
+                const x = d.x - minX + this.xOffset;
+                const y = d.y - minY + this.yOffset;
+                return `${x},${y-10} ${x-10},${y+10} ${x+10},${y+10}`;
+            })
+        }
+    
+        // Add click event handling for each shape
+        shapes.on('click', (event, d) => {
+            console.log(`Clicked ${shapeType} with data:`, d)
         })
     }
+    
 
     /**
      * Draws text labels on the SVG canvas.
@@ -124,5 +147,6 @@ export class Draw {
             .attr('text-anchor', 'middle')
             .attr('font-size', this.textFontSize)
             .attr('fill', this.textFill)
+            .attr('font-family', 'EB Garamond, serif')
     }
 }
