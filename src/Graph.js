@@ -245,8 +245,7 @@ export class Graph {
      * - A decimalPart length of 1 are vertically aligned with primary nodes.
      * - A decimalPart length of 2 are horizontally displaced from the previous node.
      * - A decimalPart length of 3 are vertically aligned below their predecessor.
-     * 
-     * Special cases (e.g., the node with the number `25.1011`) are handled uniquely.
+     * - A decimalPart length of 4 are horizontally displaced from the previous node.
      *
      * @param {string|number} chapter - The chapter for which the nodes are to be plotted.
      * @param {number} [startingX=0] - The initial x-coordinate for plotting.
