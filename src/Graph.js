@@ -169,8 +169,7 @@ export class Graph {
      * console.log(chapters) // [1, 2, 3, ...]
      */
     getChapterNumbers() {
-        let chapterNumbers = [...new Set(Object.values(this.nodes).map(node => Math.floor(parseFloat(node.properties.number))))]
-        // sort the chapter numbers
+        let chapterNumbers = [...new Set(Object.values(this.nodes).map(node => node.properties.chapter))]   
         chapterNumbers.sort((a, b) => a - b)
         return chapterNumbers
     }
@@ -214,15 +213,14 @@ export class Graph {
         // Extract the actual decimalPart values
         let decimalPartValues = primaryNodes.map(node => node.properties.number.split(".")[1])
 
-        // Find missing decimalPart values
+        // add ghost nodes for missing decimalPart values to maintain Graph structure
         for (let i = 0; i < 10; i++) {
             if (!decimalPartValues.includes(i.toString())) {
-                // Insert a placeholder node for the missing decimalPart value
                 chapter_nodes.push({
                     type: "node",
                     properties: {
                         number: chapter + "." + i,
-                        isPlaceholder: true // Property to ensure it's not displayed
+                        isPlaceholder: true
                     }
                 })
             }

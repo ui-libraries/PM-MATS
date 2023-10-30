@@ -4,7 +4,7 @@ import { getDecimalLength, getDecimalPart } from './utils.js'
  * Draw Class to create a D3 visualization.
  * 
  * @class
- * @param {string} [svgSelector='canvas'] - The CSS selector to attach the SVG element to.
+ * @param {string} [svgSelector='container'] - The CSS selector to attach the SVG element to.
  * @param {Object} data - The data to be visualized.
  * @param {Object} [options={}] - Additional options for customization.
  * @param {number} [options.xOffset=20] - X-offset for positioning elements.

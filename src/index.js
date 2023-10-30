@@ -5,24 +5,23 @@ import { table } from './datatable.js'
 const pm = new Graph()
 
 function processChapters(num = null) {
-  const allChapters = pm.getChapterNumbers()
-  let allChapterData = {}
+  const chapters = pm.getChapterNumbers()
+  let chapterData = {}
   let x = 0
+  const GAP = 200
 
   if (!num) {
-      for (let chapter of allChapters) {
-          let [returnedChapterNodes, returnedMaxX] = pm.plot(chapter, x, 0)
-          // Save the data for this chapter
-          allChapterData[chapter] = returnedChapterNodes
-          x = returnedMaxX + 200
+      for (let chapter of chapters) {
+          let [chapter_nodes, maxX] = pm.plot(chapter, x, 0)
+          chapterData[chapter] = chapter_nodes
+          x = maxX + GAP
       }
   } else {
-      let [returnedChapterNodes, returnedMaxX] = pm.plot(num, x, 0)
-      // Save the data for this chapter
-      allChapterData[num] = returnedChapterNodes
-      x = returnedMaxX + 200
+      let [chapter_nodes, maxX] = pm.plot(num, x, 0)
+      chapterData[num] = chapter_nodes
+      x = maxX + GAP
   }
-  return allChapterData
+  return chapterData
 }
 
 new Draw('#container', processChapters(), {
