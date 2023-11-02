@@ -8,7 +8,7 @@ function processChapters(num = null) {
   const chapters = pm.getChapterNumbers()
   let chapterData = {}
   let x = 0
-  const GAP = 200
+  const GAP = 300
 
   if (!num) {
       for (let chapter of chapters) {

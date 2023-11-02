@@ -16,7 +16,7 @@ import { getDecimalLength, getDecimalPart } from './utils.js'
  * @param {string} [options.textFill='black'] - The fill color for text.
  */
 export class Draw {
-    constructor(svgSelector = 'canvas', data, options = {}) {
+    constructor(svgSelector = 'container', data, options = {}) {
         this.svg = d3.select(svgSelector)
         this.data = data
         this.xOffset = options.xOffset || 20
@@ -62,6 +62,7 @@ export class Draw {
         this._drawShape(this.shape, minX, minY)
         this._drawTextLabels(minX, minY)
         this._drawChapterMarker(minX, minY)
+        this._drawDivider(minX, minY)
     }
 
     /**
@@ -205,4 +206,115 @@ export class Draw {
             .attr('dx', '-1')
             .text(d => d.properties.number.split('.')[0])
     }
+
+    /**
+     * Draws dividers and associated braces based on the data properties.
+     *
+     * This function loops through each chapter in the provided data. If the chapter has properties of 
+     * 'volume', 'part', and 'section', it calculates the dividers and their positions based on the 
+     * data's x and y attributes. Dividers are appended as text to the SVG canvas. Additionally, a brace 
+     * is drawn next to each divider.
+     *
+     * @private
+     * @param {number} minX - The minimum x-coordinate value of the canvas.
+     * @param {number} minY - The minimum y-coordinate value of the canvas.
+     * @property {Object} this.data - An object containing the chapter data.
+     * @property {number} this.textFontSize - The font size for the text.
+     * @property {number} this.yOffset - Y-axis offset.
+     * @property {number} this.xOffset - X-axis offset.
+     * @property {Object} this.svg - The SVG canvas where elements are drawn.
+     * @property {string} this.textFill - Color value for the text fill.
+     */
+    _drawDivider(minX, minY) {
+        let lastVolume = "", lastPart = "", lastSection = ""
+        let dividers = []
+        let braces = []
+        const lineHeight = this.textFontSize * 1.2 // Assuming 1.2 line height for stacking text
+    
+        const chapters = this.data
+    
+        let prevChapterY = null // y-value of the previous chapter's last node
+    
+        for (let chapter in chapters) {
+            if (chapters.hasOwnProperty(chapter)) {
+                const chapterData = chapters[chapter]
+    
+                let firstNodeY = null
+                let lastNodeY = null
+    
+                for (let j = 0; j < chapterData.length; j++) {
+                    const d = chapterData[j]
+    
+                    if (d.isPlaceholder !== true) {
+                        if (firstNodeY === null) firstNodeY = d.y
+                        lastNodeY = d.y
+    
+                        const volume = d.properties.volume
+                        const part = d.properties.part
+                        const section = d.properties.section
+                        if (volume === undefined || part === undefined || section === undefined) continue
+    
+                        if (volume !== lastVolume || part !== lastPart || section !== lastSection) {
+                            let avgY = (firstNodeY + (prevChapterY !== null ? prevChapterY : firstNodeY)) / 2 - minY + this.yOffset
+    
+                            dividers.push({
+                                text: `Volume ${volume}`,
+                                x: d.x - minX + this.xOffset - 250,
+                                y: 200
+                            })
+                            dividers.push({
+                                text: `Part ${part}`,
+                                x: d.x - minX + this.xOffset - 250,
+                                y: 220
+                            })
+                            dividers.push({
+                                text: `Section ${section}`,
+                                x: d.x - minX + this.xOffset - 250,
+                                y: 240
+                            })
+
+                            braces.push({
+                                x: d.x - minX + this.xOffset - 250 + this.textFontSize * 1.5,
+                                y: 220  // Centered based on the "Part" text
+                            })
+    
+                            lastVolume = volume
+                            lastPart = part
+                            lastSection = section
+                        }
+                    }
+                }
+                prevChapterY = lastNodeY
+            }
+        }
+    
+        // Drawing the dividers on the SVG canvas
+        this.svg.selectAll('.divider-text')
+        .data(dividers)
+        .enter()
+        .append('text')
+        .attr('class', 'divider-text')
+        .attr('x', d => d.x)
+        .attr('y', d => d.y)
+        .text(d => d.text)
+        .attr('text-anchor', 'middle')
+        .attr('font-size', `${this.textFontSize * 1.2}px`)  // Increase the font size by 20%
+        .attr('font-weight', 'bold')  // Make the text bolder
+        .attr('fill', this.textFill)
+        .attr('font-family', 'EB Garamond, serif')
+
+        this.svg.selectAll('.divider-brace')
+        .data(braces)
+        .enter()
+        .append('text')
+        .attr('class', 'divider-brace')
+        .attr('x', d => d.x + 20)
+        .attr('y', d => d.y)
+        .text('{')
+        .attr('font-size', this.textFontSize * 2)
+        .attr('fill', this.textFill)
+        .attr('font-family', 'EB Garamond, serif')
+        .attr('transform', d => `translate(${d.x}, ${d.y}) scale(1.5, 10) translate(${-d.x}, ${-d.y})`)
+        .attr('dominant-baseline', 'middle')    
+    }    
 }
