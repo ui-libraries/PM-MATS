@@ -7,6 +7,10 @@ body {
     font-family: 'EB Garamond', serif;
 }
 
+#table-body {
+    background-color: white;
+}
+
 #container {
     padding-top: 0px;
 }

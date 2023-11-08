@@ -14,16 +14,54 @@ function exportJson () {
     a.click()
     URL.revokeObjectURL(url)
 }
+
+function exportCsv() {
+    const columnNames = ["id", "type", "number", "page", "section", "volume", "chapter", "part", "provenBy", "proves"]
+    const csvData = []
+    csvData.push(columnNames.join(','))
+    for (const item of data) {
+      const proves = item.proves.join(',')
+      const provenBy = item.provenBy.join(',')
+      const csvRow = [
+        item.id,
+        item.properties.type,
+        item.properties.number,
+        item.properties.page,
+        item.properties.section,
+        item.properties.volume,
+        item.properties.chapter,
+        item.properties.part,
+        `"${provenBy}"`,
+        `"${proves}"`
+      ]
+      csvData.push(csvRow.join(','))
+    }
+    const csvString = csvData.join('\n')
+    const blob = new Blob([csvString], { type: "text/csv" })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = 'principia-mathematica.csv'
+    a.click()
+    URL.revokeObjectURL(url)
+  }  
  
 export let table = new DataTable('#principia-table', {
     data: data,
     dom: 'Blfrtip',
     buttons: [
         {
-            text: 'Export data',
+            text: 'Export CSV',
             className: 'btn export-btn',
             action: function ( e, dt, node, config ) {
                 exportCsv()
+            }
+        },
+        {
+            text: 'Export JSON',
+            className: 'btn export-btn',
+            action: function ( e, dt, node, config ) {
+                exportJson()
             }
         }
     ],
