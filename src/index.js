@@ -4,8 +4,26 @@ import { table } from './datatable.js'
 
 const pm = new Graph()
 
+function addPaddingToSVG(padding) {
+  const svg = d3.select('#container')
+  const bbox = svg.node().getBBox()
+
+  const newViewBox = [
+      bbox.x - padding,
+      bbox.y - padding,
+      bbox.width + padding * 2,
+      bbox.height + padding * 2
+  ]
+  svg.attr('viewBox', newViewBox.join(' '))
+
+  // Optional: Adjust the width and height attributes if necessary
+  // svg.attr('width', bbox.width + padding * 2);
+  // svg.attr('height', bbox.height + padding * 2);
+}
+
 function processChapters(num = null) {
-  const chapters = pm.getChapterNumbers()
+  const excluded = ['8', '89']
+  const chapters = pm.getChapterNumbers().filter(chapter => !excluded.includes(chapter))
   let chapterData = {}
   let x = 0
   const GAP = 300
@@ -33,3 +51,5 @@ new Draw('#container', processChapters(), {
   textFontSize: 12,
   textFill: 'black'
 })
+
+addPaddingToSVG(0.5)
