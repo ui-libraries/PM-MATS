@@ -39,3 +39,25 @@ export function downloadData(allChapterData) {
     a.click()
     URL.revokeObjectURL(url)
   }
+
+/**
+ * Converts a given number to its Roman numeral representation.
+ * 
+ * Roman numerals are created by combining symbols and adding values. This function handles numbers up to 3999 (inclusive). For numbers outside this range, an 'Appendix' string is returned. The Roman numeral system uses seven symbols: I, V, X, L, C, D, and M.
+ *
+ * @param {number} num - The number to be converted to a Roman numeral. Should be a positive integer.
+ * @returns {string} The Roman numeral representation of the given number. Returns 'Appendix' for non-numeric inputs or numbers outside the range of standard Roman numeral representation.
+ */
+  export function romanize (num) {
+    if (isNaN(num))
+        return "Appendix"
+    var digits = String(+num).split(""),
+        key = ["","C","CC","CCC","CD","D","DC","DCC","DCCC","CM",
+               "","X","XX","XXX","XL","L","LX","LXX","LXXX","XC",
+               "","I","II","III","IV","V","VI","VII","VIII","IX"],
+        roman = "",
+        i = 3
+    while (i--)
+        roman = (key[+digits.pop() + (i * 10)] || "") + roman
+    return Array(+digits.join("") + 1).join("M") + roman
+}

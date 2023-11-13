@@ -197,9 +197,13 @@ export class Graph {
      */
     getChapterNodes(chapter) {
         let chapter_nodes = []
+        let volume, part, section
         // Filter nodes based on the given chapter
         for (let node of Object.values(this.nodes)) {
             if (node.properties.chapter === chapter.toString()) {
+                volume = node.properties.volume
+                part = node.properties.part
+                section = node.properties.section
                 chapter_nodes.push(node)
             }
         }
@@ -218,9 +222,13 @@ export class Graph {
             if (!decimalPartValues.includes(i.toString())) {
                 chapter_nodes.push({
                     type: "node",
+
                     properties: {
                         number: chapter + "." + i,
-                        isPlaceholder: true
+                        isPlaceholder: true,
+                        volume: volume,
+                        part: part,
+                        section: section
                     }
                 })
             }

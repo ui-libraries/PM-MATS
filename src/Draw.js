@@ -1,4 +1,5 @@
 import { getDecimalLength, getDecimalPart } from './utils.js'
+import { romanize } from './utils.js'
 
 /**
  * Draw Class to create a D3 visualization.
@@ -27,6 +28,12 @@ export class Draw {
         this.textFontSize = options.textFontSize || 12
         this.textFill = options.textFill || 'black'
         this.init()
+
+        this.tooltip = d3.select('body')
+            .append('div')
+            .attr('class', 'tooltip')
+            .style('opacity', 0)
+            .style('position', 'absolute')
     }
 
     /**
@@ -62,7 +69,7 @@ export class Draw {
         this._drawShape(this.shape, minX, minY)
         this._drawTextLabels(minX, minY)
         this._drawChapterMarker(minX, minY)
-        this._drawDivider(minX, minY)
+        //this._drawDivider(minX, minY)
     }
 
     /**
@@ -179,7 +186,7 @@ export class Draw {
             .attr('cx', d => d.x - minX + this.xOffset)
             .attr('cy', d => d.y - minY + this.yOffset)
             .attr('r', 17)
-            .attr('fill', 'none')
+            .attr('fill', 'transparent')
             .attr('stroke', 'black')
             .attr('stroke-width', 5)
 
@@ -205,6 +212,27 @@ export class Draw {
         texts.append('tspan')
             .attr('dx', '-1')
             .text(d => d.properties.number.split('.')[0])
+
+        circles.on('mouseenter', (event, d) => this._showTooltip(event, d))
+            .on('mouseleave', () => this._hideTooltip())
+
+        texts.on('mouseenter', (event, d) => this._showTooltip(event, d))
+            .on('mouseleave', () => this._hideTooltip())
+    }
+
+    _showTooltip(event, d) {
+        this.tooltip.transition()
+            .duration(200)
+            .style('opacity', .9)
+        this.tooltip.html(`Volume ${romanize(d.properties.volume)}<br>Part ${romanize(d.properties.part)}<br>Section ${d.properties.section}`)
+            .style('left', (event.pageX + 10) + 'px')
+            .style('top', (event.pageY - 28) + 'px')
+    }
+    
+    _hideTooltip() {
+        this.tooltip.transition()
+            .duration(500)
+            .style('opacity', 0)
     }
 
     /**
