@@ -266,13 +266,12 @@ export class Graph {
      * plot(1, 0, 0);
      * // Output: Array of plotted nodes for chapter 1 and the maximum x-coordinate value.
      */
-    plot(chapter, startingX = 0, startingY = 0) {
+    plot(chapter, startingX = 0, startingY = 0, PAD = 50) {
         let maxX = 0
         let maxY = 0
         let x = startingX
         let y = startingY
         const chapter_nodes = this.getChapterNodes(chapter)
-        const PAD = 50
         
         for (let node of chapter_nodes) {
             let previousNode = chapter_nodes[chapter_nodes.indexOf(node) - 1]

@@ -27,6 +27,7 @@ export class Draw {
         this.fill = options.fill || 'blue'
         this.textFontSize = options.textFontSize || 12
         this.textFill = options.textFill || 'black'
+        this.minimap = options.minimap || false
         this.init()
 
         this.tooltip = d3.select('body')
@@ -67,8 +68,10 @@ export class Draw {
             .attr('height', svgHeight)
 
         this._drawShape(this.shape, minX, minY)
-        this._drawTextLabels(minX, minY)
-        this._drawChapterMarker(minX, minY)
+        if (!this.minimap) {
+            this._drawTextLabels(minX, minY)
+            this._drawChapterMarker(minX, minY)
+        }
         //this._drawDivider(minX, minY)
     }
 
