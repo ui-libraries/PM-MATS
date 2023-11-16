@@ -1,5 +1,6 @@
 import { Draw } from './Draw.js'
 import { Graph } from './Graph.js'
+import { table } from './datatable.js'
 
 const pm = new Graph()
 
