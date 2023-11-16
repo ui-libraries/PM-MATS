@@ -1,7 +1,12 @@
+#container {
+    padding-right: 2rem;
+    padding-bottom: 2rem;
+    overflow: visible;
+}
+
 body {
     background-color: #F8F0E3;
     font-family: 'EB Garamond', serif;
-    padding: 5px;
 }
 
 .btn {
