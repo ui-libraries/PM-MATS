@@ -1,8 +1,20 @@
 import { Draw } from './Draw.js'
 import { Graph } from './Graph.js'
 import { table } from './datatable.js'
+import { getQueryParam } from './utils.js'
 
 const pm = new Graph()
+
+document.addEventListener('DOMContentLoaded', (event) => {
+  let numberValue = getQueryParam('q')
+  
+  if (numberValue) {
+    let chapterNumber = numberValue.split('.')[0]
+    miniMap([chapterNumber])
+  } else {
+    normalMap()
+  }  
+})
 
 function processChapters({ chapterNumbers = null, GAP = 300, PAD = 50, x = 0 } = {}) {
   const excluded = ['8', '89'];
@@ -66,4 +78,4 @@ function normalMap() {
 
 //miniMap(['24', '25'])
 
-normalMap()
+

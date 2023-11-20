@@ -61,3 +61,9 @@ export function downloadData(allChapterData) {
         roman = (key[+digits.pop() + (i * 10)] || "") + roman
     return Array(+digits.join("") + 1).join("M") + roman
 }
+
+export function getQueryParam(param) {
+    let queryString = window.location.search
+    let urlParams = new URLSearchParams(queryString)
+    return urlParams.get(param)
+}

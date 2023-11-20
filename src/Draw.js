@@ -139,6 +139,9 @@ export class Draw {
         // Add click event handling for each shape
         shapes.on('click', (event, d) => {
             console.log(`Clicked ${shapeType} with data:`, d)
+            let queryString = new URLSearchParams({ q: d.properties.number }).toString()
+            let currentUrl = window.location.href.replace('index.html', '')
+            window.open(`${currentUrl}?${queryString}`, '_blank')
         })
     }
 
