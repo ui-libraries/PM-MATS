@@ -75,7 +75,21 @@ function normalMap() {
 
 }
 
+$('.menu-search input').on('keydown', function(e) {
+  if (e.keyCode === 13) {
+      if ($(this).is(':focus')) {
+        const num = $(this).val()
+        const svgElement = document.getElementById('container')
+        const node = pm.getNodeByNumber(num)
+        $('html, body').animate({
+          scrollLeft: node.x - $(window).width() / 2
+      }, 100)
+      }
+  }
+})
+
 
 //miniMap(['24', '25'])
+
 
 

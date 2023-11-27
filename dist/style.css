@@ -2,31 +2,26 @@
     padding-right: 2rem;
     padding-bottom: 2rem;
     overflow: visible;
+    margin-top: 50px;
 }
-
 body {
     background-color: #F8F0E3;
     font-family: 'EB Garamond', serif;
 }
-
 .btn {
     font-family: 'EB Garamond', serif;
 }
-
 #table-body {
     background-color: white;
 }
-
 #title {
     margin-top: 0px;
     margin-bottom: 10px;
 }
-
 .export-btn {
     margin-top: 0px;
     margin-bottom: 10px;
 }
-
 .tooltip {
     position: absolute;
     text-align: center;
@@ -39,5 +34,54 @@ body {
     border: 1px solid #ccc;
     border-radius: 8px;
     pointer-events: none;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Drop shadow added */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 }
+
+.menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50px; /* Adjust height to fit content */
+    background-color: #333;
+    color: #fff;
+    padding: 0px;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* This will push the last child to the right */
+}
+
+.menu ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    width: 100%;
+    justify-content: space-between; /* This should be set to space-between */
+}
+
+.menu li {
+    padding: 0 10px;
+}
+
+.menu-title {
+    flex-shrink: 0; /* Prevents the title from shrinking */
+}
+
+.menu-item {
+    padding: 0px;
+    margin: 0px;
+}
+
+.menu-search input {
+    border: none;
+    padding: 5px;
+    border-radius: 4px;
+    background-color: #fff;
+    width: 200px;
+    margin-left: auto; /* Pushes the input to the right */
+}
+
+
+
