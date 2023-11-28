@@ -36,18 +36,6 @@ function processChapters({ chapterNumbers = null, GAP = 300, PAD = 50, x = 0 } =
   }
   return chapterData;
 }
-/*
-new Draw('#container', processChapters(), {
-  xOffset: 20,
-  yOffset: 20,
-  shape: 'circle',
-  size: 5,
-  fill: '#CC5500',
-  textFontSize: 12,
-  textFill: 'black'
-})
-*/
-
 function miniMap(chapters) {
   const content = processChapters({chapterNumbers: chapters, GAP: 100, PAD: 10})
   new Draw('#container', content, {
@@ -56,7 +44,7 @@ function miniMap(chapters) {
     shape: 'circle',
     size: 5,
     fill: '#CC5500',
-    textFontSize: 24,
+    textFontSize: 12,
     textFill: 'black',
     minimap: true
   })

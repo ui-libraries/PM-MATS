@@ -1,13 +1,21 @@
+
+
+body {
+    background-color: #F8F0E3;
+    font-family: 'EB Garamond', serif;
+}
+
 #container {
     padding-right: 2rem;
     padding-bottom: 2rem;
     overflow: visible;
     margin-top: 50px;
 }
-body {
-    background-color: #F8F0E3;
-    font-family: 'EB Garamond', serif;
+
+.dataTables_wrapper {
+    margin-top: 60px;
 }
+
 .btn {
     font-family: 'EB Garamond', serif;
 }
@@ -49,7 +57,8 @@ body {
     z-index: 100;
     display: flex;
     align-items: center;
-    justify-content: space-between; /* This will push the last child to the right */
+    margin: 0px;
+    
 }
 
 .menu ul {
@@ -58,7 +67,7 @@ body {
     padding: 0;
     display: flex;
     width: 100%;
-    justify-content: space-between; /* This should be set to space-between */
+    align-items: center;
 }
 
 .menu li {
@@ -66,12 +75,20 @@ body {
 }
 
 .menu-title {
-    flex-shrink: 0; /* Prevents the title from shrinking */
+    flex-shrink: 0;
+    font-size: 1.3rem;
+    font-style: bold;
+    margin-right: 25px;
 }
 
 .menu-item {
-    padding: 0px;
-    margin: 0px;
+    flex-shrink: 0;
+    font-size: 0.8rem;
+}
+
+.menu-search {
+    flex-grow: 1;
+    text-align: right;
 }
 
 .menu-search input {
@@ -82,6 +99,22 @@ body {
     width: 200px;
     margin-left: auto; /* Pushes the input to the right */
 }
+
+.menu-search input:focus {
+    outline: none;
+}
+
+a {
+    text-decoration: none; /* Remove the default underline */
+    border-bottom: 1px dotted whitesmoke; /* Add a dotted underline */
+    color: whitesmoke; /* Set the text color */
+    padding-bottom: 2px; /* Ensure some space between the text and the underline */
+}
+
+a:hover, a:focus {
+    border-bottom-style: solid; /* Change to a solid underline on hover/focus for a visual cue */
+}
+
 
 
 
