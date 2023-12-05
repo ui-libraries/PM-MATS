@@ -6,7 +6,7 @@ import { getQueryParam } from './utils.js'
 const pm = new Graph()
 
 document.addEventListener('DOMContentLoaded', (event) => {
-  let numberValue = getQueryParam('q')
+  let numberValue = getQueryParam('n')
   
   if (numberValue) {
     let chapterNumber = numberValue.split('.')[0]
@@ -23,22 +23,24 @@ function processChapters({ chapterNumbers = null, GAP = 300, PAD = 50, x = 0 } =
 
   if (!chapterNumbers) {
     for (let chapter of chapters) {
-      let [chapter_nodes, maxX] = pm.plot(chapter, x, 0, PAD);
-      chapterData[chapter] = chapter_nodes;
-      x = maxX + GAP;
+      let [chapter_nodes, maxX] = pm.plot(chapter, x, 0, PAD)
+      chapterData[chapter] = chapter_nodes
+      x = maxX + GAP
     }
   } else {
     for (let chapter of chapterNumbers) {
-      let [chapter_nodes, maxX] = pm.plot(chapter, x, 0, PAD);
-      chapterData[chapter] = chapter_nodes;
-      x = maxX + GAP;
+      let [chapter_nodes, maxX] = pm.plot(chapter, x, 0, PAD)
+      chapterData[chapter] = chapter_nodes
+      x = maxX + GAP
     }
   }
-  return chapterData;
+  return chapterData
 }
+
+//GAP is the space between chapters, PAD is the space between nodes in a chapter
 function miniMap(chapters) {
-  const content = processChapters({chapterNumbers: chapters, GAP: 100, PAD: 10})
-  new Draw('#container', content, {
+  const content = processChapters({chapterNumbers: chapters, GAP: 100, PAD: 20})
+  new Draw('#minimap', content, {
     xOffset: 20,
     yOffset: 20,
     shape: 'circle',
@@ -60,7 +62,6 @@ function normalMap() {
     textFontSize: 12,
     textFill: 'black'
   })
-
 }
 
 $('.menu-search input').on('keydown', function(e) {
