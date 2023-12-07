@@ -75,14 +75,14 @@ export let table = new DataTable('#principia-table', {
     dom: 'Blfrtip',
     buttons: [{
             text: 'Export CSV',
-            className: 'btn export-btn',
+            className: 'btn export-btn btn-light btn-sm',
             action: function(e, dt, node, config) {
                 exportCsv()
             },
         },
         {
             text: 'Export JSON',
-            className: 'btn export-btn',
+            className: 'btn export-btn btn-light btn-sm',
             action: function(e, dt, node, config) {
                 exportJson()
             },

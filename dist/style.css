@@ -9,11 +9,12 @@ body {
     padding-right: 2rem;
     padding-bottom: 2rem;
     overflow: visible;
-    margin-top: 50px;
+    margin-top: 10px;
+    margin-left: 10px;
 }
 
 .dataTables_wrapper {
-    margin-top: 60px;
+    margin-top: 10px;
 }
 
 .btn {
@@ -49,134 +50,86 @@ body {
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.menu {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 50px; /* Adjust height to fit content */
-    background-color: #333;
-    color: #fff;
-    padding: 0px;
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    margin: 0px;
-    
+/* Custom CSS to modify navbar */
+.navbar {
+    padding-top: 0.2rem;
+    padding-bottom: 0.2rem;
 }
 
-.menu ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    width: 100%;
-    align-items: center;
-}
-
-.menu li {
-    padding: 0 10px;
-}
-
-.menu-title {
-    flex-shrink: 0;
-    font-size: 1.3rem;
-    font-style: bold;
-    margin-right: 25px;
-}
-
-.menu-item {
-    flex-shrink: 0;
+.nav-link {
     font-size: 0.8rem;
-}
-
-.menu-search {
-    flex-grow: 1;
-    text-align: right;
-}
-
-.menu-search input {
-    border: none;
-    padding: 5px;
-    border-radius: 4px;
-    background-color: #fff;
-    width: 200px;
-    margin-left: auto; /* Pushes the input to the right */
-}
-
-.menu-search input:focus {
-    outline: none;
-}
-
-a {
+    padding: 0 15px;
     text-decoration: none; 
-    border-bottom: 1px dotted whitesmoke; 
     color: whitesmoke; 
-    padding-bottom: 2px; 
+    display: inline-block;
+    position: relative;
 }
 
-a:hover, a:focus {
-    border-bottom-style: solid; 
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -5px; 
+    left: 0;
+    right: 0;
+    height: 1px; 
+    background-color: currentColor; 
+    opacity: 0; 
+    transition: opacity 0.3s, transform 0.3s;
+    transform: scale(0, 1);
+    transform-origin: center bottom;
 }
+
+.nav-link:hover::after,
+.nav-link:focus::after {
+    opacity: 1;
+    transform: scale(1, 1);
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+    text-decoration: none !important;
+}
+
 
 #minimap {
     position: absolute;
     top: 20%;
     left: 50%;
     transform: translate(-50%, -50%);
-    /* Specify width and height if necessary */
-    width: 200px; /* Example width */
-    height: 200px; /* Example height */
+    width: 200px;
+    height: 200px;
 }
 
-
-@media screen and (max-width: 700px) {
-    #container {
-        overflow-x: scroll; 
-        padding-right: 1rem;
-        margin-top: 75px; 
-        height: auto;
-    }
-
-    .menu ul {
-        flex-wrap: wrap; 
-    }
-
-    .menu-search {
-        text-align: center;
-        order: 1; 
-        width: 100%; /* Full width within the menu */
-        margin-top: 10px;
-        padding-bottom: 10px !important;
-    }
-
-    .menu-search input {
-        width: 90%; 
-        margin: 0 auto;
-    }
-
-    .menu {
-        display: block;
-        position: fixed !important;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: auto;
-    }
-
-    .tooltip {
-        width: auto; 
-        left: 5%; 
-        right: 5%;
-    }
-
-    .dataTables_wrapper {
-        margin-top: 30px;
-    }
-
-    .btn, .export-btn {
-        font-size: smaller; 
-    }
+.dt-buttons {
+    margin-left: 10px;
 }
+
+.dataTables_length {
+    margin-left: 10px;
+}
+
+.dataTables_info {
+    margin-left: 10px;
+}
+
+.btn-light {
+    background-color: #e2e6ea;
+    border-color: #dae0e5;
+}
+
+.btn-light:hover {
+    background-color: #d5dae0;
+    border-color: #c9cfd5;
+}
+
+.btn-light:focus, .btn-light.focus {
+    box-shadow: 0 0 0 0.2rem rgba(200, 203, 207, 0.5);
+}
+
+.btn-light:active, .btn-light.active {
+    background-color: #caccd1;
+    border-color: #bdbec2;
+}
+
 
 
