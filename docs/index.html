@@ -942,7 +942,7 @@ Missing nodes are represented as placeholders.</p>
       <div class="clearfix small pointer toggle-sibling">
         <div class="py1 contain">
             <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>plot(chapter, startingX, startingY)</span>
+            <span class='code strong strong truncate'>plot(chapter, startingX, startingY, PAD)</span>
         </div>
       </div>
       <div class="clearfix display-none toggle-target">
@@ -960,7 +960,7 @@ Missing nodes are represented as placeholders.</p>
 <li>A decimalPart length of 4 are horizontally displaced from the previous node.</li>
 </ul>
 
-    <div class='pre p1 fill-light mt0'>plot(chapter: (<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a> | <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>), startingX: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, startingY: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>): [<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>>, <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>]</div>
+    <div class='pre p1 fill-light mt0'>plot(chapter: (<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a> | <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>), startingX: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, startingY: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, PAD: any): [<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>>, <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>]</div>
   
   
 
@@ -1000,6 +1000,15 @@ Missing nodes are represented as placeholders.</p>
             = <code>0</code>)</code>
 	    The initial y-coordinate for plotting.
 
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>PAD</span> <code class='quiet'>(any
+            = <code>50</code>)</code>
+	    
           </div>
           
         </div>
