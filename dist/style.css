@@ -11,6 +11,8 @@ body {
     overflow: visible;
     margin-top: 10px;
     margin-left: 10px;
+    display: block;
+    width: auto;
 }
 
 .dataTables_wrapper {
@@ -40,7 +42,7 @@ body {
     text-align: center;
     width: 100px;
     height: 70px;
-    padding: 2px;
+    padding: 0px;
     font-family: 'EB Garamond', serif;
     font-size: 16px;
     background: rgb(240, 247, 255);
@@ -131,5 +133,22 @@ body {
     border-color: #bdbec2;
 }
 
+.fixed-top-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%; /* Full width */
+    z-index: 1020; /* Above other content */
+}
+
+.content-container {
+    padding-top: 10px; /* Height of the navbar to ensure content doesn't get hidden underneath */
+    overflow-x: scroll; /* Force horizontal scrollbar */
+    position: absolute; /* Take it out of the normal flow so it doesn't affect your navbar */
+    top: 56px; /* Adjust this value if your navbar height is different */
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
 
 
