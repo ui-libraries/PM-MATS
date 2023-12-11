@@ -137,15 +137,15 @@ body {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%; /* Full width */
-    z-index: 1020; /* Above other content */
+    width: 100%;
+    z-index: 1020;
 }
 
 .content-container {
-    padding-top: 10px; /* Height of the navbar to ensure content doesn't get hidden underneath */
-    overflow-x: scroll; /* Force horizontal scrollbar */
-    position: absolute; /* Take it out of the normal flow so it doesn't affect your navbar */
-    top: 56px; /* Adjust this value if your navbar height is different */
+    padding-top: 10px;
+    overflow-x: scroll;
+    position: absolute;
+    top: 56px;
     left: 0;
     right: 0;
     bottom: 0;

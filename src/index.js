@@ -43,12 +43,10 @@ function miniMap(chapters) {
   new Draw('#minimap', content, {
     xOffset: 20,
     yOffset: 20,
-    shape: 'circle',
     size: 5,
     fill: '#CC5500',
     textFontSize: 12,
     textFill: 'black',
-    minimap: true
   })
 }
 
@@ -56,7 +54,6 @@ function normalMap() {
   new Draw('#container', processChapters(), {
     xOffset: 20,
     yOffset: 20,
-    shape: 'circle',
     size: 5,
     fill: '#CC5500',
     textFontSize: 12,
@@ -75,10 +72,6 @@ $('#number-search').on('submit', function(e) {
     scrollLeft: node.x - $(window).width() / 2
   }, 100)
 })
-
-
-
-//miniMap(['24', '25'])
 
 
 

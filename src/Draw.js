@@ -22,12 +22,10 @@ export class Draw {
         this.data = data
         this.xOffset = options.xOffset || 20
         this.yOffset = options.yOffset || 20
-        this.shape = options.shape || 'circle'
         this.size = options.size || 5
         this.fill = options.fill || 'blue'
         this.textFontSize = options.textFontSize || 12
         this.textFill = options.textFill || 'black'
-        this.minimap = options.minimap || false
         this.init()
 
         this.tooltip = d3.select('body')
@@ -64,14 +62,14 @@ export class Draw {
         const svgHeight = maxY - minY + this.yOffset
 
         // Set SVG dimensions
-        this.svg.attr('width', svgWidth)
+        this.svg
+            .attr('width', svgWidth)
             .attr('height', svgHeight)
 
-        this._drawShape(this.shape, minX, minY)
-        if (!this.minimap) {
-            this._drawTextLabels(minX, minY)
-            this._drawChapterMarker(minX, minY)
-        }
+        this._drawShape(minX, minY)
+        this._drawTextLabels(minX, minY)
+        this._drawChapterMarker(minX, minY)
+
     }
 
     /**
@@ -81,11 +79,11 @@ export class Draw {
      * @param {number} minX - The minimum X-coordinate in the data.
      * @param {number} minY - The minimum Y-coordinate in the data.
      */
-    _drawShape(shapeType, minX, minY) {
-        const shapes = this.svg.selectAll(shapeType)
+    _drawShape(minX, minY) {
+        const shapes = this.svg.selectAll('circle')
             .data(Object.values(this.data).flat())
             .enter()
-            .append(shapeType)
+            .append('circle')
             .filter(d => !d.properties.isPlaceholder)
             .attr('fill', d => {
                 if (d.properties.type) {
@@ -103,41 +101,17 @@ export class Draw {
                 return this.fill
             })
     
-        if (shapeType === 'circle') {
-            shapes.attr('cx', d => d.x - minX + this.xOffset)
-                  .attr('cy', d => d.y - minY + this.yOffset)
-                  .attr('r', d => {
-                      const decimalCount = getDecimalLength(d.properties.number)
-                      const radiusIncreaseFactor = 0
-                      return this.size + (decimalCount * radiusIncreaseFactor)
-                  })
-        } else if (shapeType === 'rect') {
-            shapes.attr('x', d => d.x - minX + this.xOffset - this.size)
-                  .attr('y', d => d.y - minY + this.yOffset - this.size)
-                  .attr('width', this.size * 2)
-                  .attr('height', this.size * 2)
-        } else if (shapeType === 'ellipse') {
-            shapes.attr('cx', d => d.x - minX + this.xOffset)
-                  .attr('cy', d => d.y - minY + this.yOffset)
-                  .attr('rx', this.size)  // Adapt the x-radius as needed
-                  .attr('ry', this.size * 0.7)  // Adapt the y-radius as needed
-        } else if (shapeType === 'polygon') {
-            // Generalized for an equilateral triangle, but can be modified for other polygons
-            shapes.attr('points', d => {
-                const x = d.x - minX + this.xOffset
-                const y = d.y - minY + this.yOffset
-                const halfWidth = this.size
-                return [
-                    `${x},${y - this.size}`,
-                    `${x - halfWidth},${y + halfWidth}`,
-                    `${x + halfWidth},${y + halfWidth}`
-                ].join(' ')
-            })
-        }
+        shapes.attr('cx', d => d.x - minX + this.xOffset)
+            .attr('cy', d => d.y - minY + this.yOffset)
+            .attr('r', d => {
+                const decimalCount = getDecimalLength(d.properties.number)
+                const radiusIncreaseFactor = 0
+                return this.size + (decimalCount * radiusIncreaseFactor)
+        })
 
         // Add click event handling for each shape
         shapes.on('click', (event, d) => {
-            console.log(`Clicked ${shapeType} with data:`, d)
+            console.log(`Clicked ${'circle'} with data:`, d)
             let queryString = new URLSearchParams({ n: d.properties.number }).toString()
             let currentUrl = window.location.href.replace('index.html', '')
             window.open(`${currentUrl}?${queryString}`, '_blank')
