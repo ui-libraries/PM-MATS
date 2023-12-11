@@ -1,4 +1,5 @@
-import { Draw } from './Draw.js'
+import { Map } from './Map.js'
+import { Minimap } from './Minimap.js'
 import { Graph } from './Graph.js'
 import { table } from './datatable.js'
 import { getQueryParam } from './utils.js'
@@ -40,7 +41,7 @@ function processChapters({ chapterNumbers = null, GAP = 300, PAD = 50, x = 0 } =
 //GAP is the space between chapters, PAD is the space between nodes in a chapter
 function miniMap(chapters) {
   const content = processChapters({chapterNumbers: chapters, GAP: 100, PAD: 20})
-  new Draw('#minimap', content, {
+  new Minimap('#minimap', content, {
     xOffset: 20,
     yOffset: 20,
     size: 5,
@@ -51,7 +52,7 @@ function miniMap(chapters) {
 }
 
 function normalMap() {
-  new Draw('#container', processChapters(), {
+  new Map('#container', processChapters(), {
     xOffset: 20,
     yOffset: 20,
     size: 5,
