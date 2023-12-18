@@ -19,8 +19,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
 function processChapters({ chapterNumbers = null, GAP = 300, PAD = 50, x = 0 } = {}) {
   const excluded = ['8', '89'];
-  const chapters = pm.getChapterNumbers().filter(chapter => !excluded.includes(chapter));
-  let chapterData = {};
+  const chapters = pm.getChapterNumbers().filter(chapter => !excluded.includes(chapter))
+  let chapterData = {}
 
   if (!chapterNumbers) {
     for (let chapter of chapters) {
@@ -41,7 +41,7 @@ function processChapters({ chapterNumbers = null, GAP = 300, PAD = 50, x = 0 } =
 //GAP is the space between chapters, PAD is the space between nodes in a chapter
 function miniMap(chapters) {
   const content = processChapters({chapterNumbers: chapters, GAP: 100, PAD: 20})
-  new Minimap('#minimap', content, {
+  new Minimap('#pm-map', content, {
     xOffset: 20,
     yOffset: 20,
     size: 5,
@@ -52,7 +52,7 @@ function miniMap(chapters) {
 }
 
 function normalMap() {
-  new Map('#container', processChapters(), {
+  new Map('#pm-map', processChapters(), {
     xOffset: 20,
     yOffset: 20,
     size: 5,
@@ -65,7 +65,7 @@ function normalMap() {
 $('#number-search').on('submit', function(e) {
   e.preventDefault()
   const num = $('.menu-search').val()
-  const svgElement = document.getElementById('container')
+  const svgElement = document.getElementById('pm-map')
   const node = pm.getNodeByNumber(num)
   console.log(node)
 

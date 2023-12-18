@@ -5,7 +5,7 @@ import { romanize } from './utils.js'
  * Draw Class to create a D3 visualization.
  * 
  * @class
- * @param {string} [svgSelector='container'] - The CSS selector to attach the SVG element to.
+ * @param {string} [svgSelector='pm-map'] - The CSS selector to attach the SVG element to.
  * @param {Object} data - The data to be visualized.
  * @param {Object} [options={}] - Additional options for customization.
  * @param {number} [options.xOffset=20] - X-offset for positioning elements.
@@ -17,7 +17,7 @@ import { romanize } from './utils.js'
  * @param {string} [options.textFill='black'] - The fill color for text.
  */
 export class Minimap {
-    constructor(svgSelector = 'container', data, options = {}) {
+    constructor(svgSelector = 'pm-map', data, options = {}) {
         this.svg = d3.select(svgSelector)
         this.data = data
         this.xOffset = options.xOffset || 20
@@ -67,7 +67,6 @@ export class Minimap {
             .attr('height', svgHeight)
 
         this._drawShape(minX, minY)
-        this._drawTextLabels(minX, minY)
         this._drawChapterMarker(minX, minY)
 
     }
@@ -140,8 +139,8 @@ export class Minimap {
             .enter()
             .append('circle')
             .attr('class', 'special-circle')
-            .attr('cx', d => d.x - minX + this.xOffset)
-            .attr('cy', d => d.y - minY + this.yOffset)
+            .attr('cx', d => d.x - minX + this.xOffset - 15)
+            .attr('cy', d => d.y - minY + this.yOffset - 15)
             .attr('r', 17)
             .attr('fill', 'transparent')
             .attr('stroke', 'black')
@@ -153,8 +152,8 @@ export class Minimap {
             .enter()
             .append('text')
             .attr('class', 'special-text')
-            .attr('x', d => d.x - minX + this.xOffset)
-            .attr('y', d => d.y - minY + this.yOffset)
+            .attr('x', d => d.x - minX + this.xOffset - 15)
+            .attr('y', d => d.y - minY + this.yOffset - 15)
             .attr('font-family', 'EB Garamond, serif')
             .attr('font-size', '12px')
             .attr('fill', 'black')
