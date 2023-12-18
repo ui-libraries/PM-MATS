@@ -10,8 +10,12 @@ document.addEventListener('DOMContentLoaded', (event) => {
   let numberValue = getQueryParam('n')
   
   if (numberValue) {
+    // use jquery to remove #pm-map
+    $('#pm-map').remove()
     let chapterNumber = numberValue.split('.')[0]
-    miniMap([chapterNumber])
+    miniMap([chapterNumber], "#minimap2")
+    miniMap(['3'], "#minimap9")
+    miniMap(['9'], "#minimap7")
   } else {
     normalMap()
   }  
@@ -39,9 +43,9 @@ function processChapters({ chapterNumbers = null, GAP = 300, PAD = 50, x = 0 } =
 }
 
 //GAP is the space between chapters, PAD is the space between nodes in a chapter
-function miniMap(chapters) {
+function miniMap(chapters, svgSelector = '#pm-map') {
   const content = processChapters({chapterNumbers: chapters, GAP: 100, PAD: 20})
-  new Minimap('#pm-map', content, {
+  new Minimap(svgSelector, content, {
     xOffset: 20,
     yOffset: 20,
     size: 5,

@@ -1,63 +1,83 @@
 <!DOCTYPE html>
 <html>
-  <head lang="en">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-    <title>Principia Mathematica</title>
-  </head>
-  <body>
-    <div class="fixed-top-container">
-      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container-fluid">
-          <div class="navbar-brand">Principia Mathematica</div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="index.html">map</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="data.html">table</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="about.html">about</a>
-              </li>
-            </ul>
-            <form id="number-search" class="d-flex">
-              <input class="form-control me-2 menu-search" type="search" placeholder="Enter a number..." aria-label="Search">
-              <button class="btn btn-outline-info btn-sm" type="submit">Search</button>
-            </form>
-          </div>
-        </div>
-      </nav>
-    </div>
-    <div class="content-container">
-      <svg id="pm-map"></svg>
-    </div>
-    <body>
-      <div class="container mt-4">
-          <div class="row">
-              <div class="col" id="column1"></div>
-              <div class="col" id="column2"></div>
-              <div class="col" id="column3"></div>
-          </div>
+   <head lang="en">
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+      <link href="https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="style.css">
+      <title>Principia Mathematica</title>
+   </head>
+   <body>
+      <div class="fixed-top-container">
+         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+               <div class="navbar-brand">Principia Mathematica</div>
+               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+               <span class="navbar-toggler-icon"></span>
+               </button>
+               <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                  <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                     <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="index.html">map</a>
+                     </li>
+                     <li class="nav-item">
+                        <a class="nav-link" href="data.html">table</a>
+                     </li>
+                     <li class="nav-item">
+                        <a class="nav-link" href="about.html">about</a>
+                     </li>
+                  </ul>
+                  <form id="number-search" class="d-flex">
+                     <input class="form-control me-2 menu-search" type="search" placeholder="Enter a number..." aria-label="Search">
+                     <button class="btn btn-outline-info btn-sm" type="submit">Search</button>
+                  </form>
+               </div>
+            </div>
+         </nav>
       </div>
-  
-      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
-      <script>
-          // JavaScript code will go here
-      </script>
-  </body>
-    <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script src="https://d3js.org/d3.v7.min.js"></script>
-    <script src="js/bundle.js" charset="utf-8"></script>
-  </body>
+      <div class="content-container">
+         <svg id="pm-map"></svg>
+         <div class="container mt-4">
+            <div class="row">
+               <div class="col">
+                  <svg id="minimap1"></svg>
+               </div>
+               <div class="col">
+                  <svg id="minimap2"></svg>
+               </div>
+               <div class="col">
+                  <svg id="minimap3"></svg>
+               </div>
+            </div>
+            <div class="row">
+               <div class="col">
+                  <svg id="minimap4"></svg>
+               </div>
+               <div class="col">
+                  <svg id="minimap5"></svg>
+               </div>
+               <div class="col">
+                  <svg id="minimap6"></svg>
+               </div>
+            </div>
+            <div class="row">
+               <div class="col">
+                  <svg id="minimap7"></svg>
+               </div>
+               <div class="col">
+                  <svg id="minimap8"></svg>
+               </div>
+               <div class="col">
+                  <svg id="minimap9"></svg>
+               </div>
+            </div>
+         </div>
+      </div>
+      <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+      <script src="https://d3js.org/d3.v7.min.js"></script>
+      <script src="js/bundle.js" charset="utf-8"></script>
+   </body>
 </html>
