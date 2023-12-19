@@ -92,6 +92,9 @@ export class Minimap {
             .append('circle')
             .filter(d => !d.properties.isPlaceholder)
             .attr('fill', d => {
+                if (d.properties.number === this.highlightedNumber) {
+                    return '#000000'
+                }
                 if (d.properties.type) {
                     switch (d.properties.type) {
                         case 'Thm':
