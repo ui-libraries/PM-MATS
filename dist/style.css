@@ -181,4 +181,33 @@ body {
     overflow: visible;
 }
 
+.summary-link {
+    font-size: 0.8rem;
+    padding: 0px;
+    text-decoration: none; 
+    color: black; 
+    display: inline-block;
+    position: relative;
+}
+
+.summary-link::after {
+    content: '';
+    position: absolute;
+    bottom: -5px; 
+    left: 0;
+    right: 0;
+    height: 1px; 
+    background-color: currentColor; 
+    opacity: 0; 
+    transition: opacity 0.3s, transform 0.3s;
+    transform: scale(0, 1);
+    transform-origin: center bottom;
+}
+
+.summary-link:hover::after,
+.summary-link:focus::after {
+    opacity: 1;
+    transform: scale(1, 1);
+}
+
 
