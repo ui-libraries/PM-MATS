@@ -26,11 +26,18 @@ export class Minimap {
         this.fill = options.fill || 'blue'
         this.textFontSize = options.textFontSize || 12
         this.textFill = options.textFill || 'black'
+        this.highlightedNumber = options.highlightedNumber || null
         this.init()
 
         this.tooltip = d3.select('body')
             .append('div')
             .attr('class', 'tooltip')
+            .style('opacity', 0)
+            .style('position', 'absolute')
+
+        this.minimpTooltip = d3.select('body')
+            .append('div')
+            .attr('class', 'minimp-tooltip')
             .style('opacity', 0)
             .style('position', 'absolute')
     }
@@ -107,6 +114,9 @@ export class Minimap {
                 const radiusIncreaseFactor = 0
                 return this.size + (decimalCount * radiusIncreaseFactor)
         })
+
+        shapes.on('mouseenter', (event, d) => this._showMiniNum(event, d))
+            .on('mouseleave', () => this._hideMiniNum())
 
         // Add click event handling for each shape
         shapes.on('click', (event, d) => {
@@ -189,5 +199,20 @@ export class Minimap {
         this.tooltip.transition()
             .duration(500)
             .style('opacity', 0)
-    }   
+    }
+
+    _showMiniNum(event, d) {
+        this.minimpTooltip.transition()
+            .duration(200)
+            .style('opacity', .9)
+        this.minimpTooltip.html(`${d.properties.number}`)
+            .style('left', (event.pageX + 10) + 'px')
+            .style('top', (event.pageY - 28) + 'px')
+    }
+
+    _hideMiniNum() {
+        this.minimpTooltip.transition()
+            .duration(500)
+            .style('opacity', 0)
+    }
 }

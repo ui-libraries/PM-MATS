@@ -52,6 +52,21 @@ body {
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 }
 
+.minimp-tooltip {
+    position: absolute;
+    text-align: center;
+    width: 50px;
+    height: 25px;
+    padding: 0px;
+    font-family: 'EB Garamond', serif;
+    font-size: 16px;
+    background: rgb(240, 247, 255);
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    pointer-events: none;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
 /* Custom CSS to modify navbar */
 .navbar {
     padding-top: 0.2rem;
@@ -160,6 +175,10 @@ body {
     height: 100%;
     top: 0;
     left: 0;
+}
+
+.col svg {
+    overflow: visible;
 }
 
 
