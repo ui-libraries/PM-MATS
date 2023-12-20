@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
   if (numberValue) {
       $('#pm-map').remove()
       let chapterNumber = numberValue.split('.')[0]
-      miniMap([chapterNumber], "#minimap2", numberValue)
+      miniMap([chapterNumber], "#main-minimap", numberValue)
       createSummaryLink(numberValue)
       generateAllRows(numberValue)
   } else {
