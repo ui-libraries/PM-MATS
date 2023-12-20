@@ -13,11 +13,19 @@ document.addEventListener('DOMContentLoaded', (event) => {
       $('#pm-map').remove()
       let chapterNumber = numberValue.split('.')[0]
       miniMap([chapterNumber], "#minimap2", numberValue)
+      createSummaryLink(numberValue)
       generateAllRows(numberValue)
   } else {
       normalMap()
   }
 })
+
+function createSummaryLink(numberValue) {
+  const node = pm.getNodeByNumber(numberValue)
+  const page = node.properties.page
+  let link = `https://archive.org/details/dli.ernet.247278/page/${page}/mode/2up`
+  $('#minimap-title').append(`<a class="summary-link active" href="${link}" target="_blank">Summary</a>`)
+}
 
 function insertChapterSvgs(numberValue, i) {
   const node = pm.getNodeByNumber(numberValue)
