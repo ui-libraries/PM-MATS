@@ -1,15 +1,17 @@
 
-#proof-labels{
+#proof-labels {
     margin-top: 4.5rem;
     height: 3.5rem;
 }
-.minimap-row{
 
-}
-
-.left-col{
+.left-col {
     text-align: right;
 }
+
+.minimap-row {
+    margin-bottom: 3rem;
+}
+
 body {
     background-color: #F8F0E3;
     font-family: 'EB Garamond', serif;

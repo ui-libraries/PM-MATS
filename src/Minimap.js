@@ -93,7 +93,7 @@ export class Minimap {
             .filter(d => !d.properties.isPlaceholder)
             .attr('fill', d => {
                 if (d.properties.number === this.highlightedNumber) {
-                    return '#000000'
+                    return 'yellow'
                 }
                 if (d.properties.type) {
                     switch (d.properties.type) {
@@ -108,6 +108,18 @@ export class Minimap {
                     }
                 }
                 return this.fill
+            })
+            .attr('stroke', d => {
+                if (d.properties.number === this.highlightedNumber) {
+                    return '#000000'
+                }
+                return '#000000'
+            })
+            .attr('stroke-width', d => {
+                if (d.properties.number === this.highlightedNumber) {
+                    return 2
+                }
+                return 0
             })
     
         shapes.attr('cx', d => d.x - minX + this.xOffset)

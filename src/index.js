@@ -8,110 +8,131 @@ const pm = new Graph()
 
 document.addEventListener('DOMContentLoaded', (event) => {
   let numberValue = getQueryParam('n')
-  
+
   if (numberValue) {
-    $('#pm-map').remove()
-    let chapterNumber = numberValue.split('.')[0]
-    miniMap([chapterNumber], "#minimap2", numberValue)
-    //miniMap(['3'], "#minimap9", '3.1')
-    //miniMap(['9'], "#minimap7", '9.1')
-    generateMinimapColumns(numberValue)
+      $('#pm-map').remove()
+      let chapterNumber = numberValue.split('.')[0]
+      miniMap([chapterNumber], "#minimap2", numberValue)
+      generateAllRows(numberValue)
   } else {
-    normalMap()
-  }  
+      normalMap()
+  }
 })
 
-//generates the svg, returns the unique id svg number for print
-function amazing(number, i){
-  const node = pm.getNodeByNumber(number)
-  const proves = node.proves
-  const provenBy = node.provenBy 
+function insertChapterSvgs(numberValue, i) {
+  const node = pm.getNodeByNumber(numberValue)
+  if (!node) {
+    console.error(`Node not found for numberValue: ${numberValue}`)
+    return
+  }
 
-  //use the map method to return a list without decimal parts
+  const proves = node.proves || []
+  const provenBy = node.provenBy || []
+
   const provesChapter = proves.map((num) => num.split('.')[0])
   const provenByChapter = provenBy.map((num) => num.split('.')[0])
 
-  miniMap([provenByChapter[i]], "#left-svg"+i, provenBy[i])
-  miniMap([provesChapter[i]], "#right-svg"+i, proves[i])
-}
+  if (provenByChapter.length > i && provenBy.length > i) {
+    miniMap([provenByChapter[i]], "#left-svg" + i, provenBy[i])
+  } else {
+    console.warn(`provenByChapter does not have an element at index ${i}`)
+  }
 
-function generateMinimapColumns(numberValue){
-//insertRow will drop in the amazing function
-//number is the query parameter number
-
-  let i = 0
-  let row = insertRow(i)
-
-  $('#minimap-column-top').append(row)
-  amazing(numberValue, i)
-}
-
-function insertRow(i) {
-  let html = 
-  `
-  <div class="row minimap-row">
-  <div class="col left-col">
-     <svg id="left-svg${i}"></svg>
-  </div>
-  <div class="col">
-
-  </div>
-  <div class="col right-col">
-     <svg id="right-svg${i}"></svg>
-  </div>
-</div>
-  `
-  return html
+  if (provesChapter.length > i && proves.length > i) {
+    miniMap([provesChapter[i]], "#right-svg" + i, proves[i])
+  } else {
+    console.warn(`provesChapter does not have an element at index ${i}`)
+  }
 }
 
 
-    //insertRow will have SVG container inserted into the dom
-    //addMiniMaps will return the unique 
+function createRow(numberValue, i) {
+  let row = `
+    <div class="row minimap-row">
+      <div class="col left-col">
+          <svg id="left-svg${i}"></svg>
+      </div>
+      <div class="col"></div>
+      <div class="col right-col">
+          <svg id="right-svg${i}"></svg>
+      </div>
+    </div>
+  `;
+  $('#minimap-column-top').append(row);
+  insertChapterSvgs(numberValue, i);
+}
 
 
-function processChapters({ chapterNumbers = null, GAP = 300, PAD = 50, x = 0 } = {}) {
+function generateAllRows(numberValue) {
+  const node = pm.getNodeByNumber(numberValue);
+  if (!node) {
+    console.error(`Node not found for numberValue: ${numberValue}`);
+    return;
+  }
+
+  const proves = node.proves || [];
+  const provenBy = node.provenBy || [];
+
+  // Loop through the arrays and create rows
+  for (let i = 0; i < Math.max(proves.length, provenBy.length); i++) {
+    createRow(numberValue, i);
+  }
+}
+
+
+
+function processChapters({
+  chapterNumbers = null,
+  GAP = 300,
+  PAD = 50,
+  x = 0
+} = {}) {
   const excluded = ['8', '89'];
   const chapters = pm.getChapterNumbers().filter(chapter => !excluded.includes(chapter))
   let chapterData = {}
 
   if (!chapterNumbers) {
-    for (let chapter of chapters) {
-      let [chapter_nodes, maxX] = pm.plot(chapter, x, 0, PAD)
-      chapterData[chapter] = chapter_nodes
-      x = maxX + GAP
-    }
+      for (let chapter of chapters) {
+          let [chapter_nodes, maxX] = pm.plot(chapter, x, 0, PAD)
+          chapterData[chapter] = chapter_nodes
+          x = maxX + GAP
+      }
   } else {
-    for (let chapter of chapterNumbers) {
-      let [chapter_nodes, maxX] = pm.plot(chapter, x, 0, PAD)
-      chapterData[chapter] = chapter_nodes
-      x = maxX + GAP
-    }
+      for (let chapter of chapterNumbers) {
+          let [chapter_nodes, maxX] = pm.plot(chapter, x, 0, PAD)
+          chapterData[chapter] = chapter_nodes
+          x = maxX + GAP
+      }
   }
   return chapterData
 }
 
 //GAP is the space between chapters, PAD is the space between nodes in a chapter
 function miniMap(chapters, svgSelector = '#pm-map', highlightedNumber = null) {
-  const content = processChapters({chapterNumbers: chapters, GAP: 100, PAD: 20})
+  const content = processChapters({
+      chapterNumbers: chapters,
+      GAP: 100,
+      PAD: 20
+  })
   new Minimap(svgSelector, content, {
-    xOffset: 20,
-    yOffset: 20,
-    size: 5,
-    fill: '#CC5500',
-    textFontSize: 12,
-    textFill: 'black',
-    highlightedNumber: highlightedNumber
+      xOffset: 20,
+      yOffset: 20,
+      size: 5,
+      fill: '#CC5500',
+      textFontSize: 12,
+      textFill: 'black',
+      highlightedNumber: highlightedNumber
   })
 }
 
 function normalMap() {
   new Map('#pm-map', processChapters(), {
-    xOffset: 20,
-    yOffset: 20,
-    size: 5,
-    fill: '#CC5500',
-    textFontSize: 12,
-    textFill: 'black'
+      xOffset: 20,
+      yOffset: 20,
+      size: 5,
+      fill: '#CC5500',
+      textFontSize: 12,
+      textFill: 'black'
   })
 }
 
@@ -123,9 +144,6 @@ $('#number-search').on('submit', function(e) {
   console.log(node)
 
   $('.content-container').animate({
-    scrollLeft: node.x - $(window).width() / 2
+      scrollLeft: node.x - $(window).width() / 2
   }, 100)
 })
-
-
-
