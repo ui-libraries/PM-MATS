@@ -13,12 +13,61 @@ document.addEventListener('DOMContentLoaded', (event) => {
     $('#pm-map').remove()
     let chapterNumber = numberValue.split('.')[0]
     miniMap([chapterNumber], "#minimap2", numberValue)
-    miniMap(['3'], "#minimap9", '3.1')
-    miniMap(['9'], "#minimap7", '9.1')
+    //miniMap(['3'], "#minimap9", '3.1')
+    //miniMap(['9'], "#minimap7", '9.1')
+    generateMinimapColumns(numberValue)
   } else {
     normalMap()
   }  
 })
+
+//generates the svg, returns the unique id svg number for print
+function amazing(number, i){
+  const node = pm.getNodeByNumber(number)
+  const proves = node.proves
+  const provenBy = node.provenBy 
+
+  //use the map method to return a list without decimal parts
+  const provesChapter = proves.map((num) => num.split('.')[0])
+  const provenByChapter = provenBy.map((num) => num.split('.')[0])
+
+  miniMap([provenByChapter[i]], "#left-svg"+i, provenBy[i])
+  miniMap([provesChapter[i]], "#right-svg"+i, proves[i])
+}
+
+function generateMinimapColumns(numberValue){
+//insertRow will drop in the amazing function
+//number is the query parameter number
+
+  let i = 0
+  let row = insertRow(i)
+
+  $('#minimap-column-top').append(row)
+  amazing(numberValue, i)
+}
+
+function insertRow(i) {
+  let html = 
+  `
+  <div class="row minimap-row">
+  <div class="col left-col">
+     <svg id="left-svg${i}"></svg>
+  </div>
+  <div class="col">
+
+  </div>
+  <div class="col right-col">
+     <svg id="right-svg${i}"></svg>
+  </div>
+</div>
+  `
+  return html
+}
+
+
+    //insertRow will have SVG container inserted into the dom
+    //addMiniMaps will return the unique 
+
 
 function processChapters({ chapterNumbers = null, GAP = 300, PAD = 50, x = 0 } = {}) {
   const excluded = ['8', '89'];
