@@ -170,7 +170,6 @@ body {
 }
 
 .content-container {
-    padding-top: 50px;
     overflow-x: scroll;
     position: absolute;
     top: 56px;
@@ -179,6 +178,9 @@ body {
     bottom: 0;
 }
 
+.minimap-container-padding-top{
+    padding-top:2rem;
+}
 .container.mt-4 {
     margin-top: 56px;
 }

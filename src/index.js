@@ -10,15 +10,50 @@ document.addEventListener('DOMContentLoaded', (event) => {
   let pmNumber = getQueryParam('n')
 
   if (pmNumber) {
-      $('#pm-map').remove()
+      $('.content-container').append(minimapTemplate())
       let chapterNumber = pmNumber.split('.')[0]
       miniMap([chapterNumber], "#main-minimap", pmNumber)
       createSummaryLink(pmNumber)
       generateAllRows(pmNumber)
   } else {
-      normalMap()
+    $('.content-container').append('<svg id="pm-map"></svg>')
+    normalMap()
   }
 })
+
+function minimapTemplate() {
+  const html = `
+  <div class="container mt-2 minimap-container-padding-top" id="minimap-column-top">
+            <div class="row">
+               <div class="col">
+               </div>
+               <div class="col">
+                <div class="row">
+                  <div id="minimap-title" class="col-6">
+                    <h3>A Sufficiently long Title to test Display</h3>
+                  </div>
+                  <div class="col-6">
+                    <svg id="main-minimap"></svg>
+                  </div>
+                </div>
+              </div>
+               <div class="col">
+               </div>
+            </div>
+            <div class="row" id="proof-labels">
+               <div class="col left-col">
+                  <h3>Its Proof Cites...</h3>
+               </div>
+               <div class="col">
+               </div>
+               <div class="col right-col">
+                  <h4>Cited in Proof of...</h4> 
+               </div>
+            </div>
+         </div>
+  `
+  return html
+}
 
 function createSummaryLink(pmNumber) {
   const node = pm.getNodeByNumber(pmNumber)
