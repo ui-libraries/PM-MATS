@@ -102,10 +102,7 @@ export let table = new DataTable('#principia-table', {
         },
         {
             data: 'properties.page',
-            title: 'Page',
-            render: function(data, type, row) {
-                return '<div style="max-width: 100px overflow-x: auto">' + (data || '') + '</div>'
-            },
+            title: 'Page'
         },
         {
             data: 'properties.section',
@@ -127,14 +124,18 @@ export let table = new DataTable('#principia-table', {
             data: 'provenBy',
             title: 'Its proof cites...',
             render: function(data, type, row) {
-                return '<div style="max-width: 200px overflow-x: auto">' + (data || '') + '</div>'
+                let dataArray = Array.isArray(data) ? data : [data]
+                let formattedData = dataArray.join(', ')
+                return '<div style="max-width: 300px; max-height: 300px; word-wrap: break-word; overflow-y: auto;">' + (formattedData || '') + '</div>'
             },
         },
         {
             data: 'proves',
             title: 'Cited in proof of...',
             render: function(data, type, row) {
-                return '<div style="max-width: 100px overflow-x: auto">' + (data || '') + '</div>'
+                let dataArray = Array.isArray(data) ? data : [data]
+                let formattedData = dataArray.join(', ')
+                return '<div style="max-width: 300px; max-height: 300px; word-wrap: break-word; overflow-y: auto;">' + (formattedData || '') + '</div>'
             },
         },
     ],
