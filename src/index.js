@@ -7,30 +7,30 @@ import { getQueryParam } from './utils.js'
 const pm = new Graph()
 
 document.addEventListener('DOMContentLoaded', (event) => {
-  let numberValue = getQueryParam('n')
+  let pmNumber = getQueryParam('n')
 
-  if (numberValue) {
+  if (pmNumber) {
       $('#pm-map').remove()
-      let chapterNumber = numberValue.split('.')[0]
-      miniMap([chapterNumber], "#main-minimap", numberValue)
-      createSummaryLink(numberValue)
-      generateAllRows(numberValue)
+      let chapterNumber = pmNumber.split('.')[0]
+      miniMap([chapterNumber], "#main-minimap", pmNumber)
+      createSummaryLink(pmNumber)
+      generateAllRows(pmNumber)
   } else {
       normalMap()
   }
 })
 
-function createSummaryLink(numberValue) {
-  const node = pm.getNodeByNumber(numberValue)
+function createSummaryLink(pmNumber) {
+  const node = pm.getNodeByNumber(pmNumber)
   const page = node.properties.page
   let link = `https://archive.org/details/dli.ernet.247278/page/${page}/mode/2up`
-  $('#minimap-title').append(`<a class="summary-link active" href="${link}" target="_blank">Summary</a>`)
+  $('#minimap-title').append(`<a class="summary-link active" href="${link}" target="_blank">summary</a>`)
 }
 
-function insertChapterSvgs(numberValue, i) {
-  const node = pm.getNodeByNumber(numberValue)
+function insertChapterSvgs(pmNumber, i) {
+  const node = pm.getNodeByNumber(pmNumber)
   if (!node) {
-    console.error(`Node not found for numberValue: ${numberValue}`)
+    console.error(`Node not found for pmNumber: ${pmNumber}`)
     return
   }
 
@@ -54,7 +54,7 @@ function insertChapterSvgs(numberValue, i) {
 }
 
 
-function createRow(numberValue, i) {
+function createRow(pmNumber, i) {
   let row = `
     <div class="row minimap-row">
       <div class="col left-col">
@@ -65,37 +65,32 @@ function createRow(numberValue, i) {
           <svg id="right-svg${i}"></svg>
       </div>
     </div>
-  `;
-  $('#minimap-column-top').append(row);
-  insertChapterSvgs(numberValue, i);
+  `
+  $('#minimap-column-top').append(row)
+  insertChapterSvgs(pmNumber, i)
 }
 
 
-function generateAllRows(numberValue) {
-  const node = pm.getNodeByNumber(numberValue);
+function generateAllRows(pmNumber) {
+  const node = pm.getNodeByNumber(pmNumber)
   if (!node) {
-    console.error(`Node not found for numberValue: ${numberValue}`);
-    return;
+    console.error(`Node not found for pmNumber: ${pmNumber}`)
+    return
   }
 
-  const proves = node.proves || [];
-  const provenBy = node.provenBy || [];
+  const proves = node.proves || []
+  const provenBy = node.provenBy || []
 
   // Loop through the arrays and create rows
   for (let i = 0; i < Math.max(proves.length, provenBy.length); i++) {
-    createRow(numberValue, i);
+    createRow(pmNumber, i)
   }
 }
 
 
 
-function processChapters({
-  chapterNumbers = null,
-  GAP = 300,
-  PAD = 50,
-  x = 0
-} = {}) {
-  const excluded = ['8', '89'];
+function processChapters({ chapterNumbers = null, GAP = 300, PAD = 50, x = 0} = {}) {
+  const excluded = ['8', '89']
   const chapters = pm.getChapterNumbers().filter(chapter => !excluded.includes(chapter))
   let chapterData = {}
 

@@ -9,6 +9,7 @@
 }
 
 .minimap-row {
+    margin-top: 3rem;
     margin-bottom: 3rem;
 }
 
@@ -169,7 +170,7 @@ body {
 }
 
 .content-container {
-    padding-top: 10px;
+    padding-top: 50px;
     overflow-x: scroll;
     position: absolute;
     top: 56px;

@@ -133,13 +133,14 @@ export class Minimap {
         shapes.on('mouseenter', (event, d) => this._showMiniNum(event, d))
             .on('mouseleave', () => this._hideMiniNum())
 
-        // Add click event handling for each shape
+        /*
         shapes.on('click', (event, d) => {
             console.log(`Clicked ${'circle'} with data:`, d)
             let queryString = new URLSearchParams({ n: d.properties.number }).toString()
             let currentUrl = window.location.href.replace('index.html', '')
             window.open(`${currentUrl}?${queryString}`, '_blank')
         })
+        */
     }
 
     /**
