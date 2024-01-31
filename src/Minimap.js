@@ -18,6 +18,10 @@ import { romanize } from './utils.js'
  */
 export class Minimap {
     constructor(svgSelector = 'pm-map', data, options = {}) {
+        this.mainMinimap = false
+        if (svgSelector === '#main-minimap') {
+            this.mainMinimap = true
+        }
         this.svg = d3.select(svgSelector)
         this.data = data
         this.xOffset = options.xOffset || 20
@@ -92,7 +96,7 @@ export class Minimap {
             .append('circle')
             .filter(d => !d.properties.isPlaceholder)
             .attr('fill', d => {
-                if (d.properties.number === this.highlightedNumber) {
+                if (d.properties.number === this.highlightedNumber && this.mainMinimap) {
                     return 'yellow'
                 }
                 if (d.properties.type) {
