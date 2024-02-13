@@ -9,10 +9,38 @@
     flex-direction: column;
 }
 
-.col svg {
-    margin-top: 3rem; 
-    overflow: visible;
-    width: 100%; 
+
+
+.proofs-svg {
+    display: flex;
+    justify-content: center; /* Center children horizontally */
+    align-items: start; /* Align children to the start of the container vertically */
+    text-align: center; /* Center the text within the columns, if necessary */
+    width: 100%; /* Ensure the row takes up the full width */
+    margin-top: 3rem;
+}
+
+#left-svg-container, #right-svg-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#left-svgs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#right-svgs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.minisvg {
+    margin-top: 3rem;
+    margin-bottom: 1rem;
 }
 
 

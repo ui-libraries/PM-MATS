@@ -43,9 +43,11 @@ function minimapTemplate() {
       <div class="row proofs-svg">
         <div class="col" id="left-svg-container">
             <h3>Its Proof Cites...</h3>
+            <div id="left-svgs"></div>
         </div>
         <div class="col" id="right-svg-container">
-            <h4>Cited in Proof of...</h4>
+            <h3>Cited in Proof of...</h3>
+            <div id="right-svgs"></div>
         </div>
       </div>
   </div>
@@ -70,9 +72,9 @@ function insertChapterSvgs(pmNumber, isLeft) {
 
   // Replace periods in pmNumber with underscores for valid ID
   const safePmNumber = pmNumber.replace(/\./g, '_')
-  const targetContainer = isLeft ? '#left-svg-container' : '#right-svg-container'
+  const targetContainer = isLeft ? '#left-svgs' : '#right-svgs'
   const svgId = isLeft ? `left-svg${safePmNumber}` : `right-svg${safePmNumber}`
-  const svgHtml = `<svg id="${svgId}"></svg>`
+  const svgHtml = `<svg id="${svgId}" class="minisvg"></svg>`
 
   $(targetContainer).append(svgHtml)
 
