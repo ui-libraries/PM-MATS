@@ -4,9 +4,17 @@
     height: 3.5rem;
 }
 
-.left-col {
-    text-align: right;
+.left-col, .right-col {
+    display: flex;
+    flex-direction: column;
 }
+
+.col svg {
+    margin-top: 3rem; 
+    overflow: visible;
+    width: 100%; 
+}
+
 
 .minimap-row {
     margin-top: 3rem;

@@ -23,37 +23,36 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
 function minimapTemplate() {
   const html = `
-  <div class="container mt-2 minimap-container-padding-top" id="minimap-column-top">
+    <div class="container mt-2 minimap-container-padding-top" id="minimap-column-top">
+      <div class="row main-svg">
+        <div class="col">
+        </div>
+        <div class="col">
             <div class="row">
-               <div class="col">
-               </div>
-               <div class="col">
-                <div class="row">
-                  <div id="minimap-title" class="col-6">
-                    <h3>A Sufficiently long Title to test Display</h3>
-                  </div>
-                  <div class="col-6">
-                    <svg id="main-minimap"></svg>
-                  </div>
-                </div>
+              <div id="minimap-title" class="col-6">
+                  <h3>A Sufficiently long Title to test Display</h3>
               </div>
-               <div class="col">
-               </div>
+              <div class="col-6">
+                  <svg id="main-minimap"></svg>
+              </div>
             </div>
-            <div class="row" id="proof-labels">
-               <div class="col left-col">
-                  <h3>Its Proof Cites...</h3>
-               </div>
-               <div class="col">
-               </div>
-               <div class="col right-col">
-                  <h4>Cited in Proof of...</h4> 
-               </div>
-            </div>
-         </div>
+        </div>
+        <div class="col">
+        </div>
+      </div>
+      <div class="row proofs-svg">
+        <div class="col" id="left-svg-container">
+            <h3>Its Proof Cites...</h3>
+        </div>
+        <div class="col" id="right-svg-container">
+            <h4>Cited in Proof of...</h4>
+        </div>
+      </div>
+  </div>
   `
   return html
 }
+
 
 function createSummaryLink(pmNumber) {
   const node = pm.getNodeByNumber(pmNumber)
@@ -62,49 +61,24 @@ function createSummaryLink(pmNumber) {
   $('#minimap-title').append(`<a class="summary-link active" href="${link}" target="_blank">summary</a>`)
 }
 
-function insertChapterSvgs(pmNumber, i) {
+function insertChapterSvgs(pmNumber, isLeft) {
   const node = pm.getNodeByNumber(pmNumber)
   if (!node) {
     console.error(`Node not found for pmNumber: ${pmNumber}`)
     return
   }
 
-  const proves = node.proves || []
-  const provenBy = node.provenBy || []
+  // Replace periods in pmNumber with underscores for valid ID
+  const safePmNumber = pmNumber.replace(/\./g, '_')
+  const targetContainer = isLeft ? '#left-svg-container' : '#right-svg-container'
+  const svgId = isLeft ? `left-svg${safePmNumber}` : `right-svg${safePmNumber}`
+  const svgHtml = `<svg id="${svgId}"></svg>`
 
-  const provesChapter = proves.map((num) => num.split('.')[0])
-  const provenByChapter = provenBy.map((num) => num.split('.')[0])
+  $(targetContainer).append(svgHtml)
 
-  if (provenByChapter.length > i && provenBy.length > i) {
-    miniMap([provenByChapter[i]], "#left-svg" + i, provenBy[i])
-  } else {
-    console.warn(`provenByChapter does not have an element at index ${i}`)
-  }
-
-  if (provesChapter.length > i && proves.length > i) {
-    miniMap([provesChapter[i]], "#right-svg" + i, proves[i])
-  } else {
-    console.warn(`provesChapter does not have an element at index ${i}`)
-  }
+  const chapter = pmNumber.split('.')[0]
+  miniMap([chapter], `#${svgId}`, pmNumber)
 }
-
-
-function createRow(pmNumber, i) {
-  let row = `
-    <div class="row minimap-row">
-      <div class="col left-col">
-          <svg id="left-svg${i}"></svg>
-      </div>
-      <div class="col"></div>
-      <div class="col right-col">
-          <svg id="right-svg${i}"></svg>
-      </div>
-    </div>
-  `
-  $('#minimap-column-top').append(row)
-  insertChapterSvgs(pmNumber, i)
-}
-
 
 function generateAllRows(pmNumber) {
   const node = pm.getNodeByNumber(pmNumber)
@@ -116,11 +90,13 @@ function generateAllRows(pmNumber) {
   const proves = node.proves || []
   const provenBy = node.provenBy || []
 
-  // Loop through the arrays and create rows
-  for (let i = 0; i < Math.max(proves.length, provenBy.length); i++) {
-    createRow(pmNumber, i)
-  }
+  // Insert all left SVGs
+  provenBy.forEach((proven, i) => insertChapterSvgs(proven, true))
+
+  // Insert all right SVGs
+  proves.forEach((prove, i) => insertChapterSvgs(prove, false))
 }
+
 
 
 
