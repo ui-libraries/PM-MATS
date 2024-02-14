@@ -71,7 +71,7 @@ function exportCsv() {
 
 export let table = new DataTable('#principia-table', {
     data: data,
-    dom: 'Blfrtip',
+    dom: 'Bfrti',
     lengthMenu: [
         [-1],
         ['All']

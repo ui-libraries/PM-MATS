@@ -168,6 +168,12 @@ body {
 
 .dt-buttons {
     margin-left: 10px;
+    margin-right: 10px;
+    float: left;
+}
+
+#principia-table_filter {
+   float: left;
 }
 
 .dataTables_length {
