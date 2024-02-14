@@ -1,4 +1,3 @@
-
 #proof-labels {
     margin-top: 4.5rem;
     height: 3.5rem;
@@ -9,14 +8,12 @@
     flex-direction: column;
 }
 
-
-
 .proofs-svg {
     display: flex;
-    justify-content: center; /* Center children horizontally */
-    align-items: start; /* Align children to the start of the container vertically */
-    text-align: center; /* Center the text within the columns, if necessary */
-    width: 100%; /* Ensure the row takes up the full width */
+    justify-content: center; 
+    align-items: start; 
+    text-align: center; 
+    width: 100%; 
     margin-top: 3rem;
 }
 
@@ -62,28 +59,6 @@ body {
     margin-left: 10px;
     display: block;
     width: auto;
-}
-
-.dataTables_wrapper {
-    margin-top: 3.5rem;
-}
-
-.btn {
-    font-family: 'EB Garamond', serif;
-}
-
-#table-body {
-    background-color: white;
-}
-
-#title {
-    margin-top: 0px;
-    margin-bottom: 10px;
-}
-
-.export-btn {
-    margin-top: 0px;
-    margin-bottom: 10px;
 }
 
 .tooltip {
@@ -156,7 +131,6 @@ body {
     text-decoration: none !important;
 }
 
-
 #minimap {
     position: absolute;
     top: 20%;
@@ -164,24 +138,6 @@ body {
     transform: translate(-50%, -50%);
     width: 200px;
     height: 200px;
-}
-
-.dt-buttons {
-    margin-left: 10px;
-    margin-right: 10px;
-    float: left;
-}
-
-#principia-table_filter {
-   float: left;
-}
-
-.dataTables_length {
-    margin-left: 10px;
-}
-
-.dataTables_info {
-    margin-left: 10px;
 }
 
 .btn-light {
@@ -268,3 +224,47 @@ body {
 }
 
 
+/* This section is for the Datatable page*/
+.dataTables_wrapper {
+    margin-top: 3.5rem;
+}
+
+.btn {
+    font-family: 'EB Garamond', serif;
+}
+
+#table-body {
+    background-color: white;
+}
+
+#title {
+    margin-top: 0px;
+    margin-bottom: 10px;
+}
+
+.export-btn {
+    margin-top: 0px;
+    margin-bottom: 10px;
+}
+
+.dt-buttons {
+    margin-left: 10px;
+    margin-right: 10px;
+    float: left;
+}
+
+#principia-table_filter {
+   float: left;
+}
+
+.dataTables_length {
+    margin-left: 10px;
+}
+
+.dataTables_info {
+    margin-left: 10px;
+}
+
+.column-width {
+    max-width: 3.5rem;
+}

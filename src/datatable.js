@@ -72,6 +72,7 @@ function exportCsv() {
 export let table = new DataTable('#principia-table', {
     data: data,
     dom: 'Bfrti',
+    autoWidth: false,
     lengthMenu: [
         [-1],
         ['All']
@@ -91,37 +92,46 @@ export let table = new DataTable('#principia-table', {
             },
         },
     ],
-    columns: [{
+    columns: [
+        {
             data: 'id',
-            title: 'ID'
+            title: 'ID',
+            className: 'column-width'
         },
         {
             data: 'properties.type',
-            title: 'Type'
+            title: 'Type',
+            className: 'column-width'
         },
         {
             data: 'properties.number',
-            title: 'Number'
+            title: 'Number',
+            className: 'column-width'
         },
         {
             data: 'properties.page',
-            title: 'Page'
+            title: 'Page',
+            className: 'column-width'
         },
         {
             data: 'properties.section',
-            title: 'Section'
+            title: 'Section',
+            className: 'column-width'
         },
         {
             data: 'properties.volume',
-            title: 'Volume'
+            title: 'Volume',
+            className: 'column-width'
         },
         {
             data: 'properties.chapter',
-            title: 'Chapter'
+            title: 'Chapter',
+            className: 'column-width'
         },
         {
             data: 'properties.part',
-            title: 'Part'
+            title: 'Part',
+            className: 'column-width'
         },
         {
             data: 'provenBy',
