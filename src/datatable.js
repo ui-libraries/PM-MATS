@@ -71,8 +71,11 @@ function exportCsv() {
 
 export let table = new DataTable('#principia-table', {
     data: data,
-    pageLength: 10,
     dom: 'Blfrtip',
+    lengthMenu: [
+        [-1],
+        ['All']
+    ],
     buttons: [{
             text: 'Export CSV',
             className: 'btn export-btn btn-light btn-sm',
