@@ -136,6 +136,7 @@ export let table = new DataTable('#principia-table', {
         {
             data: 'provenBy',
             title: 'Its proof cites...',
+            className: 'column-width-proofs',
             render: function(data, type, row) {
                 let dataArray = Array.isArray(data) ? data : [data]
                 let formattedData = dataArray.join(', ')
@@ -145,6 +146,7 @@ export let table = new DataTable('#principia-table', {
         {
             data: 'proves',
             title: 'Cited in proof of...',
+            className: 'column-width-proofs',
             render: function(data, type, row) {
                 let dataArray = Array.isArray(data) ? data : [data]
                 let formattedData = dataArray.join(', ')

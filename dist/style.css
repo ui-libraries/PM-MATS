@@ -268,3 +268,15 @@ body {
 .column-width {
     max-width: 3.5rem;
 }
+
+.column-width-proofs {
+    max-width: 5rem;
+}
+
+table.dataTable > thead > tr > th, table.dataTable > thead > tr > td {
+    padding: 0px!important;
+}
+
+#principia-table {
+    padding: 10px;
+}
