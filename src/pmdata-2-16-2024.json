@@ -1,0 +1,16 @@
+﻿[
+  {
+    "file": "pmdata2-16-2024.json",
+    "source": "database: nodes(9944), rels(35138)",
+    "format": "json",
+    "nodes": 9944,
+    "relationships": 35138,
+    "properties": 69635,
+    "time": 2148,
+    "rows": 45082,
+    "batchSize": -1,
+    "batches": 0,
+    "done": true,
+    "data": null
+  }
+]
