@@ -1,0 +1,20 @@
+{
+    "Volume I": {
+      "Part I": {
+        "title": "MATHEMATICAL LOGIC",
+        "sections": {
+          "A": {
+            "title": "THE THEORY OF DEDUCTION",
+            "chapters": {
+              "1": {
+                "title": "Primitive Ideas and Propositions"
+              },
+              "2": {
+                "title": "Immediate Consequences of the Primitive Propositions"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
