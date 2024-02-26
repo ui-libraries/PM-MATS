@@ -1,5 +1,7 @@
 import { getDecimalLength, getDecimalPart } from './utils.js'
-import { romanize } from './utils.js'
+import * as labels from './pm-chapter-labels.json'
+import { romanize, findLabel } from './utils.js'
+let datar
 
 /**
  * Draw Class to create a D3 visualization.
@@ -20,6 +22,7 @@ export class Map {
     constructor(svgSelector = 'pm-map', data, options = {}) {
         this.svg = d3.select(svgSelector)
         this.data = data
+        datar = this.data
         this.xOffset = options.xOffset || 20
         this.yOffset = options.yOffset || 20
         this.size = options.size || 5
@@ -41,6 +44,8 @@ export class Map {
      * @private
      */
     init() {
+        let test = findLabel('2.13', this.data, labels)
+        console.log(test)
         // Calculate minimum and maximum x and y coordinates
         let minX = Infinity,
             maxX = -Infinity,
@@ -212,5 +217,5 @@ export class Map {
         this.tooltip.transition()
             .duration(500)
             .style('opacity', 0)
-    }   
+    }
 }

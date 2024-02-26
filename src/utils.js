@@ -67,3 +67,47 @@ export function getQueryParam(param) {
     let urlParams = new URLSearchParams(queryString)
     return urlParams.get(param)
 }
+
+export function findLabel(chapterNumber, data, labels) {
+    labels = labels.default
+    let properties
+    Object.keys(data).forEach(key => {
+      data[key].forEach(node => {
+        if (node.properties && node.properties.number === chapterNumber) {
+          properties = node.properties
+        }
+      })
+    })
+
+    if (!properties) {
+      console.warn('Data for the given chapter number not found:', chapterNumber)
+      return null
+    }
+  
+    // Using the found properties, lookup the labels
+    let partLabel, sectionLabel, chapterLabel
+    let vol = `Volume ${romanize(properties.volume)}`
+    let part = `Part ${romanize(properties.part)}`
+    let sect = properties.section
+    let chap = properties.chapter
+
+    try {
+        const partObj = labels[vol][part]
+        const sectObj = partObj.sections[sect]
+        const chapObj = sectObj.chapters[chap]
+    
+        // Constructing the response object
+        const response = {
+          "part-label": partObj.title,
+          "sect-label": sectObj.title,
+          "chap-label": chapObj.title
+        }
+    
+        return response;
+      } catch (error) {
+        console.error("An error occurred while trying to find the titles:", error)
+        return null
+      }
+
+    
+  }
