@@ -103,7 +103,7 @@ export function findLabel(chapterNumber, data, labels) {
           "chap-label": chapObj.title
         }
     
-        return response;
+        return response
       } catch (error) {
         console.error("An error occurred while trying to find the titles:", error)
         return null

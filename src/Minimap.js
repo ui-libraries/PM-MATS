@@ -1,5 +1,6 @@
-import { getDecimalLength, getDecimalPart } from './utils.js'
+import { getDecimalLength, getDecimalPart, findLabel } from './utils.js'
 import { romanize } from './utils.js'
+import * as labels from './pm-chapter-labels.json'
 
 /**
  * Draw Class to create a D3 visualization.
@@ -79,7 +80,6 @@ export class Minimap {
 
         this._drawShape(minX, minY)
         this._drawChapterMarker(minX, minY)
-
     }
 
     /**

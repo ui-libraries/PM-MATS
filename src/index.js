@@ -2,7 +2,8 @@ import { Map } from './Map.js'
 import { Minimap } from './Minimap.js'
 import { Graph } from './Graph.js'
 import { table } from './datatable.js'
-import { getQueryParam } from './utils.js'
+import * as labels from './pm-chapter-labels.json'
+import { getQueryParam, findLabel } from './utils.js'
 
 const pm = new Graph()
 
@@ -15,11 +16,17 @@ document.addEventListener('DOMContentLoaded', (event) => {
       miniMap([chapterNumber], "#main-minimap", pmNumber)
       createSummaryLink(pmNumber)
       generateAllRows(pmNumber)
+      chapterTitle(pmNumber)
   } else {
     $('.content-container').append('<svg id="pm-map"></svg>')
     normalMap()
   }
 })
+
+function chapterTitle(chapterNumber) {
+  let title = findLabel(chapterNumber, processChapters(), labels)
+  document.querySelector('#minimap-title h3').textContent = title['chap-label']
+}
 
 function minimapTemplate() {
   const html = `
@@ -30,7 +37,7 @@ function minimapTemplate() {
         <div class="col">
             <div class="row">
               <div id="minimap-title" class="col-6">
-                  <h3>A Sufficiently long Title to test Display</h3>
+                  <h3></h3>
               </div>
               <div class="col-6">
                   <svg id="main-minimap"></svg>
