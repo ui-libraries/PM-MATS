@@ -69,6 +69,9 @@ export function getQueryParam(param) {
 }
 
 export function findLabel(chapterNumber, data, labels) {
+    if (chapterNumber.endsWith('.0')) {
+        chapterNumber = chapterNumber.replace('.0', '.1')
+    }
     labels = labels.default
     let properties
     Object.keys(data).forEach(key => {

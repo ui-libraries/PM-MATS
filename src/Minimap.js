@@ -206,11 +206,16 @@ export class Minimap {
             .on('mouseleave', () => this._hideTooltip())
     }
 
+    _titles(chapterNumber) {
+        let title = findLabel(chapterNumber, this.data, labels)
+        return title
+    }
+
     _showTooltip(event, d) {
         this.tooltip.transition()
             .duration(200)
             .style('opacity', .9)
-        this.tooltip.html(`Volume ${romanize(d.properties.volume)}<br>Part ${romanize(d.properties.part)}<br>Section ${d.properties.section}`)
+        this.tooltip.html(`Volume ${romanize(d.properties.volume)}<br>Part ${romanize(d.properties.part)}: ${findLabel(d.properties.number, this.data, labels)['part-label']}<br>Section ${d.properties.section}: ${findLabel(d.properties.number, this.data, labels)['sect-label']}`)
             .style('left', (event.pageX + 10) + 'px')
             .style('top', (event.pageY - 28) + 'px')
     }
