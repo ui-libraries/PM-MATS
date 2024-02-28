@@ -67,7 +67,7 @@ function createSummaryLink(pmNumber) {
   const node = pm.getNodeByNumber(pmNumber)
   const page = node.properties.page
   let link = `https://archive.org/details/dli.ernet.247278/page/${page}/mode/2up`
-  $('#minimap-title').append(`<a class="summary-link active" href="${link}" target="_blank">summary</a>`)
+  $('#minimap-title').append(`<a class="summary-link active" href="${link}" target="_blank">original text</a>`)
 }
 
 function insertChapterSvgs(pmNumber, isLeft) {
