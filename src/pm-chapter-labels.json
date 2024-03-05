@@ -1,764 +1,764 @@
 {
-  "Volume I":{
-     "Part I":{
-        "title":"MATHEMATICAL LOGIC",
-        "sections":{
-           "A":{
-              "title":"THE THEORY OF DEDUCTION",
-              "chapters":{
-                 "1":{
-                    "title":"Primitive Ideas and Propositions"
-                 },
-                 "2":{
-                    "title":"Immediate Consequences of the Primitive Propositions"
-                 },
-                 "3":{
-                    "title":"The Logical Product of Two Propositions"
-                 },
-                 "4":{
-                    "title":"Equivalence and Formal Rules"
-                 }
-              }
-           },
-           "B":{
-              "title":"THE THEORY OF APPARENT VARIABLES",
-              "chapters":{
-                 "9":{
-                    "title":"Extension of the Theory of Deduction from Lower to Higher Types of Propositions"
-                 },
-                 "10":{
-                    "title":"Theory of Propositions Containing Some Apparent Variable"
-                 },
-                 "11":{
-                    "title":"The Theory of Two Apparent Variables"
-                 },
-                 "12":{
-                    "title":"The Hierarchy of Types and the Axiom of Reducibility"
-                 },
-                 "13":{
-                    "title":"Identity"
-                 },
-                 "14":{
-                    "title":"Descriptions"
-                 }
-              }
-           },
-           "C":{
-              "title":"CLASSES AND RELATIONS",
-              "chapters":{
-                 "20":{
-                    "title":"General Theory of Classes"
-                 },
-                 "21":{
-                    "title":"General Theory of Relations"
-                 },
-                 "22":{
-                    "title":"Calculus of Classes"
-                 },
-                   "23":{
+   "Volume I":{
+      "Part I":{
+         "title":"MATHEMATICAL LOGIC",
+         "sections":{
+            "A":{
+               "title":"THE THEORY OF DEDUCTION",
+               "chapters":{
+                  "1":{
+                     "title":"Primitive Ideas and Propositions"
+                  },
+                  "2":{
+                     "title":"Immediate Consequences of the Primitive Propositions"
+                  },
+                  "3":{
+                     "title":"The Logical Product of Two Propositions"
+                  },
+                  "4":{
+                     "title":"Equivalence and Formal Rules"
+                  }
+               }
+            },
+            "B":{
+               "title":"THE THEORY OF APPARENT VARIABLES",
+               "chapters":{
+                  "9":{
+                     "title":"Extension of the Theory of Deduction from Lower to Higher Types of Propositions"
+                  },
+                  "10":{
+                     "title":"Theory of Propositions Containing Some Apparent Variable"
+                  },
+                  "11":{
+                     "title":"The Theory of Two Apparent Variables"
+                  },
+                  "12":{
+                     "title":"The Hierarchy of Types and the Axiom of Reducibility"
+                  },
+                  "13":{
+                     "title":"Identity"
+                  },
+                  "14":{
+                     "title":"Descriptions"
+                  }
+               }
+            },
+            "C":{
+               "title":"CLASSES AND RELATIONS",
+               "chapters":{
+                  "20":{
+                     "title":"General Theory of Classes"
+                  },
+                  "21":{
+                     "title":"General Theory of Relations"
+                  },
+                  "22":{
+                     "title":"Calculus of Classes"
+                  },
+                  "23":{
                      "title":"Calculus of Relations"
-                   },
-                 "24":{
-                    "title":"The Universal Class, the Null-Class, and the Existence of Classes"
-                 },
-                 "25":{
-                    "title":"The Universal Relation, the Null Relation, and the Existence of Relations"
-                 }
-              }
-           },
-           "D":{
-              "title":"LOGIC OF RELATIONS",
-              "chapters":{
-                 "30":{
-                    "title":"Descriptive Functions"
-                 },
-                 "31":{
-                    "title":"Converses of Relations"
-                 },
-                 "32":{
-                    "title":"Referents and Relata of a Given Term with Respect to a Given Relation"
-                 },
-                 "33":{
-                    "title":"Domains, Converse Domains, and Fields of Relations"
-                 },
-                 "34":{
-                    "title":"The Relative Product of Two Relations"
-                 },
-                 "35":{
-                    "title":"Relations with Limited Domains and Converse Domains"
-                 },
-                 "36":{
-                    "title":"Relations with Limited Fields"
-                 },
-                 "37":{
-                    "title":"Plural Descriptive Functions"
-                 },
-                 "38":{
-                    "title":"Relations and Classes Derived from a Double Descriptive Function"
-                 }
-              }
-           },
-           "E":{
-              "title":"PRODUCTS AND SUMS OF CLASSES",
-              "chapters":{
-                 "40":{
-                    "title":"Products and Sums of Classes of Classes"
-                 },
-                 "41":{
-                    "title":"The Product and Sum of a Class of Relations"
-                 },
-                 "42":{
-                    "title":"Miscellaneous Propositions"
-                 },
-                 "43":{
-                    "title":"The Relations of a Relative Product to Its Factors"
-                 }
-              }
-           }
-        }
-     },
-     "Part II":{
-        "title":"PROLEGOMENA TO CARDINAL ARITHMETIC",
-        "sections":{
-           "A":{
-              "title":"UNIT CLASSES AND COUPLES",
-              "chapters":{
-                 "50":{
-                    "title":"Identity and Diversity as Relations"
-                 },
-                 "51":{
-                    "title":"Unit Classes"
-                 },
-                 "52":{
-                    "title":"The Cardinal Number 1"
-                 },
-                 "53":{
-                    "title":"Miscellaneous Propositions involving Unit Classes"
-                 },
-                 "54":{
-                    "title":"Cardinal Couples"
-                 },
-                 "55":{
-                    "title":"Ordinal Couples"
-                 },
-                 "56":{
-                    "title":"The Ordinal Number 2r"
-                 }
-              }
-           },
-           "B":{
-              "title":"SUB-CLASSES, SUB-RELATIONS, AND RELATIVE TYPES",
-              "chapters":{
-                 "60":{
-                    "title":"The Sub-Classes of a given Class"
-                 },
-                 "61":{
-                    "title":"The Sub-Relations of a given Relation"
-                 },
-                 "62":{
-                    "title":"The Relation of Membership of a Class"
-                 },
-                 "63":{
-                    "title":"Relative Types of Classes"
-                 },
-                 "64":{
-                    "title":"Relative Types of Relations"
-                 },
-                 "65":{
-                    "title":"On the Typical Definition of Ambiguous Symbols"
-                 }
-              }
-           },
-           "C":{
-              "title":"ONE-MANY, MANY-ONE, AND ONE-ONE RELATIONS",
-              "chapters":{
-                 "70":{
-                    "title":"Relations whose Classes of Referents and of Relata belong to given Classes"
-                 },
-                 "71":{
-                    "title":"One-Many, Many-One, and One-One Relations"
-                 },
-                 "72":{
-                    "title":"Miscellaneous Propositions concerning One-Many, Many-One, and One-One Relations"
-                 },
-                 "73":{
-                    "title":"Similarity of Classes"
-                 },
-                 "74":{
-                    "title":"One One-Many and Many-One Relations with Limited Fields"
-                 }
-              }
-           },
-           "D":{
-              "title":"SELECTIONS",
-              "chapters":{
-                 "80":{
-                    "title":"Elementary Properties of Selections"
-                 },
-                 "81":{
-                    "title":"Selections from Many-One Relations"
-                 },
-                 "82":{
-                    "title":"Selections from Relative Products"
-                 },
-                 "83":{
-                    "title":"Selections from Classes of Classes"
-                 },
-                 "84":{
-                    "title":"Classes of Mutually Exclusive Classes"
-                 },
-                 "85":{
-                    "title":"Miscellaneous Propositions"
-                 },
-                 "86":{
-                    "title":"Conditions for the Existence of Selections"
-                 }
-              }
-           },
-           "E":{
-              "title":"INDUCTIVE RELATIONS",
-              "chapters":{
-                 "90":{
-                    "title":"On the Ancestral Relation"
-                 },
-                 "91":{
-                    "title":"On Powers of a Relation"
-                 },
-                 "92":{
-                    "title":"Powers of One-Many and Many-One Relations"
-                 },
-                 "93":{
-                    "title":"Inductive Analysis of the Field of a Relation"
-                 },
-                 "94":{
-                    "title":"On Powers of Relative Products"
-                 },
-                 "95":{
-                    "title":"On the Equi-factor Relation"
-                 },
-                 "96":{
-                    "title":"On the Posterity of a Term"
-                 },
-                 "97":{
-                    "title":"Analysis of the Field of a Relation into Families"
-                 }
-              }
-           }
-        }
-     }
-  },
-  "Volume II":{
-     "Prefatory Statement of Symbolic Conventions":"vii",
-     "Part III":{
-        "title":"CARDINAL ARITHMETIC",
-        "Summary of Part III":"3",
-        "sections":{
-           "A":{
-              "title":"DEFINITION AND LOGICAL PROPERTIES OF CARDINALS NUMBERS",
-              "chapters":{
-                 "100":{
-                    "title":"Definition and elementary properties of cardinal numbers"
-                 },
-                 "101":{
-                    "title":"On 0 and 1 and 2"
-                 },
-                 "102":{
-                    "title":"On cardinal numbers of assigned types"
-                 },
-                 "103":{
-                    "title":"Homogeneous Cardinals"
-                 },
-                 "104":{
-                    "title":"Ascending Cardinals"
-                 },
-                 "105":{
-                    "title":"Descending Cardinals"
-                 },
-                 "106":{
-                    "title":"Cardinals of relational types"
-                 }
-              }
-           },
-           "B":{
-              "title":"ADDITION, MULTIPLICATION, AND EXPONENTIATION",
-              "chapters":{
-                 "110":{
-                    "title":"The arithmetical sum of two classes and of two cardinals"
-                 },
-                 "111":{
-                    "title":"Double similarity"
-                 },
-                 "112":{
-                    "title":"The arithmetical sum of a class of classes"
-                 },
-                 "113":{
-                    "title":"On the arithmetical product of two classes or of two cardinals"
-                 },
-                 "114":{
-                    "title":"The arithmetical product of a class of classes"
-                 },
-                 "115":{
-                    "title":"Multiplicative classes and arithmetic classes"
-                 },
-                 "116":{
-                    "title":"Exponentiation"
-                 },
-                 "117":{
-                    "title":"Greater and less"
-                 }
-              },
-              "General Note":{
-                 "title":"On Cardinal Correlators"
-              }
-           },
-           "C":{
-              "title":"FINITE AND INFINITE",
-              "chapters":{
-                 "118":{
-                    "title":"Arithmetical substitution and uniform normal numbers"
-                 },
-                 "119":{
-                    "title":"Subtraction"
-                 },
-                 "120":{
-                    "title":"Inductive cardinals"
-                 },
-                 "121":{
-                    "title":"Intervals"
-                 },
-                 "122":{
-                    "title":"Progressions"
-                 },
-                 "123":{
-                    "title":"ℵ0"
-                 },
-                 "124":{
-                    "title":"Reflexive classes and cardinals"
-                 },
-                 "125":{
-                    "title":"The axiom of infinity"
-                 },
-                 "126":{
-                    "title":"On typically indefinite inductive cardinals"
-                 }
-              }
-           }
-        }
-     },
-     "Part IV":{
-        "title":"RELATION ARITHMETIC",
-        "Summary of Part IV":"",
-        "sections":{
-           "A":{
-              "title":"ORDINAL SIMILARITY AND RELATION-NUMBERS",
-              "chapters":{
-                 "150":{
-                    "title":"Internal transformation of a relation"
-                 },
-                 "151":{
-                    "title":"Ordinal similarity"
-                 },
-                 "152":{
-                    "title":"Definition and elementary properties of relation-numbers"
-                 },
-                 "153":{
-                    "title":"The relation-numbers 0r, 2r, and 1s"
-                 },
-                 "154":{
-                    "title":"Relation-numbers of assigned types"
-                 },
-                 "155":{
-                    "title":"Homogeneous relation-numbers"
-                 }
-              }
-           },
-           "B":{
-              "title":"ADDITION OF RELATIONS, AND THE PRODUCT OF TWO RELATIONS",
-              "chapters":{
-                 "160":{
-                    "title":"The sum of two relations"
-                 },
-                 "161":{
-                    "title":"Addition of a term to a relation"
-                 },
-                 "162":{
-                    "title":"The sum of the relations of a field"
-                 },
-                 "163":{
-                    "title":"Relations of mutually exclusive relations"
-                 },
-                 "164":{
-                    "title":"Double likeness"
-                 },
-                 "165":{
-                    "title":"Relations of relations of couples"
-                 },
-                 "166":{
-                    "title":"The product of two relations"
-                 }
-              }
-           },
-           "C":{
-              "title":"THE PRINCIPLE OF FIRST DIFFERENCES, AND THE MULTIPLICATION AND EXPONENTIATION OF RELATIONS",
-              "chapters":{
-                 "170":{
-                    "title":"On the relation of first differences among the subclasses of a given class"
-                 },
-                 "171":{
-                    "title":"The principle of first differences (continued)"
-                 },
-                 "172":{
-                    "title":"The product of the relations of a field"
-                 },
-                 "173":{
-                    "title":"The product of the relations of a field (continued)"
-                 },
-                 "174":{
-                    "title":"The associative law of relational multiplication"
-                 },
-                 "176":{
-                    "title":"Exponentiation"
-                 },
-                 "177":{
-                    "title":"Propositions connecting Pdf with products and powers"
-                 }
-              }
-           },
-           "D":{
-              "title":"ARITHMETIC OF RELATION-NUMBERS",
-              "chapters":{
-                 "180":{
-                    "title":"The sum of two relation-numbers"
-                 },
-                 "181":{
-                    "title":"On the addition of unity to a relation number"
-                 },
-                 "182":{
-                    "title":"On separated relations"
-                 },
-                 "183":{
-                    "title":"The sum of the relation-numbers of a field"
-                 },
-                 "184":{
-                    "title":"The product of two relation-numbers"
-                 },
-                 "185":{
-                    "title":"The product of the relation-numbers of a field"
-                 },
-                 "186":{
-                    "title":"Powers of relation-numbers"
-                 }
-              }
-           }
-        }
-     },
-     "Part V":{
-        "title":"SERIES",
-        "Summary of Part V":"",
-        "sections":{
-           "A":{
-              "title":"GENERAL THEORY OF SERIES",
-              "chapters":{
-                 "200":{
-                    "title":"Relations contained in diversity"
-                 },
-                 "201":{
-                    "title":"Transitive relations"
-                 },
-                 "202":{
-                    "title":"Connected relations"
-                 },
-                 "204":{
-                    "title":"Elementary properties of series"
-                 },
-                 "205":{
-                    "title":"Maximum points"
-                 },
-                 "206":{
-                    "title":"Sequent points"
-                 },
-                 "207":{
-                    "title":"Limits"
-                 },
-                 "208":{
-                    "title":"The correlation of series"
-                 }
-              }
-           },
-           "B":{
-              "title":"ON SECTIONS, SEGMENTS, STRETCHES, AND DERIVATIVES",
-              "chapters":{
-                 "210":{
-                    "title":"On series of classes generated by the relation of inclusion"
-                 },
-                 "211":{
-                    "title":"On sections and segments"
-                 },
-                 "212":{
-                    "title":"The series of segments"
-                 },
-                 "213":{
-                    "title":"Sectional relations"
-                 },
-                 "214":{
-                    "title":"Dedekindian relations"
-                 },
-                 "215":{
-                    "title":"Stretches"
-                 },
-                 "216":{
-                    "title":"Derivatives"
-                 },
-                 "217":{
-                    "title":"On segments of sums and converses"
-                 }
-              }
-           },
-           "C":{
-              "title":"ON CONVERGENCE AND THE LIMITS OF FUNCTIONS",
-              "chapters":{
-                 "230":{
-                    "title":"On convergents"
-                 },
-                 "231":{
-                    "title":"Limiting sections and ultimate oscillation of a function"
-                 },
-                 "232":{
-                    "title":"On the oscillation of a function as the argument approaches a given limit"
-                 },
-                 "233":{
-                    "title":"On the limits of functions"
-                 },
-                 "234":{
-                    "title":"Continuity of functions"
-                 }
-              }
-           }
-        }
-     }
-  },
-  "Volume III":{
-     "Part V (continued)":{
-        "sections":{
-           "D":{
-              "title":"WELL-ORDERED SERIES",
-              "chapters":{
-                 "250":{
-                    "title":"Elementary properties of well-ordered series"
-                 },
-                 "251":{
-                    "title":"Ordinal-Numbers"
-                 },
-                 "252":{
-                    "title":"Segments of well-ordered series"
-                 },
-                 "253":{
-                    "title":"Sectional relations of well-ordered series"
-                 },
-                 "254":{
-                    "title":"Greater and less among well-ordered series"
-                 },
-                 "255":{
-                    "title":"Greater and less among ordinal numbers"
-                 },
-                 "256":{
-                    "title":"The series of ordinals"
-                 },
-                 "257":{
-                    "title":"The transfinite ancestral relation"
-                 },
-                 "258":{
-                    "title":"Zermelo’s theorem"
-                 },
-                 "259":{
-                    "title":"Inductively defined correlation"
-                 }
-              },
-              "E":{
-                 "title":"FINITE AND INFINITE SERIES AND ORDINALS",
-                 "chapters":{
-                    "260":{
-                       "title":"On finite intervals in a series"
-                    },
-                    "261":{
-                       "title":"Finite and infinite series"
-                    },
-                    "262":{
-                       "title":"Finite ordinals"
-                    },
-                    "263":{
-                       "title":"Progressions"
-                    },
-                    "264":{
-                       "title":"Derivatives of well-ordered series"
-                    },
-                    "265":{
-                       "title":"The series of alephs"
-                    }
-                 }
-              },
-              "F":{
-                 "title":"COMPACT SERIES, RATIONAL SERIES, AND CONTINUOUS SERIES",
-                 "chapters":{
-                    "270":{
-                       "title":"Compact series"
-                    },
-                    "271":{
-                       "title":"Median classes in series"
-                    },
-                    "272":{
-                       "title":"Similarity of position"
-                    },
-                    "273":{
-                       "title":"Rational series"
-                    },
-                    "274":{
-                       "title":"On series of finite subclasses of a series"
-                    },
-                    "275":{
-                       "title":"Continuous series"
-                    },
-                    "276":{
-                       "title":"On series of infinite subclasses of a series"
-                    }
-                 }
-              }
-           }
-        },
-        "Part VI":{
-           "title":"QUANTITY",
-           "Summary of Part VI":"",
-           "sections":{
-              "A":{
-                 "title":"GENERALIZATION OF NUMBER",
-                 "chapters":{
-                    "300":{
-                       "title":"Positive and negative integers, and numerical relations"
-                    },
-                    "301":{
-                       "title":"Numerically defined powers of relations"
-                    },
-                    "302":{
-                       "title":"On relative primes"
-                    },
-                    "303":{
-                       "title":"Ratios"
-                    },
-                    "304":{
-                       "title":"The series of ratios"
-                    },
-                    "305":{
-                       "title":"Multiplication of simple ratios"
-                    },
-                    "306":{
-                       "title":"Addition of simple ratios"
-                    },
-                    "307":{
-                       "title":"Generalized ratios"
-                    },
-                    "308":{
-                       "title":"Addition of generalized ratios"
-                    },
-                    "309":{
-                       "title":"Multiplication of generalized ratios"
-                    },
-                    "310":{
-                       "title":"The series of real numbers"
-                    },
-                    "311":{
-                       "title":"Addition of concordant real numbers"
-                    },
-                    "312":{
-                       "title":"Algebraic addition of real numbers"
-                    },
-                    "313":{
-                       "title":"Multiplication of real numbers"
-                    },
-                    "314":{
-                       "title":"Real numbers are relations"
-                    }
-                 }
-              },
-              "B":{
-                 "title":"VECTOR-FAMILIES",
-                 "chapters":{
-                    "330":{
-                       "title":"Elementary properties of vector-families"
-                    },
-                    "331":{
-                       "title":"Connected families"
-                    },
-                    "332":{
-                       "title":"On the representative of a relation in a family"
-                    },
-                    "333":{
-                       "title":"Open families"
-                    },
-                    "334":{
-                       "title":"Serial families"
-                    },
-                    "335":{
-                       "title":"Initial families"
-                    },
-                    "336":{
-                       "title":"The series of vectors"
-                    },
-                    "337":{
-                       "title":"Multiples and submultiples of vectors"
-                    }
-                 }
-              },
-              "C":{
-                 "title":"MEASUREMENT",
-                 "chapters":{
-                    "350":{
-                       "title":"Ratios of members of a family"
-                    },
-                    "351":{
-                       "title":"Submultipliable families"
-                    },
-                    "352":{
-                       "title":"Rational multiples of a given vector"
-                    },
-                    "353":{
-                       "title":"Rational families"
-                    },
-                    "354":{
-                       "title":"Rational nets"
-                    },
-                    "355":{
-                       "title":"Measurement by real numbers"
-                    },
-                    "356":{
-                       "title":"Existence-theorems for vector-families"
-                    }
-                 }
-              },
-              "D":{
-                 "title":"CYCLIC FAMILIES",
-                 "chapters":{
-                    "370":{
-                       "title":"Elementary properties of cyclic families"
-                    },
-                    "371":{
-                       "title":"The series of vectors"
-                    },
-                    "372":{
-                       "title":"Integral sections of the series of vectors"
-                    },
-                    "373":{
-                       "title":"Submultiples of identity"
-                    },
-                    "374":{
-                       "title":"Principle submultiples"
-                    },
-                    "375":{
-                       "title":"Principle ratios"
-                    }
-                 }
-              }
-           }
-        }
-     }
-  }
+                  },
+                  "24":{
+                     "title":"The Universal Class, the Null-Class, and the Existence of Classes"
+                  },
+                  "25":{
+                     "title":"The Universal Relation, the Null Relation, and the Existence of Relations"
+                  }
+               }
+            },
+            "D":{
+               "title":"LOGIC OF RELATIONS",
+               "chapters":{
+                  "30":{
+                     "title":"Descriptive Functions"
+                  },
+                  "31":{
+                     "title":"Converses of Relations"
+                  },
+                  "32":{
+                     "title":"Referents and Relata of a Given Term with Respect to a Given Relation"
+                  },
+                  "33":{
+                     "title":"Domains, Converse Domains, and Fields of Relations"
+                  },
+                  "34":{
+                     "title":"The Relative Product of Two Relations"
+                  },
+                  "35":{
+                     "title":"Relations with Limited Domains and Converse Domains"
+                  },
+                  "36":{
+                     "title":"Relations with Limited Fields"
+                  },
+                  "37":{
+                     "title":"Plural Descriptive Functions"
+                  },
+                  "38":{
+                     "title":"Relations and Classes Derived from a Double Descriptive Function"
+                  }
+               }
+            },
+            "E":{
+               "title":"PRODUCTS AND SUMS OF CLASSES",
+               "chapters":{
+                  "40":{
+                     "title":"Products and Sums of Classes of Classes"
+                  },
+                  "41":{
+                     "title":"The Product and Sum of a Class of Relations"
+                  },
+                  "42":{
+                     "title":"Miscellaneous Propositions"
+                  },
+                  "43":{
+                     "title":"The Relations of a Relative Product to Its Factors"
+                  }
+               }
+            }
+         }
+      },
+      "Part II":{
+         "title":"PROLEGOMENA TO CARDINAL ARITHMETIC",
+         "sections":{
+            "A":{
+               "title":"UNIT CLASSES AND COUPLES",
+               "chapters":{
+                  "50":{
+                     "title":"Identity and Diversity as Relations"
+                  },
+                  "51":{
+                     "title":"Unit Classes"
+                  },
+                  "52":{
+                     "title":"The Cardinal Number 1"
+                  },
+                  "53":{
+                     "title":"Miscellaneous Propositions involving Unit Classes"
+                  },
+                  "54":{
+                     "title":"Cardinal Couples"
+                  },
+                  "55":{
+                     "title":"Ordinal Couples"
+                  },
+                  "56":{
+                     "title":"The Ordinal Number 2r"
+                  }
+               }
+            },
+            "B":{
+               "title":"SUB-CLASSES, SUB-RELATIONS, AND RELATIVE TYPES",
+               "chapters":{
+                  "60":{
+                     "title":"The Sub-Classes of a given Class"
+                  },
+                  "61":{
+                     "title":"The Sub-Relations of a given Relation"
+                  },
+                  "62":{
+                     "title":"The Relation of Membership of a Class"
+                  },
+                  "63":{
+                     "title":"Relative Types of Classes"
+                  },
+                  "64":{
+                     "title":"Relative Types of Relations"
+                  },
+                  "65":{
+                     "title":"On the Typical Definition of Ambiguous Symbols"
+                  }
+               }
+            },
+            "C":{
+               "title":"ONE-MANY, MANY-ONE, AND ONE-ONE RELATIONS",
+               "chapters":{
+                  "70":{
+                     "title":"Relations whose Classes of Referents and of Relata belong to given Classes"
+                  },
+                  "71":{
+                     "title":"One-Many, Many-One, and One-One Relations"
+                  },
+                  "72":{
+                     "title":"Miscellaneous Propositions concerning One-Many, Many-One, and One-One Relations"
+                  },
+                  "73":{
+                     "title":"Similarity of Classes"
+                  },
+                  "74":{
+                     "title":"One One-Many and Many-One Relations with Limited Fields"
+                  }
+               }
+            },
+            "D":{
+               "title":"SELECTIONS",
+               "chapters":{
+                  "80":{
+                     "title":"Elementary Properties of Selections"
+                  },
+                  "81":{
+                     "title":"Selections from Many-One Relations"
+                  },
+                  "82":{
+                     "title":"Selections from Relative Products"
+                  },
+                  "83":{
+                     "title":"Selections from Classes of Classes"
+                  },
+                  "84":{
+                     "title":"Classes of Mutually Exclusive Classes"
+                  },
+                  "85":{
+                     "title":"Miscellaneous Propositions"
+                  },
+                  "86":{
+                     "title":"Conditions for the Existence of Selections"
+                  }
+               }
+            },
+            "E":{
+               "title":"INDUCTIVE RELATIONS",
+               "chapters":{
+                  "90":{
+                     "title":"On the Ancestral Relation"
+                  },
+                  "91":{
+                     "title":"On Powers of a Relation"
+                  },
+                  "92":{
+                     "title":"Powers of One-Many and Many-One Relations"
+                  },
+                  "93":{
+                     "title":"Inductive Analysis of the Field of a Relation"
+                  },
+                  "94":{
+                     "title":"On Powers of Relative Products"
+                  },
+                  "95":{
+                     "title":"On the Equi-factor Relation"
+                  },
+                  "96":{
+                     "title":"On the Posterity of a Term"
+                  },
+                  "97":{
+                     "title":"Analysis of the Field of a Relation into Families"
+                  }
+               }
+            }
+         }
+      }
+   },
+   "Volume II":{
+      "Prefatory Statement of Symbolic Conventions":"vii",
+      "Part III":{
+         "title":"CARDINAL ARITHMETIC",
+         "Summary of Part III":"3",
+         "sections":{
+            "A":{
+               "title":"DEFINITION AND LOGICAL PROPERTIES OF CARDINALS NUMBERS",
+               "chapters":{
+                  "100":{
+                     "title":"Definition and elementary properties of cardinal numbers"
+                  },
+                  "101":{
+                     "title":"On 0 and 1 and 2"
+                  },
+                  "102":{
+                     "title":"On cardinal numbers of assigned types"
+                  },
+                  "103":{
+                     "title":"Homogeneous Cardinals"
+                  },
+                  "104":{
+                     "title":"Ascending Cardinals"
+                  },
+                  "105":{
+                     "title":"Descending Cardinals"
+                  },
+                  "106":{
+                     "title":"Cardinals of relational types"
+                  }
+               }
+            },
+            "B":{
+               "title":"ADDITION, MULTIPLICATION, AND EXPONENTIATION",
+               "chapters":{
+                  "110":{
+                     "title":"The arithmetical sum of two classes and of two cardinals"
+                  },
+                  "111":{
+                     "title":"Double similarity"
+                  },
+                  "112":{
+                     "title":"The arithmetical sum of a class of classes"
+                  },
+                  "113":{
+                     "title":"On the arithmetical product of two classes or of two cardinals"
+                  },
+                  "114":{
+                     "title":"The arithmetical product of a class of classes"
+                  },
+                  "115":{
+                     "title":"Multiplicative classes and arithmetic classes"
+                  },
+                  "116":{
+                     "title":"Exponentiation"
+                  },
+                  "117":{
+                     "title":"Greater and less"
+                  }
+               },
+               "General Note":{
+                  "title":"On Cardinal Correlators"
+               }
+            },
+            "C":{
+               "title":"FINITE AND INFINITE",
+               "chapters":{
+                  "118":{
+                     "title":"Arithmetical substitution and uniform normal numbers"
+                  },
+                  "119":{
+                     "title":"Subtraction"
+                  },
+                  "120":{
+                     "title":"Inductive cardinals"
+                  },
+                  "121":{
+                     "title":"Intervals"
+                  },
+                  "122":{
+                     "title":"Progressions"
+                  },
+                  "123":{
+                     "title":"ℵ0"
+                  },
+                  "124":{
+                     "title":"Reflexive classes and cardinals"
+                  },
+                  "125":{
+                     "title":"The axiom of infinity"
+                  },
+                  "126":{
+                     "title":"On typically indefinite inductive cardinals"
+                  }
+               }
+            }
+         }
+      },
+      "Part IV":{
+         "title":"RELATION ARITHMETIC",
+         "Summary of Part IV":"",
+         "sections":{
+            "A":{
+               "title":"ORDINAL SIMILARITY AND RELATION-NUMBERS",
+               "chapters":{
+                  "150":{
+                     "title":"Internal transformation of a relation"
+                  },
+                  "151":{
+                     "title":"Ordinal similarity"
+                  },
+                  "152":{
+                     "title":"Definition and elementary properties of relation-numbers"
+                  },
+                  "153":{
+                     "title":"The relation-numbers 0r, 2r, and 1s"
+                  },
+                  "154":{
+                     "title":"Relation-numbers of assigned types"
+                  },
+                  "155":{
+                     "title":"Homogeneous relation-numbers"
+                  }
+               }
+            },
+            "B":{
+               "title":"ADDITION OF RELATIONS, AND THE PRODUCT OF TWO RELATIONS",
+               "chapters":{
+                  "160":{
+                     "title":"The sum of two relations"
+                  },
+                  "161":{
+                     "title":"Addition of a term to a relation"
+                  },
+                  "162":{
+                     "title":"The sum of the relations of a field"
+                  },
+                  "163":{
+                     "title":"Relations of mutually exclusive relations"
+                  },
+                  "164":{
+                     "title":"Double likeness"
+                  },
+                  "165":{
+                     "title":"Relations of relations of couples"
+                  },
+                  "166":{
+                     "title":"The product of two relations"
+                  }
+               }
+            },
+            "C":{
+               "title":"THE PRINCIPLE OF FIRST DIFFERENCES, AND THE MULTIPLICATION AND EXPONENTIATION OF RELATIONS",
+               "chapters":{
+                  "170":{
+                     "title":"On the relation of first differences among the subclasses of a given class"
+                  },
+                  "171":{
+                     "title":"The principle of first differences (continued)"
+                  },
+                  "172":{
+                     "title":"The product of the relations of a field"
+                  },
+                  "173":{
+                     "title":"The product of the relations of a field (continued)"
+                  },
+                  "174":{
+                     "title":"The associative law of relational multiplication"
+                  },
+                  "176":{
+                     "title":"Exponentiation"
+                  },
+                  "177":{
+                     "title":"Propositions connecting Pdf with products and powers"
+                  }
+               }
+            },
+            "D":{
+               "title":"ARITHMETIC OF RELATION-NUMBERS",
+               "chapters":{
+                  "180":{
+                     "title":"The sum of two relation-numbers"
+                  },
+                  "181":{
+                     "title":"On the addition of unity to a relation number"
+                  },
+                  "182":{
+                     "title":"On separated relations"
+                  },
+                  "183":{
+                     "title":"The sum of the relation-numbers of a field"
+                  },
+                  "184":{
+                     "title":"The product of two relation-numbers"
+                  },
+                  "185":{
+                     "title":"The product of the relation-numbers of a field"
+                  },
+                  "186":{
+                     "title":"Powers of relation-numbers"
+                  }
+               }
+            }
+         }
+      },
+      "Part V":{
+         "title":"SERIES",
+         "Summary of Part V":"",
+         "sections":{
+            "A":{
+               "title":"GENERAL THEORY OF SERIES",
+               "chapters":{
+                  "200":{
+                     "title":"Relations contained in diversity"
+                  },
+                  "201":{
+                     "title":"Transitive relations"
+                  },
+                  "202":{
+                     "title":"Connected relations"
+                  },
+                  "204":{
+                     "title":"Elementary properties of series"
+                  },
+                  "205":{
+                     "title":"Maximum points"
+                  },
+                  "206":{
+                     "title":"Sequent points"
+                  },
+                  "207":{
+                     "title":"Limits"
+                  },
+                  "208":{
+                     "title":"The correlation of series"
+                  }
+               }
+            },
+            "B":{
+               "title":"ON SECTIONS, SEGMENTS, STRETCHES, AND DERIVATIVES",
+               "chapters":{
+                  "210":{
+                     "title":"On series of classes generated by the relation of inclusion"
+                  },
+                  "211":{
+                     "title":"On sections and segments"
+                  },
+                  "212":{
+                     "title":"The series of segments"
+                  },
+                  "213":{
+                     "title":"Sectional relations"
+                  },
+                  "214":{
+                     "title":"Dedekindian relations"
+                  },
+                  "215":{
+                     "title":"Stretches"
+                  },
+                  "216":{
+                     "title":"Derivatives"
+                  },
+                  "217":{
+                     "title":"On segments of sums and converses"
+                  }
+               }
+            },
+            "C":{
+               "title":"ON CONVERGENCE AND THE LIMITS OF FUNCTIONS",
+               "chapters":{
+                  "230":{
+                     "title":"On convergents"
+                  },
+                  "231":{
+                     "title":"Limiting sections and ultimate oscillation of a function"
+                  },
+                  "232":{
+                     "title":"On the oscillation of a function as the argument approaches a given limit"
+                  },
+                  "233":{
+                     "title":"On the limits of functions"
+                  },
+                  "234":{
+                     "title":"Continuity of functions"
+                  }
+               }
+            }
+         }
+      }
+   },
+   "Volume III":{
+      "Part V":{
+         "title":"SERIES",
+         "sections":{
+            "D":{
+               "title":"WELL-ORDERED SERIES",
+               "chapters":{
+                  "250":{
+                     "title":"Elementary properties of well-ordered series"
+                  },
+                  "251":{
+                     "title":"Ordinal-Numbers"
+                  },
+                  "252":{
+                     "title":"Segments of well-ordered series"
+                  },
+                  "253":{
+                     "title":"Sectional relations of well-ordered series"
+                  },
+                  "254":{
+                     "title":"Greater and less among well-ordered series"
+                  },
+                  "255":{
+                     "title":"Greater and less among ordinal numbers"
+                  },
+                  "256":{
+                     "title":"The series of ordinals"
+                  },
+                  "257":{
+                     "title":"The transfinite ancestral relation"
+                  },
+                  "258":{
+                     "title":"Zermelo’s theorem"
+                  },
+                  "259":{
+                     "title":"Inductively defined correlation"
+                  }
+               }
+            },
+            "E":{
+               "title":"FINITE AND INFINITE SERIES AND ORDINALS",
+               "chapters":{
+                  "260":{
+                     "title":"On finite intervals in a series"
+                  },
+                  "261":{
+                     "title":"Finite and infinite series"
+                  },
+                  "262":{
+                     "title":"Finite ordinals"
+                  },
+                  "263":{
+                     "title":"Progressions"
+                  },
+                  "264":{
+                     "title":"Derivatives of well-ordered series"
+                  },
+                  "265":{
+                     "title":"The series of alephs"
+                  }
+               }
+            },
+            "F":{
+               "title":"COMPACT SERIES, RATIONAL SERIES, AND CONTINUOUS SERIES",
+               "chapters":{
+                  "270":{
+                     "title":"Compact series"
+                  },
+                  "271":{
+                     "title":"Median classes in series"
+                  },
+                  "272":{
+                     "title":"Similarity of position"
+                  },
+                  "273":{
+                     "title":"Rational series"
+                  },
+                  "274":{
+                     "title":"On series of finite subclasses of a series"
+                  },
+                  "275":{
+                     "title":"Continuous series"
+                  },
+                  "276":{
+                     "title":"On series of infinite subclasses of a series"
+                  }
+               }
+            }
+         }
+      },
+      "Part VI":{
+         "title":"QUANTITY",
+         "sections":{
+            "A":{
+               "title":"GENERALIZATION OF NUMBER",
+               "chapters":{
+                  "300":{
+                     "title":"Positive and negative integers, and numerical relations"
+                  },
+                  "301":{
+                     "title":"Numerically defined powers of relations"
+                  },
+                  "302":{
+                     "title":"On relative primes"
+                  },
+                  "303":{
+                     "title":"Ratios"
+                  },
+                  "304":{
+                     "title":"The series of ratios"
+                  },
+                  "305":{
+                     "title":"Multiplication of simple ratios"
+                  },
+                  "306":{
+                     "title":"Addition of simple ratios"
+                  },
+                  "307":{
+                     "title":"Generalized ratios"
+                  },
+                  "308":{
+                     "title":"Addition of generalized ratios"
+                  },
+                  "309":{
+                     "title":"Multiplication of generalized ratios"
+                  },
+                  "310":{
+                     "title":"The series of real numbers"
+                  },
+                  "311":{
+                     "title":"Addition of concordant real numbers"
+                  },
+                  "312":{
+                     "title":"Algebraic addition of real numbers"
+                  },
+                  "313":{
+                     "title":"Multiplication of real numbers"
+                  },
+                  "314":{
+                     "title":"Real numbers are relations"
+                  }
+               }
+            },
+            "B":{
+               "title":"VECTOR-FAMILIES",
+               "chapters":{
+                  "330":{
+                     "title":"Elementary properties of vector-families"
+                  },
+                  "331":{
+                     "title":"Connected families"
+                  },
+                  "332":{
+                     "title":"On the representative of a relation in a family"
+                  },
+                  "333":{
+                     "title":"Open families"
+                  },
+                  "334":{
+                     "title":"Serial families"
+                  },
+                  "335":{
+                     "title":"Initial families"
+                  },
+                  "336":{
+                     "title":"The series of vectors"
+                  },
+                  "337":{
+                     "title":"Multiples and submultiples of vectors"
+                  }
+               }
+            },
+            "C":{
+               "title":"MEASUREMENT",
+               "chapters":{
+                  "350":{
+                     "title":"Ratios of members of a family"
+                  },
+                  "351":{
+                     "title":"Submultipliable families"
+                  },
+                  "352":{
+                     "title":"Rational multiples of a given vector"
+                  },
+                  "353":{
+                     "title":"Rational families"
+                  },
+                  "354":{
+                     "title":"Rational nets"
+                  },
+                  "355":{
+                     "title":"Measurement by real numbers"
+                  },
+                  "356":{
+                     "title":"Existence-theorems for vector-families"
+                  }
+               }
+            },
+            "D":{
+               "title":"CYCLIC FAMILIES",
+               "chapters":{
+                  "370":{
+                     "title":"Elementary properties of cyclic families"
+                  },
+                  "371":{
+                     "title":"The series of vectors"
+                  },
+                  "372":{
+                     "title":"Integral sections of the series of vectors"
+                  },
+                  "373":{
+                     "title":"Submultiples of identity"
+                  },
+                  "374":{
+                     "title":"Principle submultiples"
+                  },
+                  "375":{
+                     "title":"Principle ratios"
+                  }
+               }
+            }
+         }
+      }
+   }
 }

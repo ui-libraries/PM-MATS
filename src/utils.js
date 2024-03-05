@@ -86,14 +86,11 @@ export function findLabel(chapterNumber, data, labels) {
       console.warn('Data for the given chapter number not found:', chapterNumber)
       return null
     }
-  
     // Using the found properties, lookup the labels
-    let partLabel, sectionLabel, chapterLabel
     let vol = `Volume ${romanize(properties.volume)}`
     let part = `Part ${romanize(properties.part)}`
     let sect = properties.section
     let chap = properties.chapter
-
     try {
         const partObj = labels[vol][part]
         const sectObj = partObj.sections[sect]
