@@ -108,6 +108,4 @@ export function findLabel(chapterNumber, data, labels) {
         console.error("An error occurred while trying to find the titles:", error)
         return null
       }
-
-    
   }
