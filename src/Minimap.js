@@ -90,6 +90,33 @@ export class Minimap {
      * @param {number} minY - The minimum Y-coordinate in the data.
      */
     _drawShape(minX, minY) {
+        const defs = this.svg.append('defs');
+        const ppnt = defs.append('linearGradient')
+            .attr('id', 'ppnt')
+            .attr('x1', '0%')
+            .attr('y1', '0%')
+            .attr('x2', '0%')
+            .attr('y2', '100%')
+        ppnt.append('stop').attr('offset', '50%').attr('stop-color', '#f005e0')
+        ppnt.append('stop').attr('offset', '50%').attr('stop-color', 'black')
+
+        const dft = defs.append('linearGradient')
+            .attr('id', 'dft')
+            .attr('x1', '0%')
+            .attr('y1', '0%')
+            .attr('x2', '0%')
+            .attr('y2', '100%')
+        dft.append('stop').attr('offset', '50%').attr('stop-color', '#05e0f0')
+        dft.append('stop').attr('offset', '50%').attr('stop-color', 'black')
+
+        const thmnt = defs.append('linearGradient')
+            .attr('id', 'thmnt')
+            .attr('x1', '0%')
+            .attr('y1', '0%')
+            .attr('x2', '0%')
+            .attr('y2', '100%')
+        thmnt.append('stop').attr('offset', '50%').attr('stop-color', '#cc5500')
+        thmnt.append('stop').attr('offset', '50%').attr('stop-color', 'black')
         const shapes = this.svg.selectAll('circle')
             .data(Object.values(this.data).flat())
             .enter()
@@ -107,6 +134,12 @@ export class Minimap {
                             return '#f005e0'
                         case 'Df':
                             return '#05e0f0'
+                        case 'Pp(nt)':
+                            return 'url(#ppnt)'
+                        case 'Dft':
+                            return 'url(#dft)'
+                        case 'Thm(nt)':
+                            return 'url(#thmnt)'
                         default:
                             return this.fill
                     }
