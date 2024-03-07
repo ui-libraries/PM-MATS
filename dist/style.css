@@ -224,6 +224,20 @@ body {
     transform: scale(1, 1);
 }
 
+.info-link {
+    text-decoration: none;
+    border-bottom: 1px dotted black;
+    padding-bottom: 2px;
+    transition: border-bottom 0.3s ease-in-out;
+    color: rgb(98, 28, 28);
+  }
+  
+  .info-link:hover {
+    border-bottom: 1px solid black;
+    color: rgb(170, 34, 34)
+  }
+  
+
 
 /* This section is for the Datatable page*/
 .dataTables_wrapper {

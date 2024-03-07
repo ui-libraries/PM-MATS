@@ -22,7 +22,7 @@
                   <a class="nav-link" aria-current="page" href="index.html">map</a>
                </li>
                <li class="nav-item">
-                  <a class="nav-link" href="data.html">table</a>
+                  <a class="nav-link" href="table.html">table</a>
                </li>
                <li class="nav-item">
                   <a class="nav-link active" href="about.html">about</a>
@@ -34,7 +34,41 @@
          </div>
       </div>
    </nav>
-    <div id="about-container"></div>
+      <div class="container py-5">
+         <div class="row">
+            <div class="text-center mb-4">
+               <h3>About the project</h3>
+            </div>
+             <div class="col-12 col-md-8 offset-md-2">
+                 <p>Welcome to the <em>Principia Mathematica</em> Maps and Table Site (PM-MATS). The goal of this project is to make clear structural connections between different parts of Principia and to make analyzable data about the theorems, definitions, and primitive postulates in its text. We do this by providing three digital tools:</p>
+                 <ol>
+                     <li> A <a href="map.html" class="info-link">map of <em>Principia</em></a> that allows you to see the whole book.</li>
+                     <li> 9,944 mini-maps (one for every starred number in <em>Principia</em>) that show you everything used to prove it and everything that it is used to prove (<a href="/?n=13.1" class="info-link"><em>❋13.1 for example</em></a>).</li>
+                     <li> A <a href="table.html" class="info-link">table of <em>Principia</em></a> that allows users to search for specific starred numbers, sections, chapters, and more, and also allows exportation of search results to JSON or CSV files.</li>
+                 </ol>
+                 <p>This project is supported by a Scholarly Editions and Translations grant from the National Endowment for the Humanities running from 2023 to 2025. This project is also part of the broader initiative, the <a href="https://www.principiarewrite.com/" class="info-link"><em>Principia</em> Rewrite Project.</a></p>
+                 <p>You can read about the people working on this project <a href="people.html" class="info-link">here</a>.</p>
+             </div>
+             <div class="col-12 col-md-8 offset-md-2">
+               <h5><strong><em>Principia Mathematica</em> and PM-MATS </strong></h5>
+               <p><em><a href="https://www.loc.gov/item/25015133/" class="info-link">Principia Mathematica</em></a> by the two Cambridge mathematicians <a href="https://whiteheadresearch.org/" class="info-link">Alfred North Whitehead</a> and <a href="https://russell.humanities.mcmaster.ca/" class="info-link">Bertrand Russell</a> appeared as three volumes with <a href="https://www.cambridge.org/us/universitypress/subjects/mathematics/logic-categories-and-sets/principia-mathematica" class="info-link">Cambridge University Press</a> in 1910 to 1913 (the fourth volume, planned for publication in 1914, was never published). It was among the symbolically densest works ever published and attempted to demonstrate Logicism, the view that all mathematical truths are logical truths. <em>Principia</em> ranks among the most influential books ever produced.</p>
+
+               <p><em>Principia</em> served as both an instructional and a research text for logicians in the years before World War II and profoundly influenced, and for thirty years even shaped, the interrelated fields of philosophy, mathematical logic, and computer science. <em>Principia</em> showed its influence on in the logical works of Kurt Gödel, Alan Turing, Alonzo Church, David Hilbert, Willard van Orman Quine, and Rudolf Carnap (among others). <em>Principia</em> also demarcated a new philosophical research program in what is now often called, more or less imperfectly, analytic philosophy, leading a global generation of philosophers looking to apply its symbolic techniques to lasting effect.</p>
+               
+               <p>Despite <em>Principia</em>'s enormous significance, the text appeared without an editorial apparatus (like a bibliography, an index of symbols or significant terms, and a table of citations of theorems in proofs). The text has also never been digitized: we only have OCR scans of the text that do not facilitate even baseline searches of the text, much less data about the dependencies between parts of <em>Principia</em> that would facilitate a structural or “bird's-eye” view of the text. This digital humanities project is changing all that. First, we have created a JSON file that encodes the text's theorem citation network and <a href="https://github.com/ui-libraries/principia" class="info-link"> posted that file on GitHub</a>. Second, we created PM-MATS, a surveyable map and a filterable table to improve the study of Principia for researchers and members of the public.</p>
+           </div>
+           <div class="col-12 col-md-8 offset-md-2">
+            <h5><strong>Further information</strong></h5>
+            <p>Want to get involved? Have a question or suggestion? You can contact us <a href="people.html" class="info-link">here.</a></p>
+           </div>
+           <div class="col-12 col-md-8 offset-md-2">
+            <h5><strong>Support</strong></h5>
+            <p>The <em>Principia Mathematica</em> Maps and Table Site project has been made possible in part by a major grant from the National Endowment for the Humanities. Any views, findings, conclusions, or recommendations expressed in this publication do not necessarily reflect those of the National Endowment for the Humanities.</p>
+        </div>
+        
+           
+         </div>
+     </div>
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="js/bundle.js" charset="utf-8"></script>
