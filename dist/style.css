@@ -1,3 +1,8 @@
+strong {
+    font-size: 1.2rem;
+
+}
+
 #proof-labels {
     margin-top: 4.5rem;
     height: 3.5rem;
@@ -238,7 +243,24 @@ body {
   }
   
 
+.col-md-8 img {
+    float: left; 
+    margin-right: 20px; 
+    margin-bottom: 20px; 
+    width: 200px; 
+    height: auto; 
+}
 
+/* Clear floats after each block to maintain layout integrity */
+.profile-info:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.profile {
+    margin-bottom: 4rem;
+}
 /* This section is for the Datatable page*/
 .dataTables_wrapper {
     margin-top: 3.5rem;
