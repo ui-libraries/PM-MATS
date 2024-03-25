@@ -200,6 +200,10 @@ body {
     overflow: visible;
 }
 
+#main-minimap{
+    margin-left: 2rem;
+}
+
 .summary-link {
     font-size: 0.8rem;
     padding: 0px;
@@ -207,6 +211,7 @@ body {
     color: black; 
     display: inline-block;
     position: relative;
+    margin-bottom: 1.5rem;
 }
 
 .summary-link::after {

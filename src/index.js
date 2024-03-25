@@ -36,10 +36,10 @@ function minimapTemplate() {
         </div>
         <div class="col">
             <div class="row">
-              <div id="minimap-title" class="col-6">
+              <div id="minimap-title" class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
                   <h3></h3>
               </div>
-              <div class="col-6">
+              <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
                   <svg id="main-minimap"></svg>
               </div>
             </div>
