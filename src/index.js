@@ -9,8 +9,15 @@ const pm = new Graph()
 
 document.addEventListener('DOMContentLoaded', (event) => {
   let pmNumber = getQueryParam('n')
+  const searchTemplate = `
+    <form id="number-search" class="d-flex">
+        <input class="form-control me-2 menu-search" type="search" placeholder="Enter a number..." aria-label="Search">
+        <button class="btn btn-outline-info btn-sm" type="submit">Search</button>
+    </form>
+  `
 
   if (pmNumber) {
+      $('#number-search').remove()
       $('.content-container').append(minimapTemplate())
       let chapterNumber = pmNumber.split('.')[0]
       miniMap([chapterNumber], "#main-minimap", pmNumber)
@@ -19,7 +26,19 @@ document.addEventListener('DOMContentLoaded', (event) => {
       chapterTitle(pmNumber)
   } else {
     $('.content-container').append('<svg id="pm-map"></svg>')
+    $('#navbarSupportedContent').append(searchTemplate)
     normalMap()
+    $('#number-search').on('submit', function(e) {
+      e.preventDefault()
+      const num = $('.menu-search').val()
+      const svgElement = document.getElementById('pm-map')
+      const node = pm.getNodeByNumber(num)
+      console.log(node)
+    
+      $('.content-container').animate({
+          scrollLeft: node.x - $(window).width() / 2
+      }, 100)
+    })
   }
 })
 
@@ -159,14 +178,3 @@ function normalMap() {
   })
 }
 
-$('#number-search').on('submit', function(e) {
-  e.preventDefault()
-  const num = $('.menu-search').val()
-  const svgElement = document.getElementById('pm-map')
-  const node = pm.getNodeByNumber(num)
-  console.log(node)
-
-  $('.content-container').animate({
-      scrollLeft: node.x - $(window).width() / 2
-  }, 100)
-})
