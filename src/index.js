@@ -84,8 +84,26 @@ function minimapTemplate() {
 
 function createSummaryLink(pmNumber) {
   const node = pm.getNodeByNumber(pmNumber)
+  console.log(node)
   const page = node.properties.page
-  let link = `https://archive.org/details/dli.ernet.247278/page/${page}/mode/2up`
+  const volume = node.properties.volume
+  let link
+
+  switch(volume) {
+    case "1":
+      link = `https://archive.org/details/alfred-north-whitehead-bertrand-russel-principia-mathematica.-1/Alfred%20North%20Whitehead%2C%20Bertrand%20Russel%20-%20Principia%20Mathematica.%201/page/${page}/mode/2up`
+      break
+    case "2":
+      link = `https://archive.org/details/alfred-north-whitehead-bertrand-russel-principia-mathematica.-1/Alfred%20North%20Whitehead%2C%20Bertrand%20Russell%20-%20Principia%20Mathematica%20Volume%202/page/${page}/mode/2up`
+      break
+    case "3":
+      link = `https://archive.org/details/alfred-north-whitehead-bertrand-russel-principia-mathematica.-1/Alfred%20North%20Whitehead%2C%20Bertrand%20Russell%20-%20Principia%20Mathematica.%20Volume%203/page/${page}/mode/2up`
+      break
+    default:
+      console.log('Invalid volume number')
+      return
+  }
+
   $('#minimap-title').append(`<a class="summary-link active" href="${link}" target="_blank">original text</a>`)
 }
 
