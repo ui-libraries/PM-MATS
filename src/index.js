@@ -15,8 +15,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         <button class="btn btn-outline-info btn-sm" type="submit">Search</button>
     </form>
   `
-
-  if (pmNumber) {
+  if (pmNumber || window.location.pathname.includes('table.html')) {
       $('#number-search').remove()
       $('.content-container').append(minimapTemplate())
       let chapterNumber = pmNumber.split('.')[0]
