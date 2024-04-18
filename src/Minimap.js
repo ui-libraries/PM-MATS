@@ -170,14 +170,16 @@ export class Minimap {
         shapes.on('mouseenter', (event, d) => this._showMiniNum(event, d))
             .on('mouseleave', () => this._hideMiniNum())
 
-        /*
+        
         shapes.on('click', (event, d) => {
-            console.log(`Clicked ${'circle'} with data:`, d)
+            console.log(`Clicked circle with data:`, d)
             let queryString = new URLSearchParams({ n: d.properties.number }).toString()
-            let currentUrl = window.location.href.replace('index.html', '')
-            window.open(`${currentUrl}?${queryString}`, '_blank')
+            let currentUrl = new URL(window.location.href)
+            currentUrl.search = ''
+            currentUrl.pathname = currentUrl.pathname.replace('index.html', '')
+            window.open(`${currentUrl.toString()}?${queryString}`, '_blank')
         })
-        */
+        
     }
 
     /**
