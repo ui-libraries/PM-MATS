@@ -30,10 +30,13 @@ document.addEventListener('DOMContentLoaded', (event) => {
     $('#number-search').on('submit', function(e) {
       e.preventDefault()
       const num = $('.menu-search').val()
-      const svgElement = document.getElementById('pm-map')
-      const node = pm.getNodeByNumber(num)
-      console.log(node)
-    
+      let node
+      if (!num.includes('.')) {
+        const chapterNodes = pm.getChapterNodes(num)
+        node = chapterNodes[1]
+      } else {
+        node = pm.getNodeByNumber(num)
+      }
       $('.content-container').animate({
           scrollLeft: node.x - $(window).width() / 2
       }, 100)
@@ -83,7 +86,6 @@ function minimapTemplate() {
 
 function createSummaryLink(pmNumber) {
   const node = pm.getNodeByNumber(pmNumber)
-  console.log(node)
   const page = node.properties.page
   const volume = node.properties.volume
   let link
@@ -145,7 +147,7 @@ function generateAllRows(pmNumber) {
 
 
 
-function processChapters({ chapterNumbers = null, GAP = 300, PAD = 50, x = 0} = {}) {
+function processChapters({ chapterNumbers = null, GAP = 200, PAD = 50, x = 0} = {}) {
   const excluded = ['8', '89']
   const chapters = pm.getChapterNumbers().filter(chapter => !excluded.includes(chapter))
   let chapterData = {}
