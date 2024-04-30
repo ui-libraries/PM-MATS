@@ -228,7 +228,8 @@ export class Graph {
                         isPlaceholder: true,
                         volume: volume,
                         part: part,
-                        section: section
+                        section: section,
+                        chapter: chapter
                     }
                 })
             }

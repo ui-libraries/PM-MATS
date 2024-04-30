@@ -69,43 +69,65 @@ export function getQueryParam(param) {
 }
 
 export function findLabel(chapterNumber, data, labels) {
-    if (chapterNumber.endsWith('.0')) {
-        chapterNumber = chapterNumber.replace('.0', '.1')
-    }
-    labels = labels.default
-    let properties
-    Object.keys(data).forEach(key => {
-      data[key].forEach(node => {
-        if (node.properties && node.properties.number === chapterNumber) {
-          properties = node.properties
-        }
-      })
-    })
+  if (chapterNumber.endsWith('.0')) {
+      let baseNumber = chapterNumber.split('.')[0]
+      let suffix = 1
+      let found = false
 
-    if (!properties) {
+      while (!found && suffix <= 10) { 
+          chapterNumber = `${baseNumber}.${suffix}`
+          for (const key of Object.keys(data)) {
+              for (const node of data[key]) {
+                  if (node.properties && node.properties.number === chapterNumber) {
+                      found = true
+                      break;
+                  }
+              }
+              if (found) break
+          }
+          suffix++;
+      }
+      if (!found) chapterNumber = `${baseNumber}.0`
+  }
+
+  labels = labels.default
+  let properties = null
+
+  for (const key of Object.keys(data)) {
+      for (const node of data[key]) {
+          if (node.properties && node.properties.number === chapterNumber) {
+              properties = node.properties
+              break
+          }
+      }
+      if (properties) break
+  }
+
+  if (!properties) {
       console.warn('Data for the given chapter number not found:', chapterNumber)
       return null
-    }
-    // Using the found properties, lookup the labels
-    let vol = `Volume ${romanize(properties.volume)}`
-    let part = `Part ${romanize(properties.part)}`
-    let sect = properties.section
-    let chap = properties.chapter
-    try {
-        const partObj = labels[vol][part]
-        const sectObj = partObj.sections[sect]
-        const chapObj = sectObj.chapters[chap]
-    
-        // Constructing the response object
-        const response = {
-          "part-label": partObj.title,
-          "sect-label": sectObj.title,
-          "chap-label": chapObj.title
-        }
-    
-        return response
-      } catch (error) {
-        console.error("An error occurred while trying to find the titles:", error)
-        return null
-      }
   }
+
+  // Using the found properties, lookup the labels
+  let vol = `Volume ${romanize(properties.volume)}`
+  let part = `Part ${romanize(properties.part)}`
+  let sect = properties.section
+  let chap = properties.chapter
+
+  try {
+      const partObj = labels[vol][part]
+      const sectObj = partObj.sections[sect]
+      const chapObj = sectObj.chapters[chap]
+
+      const response = {
+        "part-label": partObj.title,
+        "sect-label": sectObj.title,
+        "chap-label": chapObj.title
+      }
+
+      return response
+  } catch (error) {
+      console.error("An error occurred while trying to find the titles:", error)
+      return null
+  }
+}

@@ -242,10 +242,11 @@ export class Map {
     }
 
     _showTooltip(event, d) {
+        console.log(d)
         this.tooltip.transition()
             .duration(200)
             .style('opacity', .9)
-        this.tooltip.html(`Volume ${romanize(d.properties.volume)}<br>Part ${romanize(d.properties.part)}: ${findLabel(d.properties.number, this.data, labels)['part-label']}<br>Section ${d.properties.section}: ${findLabel(d.properties.number, this.data, labels)['sect-label']}`)
+        this.tooltip.html(`Volume ${romanize(d.properties.volume)}<br>Part ${romanize(d.properties.part)}: ${findLabel(d.properties.number, this.data, labels)['part-label']}<br>Section ${d.properties.section}: ${findLabel(d.properties.number, this.data, labels)['sect-label']}<br>Chapter ${d.properties.chapter}: ${findLabel(d.properties.number, this.data, labels)['chap-label']}`)
             .style('left', (event.pageX + 10) + 'px')
             .style('top', (event.pageY - 28) + 'px')
     }
