@@ -325,11 +325,15 @@ body {
 }
 
 .column-width {
-    max-width: 3.5rem;
+    max-width: 2.5rem;
 }
 
 .column-width-proofs {
-    max-width: 5rem;
+    max-width: 20rem;
+}
+
+.column-width-proofs-by {
+    max-width: 10rem;
 }
 
 table.dataTable > thead > tr > th, table.dataTable > thead > tr > td {

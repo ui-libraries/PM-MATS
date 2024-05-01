@@ -71,6 +71,7 @@ function exportCsv() {
 
 export let table = new DataTable('#principia-table', {
     data: data,
+    responsive: true,
     pageLength: 250,
     pagingType: 'simple_numbers',
     dom: 'Bfrtip',
@@ -137,11 +138,11 @@ export let table = new DataTable('#principia-table', {
         {
             data: 'provenBy',
             title: 'Its proof cites...',
-            className: 'column-width-proofs',
+            className: 'column-width-proofs-by',
             render: function(data, type, row) {
                 let dataArray = Array.isArray(data) ? data : [data]
                 let formattedData = dataArray.join(', ')
-                return '<div style="max-width: 16rem; max-height: 16rem; word-wrap: break-word; overflow-y: auto;">' + (formattedData || '') + '</div>'
+                return '<div style="max-width: 100%; max-height: 16rem; word-wrap: break-word; overflow-y: auto;">' + (formattedData || '') + '</div>'
             },
         },
         {
@@ -151,7 +152,7 @@ export let table = new DataTable('#principia-table', {
             render: function(data, type, row) {
                 let dataArray = Array.isArray(data) ? data : [data]
                 let formattedData = dataArray.join(', ')
-                return '<div style="max-width: 16rem; max-height: 16rem; word-wrap: break-word; overflow-y: auto;">' + (formattedData || '') + '</div>'
+                return '<div style="max-width: 100%; max-height: 16rem; word-wrap: break-word; overflow-y: auto;">' + (formattedData || '') + '</div>'
             },
         },
     ],    
