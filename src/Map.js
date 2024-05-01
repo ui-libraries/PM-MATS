@@ -242,7 +242,6 @@ export class Map {
     }
 
     _showTooltip(event, d) {
-        console.log(d)
         this.tooltip.transition()
             .duration(200)
             .style('opacity', .9)

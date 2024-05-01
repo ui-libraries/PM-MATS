@@ -31,16 +31,26 @@ document.addEventListener('DOMContentLoaded', (event) => {
       e.preventDefault()
       const num = $('.menu-search').val()
       let node
+    
       if (!num.includes('.')) {
         const chapterNodes = pm.getChapterNodes(num)
-        node = chapterNodes[1]
+        // Select the first real node (not a ghost node)
+        node = chapterNodes.find(n => !n.properties.isPlaceholder)
+        if (!node) {
+          node = chapterNodes[0]
+        }
       } else {
         node = pm.getNodeByNumber(num)
       }
-      $('.content-container').animate({
+      
+      if (node) {
+        $('.content-container').animate({
           scrollLeft: node.x - $(window).width() / 2
-      }, 100)
-    })
+        }, 100)
+      } else {
+        console.log("No matching chapter found for number:", num)
+      }
+    })    
   }
 })
 
