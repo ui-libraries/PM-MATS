@@ -343,3 +343,22 @@ table.dataTable > thead > tr > th, table.dataTable > thead > tr > td {
 #principia-table {
     padding: 10px;
 }
+
+.custom-figure {
+    text-align: center; 
+    max-width: 300px; 
+    margin: auto; 
+}
+
+.custom-figure img {
+    width: 100%; 
+    height: auto; 
+}
+
+figcaption {
+    display: block; 
+    text-align: center; 
+    font-style: italic;
+    font-size: small;
+    margin-bottom: 1rem;
+}
