@@ -34,7 +34,7 @@ function exportJson() {
 }
 
 function exportCsv() {
-    const columnNames = ["id", "type", "number", "page", "section", "volume", "chapter", "part", "provenBy", "proves"]
+    const columnNames = ["id", "type", "volume", "part", "section", "chapter", "number", "page", "provenBy", "proves"]
     const csvData = []
     const filteredData = table.rows({
         filter: 'applied'
@@ -46,12 +46,12 @@ function exportCsv() {
         const csvRow = [
             item.id,
             item.properties.type,
-            item.properties.number,
-            item.properties.page,
-            item.properties.section,
             item.properties.volume,
-            item.properties.chapter,
             item.properties.part,
+            item.properties.section,
+            item.properties.chapter,
+            item.properties.number,
+            item.properties.page,        
             `"${provenBy}"`,
             `"${proves}"`
         ]
@@ -105,13 +105,13 @@ export let table = new DataTable('#principia-table', {
             className: 'column-width'
         },
         {
-            data: 'properties.number',
-            title: 'Number',
+            data: 'properties.volume',
+            title: 'Volume',
             className: 'column-width'
         },
         {
-            data: 'properties.page',
-            title: 'Page',
+            data: 'properties.part',
+            title: 'Part',
             className: 'column-width'
         },
         {
@@ -120,18 +120,18 @@ export let table = new DataTable('#principia-table', {
             className: 'column-width'
         },
         {
-            data: 'properties.volume',
-            title: 'Volume',
-            className: 'column-width'
-        },
-        {
             data: 'properties.chapter',
             title: 'Chapter',
             className: 'column-width'
         },
         {
-            data: 'properties.part',
-            title: 'Part',
+            data: 'properties.number',
+            title: 'Number',
+            className: 'column-width'
+        },
+        {
+            data: 'properties.page',
+            title: 'Page',
             className: 'column-width'
         },
         {
@@ -154,7 +154,7 @@ export let table = new DataTable('#principia-table', {
                 return '<div style="max-width: 16rem; max-height: 16rem; word-wrap: break-word; overflow-y: auto;">' + (formattedData || '') + '</div>'
             },
         },
-    ],
+    ],    
     initComplete: function() {
         this.api().columns().every(function() {
             let column = this
