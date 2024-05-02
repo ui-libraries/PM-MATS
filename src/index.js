@@ -144,13 +144,20 @@ function generateAllRows(pmNumber) {
     return
   }
 
-  const proves = node.proves || []
+  // "Its Proof Cites..." is 'provenBy' in the JSON and is on the left
+  // "Cited in Proof of..." is 'proves' in the JSON" and is on the right
+
   const provenBy = node.provenBy || []
+  const proves = node.proves || []
 
-  // Insert all left SVGs
+  if (provenBy.length === 0) {
+    $('#left-svg-container h3').text('no demonstration appears in text')
+  }
+  if (proves.length === 0) {
+    $('#right-svg-container h3').text('does not appear in any demonstration')
+  }
+
   provenBy.forEach((proven, i) => insertChapterSvgs(proven, true))
-
-  // Insert all right SVGs
   proves.forEach((prove, i) => insertChapterSvgs(prove, false))
 }
 
