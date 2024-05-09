@@ -187,7 +187,7 @@ function processChapters({ chapterNumbers = null, GAP = 200, PAD = 50, x = 0} = 
 }
 
 //GAP is the space between chapters, PAD is the space between nodes in a chapter
-function miniMap(chapters, svgSelector = '#pm-map', highlightedNumber = null) {
+function miniMap(chapters, svgSelector, highlightedNumber = null) {
   const content = processChapters({
       chapterNumbers: chapters,
       GAP: 100,

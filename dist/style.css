@@ -217,10 +217,6 @@ body {
     overflow: visible;
 }
 
-#main-minimap{
-    margin-left: 2rem;
-}
-
 .summary-link {
     font-size: 0.8rem;
     padding: 0px;
