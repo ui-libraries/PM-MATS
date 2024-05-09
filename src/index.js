@@ -165,7 +165,8 @@ function generateAllRows(pmNumber) {
 
 
 function processChapters({ chapterNumbers = null, GAP = 200, PAD = 50, x = 0} = {}) {
-  const excluded = ['8', '89']
+  //const excluded = ['8', '89']
+  const excluded = []
   const chapters = pm.getChapterNumbers().filter(chapter => !excluded.includes(chapter))
   let chapterData = {}
 
