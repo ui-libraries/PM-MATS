@@ -176,7 +176,7 @@ export class Minimap {
             let queryString = new URLSearchParams({ n: d.properties.number }).toString()
             let currentUrl = new URL(window.location.href)
             currentUrl.search = ''
-            currentUrl.pathname = currentUrl.pathname.replace('index.html', '')
+            currentUrl.pathname = currentUrl.pathname.replace('map.html', '')
             window.open(`${currentUrl.toString()}?${queryString}`, '_blank')
         })
         

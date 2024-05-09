@@ -149,7 +149,7 @@ export class Map {
         shapes.on('click', (event, d) => {
             console.log(`Clicked circle with data:`, d);
             let queryString = new URLSearchParams({ n: d.properties.number }).toString()
-            let currentUrl = window.location.href.replace('index.html', '')
+            let currentUrl = window.location.href.replace('map.html', '')
             window.open(`${currentUrl}?${queryString}`, '_blank')
         })
     }
