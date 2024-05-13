@@ -163,13 +163,15 @@ export let table = new DataTable('#principia-table', {
             let input = document.createElement('input')
             input.placeholder = title
             column.header().replaceChildren(input)
-            
+    
             input.addEventListener('keyup', function() {
-                if (column.search() !== this.value) {
-                    // use exact matches for filtering
-                    column.search('^' + this.value + '$', true, false).draw()
+                let searchTerm = this.value.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&') // Escapes regex special characters
+    
+                if (column.search() !== searchTerm) {
+                    // use general search allowing the term to appear anywhere
+                    column.search(searchTerm, true, false).draw()
                 }
-
+    
                 if (allInputsEmpty()) {
                     column.search('').draw()
                 }
