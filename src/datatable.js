@@ -1,11 +1,15 @@
 import DataTable from 'datatables.net-dt'
 import 'datatables.net-buttons'
-import {
-    Graph
-} from './Graph.js'
+import { Graph } from './Graph.js'
+
 const pm = new Graph()
 const data = Object.values(pm.nodes)
 
+/**
+ * Checks if all input fields in the '#principia-table' are empty.
+ * 
+ * @returns {boolean} True if all input fields are empty, otherwise false.
+ */
 function allInputsEmpty() {
     console.log('allInputsEmpty')
     let inputs = document.querySelectorAll('#principia-table input')
@@ -17,14 +21,13 @@ function allInputsEmpty() {
     return true
 }
 
+/**
+ * Exports the filtered data from the table to a JSON file.
+ */
 function exportJson() {
-    const filteredData = table.rows({
-        filter: 'applied'
-    }).data().toArray()
+    const filteredData = table.rows({ filter: 'applied' }).data().toArray()
     const jsonString = JSON.stringify(filteredData, null, 2)
-    const blob = new Blob([jsonString], {
-        type: "application/json"
-    })
+    const blob = new Blob([jsonString], { type: "application/json" })
     const url = URL.createObjectURL(blob)
     const a = document.createElement('a')
     a.href = url
@@ -33,12 +36,13 @@ function exportJson() {
     URL.revokeObjectURL(url)
 }
 
+/**
+ * Exports the filtered data from the table to a CSV file.
+ */
 function exportCsv() {
     const columnNames = ["id", "type", "volume", "part", "section", "chapter", "number", "page", "provenBy", "proves"]
     const csvData = []
-    const filteredData = table.rows({
-        filter: 'applied'
-    }).data().toArray()
+    const filteredData = table.rows({ filter: 'applied' }).data().toArray()
     csvData.push(columnNames.join(','))
     for (const item of filteredData) {
         const proves = item.proves.join(',')
@@ -58,9 +62,7 @@ function exportCsv() {
         csvData.push(csvRow.join(','))
     }
     const csvString = csvData.join('\n')
-    const blob = new Blob([csvString], {
-        type: "text/csv"
-    })
+    const blob = new Blob([csvString], { type: "text/csv" })
     const url = URL.createObjectURL(blob)
     const a = document.createElement('a')
     a.href = url
@@ -76,10 +78,9 @@ export let table = new DataTable('#principia-table', {
     pagingType: 'simple_numbers',
     dom: 'Bfrtip',
     autoWidth: false,
-    lengthMenu: [
-        [250]
-    ],
-    buttons: [{
+    lengthMenu: [[250]],
+    buttons: [
+        {
             text: 'Export CSV',
             className: 'btn export-btn btn-light btn-sm',
             action: function(e, dt, node, config) {
@@ -95,46 +96,14 @@ export let table = new DataTable('#principia-table', {
         },
     ],
     columns: [
-        {
-            data: 'id',
-            title: 'ID',
-            className: 'column-width'
-        },
-        {
-            data: 'properties.type',
-            title: 'Type',
-            className: 'column-width'
-        },
-        {
-            data: 'properties.volume',
-            title: 'Volume',
-            className: 'column-width'
-        },
-        {
-            data: 'properties.part',
-            title: 'Part',
-            className: 'column-width'
-        },
-        {
-            data: 'properties.section',
-            title: 'Section',
-            className: 'column-width'
-        },
-        {
-            data: 'properties.chapter',
-            title: 'Chapter',
-            className: 'column-width'
-        },
-        {
-            data: 'properties.number',
-            title: 'Number',
-            className: 'column-width'
-        },
-        {
-            data: 'properties.page',
-            title: 'Page',
-            className: 'column-width'
-        },
+        { data: 'id', title: 'ID', className: 'column-width' },
+        { data: 'properties.type', title: 'Type', className: 'column-width' },
+        { data: 'properties.volume', title: 'Volume', className: 'column-width' },
+        { data: 'properties.part', title: 'Part', className: 'column-width' },
+        { data: 'properties.section', title: 'Section', className: 'column-width' },
+        { data: 'properties.chapter', title: 'Chapter', className: 'column-width' },
+        { data: 'properties.number', title: 'Number', className: 'column-width' },
+        { data: 'properties.page', title: 'Page', className: 'column-width' },
         {
             data: 'provenBy',
             title: 'Its proof cites...',
@@ -155,7 +124,10 @@ export let table = new DataTable('#principia-table', {
                 return '<div style="max-width: 100%; max-height: 16rem; word-wrap: break-word; overflow-y: auto;">' + (formattedData || '') + '</div>'
             },
         },
-    ],    
+    ],
+    /**
+     * Initializes the column search input fields and their event listeners.
+     */
     initComplete: function() {
         this.api().columns().every(function() {
             let column = this

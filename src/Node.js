@@ -15,9 +15,28 @@ export class Node {
      * @property {Array<string>} provenBy - An array of Node IDs that prove this Node.
      */
     constructor(id, properties = {}) {
+        /**
+         * The unique identifier for the Node.
+         * @type {string}
+         */
         this.id = id
+
+        /**
+         * Additional properties of the Node.
+         * @type {Object}
+         */
         this.properties = properties
+
+        /**
+         * An array of Node IDs that this Node proves.
+         * @type {Array<string>}
+         */
         this.proves = []
+
+        /**
+         * An array of Node IDs that prove this Node.
+         * @type {Array<string>}
+         */
         this.provenBy = []
     }
 

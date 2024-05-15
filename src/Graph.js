@@ -9,6 +9,7 @@ import { getDecimalLength, getDecimalPart } from './utils.js'
 export class Graph {
     /**
      * Creates a new Graph and loads data into it.
+     * @constructor
      * @property {Object<string, Node>} nodes - Object storing nodes, indexed by their IDs.
      */
     constructor() {
@@ -36,7 +37,6 @@ export class Graph {
             }
         })
     }
-
 
     /**
      * Inserts a new node into the Graph.
@@ -222,7 +222,6 @@ export class Graph {
             if (!decimalPartValues.includes(i.toString())) {
                 chapter_nodes.push({
                     type: "node",
-
                     properties: {
                         number: chapter + "." + i,
                         isPlaceholder: true,
@@ -257,6 +256,7 @@ export class Graph {
      * @param {string|number} chapter - The chapter for which the nodes are to be plotted.
      * @param {number} [startingX=0] - The initial x-coordinate for plotting.
      * @param {number} [startingY=0] - The initial y-coordinate for plotting.
+     * @param {number} [PAD=50] - The padding between nodes.
      * @returns {[Object[], number]} A tuple where the first element is the array of plotted node objects and the second is the maximum x-coordinate value among the nodes.
      * 
      * @property {number} x - The x-coordinate of a node.
@@ -313,7 +313,6 @@ export class Graph {
                     break
 
                 case 4:
-                    // 25.1011, 120.4111, 120.4231, 120.4232, 120.4501, 120.4621, 120.4622, 213.1614, 373.1412
                     x += PAD
                     node.x = x
                     node.y = y

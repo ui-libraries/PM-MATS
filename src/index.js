@@ -54,11 +54,21 @@ document.addEventListener('DOMContentLoaded', (event) => {
   }
 })
 
+/**
+ * Updates the chapter title in the minimap based on the given chapter number.
+ * 
+ * @param {string} chapterNumber - The chapter number to find the title for.
+ */
 function chapterTitle(chapterNumber) {
   let title = findLabel(chapterNumber, processChapters(), labels)
   document.querySelector('#minimap-title h3').textContent = title['chap-label']
 }
 
+/**
+ * Generates the HTML template for the minimap.
+ * 
+ * @returns {string} The HTML template for the minimap.
+ */
 function minimapTemplate() {
   const html = `
     <div class="container mt-2 minimap-container-padding-top" id="minimap-column-top">
@@ -93,7 +103,11 @@ function minimapTemplate() {
   return html
 }
 
-
+/**
+ * Creates a link to the original text for a given chapter number.
+ * 
+ * @param {string} pmNumber - The chapter number to create the link for.
+ */
 function createSummaryLink(pmNumber) {
   const node = pm.getNodeByNumber(pmNumber)
   const page = node.properties.page
@@ -118,6 +132,12 @@ function createSummaryLink(pmNumber) {
   $('#minimap-title').append(`<a class="summary-link active" href="${link}" target="_blank">original text</a>`)
 }
 
+/**
+ * Inserts chapter SVGs into the specified container.
+ * 
+ * @param {string} pmNumber - The chapter number to insert SVGs for.
+ * @param {boolean} isLeft - Whether to insert SVGs into the left container.
+ */
 function insertChapterSvgs(pmNumber, isLeft) {
   const node = pm.getNodeByNumber(pmNumber)
   if (!node) {
@@ -137,6 +157,11 @@ function insertChapterSvgs(pmNumber, isLeft) {
   miniMap([chapter], `#${svgId}`, pmNumber)
 }
 
+/**
+ * Generates all rows of chapter SVGs for a given chapter number.
+ * 
+ * @param {string} pmNumber - The chapter number to generate rows for.
+ */
 function generateAllRows(pmNumber) {
   const node = pm.getNodeByNumber(pmNumber)
   if (!node) {
@@ -161,9 +186,16 @@ function generateAllRows(pmNumber) {
   proves.forEach((prove, i) => insertChapterSvgs(prove, false))
 }
 
-
-
-
+/**
+ * Processes the chapters and generates the data needed for the minimap.
+ * 
+ * @param {Object} [options={}] - Options for processing the chapters.
+ * @param {Array<string>} [options.chapterNumbers=null] - The specific chapters to process.
+ * @param {number} [options.GAP=200] - The gap between chapters.
+ * @param {number} [options.PAD=50] - The padding between nodes in a chapter.
+ * @param {number} [options.x=0] - The starting x-coordinate.
+ * @returns {Object} The processed chapter data.
+ */
 function processChapters({ chapterNumbers = null, GAP = 200, PAD = 50, x = 0} = {}) {
   //const excluded = ['8', '89']
   const excluded = []
@@ -186,7 +218,13 @@ function processChapters({ chapterNumbers = null, GAP = 200, PAD = 50, x = 0} = 
   return chapterData
 }
 
-//GAP is the space between chapters, PAD is the space between nodes in a chapter
+/**
+ * Generates a minimap for the specified chapters.
+ * 
+ * @param {Array<string>} chapters - The chapters to generate the minimap for.
+ * @param {string} svgSelector - The CSS selector for the SVG element.
+ * @param {string|null} [highlightedNumber=null] - The chapter number to highlight.
+ */
 function miniMap(chapters, svgSelector, highlightedNumber = null) {
   const content = processChapters({
       chapterNumbers: chapters,
@@ -204,6 +242,9 @@ function miniMap(chapters, svgSelector, highlightedNumber = null) {
   })
 }
 
+/**
+ * Generates the main map visualization.
+ */
 function normalMap() {
   new Map('#pm-map', processChapters(), {
       xOffset: 20,
@@ -214,4 +255,3 @@ function normalMap() {
       textFill: 'black'
   })
 }
-

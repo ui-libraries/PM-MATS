@@ -1,8 +1,21 @@
 /**
- * Returns the number of digits after the decimal point for a given number.
+ * Retrieves the length of the decimal part of a given number represented as a string.
  *
- * @param {string} number - String representation of a floating point number.
- * @return {number} - Number of digits after the decimal point.
+ * This function splits the number by the decimal point and returns the length of the decimal part if it exists.
+ * If the number does not have a decimal part, it returns `0`.
+ *
+ * @param {string} number - The number as a string from which to determine the length of the decimal part.
+ * @returns {number} The length of the decimal part of the number, or `0` if there is no decimal part.
+ *
+ * @example
+ * // Example with a decimal part
+ * const length = getDecimalLength('123.456')
+ * console.log(length) // Outputs: 3
+ *
+ * @example
+ * // Example without a decimal part
+ * const length = getDecimalLength('123')
+ * console.log(length) // Outputs: 0
  */
 export function getDecimalLength(number) {
     const parts = number.split(".")
@@ -12,6 +25,26 @@ export function getDecimalLength(number) {
     return 0
 }
 
+
+/**
+ * Retrieves the decimal part of a given number represented as a string.
+ *
+ * This function splits the number by the decimal point and returns the decimal part if it exists.
+ * If the number does not have a decimal part, it returns `null`.
+ *
+ * @param {string} number - The number as a string from which to extract the decimal part.
+ * @returns {string|null} The decimal part of the number, or `null` if there is no decimal part.
+ *
+ * @example
+ * // Example with a decimal part
+ * const decimal = getDecimalPart('123.456')
+ * console.log(decimal) // Outputs: '456'
+ *
+ * @example
+ * // Example without a decimal part
+ * const decimal = getDecimalPart('123')
+ * console.log(decimal) // Outputs: null
+ */
 export function getDecimalPart(number) {
     const parts = number.split(".")
     if (parts.length === 2) {
@@ -19,6 +52,7 @@ export function getDecimalPart(number) {
     }
     return null
 }
+
 
 /**
  * Downloads the provided chapter data as a JSON file.
@@ -62,72 +96,130 @@ export function downloadData(allChapterData) {
     return Array(+digits.join("") + 1).join("M") + roman
 }
 
+/**
+ * Retrieves the value of a specified query parameter from the URL.
+ *
+ * This function parses the current page's URL and extracts the value of the given query parameter.
+ * If the parameter is not found, it returns `null`.
+ *
+ * @param {string} param - The name of the query parameter to retrieve.
+ * @returns {string|null} The value of the query parameter, or `null` if the parameter is not present.
+ *
+ * @example
+ * // Assuming the URL is: http://example.com/?foo=bar
+ * const value = getQueryParam('foo')
+ * console.log(value) // Outputs: 'bar'
+ *
+ * @example
+ * // Assuming the URL is: http://example.com/?foo=bar
+ * const value = getQueryParam('baz')
+ * console.log(value) // Outputs: null
+ */
 export function getQueryParam(param) {
     let queryString = window.location.search
     let urlParams = new URLSearchParams(queryString)
     return urlParams.get(param)
 }
 
+
+/**
+ * Finds the labels for a given chapter number from the provided data and labels.
+ *
+ * This function attempts to locate the correct labels for a chapter by its number. If the chapter number
+ * ends with '.0', it increments the suffix until it finds a match or exceeds a limit. Once found,
+ * it retrieves the corresponding labels from the provided labels object.
+ *
+ * @param {string} chapterNumber - The chapter number to find labels for. If it ends in '.0', the function will try to find a suffix that matches.
+ * @param {Object} data - The data object containing chapter information. It is expected to be structured with nested objects containing `properties`.
+ * @param {Object} labels - The labels object containing titles for volumes, parts, sections, and chapters.
+ * @returns {Object|null} An object containing the part, section, and chapter labels if found, otherwise `null`.
+ *
+ * @example
+ * const chapterNumber = '1.0'
+ * const data = {
+ *   volume1: [{ properties: { number: '1.1', volume: 1, part: 1, section: 1, chapter: 1 } }]
+ * }
+ * const labels = {
+ *   default: {
+ *     "Volume I": {
+ *       "Part I": {
+ *         title: "Part 1 Title",
+ *         sections: {
+ *           1: {
+ *             title: "Section 1 Title",
+ *             chapters: {
+ *               1: { title: "Chapter 1 Title" }
+ *             }
+ *           }
+ *         }
+ *       }
+ *     }
+ *   }
+ * }
+ * const result = findLabel(chapterNumber, data, labels)
+ * console.log(result) // Outputs: { "part-label": "Part 1 Title", "sect-label": "Section 1 Title", "chap-label": "Chapter 1 Title" }
+ */
 export function findLabel(chapterNumber, data, labels) {
-  if (chapterNumber.endsWith('.0')) {
-      let baseNumber = chapterNumber.split('.')[0]
-      let suffix = 1
-      let found = false
-
-      while (!found && suffix <= 10) { 
-          chapterNumber = `${baseNumber}.${suffix}`
-          for (const key of Object.keys(data)) {
-              for (const node of data[key]) {
-                  if (node.properties && node.properties.number === chapterNumber) {
-                      found = true
-                      break;
-                  }
-              }
-              if (found) break
-          }
-          suffix++;
-      }
-      if (!found) chapterNumber = `${baseNumber}.0`
+    if (chapterNumber.endsWith('.0')) {
+        let baseNumber = chapterNumber.split('.')[0]
+        let suffix = 1
+        let found = false
+  
+        while (!found && suffix <= 10) { 
+            chapterNumber = `${baseNumber}.${suffix}`
+            for (const key of Object.keys(data)) {
+                for (const node of data[key]) {
+                    if (node.properties && node.properties.number === chapterNumber) {
+                        found = true
+                        break
+                    }
+                }
+                if (found) break
+            }
+            suffix++
+        }
+        if (!found) chapterNumber = `${baseNumber}.0`
+    }
+  
+    labels = labels.default
+    let properties = null
+  
+    for (const key of Object.keys(data)) {
+        for (const node of data[key]) {
+            if (node.properties && node.properties.number === chapterNumber) {
+                properties = node.properties
+                break
+            }
+        }
+        if (properties) break
+    }
+  
+    if (!properties) {
+        console.warn('Data for the given chapter number not found:', chapterNumber)
+        return null
+    }
+  
+    // Using the found properties, lookup the labels
+    let vol = `Volume ${romanize(properties.volume)}`
+    let part = `Part ${romanize(properties.part)}`
+    let sect = properties.section
+    let chap = properties.chapter
+  
+    try {
+        const partObj = labels[vol][part]
+        const sectObj = partObj.sections[sect]
+        const chapObj = sectObj.chapters[chap]
+  
+        const response = {
+          "part-label": partObj.title,
+          "sect-label": sectObj.title,
+          "chap-label": chapObj.title
+        }
+  
+        return response
+    } catch (error) {
+        console.error("An error occurred while trying to find the titles:", error)
+        return null
+    }
   }
-
-  labels = labels.default
-  let properties = null
-
-  for (const key of Object.keys(data)) {
-      for (const node of data[key]) {
-          if (node.properties && node.properties.number === chapterNumber) {
-              properties = node.properties
-              break
-          }
-      }
-      if (properties) break
-  }
-
-  if (!properties) {
-      console.warn('Data for the given chapter number not found:', chapterNumber)
-      return null
-  }
-
-  // Using the found properties, lookup the labels
-  let vol = `Volume ${romanize(properties.volume)}`
-  let part = `Part ${romanize(properties.part)}`
-  let sect = properties.section
-  let chap = properties.chapter
-
-  try {
-      const partObj = labels[vol][part]
-      const sectObj = partObj.sections[sect]
-      const chapObj = sectObj.chapters[chap]
-
-      const response = {
-        "part-label": partObj.title,
-        "sect-label": sectObj.title,
-        "chap-label": chapObj.title
-      }
-
-      return response
-  } catch (error) {
-      console.error("An error occurred while trying to find the titles:", error)
-      return null
-  }
-}
+  

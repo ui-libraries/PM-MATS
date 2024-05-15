@@ -18,6 +18,19 @@ import { romanize, findLabel } from './utils.js'
  * @param {string} [options.textFill='black'] - The fill color for text.
  */
 export class Map {
+    /**
+     * Creates a new Map.
+     * @param {string} [svgSelector='pm-map'] - The CSS selector to attach the SVG element to.
+     * @param {Object} data - The data to be visualized.
+     * @param {Object} [options={}] - Additional options for customization.
+     * @param {number} [options.xOffset=20] - X-offset for positioning elements.
+     * @param {number} [options.yOffset=20] - Y-offset for positioning elements.
+     * @param {string} [options.shape='circle'] - The shape to be drawn. Can be 'circle', 'rect', 'ellipse', or 'polygon'.
+     * @param {number} [options.size=5] - The radius of circle or half rect width.
+     * @param {string} [options.fill='blue'] - The fill color for shapes.
+     * @param {number} [options.textFontSize=12] - The font size for text labels.
+     * @param {string} [options.textFill='black'] - The fill color for text.
+     */
     constructor(svgSelector = 'pm-map', data, options = {}) {
         this.svg = d3.select(svgSelector)
         this.data = data
@@ -71,7 +84,6 @@ export class Map {
         this._drawTextLabels(minX, minY)
         this._drawChapterMarker(minX, minY)
         this._titles('2.0')
-
     }
 
     /**
@@ -82,7 +94,7 @@ export class Map {
      * @param {number} minY - The minimum Y-coordinate in the data.
      */
     _drawShape(minX, minY) {
-        const defs = this.svg.append('defs');
+        const defs = this.svg.append('defs')
         const ppnt = defs.append('linearGradient')
             .attr('id', 'ppnt')
             .attr('x1', '0%')
@@ -135,7 +147,7 @@ export class Map {
                     }
                 }
                 return this.fill
-            });
+            })
     
         shapes.attr('cx', d => d.x - minX + this.xOffset)
             .attr('cy', d => d.y - minY + this.yOffset)
@@ -143,17 +155,16 @@ export class Map {
                 const decimalCount = getDecimalLength(d.properties.number)
                 const radiusIncreaseFactor = 0
                 return this.size + (decimalCount * radiusIncreaseFactor)
-            });
+            })
     
         // Add click event handling for each shape
         shapes.on('click', (event, d) => {
-            console.log(`Clicked circle with data:`, d);
+            console.log(`Clicked circle with data:`, d)
             let queryString = new URLSearchParams({ n: d.properties.number }).toString()
             let currentUrl = window.location.href.replace('map.html', '')
             window.open(`${currentUrl}?${queryString}`, '_blank')
         })
     }
-    
 
     /**
      * Draws text labels on the SVG canvas.
@@ -236,11 +247,25 @@ export class Map {
             .on('mouseleave', () => this._hideTooltip())
     }
 
+    /**
+     * Finds the titles for a given chapter number.
+     * 
+     * @private
+     * @param {string} chapterNumber - The chapter number to find titles for.
+     * @returns {Object} The titles for the chapter.
+     */
     _titles(chapterNumber) {
         let title = findLabel(chapterNumber, this.data, labels)
         return title
     }
 
+    /**
+     * Shows the tooltip with information about the node.
+     * 
+     * @private
+     * @param {Event} event - The mouse event.
+     * @param {Object} d - The data of the node.
+     */
     _showTooltip(event, d) {
         this.tooltip.transition()
             .duration(200)
@@ -250,6 +275,11 @@ export class Map {
             .style('top', (event.pageY - 28) + 'px')
     }
     
+    /**
+     * Hides the tooltip.
+     * 
+     * @private
+     */
     _hideTooltip() {
         this.tooltip.transition()
             .duration(500)

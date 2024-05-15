@@ -3,21 +3,35 @@ import { romanize } from './utils.js'
 import * as labels from './pm-chapter-labels.json'
 
 /**
- * Draw Class to create a D3 visualization.
- * 
+ * Represents a minimap visualization in an SVG element.
  * @class
- * @param {string} [svgSelector='pm-map'] - The CSS selector to attach the SVG element to.
- * @param {Object} data - The data to be visualized.
- * @param {Object} [options={}] - Additional options for customization.
- * @param {number} [options.xOffset=20] - X-offset for positioning elements.
- * @param {number} [options.yOffset=20] - Y-offset for positioning elements.
- * @param {string} [options.shape='circle'] - The shape to be drawn. Can be 'circle', 'rect', 'ellipse', or 'polygon'.
- * @param {number} [options.size=5] - The radius of circle or half rect width.
- * @param {string} [options.fill='blue'] - The fill color for shapes.
- * @param {number} [options.textFontSize=12] - The font size for text labels.
- * @param {string} [options.textFill='black'] - The fill color for text.
  */
 export class Minimap {
+    /**
+     * Creates a new Minimap.
+     * @param {string} [svgSelector='pm-map'] - The selector for the SVG element.
+     * @param {Object} data - The data to be visualized.
+     * @param {Object} [options={}] - Additional options for the visualization.
+     * @param {number} [options.xOffset=20] - The horizontal offset for the visualization.
+     * @param {number} [options.yOffset=20] - The vertical offset for the visualization.
+     * @param {number} [options.size=5] - The size of the nodes in the visualization.
+     * @param {string} [options.fill='blue'] - The fill color for the nodes.
+     * @param {number} [options.textFontSize=12] - The font size for the text labels.
+     * @param {string} [options.textFill='black'] - The fill color for the text labels.
+     * @param {string|null} [options.highlightedNumber=null] - The number of the node to be highlighted.
+     * @property {boolean} mainMinimap - Indicates if this is the main minimap.
+     * @property {Object} svg - The D3 selection of the SVG element.
+     * @property {Object} data - The data to be visualized.
+     * @property {number} xOffset - The horizontal offset for the visualization.
+     * @property {number} yOffset - The vertical offset for the visualization.
+     * @property {number} size - The size of the nodes in the visualization.
+     * @property {string} fill - The fill color for the nodes.
+     * @property {number} textFontSize - The font size for the text labels.
+     * @property {string} textFill - The fill color for the text labels.
+     * @property {string|null} highlightedNumber - The number of the node to be highlighted.
+     * @property {Object} tooltip - The D3 selection of the tooltip element.
+     * @property {Object} minimpTooltip - The D3 selection of the minimap tooltip element.
+     */
     constructor(svgSelector = 'pm-map', data, options = {}) {
         this.mainMinimap = false
         if (svgSelector === '#main-minimap') {
@@ -90,7 +104,7 @@ export class Minimap {
      * @param {number} minY - The minimum Y-coordinate in the data.
      */
     _drawShape(minX, minY) {
-        const defs = this.svg.append('defs');
+        const defs = this.svg.append('defs')
         const ppnt = defs.append('linearGradient')
             .attr('id', 'ppnt')
             .attr('x1', '0%')
@@ -117,6 +131,7 @@ export class Minimap {
             .attr('y2', '100%')
         thmnt.append('stop').attr('offset', '50%').attr('stop-color', '#cc5500')
         thmnt.append('stop').attr('offset', '50%').attr('stop-color', 'black')
+
         const shapes = this.svg.selectAll('circle')
             .data(Object.values(this.data).flat())
             .enter()
@@ -241,11 +256,25 @@ export class Minimap {
             .on('mouseleave', () => this._hideTooltip())
     }
 
+    /**
+     * Finds the titles for a given chapter number.
+     * 
+     * @private
+     * @param {string} chapterNumber - The chapter number to find titles for.
+     * @returns {Object} The titles for the chapter.
+     */
     _titles(chapterNumber) {
         let title = findLabel(chapterNumber, this.data, labels)
         return title
     }
 
+    /**
+     * Shows the tooltip with information about the node.
+     * 
+     * @private
+     * @param {Event} event - The mouse event.
+     * @param {Object} d - The data of the node.
+     */
     _showTooltip(event, d) {
         this.tooltip.transition()
             .duration(200)
@@ -255,12 +284,24 @@ export class Minimap {
             .style('top', (event.pageY - 28) + 'px')
     }
     
+    /**
+     * Hides the tooltip.
+     * 
+     * @private
+     */
     _hideTooltip() {
         this.tooltip.transition()
             .duration(500)
             .style('opacity', 0)
     }
 
+    /**
+     * Shows the minimap tooltip with the node number.
+     * 
+     * @private
+     * @param {Event} event - The mouse event.
+     * @param {Object} d - The data of the node.
+     */
     _showMiniNum(event, d) {
         this.minimpTooltip.transition()
             .duration(200)
@@ -270,6 +311,11 @@ export class Minimap {
             .style('top', (event.pageY - 28) + 'px')
     }
 
+    /**
+     * Hides the minimap tooltip.
+     * 
+     * @private
+     */
     _hideMiniNum() {
         this.minimpTooltip.transition()
             .duration(500)

@@ -28,9 +28,39 @@
               
                 
                 <li><a
-                  href='#draw'
+                  href='#allinputsempty'
                   class="">
-                  Draw
+                  allInputsEmpty
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#exportjson'
+                  class="">
+                  exportJson
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#exportcsv'
+                  class="">
+                  exportCsv
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#initcomplete'
+                  class="">
+                  initComplete
                   
                 </a>
                 
@@ -108,6 +138,106 @@
               
                 
                 <li><a
+                  href='#chaptertitle'
+                  class="">
+                  chapterTitle
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#minimaptemplate'
+                  class="">
+                  minimapTemplate
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#createsummarylink'
+                  class="">
+                  createSummaryLink
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#insertchaptersvgs'
+                  class="">
+                  insertChapterSvgs
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#generateallrows'
+                  class="">
+                  generateAllRows
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#processchapters'
+                  class="">
+                  processChapters
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#minimap'
+                  class="">
+                  miniMap
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#normalmap'
+                  class="">
+                  normalMap
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#map'
+                  class="">
+                  Map
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#minimap-1'
+                  class="">
+                  Minimap
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
                   href='#node'
                   class=" toggle-sibling">
                   Node
@@ -119,6 +249,30 @@
                   
                     <ul class='list-reset py1-ul pl1'>
                       <li class='h5'><span>Instance members</span></li>
+                      
+                      <li><a
+                        href='#nodeid'
+                        class='regular pre-open'>
+                        #id
+                      </a></li>
+                      
+                      <li><a
+                        href='#nodeproperties'
+                        class='regular pre-open'>
+                        #properties
+                      </a></li>
+                      
+                      <li><a
+                        href='#nodeproves'
+                        class='regular pre-open'>
+                        #proves
+                      </a></li>
+                      
+                      <li><a
+                        href='#nodeprovenby'
+                        class='regular pre-open'>
+                        #provenBy
+                      </a></li>
                       
                       <li><a
                         href='#nodeaddproof'
@@ -152,6 +306,16 @@
               
                 
                 <li><a
+                  href='#getdecimalpart'
+                  class="">
+                  getDecimalPart
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
                   href='#downloaddata'
                   class="">
                   downloadData
@@ -165,6 +329,26 @@
                   href='#romanize'
                   class="">
                   romanize
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#getqueryparam'
+                  class="">
+                  getQueryParam
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#findlabel'
+                  class="">
+                  findLabel
                   
                 </a>
                 
@@ -185,154 +369,185 @@
   
   <div class='clearfix'>
     
-    <h3 class='fl m0' id='draw'>
-      Draw
+    <h3 class='fl m0' id='allinputsempty'>
+      allInputsEmpty
     </h3>
     
     
   </div>
   
 
-  <p>Draw Class to create a D3 visualization.</p>
+  <p>Checks if all input fields in the '#principia-table' are empty.</p>
 
-    <div class='pre p1 fill-light mt0'>new Draw(svgSelector: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, data: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>, options: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</div>
-  
-  
-
-  
-  
-  
-  
+    <div class='pre p1 fill-light mt0'>allInputsEmpty(): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></div>
   
   
 
   
-    <div class='py1 quiet mt1 prose-big'>Parameters</div>
-    <div class='prose'>
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code>:
+        True if all input fields are empty, otherwise false.
+
       
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>svgSelector</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
-            = <code>&#39;container&#39;</code>)</code>
-	    The CSS selector to attach the SVG element to.
+    
+  
 
-          </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
           
-        </div>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>data</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</code>
-	    The data to be visualized.
-
-          </div>
+        
           
-        </div>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>options</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>
-            = <code>{}</code>)</code>
-	    Additional options for customization.
+          <section class='p2 mb2 clearfix bg-white minishadow'>
 
-          </div>
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='exportjson'>
+      exportJson
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Exports the filtered data from the table to a JSON file.</p>
+
+    <div class='pre p1 fill-light mt0'>exportJson()</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
           
-          <table class='mt1 mb2 fixed-table h5 col-12'>
-            <colgroup>
-              <col width='30%' />
-              <col width='70%' />
-            </colgroup>
-            <thead>
-              <tr class='bold fill-light'>
-                <th>Name</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody class='mt1'>
-              
-                <tr>
-  <td class='break-word'><span class='code bold'>options.xOffset</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></code>
-  
-    (default <code>20</code>)
-  </td>
-  <td class='break-word'><span>X-offset for positioning elements.
-</span></td>
-</tr>
-
-
-              
-                <tr>
-  <td class='break-word'><span class='code bold'>options.yOffset</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></code>
-  
-    (default <code>20</code>)
-  </td>
-  <td class='break-word'><span>Y-offset for positioning elements.
-</span></td>
-</tr>
-
-
-              
-                <tr>
-  <td class='break-word'><span class='code bold'>options.shape</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
-  
-    (default <code>&#39;circle&#39;</code>)
-  </td>
-  <td class='break-word'><span>The shape to be drawn. Can be 'circle', 'rect', 'ellipse', or 'polygon'.
-</span></td>
-</tr>
-
-
-              
-                <tr>
-  <td class='break-word'><span class='code bold'>options.size</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></code>
-  
-    (default <code>5</code>)
-  </td>
-  <td class='break-word'><span>The radius of circle or half rect width.
-</span></td>
-</tr>
-
-
-              
-                <tr>
-  <td class='break-word'><span class='code bold'>options.fill</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
-  
-    (default <code>&#39;blue&#39;</code>)
-  </td>
-  <td class='break-word'><span>The fill color for shapes.
-</span></td>
-</tr>
-
-
-              
-                <tr>
-  <td class='break-word'><span class='code bold'>options.textFontSize</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></code>
-  
-    (default <code>12</code>)
-  </td>
-  <td class='break-word'><span>The font size for text labels.
-</span></td>
-</tr>
-
-
-              
-                <tr>
-  <td class='break-word'><span class='code bold'>options.textFill</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
-  
-    (default <code>&#39;black&#39;</code>)
-  </td>
-  <td class='break-word'><span>The fill color for text.
-</span></td>
-</tr>
-
-
-              
-            </tbody>
-          </table>
+        
           
-        </div>
-      
-    </div>
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='exportcsv'>
+      exportCsv
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Exports the filtered data from the table to a CSV file.</p>
+
+    <div class='pre p1 fill-light mt0'>exportCsv()</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='initcomplete'>
+      initComplete
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Initializes the column search input fields and their event listeners.</p>
+
+    <div class='pre p1 fill-light mt0'>initComplete()</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
   
 
   
@@ -960,7 +1175,7 @@ Missing nodes are represented as placeholders.</p>
 <li>A decimalPart length of 4 are horizontally displaced from the previous node.</li>
 </ul>
 
-    <div class='pre p1 fill-light mt0'>plot(chapter: (<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a> | <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>), startingX: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, startingY: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, PAD: any): [<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>>, <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>]</div>
+    <div class='pre p1 fill-light mt0'>plot(chapter: (<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a> | <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>), startingX: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, startingY: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, PAD: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>): [<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>>, <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>]</div>
   
   
 
@@ -1006,9 +1221,10 @@ Missing nodes are represented as placeholders.</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>PAD</span> <code class='quiet'>(any
+            <span class='code bold'>PAD</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>
             = <code>50</code>)</code>
-	    
+	    The padding between nodes.
+
           </div>
           
         </div>
@@ -1090,6 +1306,763 @@ Missing nodes are represented as placeholders.</p>
   
   <div class='clearfix'>
     
+    <h3 class='fl m0' id='chaptertitle'>
+      chapterTitle
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Updates the chapter title in the minimap based on the given chapter number.</p>
+
+    <div class='pre p1 fill-light mt0'>chapterTitle(chapterNumber: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>chapterNumber</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+	    The chapter number to find the title for.
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='minimaptemplate'>
+      minimapTemplate
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Generates the HTML template for the minimap.</p>
+
+    <div class='pre p1 fill-light mt0'>minimapTemplate(): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>:
+        The HTML template for the minimap.
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='createsummarylink'>
+      createSummaryLink
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Creates a link to the original text for a given chapter number.</p>
+
+    <div class='pre p1 fill-light mt0'>createSummaryLink(pmNumber: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>pmNumber</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+	    The chapter number to create the link for.
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='insertchaptersvgs'>
+      insertChapterSvgs
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Inserts chapter SVGs into the specified container.</p>
+
+    <div class='pre p1 fill-light mt0'>insertChapterSvgs(pmNumber: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, isLeft: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>pmNumber</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+	    The chapter number to insert SVGs for.
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>isLeft</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>)</code>
+	    Whether to insert SVGs into the left container.
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='generateallrows'>
+      generateAllRows
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Generates all rows of chapter SVGs for a given chapter number.</p>
+
+    <div class='pre p1 fill-light mt0'>generateAllRows(pmNumber: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>pmNumber</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+	    The chapter number to generate rows for.
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='processchapters'>
+      processChapters
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Processes the chapters and generates the data needed for the minimap.</p>
+
+    <div class='pre p1 fill-light mt0'>processChapters(options: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>options</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>
+            = <code>{}</code>)</code>
+	    Options for processing the chapters.
+
+          </div>
+          
+          <table class='mt1 mb2 fixed-table h5 col-12'>
+            <colgroup>
+              <col width='30%' />
+              <col width='70%' />
+            </colgroup>
+            <thead>
+              <tr class='bold fill-light'>
+                <th>Name</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody class='mt1'>
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>options.chapterNumbers</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>></code>
+  
+    (default <code>null</code>)
+  </td>
+  <td class='break-word'><span>The specific chapters to process.
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>options.GAP</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></code>
+  
+    (default <code>200</code>)
+  </td>
+  <td class='break-word'><span>The gap between chapters.
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>options.PAD</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></code>
+  
+    (default <code>50</code>)
+  </td>
+  <td class='break-word'><span>The padding between nodes in a chapter.
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>options.x</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></code>
+  
+    (default <code>0</code>)
+  </td>
+  <td class='break-word'><span>The starting x-coordinate.
+</span></td>
+</tr>
+
+
+              
+            </tbody>
+          </table>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></code>:
+        The processed chapter data.
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='minimap'>
+      miniMap
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Generates a minimap for the specified chapters.</p>
+
+    <div class='pre p1 fill-light mt0'>miniMap(chapters: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>>, svgSelector: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, highlightedNumber: (<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a> | null))</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>chapters</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>>)</code>
+	    The chapters to generate the minimap for.
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>svgSelector</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+	    The CSS selector for the SVG element.
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>highlightedNumber</span> <code class='quiet'>((<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a> | null)
+            = <code>null</code>)</code>
+	    The chapter number to highlight.
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='normalmap'>
+      normalMap
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Generates the main map visualization.</p>
+
+    <div class='pre p1 fill-light mt0'>normalMap()</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='map'>
+      Map
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Draw Class to create a D3 visualization.</p>
+
+    <div class='pre p1 fill-light mt0'>new Map(svgSelector: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, data: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>, options: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>svgSelector</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+            = <code>&#39;pm-map&#39;</code>)</code>
+	    The CSS selector to attach the SVG element to.
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>data</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</code>
+	    The data to be visualized.
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>options</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>
+            = <code>{}</code>)</code>
+	    Additional options for customization.
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='minimap-1'>
+      Minimap
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Represents a minimap visualization in an SVG element.</p>
+
+    <div class='pre p1 fill-light mt0'>new Minimap(svgSelector: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, data: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>, options: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>svgSelector</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+            = <code>&#39;pm-map&#39;</code>)</code>
+	    The selector for the SVG element.
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>data</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</code>
+	    The data to be visualized.
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>options</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>
+            = <code>{}</code>)</code>
+	    Additional options for the visualization.
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
     <h3 class='fl m0' id='node'>
       Node
     </h3>
@@ -1152,6 +2125,222 @@ Missing nodes are represented as placeholders.</p>
   
     <div class='py1 quiet mt1 prose-big'>Instance Members</div>
     <div class="clearfix">
+  
+    <div class='border-bottom' id='nodeid'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>id</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+
+  <p>The unique identifier for the Node.</p>
+
+    <div class='pre p1 fill-light mt0'>id</div>
+  
+    <p>
+      Type:
+      <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+    </p>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='nodeproperties'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>properties</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+
+  <p>Additional properties of the Node.</p>
+
+    <div class='pre p1 fill-light mt0'>properties</div>
+  
+    <p>
+      Type:
+      <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>
+    </p>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='nodeproves'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>proves</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+
+  <p>An array of Node IDs that this Node proves.</p>
+
+    <div class='pre p1 fill-light mt0'>proves</div>
+  
+    <p>
+      Type:
+      <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>>
+    </p>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='nodeprovenby'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>provenBy</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+
+  <p>An array of Node IDs that prove this Node.</p>
+
+    <div class='pre p1 fill-light mt0'>provenBy</div>
+  
+    <p>
+      Type:
+      <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>>
+    </p>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
   
     <div class='border-bottom' id='nodeaddproof'>
       <div class="clearfix small pointer toggle-sibling">
@@ -1304,7 +2493,9 @@ Missing nodes are represented as placeholders.</p>
   </div>
   
 
-  <p>Returns the number of digits after the decimal point for a given number.</p>
+  <p>Retrieves the length of the decimal part of a given number represented as a string.</p>
+<p>This function splits the number by the decimal point and returns the length of the decimal part if it exists.
+If the number does not have a decimal part, it returns <code>0</code>.</p>
 
     <div class='pre p1 fill-light mt0'>getDecimalLength(number: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></div>
   
@@ -1324,7 +2515,7 @@ Missing nodes are represented as placeholders.</p>
         <div class='space-bottom0'>
           <div>
             <span class='code bold'>number</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
-	    String representation of a floating point number.
+	    The number as a string from which to determine the length of the decimal part.
 
           </div>
           
@@ -1339,7 +2530,9 @@ Missing nodes are represented as placeholders.</p>
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
       <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></code>:
-        Number of digits after the decimal point.
+        The length of the decimal part of the number, or 
+<code>0</code>
+ if there is no decimal part.
 
       
     
@@ -1349,6 +2542,108 @@ Missing nodes are represented as placeholders.</p>
 
   
 
+  
+    <div class='py1 quiet mt1 prose-big'>Example</div>
+    
+      
+      <pre class='p1 overflow-auto round fill-light'><span class="hljs-comment">// Example with a decimal part</span>
+<span class="hljs-keyword">const</span> length = <span class="hljs-title function_">getDecimalLength</span>(<span class="hljs-string">&#x27;123.456&#x27;</span>)
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(length) <span class="hljs-comment">// Outputs: 3</span></pre>
+    
+      
+      <pre class='p1 overflow-auto round fill-light'><span class="hljs-comment">// Example without a decimal part</span>
+<span class="hljs-keyword">const</span> length = <span class="hljs-title function_">getDecimalLength</span>(<span class="hljs-string">&#x27;123&#x27;</span>)
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(length) <span class="hljs-comment">// Outputs: 0</span></pre>
+    
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='getdecimalpart'>
+      getDecimalPart
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Retrieves the decimal part of a given number represented as a string.</p>
+<p>This function splits the number by the decimal point and returns the decimal part if it exists.
+If the number does not have a decimal part, it returns <code>null</code>.</p>
+
+    <div class='pre p1 fill-light mt0'>getDecimalPart(number: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): (<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a> | null)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>number</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+	    The number as a string from which to extract the decimal part.
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a> | null)</code>:
+        The decimal part of the number, or 
+<code>null</code>
+ if there is no decimal part.
+
+      
+    
+  
+
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Example</div>
+    
+      
+      <pre class='p1 overflow-auto round fill-light'><span class="hljs-comment">// Example with a decimal part</span>
+<span class="hljs-keyword">const</span> decimal = <span class="hljs-title function_">getDecimalPart</span>(<span class="hljs-string">&#x27;123.456&#x27;</span>)
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(decimal) <span class="hljs-comment">// Outputs: &#x27;456&#x27;</span></pre>
+    
+      
+      <pre class='p1 overflow-auto round fill-light'><span class="hljs-comment">// Example without a decimal part</span>
+<span class="hljs-keyword">const</span> decimal = <span class="hljs-title function_">getDecimalPart</span>(<span class="hljs-string">&#x27;123&#x27;</span>)
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(decimal) <span class="hljs-comment">// Outputs: null</span></pre>
+    
   
 
   
@@ -1494,6 +2789,220 @@ Missing nodes are represented as placeholders.</p>
 
   
 
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='getqueryparam'>
+      getQueryParam
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Retrieves the value of a specified query parameter from the URL.</p>
+<p>This function parses the current page's URL and extracts the value of the given query parameter.
+If the parameter is not found, it returns <code>null</code>.</p>
+
+    <div class='pre p1 fill-light mt0'>getQueryParam(param: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): (<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a> | null)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>param</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+	    The name of the query parameter to retrieve.
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a> | null)</code>:
+        The value of the query parameter, or 
+<code>null</code>
+ if the parameter is not present.
+
+      
+    
+  
+
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Example</div>
+    
+      
+      <pre class='p1 overflow-auto round fill-light'><span class="hljs-comment">// Assuming the URL is: http://example.com/?foo=bar</span>
+<span class="hljs-keyword">const</span> value = <span class="hljs-title function_">getQueryParam</span>(<span class="hljs-string">&#x27;foo&#x27;</span>)
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(value) <span class="hljs-comment">// Outputs: &#x27;bar&#x27;</span></pre>
+    
+      
+      <pre class='p1 overflow-auto round fill-light'><span class="hljs-comment">// Assuming the URL is: http://example.com/?foo=bar</span>
+<span class="hljs-keyword">const</span> value = <span class="hljs-title function_">getQueryParam</span>(<span class="hljs-string">&#x27;baz&#x27;</span>)
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(value) <span class="hljs-comment">// Outputs: null</span></pre>
+    
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='findlabel'>
+      findLabel
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Finds the labels for a given chapter number from the provided data and labels.</p>
+<p>This function attempts to locate the correct labels for a chapter by its number. If the chapter number
+ends with '.0', it increments the suffix until it finds a match or exceeds a limit. Once found,
+it retrieves the corresponding labels from the provided labels object.</p>
+
+    <div class='pre p1 fill-light mt0'>findLabel(chapterNumber: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, data: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>, labels: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>): (<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a> | null)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>chapterNumber</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+	    The chapter number to find labels for. If it ends in '.0', the function will try to find a suffix that matches.
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>data</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</code>
+	    The data object containing chapter information. It is expected to be structured with nested objects containing 
+<code>properties</code>
+.
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>labels</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</code>
+	    The labels object containing titles for volumes, parts, sections, and chapters.
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a> | null)</code>:
+        An object containing the part, section, and chapter labels if found, otherwise 
+<code>null</code>
+.
+
+      
+    
+  
+
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Example</div>
+    
+      
+      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">const</span> chapterNumber = <span class="hljs-string">&#x27;1.0&#x27;</span>
+<span class="hljs-keyword">const</span> data = {
+  <span class="hljs-attr">volume1</span>: [{ <span class="hljs-attr">properties</span>: { <span class="hljs-attr">number</span>: <span class="hljs-string">&#x27;1.1&#x27;</span>, <span class="hljs-attr">volume</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">part</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">section</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">chapter</span>: <span class="hljs-number">1</span> } }]
+}
+<span class="hljs-keyword">const</span> labels = {
+  <span class="hljs-attr">default</span>: {
+    <span class="hljs-string">&quot;Volume I&quot;</span>: {
+      <span class="hljs-string">&quot;Part I&quot;</span>: {
+        <span class="hljs-attr">title</span>: <span class="hljs-string">&quot;Part 1 Title&quot;</span>,
+        <span class="hljs-attr">sections</span>: {
+          <span class="hljs-number">1</span>: {
+            <span class="hljs-attr">title</span>: <span class="hljs-string">&quot;Section 1 Title&quot;</span>,
+            <span class="hljs-attr">chapters</span>: {
+              <span class="hljs-number">1</span>: { <span class="hljs-attr">title</span>: <span class="hljs-string">&quot;Chapter 1 Title&quot;</span> }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+<span class="hljs-keyword">const</span> result = <span class="hljs-title function_">findLabel</span>(chapterNumber, data, labels)
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(result) <span class="hljs-comment">// Outputs: { &quot;part-label&quot;: &quot;Part 1 Title&quot;, &quot;sect-label&quot;: &quot;Section 1 Title&quot;, &quot;chap-label&quot;: &quot;Chapter 1 Title&quot; }</span></pre>
+    
   
 
   
