@@ -9,6 +9,10 @@ const pm = new Graph()
 
 document.addEventListener('DOMContentLoaded', (event) => {
   let pmNumber = getQueryParam('n')
+  let isEdition2 = getQueryParam('edition-2') !== null
+  let defaultExcluded = ['8', '89']
+  let excludedChapters = isEdition2 ? [] : defaultExcluded
+
   const searchTemplate = `
     <form id="number-search" class="d-flex">
         <input class="form-control me-2 menu-search" type="search" placeholder="Enter a number..." aria-label="Search">
@@ -19,14 +23,14 @@ document.addEventListener('DOMContentLoaded', (event) => {
       $('#number-search').remove()
       $('.content-container').append(minimapTemplate())
       let chapterNumber = pmNumber.split('.')[0]
-      miniMap([chapterNumber], "#main-minimap", pmNumber)
+      miniMap([chapterNumber], "#main-minimap", pmNumber, excludedChapters)
       createSummaryLink(pmNumber)
       generateAllRows(pmNumber)
-      chapterTitle(pmNumber)
+      chapterTitle(pmNumber, excludedChapters)
   } else {
     $('.content-container').append('<svg id="pm-map"></svg>')
     $('#navbarSupportedContent').append(searchTemplate)
-    normalMap()
+    normalMap(excludedChapters)
     $('#number-search').on('submit', function(e) {
       e.preventDefault()
       const num = $('.menu-search').val()
@@ -58,9 +62,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
  * Updates the chapter title in the minimap based on the given chapter number.
  * 
  * @param {string} chapterNumber - The chapter number to find the title for.
+ * @param {Array<string>} excluded - The chapters to be excluded.
  */
-function chapterTitle(chapterNumber) {
-  let title = findLabel(chapterNumber, processChapters(), labels)
+function chapterTitle(chapterNumber, excluded) {
+  let title = findLabel(chapterNumber, processChapters({ excluded }), labels)
   document.querySelector('#minimap-title h3').textContent = title['chap-label']
 }
 
@@ -194,11 +199,10 @@ function generateAllRows(pmNumber) {
  * @param {number} [options.GAP=200] - The gap between chapters.
  * @param {number} [options.PAD=50] - The padding between nodes in a chapter.
  * @param {number} [options.x=0] - The starting x-coordinate.
+ * @param {Array<string>} [options.excluded=['8', '89']] - The chapters to be excluded.
  * @returns {Object} The processed chapter data.
  */
-function processChapters({ chapterNumbers = null, GAP = 200, PAD = 50, x = 0} = {}) {
-  //const excluded = ['8', '89']
-  const excluded = []
+function processChapters({ chapterNumbers = null, GAP = 200, PAD = 50, x = 0, excluded = ['8', '89'] } = {}) {
   const chapters = pm.getChapterNumbers().filter(chapter => !excluded.includes(chapter))
   let chapterData = {}
 
@@ -224,12 +228,14 @@ function processChapters({ chapterNumbers = null, GAP = 200, PAD = 50, x = 0} = 
  * @param {Array<string>} chapters - The chapters to generate the minimap for.
  * @param {string} svgSelector - The CSS selector for the SVG element.
  * @param {string|null} [highlightedNumber=null] - The chapter number to highlight.
+ * @param {Array<string>} excluded - The chapters to be excluded.
  */
-function miniMap(chapters, svgSelector, highlightedNumber = null) {
+function miniMap(chapters, svgSelector, highlightedNumber = null, excluded = []) {
   const content = processChapters({
       chapterNumbers: chapters,
       GAP: 100,
-      PAD: 20
+      PAD: 20,
+      excluded
   })
   new Minimap(svgSelector, content, {
       xOffset: 20,
@@ -244,9 +250,11 @@ function miniMap(chapters, svgSelector, highlightedNumber = null) {
 
 /**
  * Generates the main map visualization.
+ * 
+ * @param {Array<string>} excluded - The chapters to be excluded.
  */
-function normalMap() {
-  new Map('#pm-map', processChapters(), {
+function normalMap(excluded = []) {
+  new Map('#pm-map', processChapters({ excluded }), {
       xOffset: 20,
       yOffset: 20,
       size: 5,
