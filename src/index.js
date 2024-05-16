@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         <button class="btn btn-outline-info btn-sm" type="submit">Search</button>
     </form>
   `
-  if (pmNumber || window.location.pathname.includes('table.html')) {
+  if (pmNumber) {
       $('#number-search').remove()
       $('.content-container').append(minimapTemplate())
       let chapterNumber = pmNumber.split('.')[0]
@@ -27,6 +27,16 @@ document.addEventListener('DOMContentLoaded', (event) => {
       createSummaryLink(pmNumber)
       generateAllRows(pmNumber)
       chapterTitle(pmNumber, excludedChapters)
+  } else if (window.location.pathname.includes('table.html')) {
+      $('#number-search').remove()
+      $('.content-container').append(minimapTemplate())
+      let chapterNumber = pmNumber ? pmNumber.split('.')[0] : null
+      miniMap(chapterNumber ? [chapterNumber] : [], "#main-minimap", pmNumber, excludedChapters)
+      if (pmNumber) {
+          createSummaryLink(pmNumber)
+          generateAllRows(pmNumber)
+          chapterTitle(pmNumber, excludedChapters)
+      }
   } else {
     $('.content-container').append('<svg id="pm-map"></svg>')
     $('#navbarSupportedContent').append(searchTemplate)
@@ -48,6 +58,12 @@ document.addEventListener('DOMContentLoaded', (event) => {
       }
       
       if (node) {
+        // Construct new URL without edition-2 if n is present
+        const newUrl = new URL(window.location.href)
+        newUrl.searchParams.set('n', num)
+        newUrl.searchParams.delete('edition-2')
+        window.history.pushState({}, '', newUrl.toString())
+
         $('.content-container').animate({
           scrollLeft: node.x - $(window).width() / 2
         }, 100)

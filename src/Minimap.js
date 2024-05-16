@@ -186,14 +186,21 @@ export class Minimap {
             .on('mouseleave', () => this._hideMiniNum())
 
         
-        shapes.on('click', (event, d) => {
-            console.log(`Clicked circle with data:`, d)
-            let queryString = new URLSearchParams({ n: d.properties.number }).toString()
-            let currentUrl = new URL(window.location.href)
-            currentUrl.search = ''
-            currentUrl.pathname = currentUrl.pathname.replace('map.html', '')
-            window.open(`${currentUrl.toString()}?${queryString}`, '_blank')
-        })
+            shapes.on('click', (event, d) => {
+                console.log(`Clicked circle with data:`, d)
+                let queryString = new URLSearchParams({ n: d.properties.number })
+                let currentUrl = new URL(window.location.href)
+                currentUrl.search = ''
+                currentUrl.pathname = currentUrl.pathname.replace('map.html', '')
+                for (let [key, value] of new URLSearchParams(window.location.search).entries()) {
+                    if (key !== 'edition-2') {
+                        queryString.append(key, value)
+                    }
+                }
+                let newUrl = `${currentUrl.origin}${currentUrl.pathname}?${queryString.toString()}`
+                window.open(newUrl, '_blank')
+            })
+            
         
     }
 

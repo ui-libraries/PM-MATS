@@ -157,13 +157,26 @@ export class Map {
                 return this.size + (decimalCount * radiusIncreaseFactor)
             })
     
-        // Add click event handling for each shape
-        shapes.on('click', (event, d) => {
-            console.log(`Clicked circle with data:`, d)
-            let queryString = new URLSearchParams({ n: d.properties.number }).toString()
-            let currentUrl = window.location.href.replace('map.html', '')
-            window.open(`${currentUrl}?${queryString}`, '_blank')
-        })
+            shapes.on('click', (event, d) => {
+                console.log(`Clicked circle with data:`, d)
+                let queryString = new URLSearchParams({ n: d.properties.number })
+                let currentUrl = new URL(window.location.href)
+                
+                // Remove 'edition-2' if present
+                queryString.delete('edition-2')
+                
+                // Add the rest of the current parameters to the query string
+                for (let [key, value] of currentUrl.searchParams.entries()) {
+                    if (key !== 'edition-2') {
+                        queryString.append(key, value)
+                    }
+                }
+            
+                // Open new URL with the updated query string
+                let newUrl = `${currentUrl.origin}${currentUrl.pathname}?${queryString.toString()}`
+                window.open(newUrl, '_blank')
+            })
+            
     }
 
     /**
