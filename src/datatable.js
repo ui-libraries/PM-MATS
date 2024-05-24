@@ -14,9 +14,9 @@ function allInputsEmpty() {
     console.log('allInputsEmpty')
     let inputs = document.querySelectorAll('#principia-table input')
     for (let input of inputs) {
-      if (input.value.trim() !== '') {
-        return false
-      }
+        if (input.value.trim() !== '') {
+            return false
+        }
     }
     return true
 }
@@ -129,19 +129,30 @@ export let table = new DataTable('#principia-table', {
      * Initializes the column search input fields and their event listeners.
      */
     initComplete: function() {
-        this.api().columns().every(function() {
-            let column = this
-            let title = column.header().textContent
-            let input = document.createElement('input')
+        const api = this.api()
+        api.columns().every(function() {
+            const column = this
+            const title = column.header().textContent
+            const input = document.createElement('input')
             input.placeholder = title
             column.header().replaceChildren(input)
     
             input.addEventListener('keyup', function() {
-                let searchTerm = this.value.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&') // Escapes regex special characters
+                let searchTerm = this.value.trim()
+                let isExactMatch = false
     
-                if (column.search() !== searchTerm) {
-                    // use general search allowing the term to appear anywhere
-                    column.search(searchTerm, true, false).draw()
+                // Check if the search term is enclosed in double quotes
+                if (searchTerm.startsWith('"') && searchTerm.endsWith('"')) {
+                    searchTerm = searchTerm.slice(1, -1)
+                    isExactMatch = true
+                }
+    
+                if (isExactMatch) {
+                    // Perform exact match search
+                    column.search('^' + searchTerm + '$', true, false).draw()
+                } else {
+                    // Perform general search
+                    column.search(searchTerm, false, true).draw()
                 }
     
                 if (allInputsEmpty()) {
