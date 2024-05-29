@@ -196,6 +196,11 @@ function generateAllRows(pmNumber) {
   const provenBy = node.provenBy || []
   const proves = node.proves || []
 
+  // sort the arrays numerically
+  provenBy.sort((a, b) => parseFloat(a) - parseFloat(b))
+  console.log("sorted", provenBy)
+  proves.sort((a, b) => parseFloat(a) - parseFloat(b))
+
   if (provenBy.length === 0) {
     $('#left-svg-container h3').text('no demonstration appears in text')
   }
@@ -206,6 +211,7 @@ function generateAllRows(pmNumber) {
   provenBy.forEach((proven, i) => insertChapterSvgs(proven, true))
   proves.forEach((prove, i) => insertChapterSvgs(prove, false))
 }
+
 
 /**
  * Processes the chapters and generates the data needed for the minimap.
