@@ -1,5 +1,5 @@
 # PM-MATS
-The goal of this project is to make clear structural connections between different parts of Principia and to make analyzable data about the theorems, definitions, and primitive postulates in its text. We do this by providing three digital tools:
+The goal of this project is to make clear structural connections between different parts of Principia Mathematica and to make analyzable data about the theorems, definitions, and primitive postulates in its text. We do this by providing three digital tools:
 
 * A map of Principia that allows you to see the whole book.
 * 9,944 mini-maps (one for every starred number in Principia) that show you everything used to prove it and everything that it is used to prove (❋13.1 for example).
