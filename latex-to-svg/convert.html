@@ -80,9 +80,13 @@
             cursor: pointer;
             margin: 0 10px 10px 0;
             font-size: 14px;
+
+            /* Key properties for icon alignment */
             display: inline-flex;
             align-items: center;
-            gap: 8px;
+            gap: 8px; /* space between icon and text */
+            line-height: 1; /* or normal */
+
             transition: background-color 0.2s;
         }
         
@@ -161,6 +165,14 @@
         .icon {
             width: 16px;
             height: 16px;
+            vertical-align: middle;
+            overflow: visible;
+
+            /* Or you can let the .btn’s font-size dictate the icon size:
+                width: 1em;
+                height: 1em; 
+            */
+
             stroke: currentColor;
             stroke-width: 2;
             stroke-linecap: round;
@@ -176,13 +188,7 @@
         <div class="panel">
             <h2>Input LaTeX</h2>
             <div class="toolbar" id="sample-buttons">
-                <button class="btn sample-btn" data-command="\pmd">Insert \pmd</button>
-                <button class="btn sample-btn" data-command="\pmdd">Insert \pmdd</button>
-                <button class="btn sample-btn" data-command="\pmthm">Insert \pmthm</button>
-                <button class="btn sample-btn" data-command="\pmast">Insert \pmast</button>
-                <button class="btn sample-btn" data-command="\pmcdot">Insert \pmcdot</button>
-                <button class="btn sample-btn" data-command="\pmdot">Insert \pmdot</button>
-                <button class="btn sample-btn" data-command="\pmdott">Insert \pmdott</button>
+                <button class="btn sample-btn" data-command="{\pmarleq}{\mathrel{\ooalign{$\boldsymbol{<}$\cr\hidewidth${\raise-.75ex\hbox{\rotatebox[origin=c]{155}{$\scalebox{1.1}{$\boldsymbol{-}$}$}}}\hspace{-.375ex}$}}}">117.06</button>
             </div>
             <textarea id="latex-input" placeholder="Enter your LaTeX here..." spellcheck="false">\pmthm p \pmimp \pmnot p</textarea>
             <div class="toolbar">
@@ -211,7 +217,7 @@
 
     <script>
         // Global variables
-        const API_URL = 'http://54.162.68.119/latex-api.php';
+        const API_URL = '/latex-api.php';
         let lastSvg = null;
 
         // DOM Elements
