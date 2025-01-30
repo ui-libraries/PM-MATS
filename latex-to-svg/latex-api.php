@@ -85,24 +85,18 @@ try {
         throw new Exception('Failed to create working directory');
     }
 
-    // Write LaTeX file
-    $latexContent = "\\documentclass[preview]{standalone}\n" .
-                   "\\usepackage{newtxtext}\n" .
-                   "\\usepackage{pifont}\n" .
-                   "\\usepackage{amssymb}\n" .
-                   "\\usepackage{graphicx}\n" .
-                   "\\usepackage{amsmath}\n" .
-                   "\\usepackage[T1]{fontenc}\n" .
-                   "\\usepackage[utf8]{inputenc}\n" .
-                   "\\usepackage{mathrsfs}\n" .
-                   "\\usepackage{rotating}\n" .  
-                   "\\begin{document}\n" .
-                   "\\Large\n" .
-                   "$" . $input['latex'] . "$\n" .
-                   "\\end{document}\n";
+
+    $latexContent =
+    "\\documentclass[preview]{standalone}\n" .
+    "\\usepackage{principia}\n" .
+    "\\begin{document}\n" .
+    "\\Large\n" .
+    "$" . $input['latex'] . "$\n" .
+    "\\end{document}\n";
+
 
     $texFile = $workDir . '/input.tex';
-    debug_log("Writing to: " . $texFile);
+    debug_log("Writing TeX content to: " . $texFile);
     
     if (file_put_contents($texFile, $latexContent) === false) {
         throw new Exception('Failed to write TeX file');
@@ -121,7 +115,7 @@ try {
         throw new Exception('PDF generation failed');
     }
 
-    // Convert to SVG
+    // Convert PDF to SVG
     $cmd = "pdf2svg " . escapeshellarg($pdfFile) . " " . escapeshellarg($workDir . '/output.svg') . " 2>&1";
     debug_log("Running: " . $cmd);
     
