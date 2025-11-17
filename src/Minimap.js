@@ -98,8 +98,7 @@ export class Minimap {
 
     /**
      * Draws shapes on the SVG canvas.
-     * 
-     * @private
+     * * @private
      * @param {number} minX - The minimum X-coordinate in the data.
      * @param {number} minY - The minimum Y-coordinate in the data.
      */
@@ -132,6 +131,15 @@ export class Minimap {
         thmnt.append('stop').attr('offset', '50%').attr('stop-color', '#cc5500')
         thmnt.append('stop').attr('offset', '50%').attr('stop-color', 'black')
 
+        // --- NEW GRADIENT DEFINITION for Half-Circle Highlight (Issue #60) ---
+        const highlightHalf = defs.append('linearGradient')
+            .attr('id', 'highlightHalf')
+            .attr('x1', '0%').attr('y1', '0%')
+            .attr('x2', '0%').attr('y2', '100%')
+        highlightHalf.append('stop').attr('offset', '50%').attr('stop-color', 'yellow') // Highlight half
+        highlightHalf.append('stop').attr('offset', '50%').attr('stop-color', 'black') // Retain black half
+        // --- END NEW GRADIENT ---
+
         const shapes = this.svg.selectAll('circle')
             .data(Object.values(this.data).flat())
             .enter()
@@ -139,8 +147,16 @@ export class Minimap {
             .filter(d => !d.properties.isPlaceholder)
             .attr('fill', d => {
                 if (d.properties.number === this.highlightedNumber && this.mainMinimap) {
-                    return 'yellow'
+                    // --- UPDATED COLORING LOGIC ---
+                    // Check if the node is one of the half-circle types
+                    if (['Pp(nt)', 'Dft', 'Thm(nt)'].includes(d.properties.type)) {
+                        return 'url(#highlightHalf)' // Apply the half-yellow/half-black gradient
+                    }
+                    return 'yellow' // Apply uniform yellow for standard nodes
+                    // --- END UPDATED LOGIC ---
                 }
+                
+                // Keep the original coloring logic for non-highlighted nodes
                 if (d.properties.type) {
                     switch (d.properties.type) {
                         case 'Thm':

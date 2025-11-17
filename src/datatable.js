@@ -110,8 +110,13 @@ export let table = new DataTable('#principia-table', {
             className: 'column-width-proofs-by',
             render: function(data, type, row) {
                 let dataArray = Array.isArray(data) ? data : [data]
+                const count = dataArray.length
                 let formattedData = dataArray.join(', ')
-                return '<div style="max-width: 100%; max-height: 16rem; word-wrap: break-word; overflow-y: auto;">' + (formattedData || '') + '</div>'
+                
+                // Add the count and then the scrollable content
+                let content = `(${count})<br>` + (formattedData || '')
+                
+                return '<div style="max-width: 100%; max-height: 16rem; word-wrap: break-word; overflow-y: auto;">' + content + '</div>'
             },
         },
         {
@@ -120,8 +125,13 @@ export let table = new DataTable('#principia-table', {
             className: 'column-width-proofs',
             render: function(data, type, row) {
                 let dataArray = Array.isArray(data) ? data : [data]
+                const count = dataArray.length
                 let formattedData = dataArray.join(', ')
-                return '<div style="max-width: 100%; max-height: 16rem; word-wrap: break-word; overflow-y: auto;">' + (formattedData || '') + '</div>'
+                
+                // Add the count and then the scrollable content
+                let content = `(${count})<br>` + (formattedData || '')
+                
+                return '<div style="max-width: 100%; max-height: 16rem; word-wrap: break-word; overflow-y: auto;">' + content + '</div>'
             },
         },
     ],

@@ -195,6 +195,17 @@ function generateAllRows(pmNumber) {
 
   const provenBy = node.provenBy || []
   const proves = node.proves || []
+  
+  // --- START OF NEW COUNTER LOGIC ---
+  const provenByCount = provenBy.length
+  const provesCount = proves.length
+  
+  // Update the left header (Its Proof Cites...)
+  $('#left-svg-container h3').text(`Its Proof Cites... (${provenByCount})`)
+  
+  // Update the right header (Cited in Proof of...)
+  $('#right-svg-container h3').text(`Cited in Proof of... (${provesCount})`)
+  // --- END OF NEW COUNTER LOGIC ---
 
   // sort the arrays numerically
   provenBy.sort((a, b) => parseFloat(a) - parseFloat(b))

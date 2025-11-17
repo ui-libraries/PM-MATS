@@ -1316,7 +1316,7 @@ Missing nodes are represented as placeholders.</p>
 
   <p>Updates the chapter title in the minimap based on the given chapter number.</p>
 
-    <div class='pre p1 fill-light mt0'>chapterTitle(chapterNumber: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</div>
+    <div class='pre p1 fill-light mt0'>chapterTitle(chapterNumber: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, excluded: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>>)</div>
   
   
 
@@ -1335,6 +1335,15 @@ Missing nodes are represented as placeholders.</p>
           <div>
             <span class='code bold'>chapterNumber</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
 	    The chapter number to find the title for.
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>excluded</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>>)</code>
+	    The chapters to be excluded.
 
           </div>
           
@@ -1719,6 +1728,17 @@ Missing nodes are represented as placeholders.</p>
 
 
               
+                <tr>
+  <td class='break-word'><span class='code bold'>options.excluded</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>></code>
+  
+    (default <code>[&#39;8&#39;,&#39;89&#39;]</code>)
+  </td>
+  <td class='break-word'><span>The chapters to be excluded.
+</span></td>
+</tr>
+
+
+              
             </tbody>
           </table>
           
@@ -1772,7 +1792,7 @@ Missing nodes are represented as placeholders.</p>
 
   <p>Generates a minimap for the specified chapters.</p>
 
-    <div class='pre p1 fill-light mt0'>miniMap(chapters: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>>, svgSelector: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, highlightedNumber: (<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a> | null))</div>
+    <div class='pre p1 fill-light mt0'>miniMap(chapters: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>>, svgSelector: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, highlightedNumber: (<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a> | null), excluded: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>>)</div>
   
   
 
@@ -1810,6 +1830,16 @@ Missing nodes are represented as placeholders.</p>
             <span class='code bold'>highlightedNumber</span> <code class='quiet'>((<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a> | null)
             = <code>null</code>)</code>
 	    The chapter number to highlight.
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>excluded</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>>
+            = <code>[]</code>)</code>
+	    The chapters to be excluded.
 
           </div>
           
@@ -1855,7 +1885,7 @@ Missing nodes are represented as placeholders.</p>
 
   <p>Generates the main map visualization.</p>
 
-    <div class='pre p1 fill-light mt0'>normalMap()</div>
+    <div class='pre p1 fill-light mt0'>normalMap(excluded: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>>)</div>
   
   
 
@@ -1866,6 +1896,21 @@ Missing nodes are represented as placeholders.</p>
   
   
 
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>excluded</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>>
+            = <code>[]</code>)</code>
+	    The chapters to be excluded.
+
+          </div>
+          
+        </div>
+      
+    </div>
   
 
   
