@@ -145,6 +145,10 @@ export let table = new DataTable('#principia-table', {
             const title = column.header().textContent
             const input = document.createElement('input')
             input.placeholder = title
+
+            input.setAttribute('aria-label', title)
+            input.setAttribute('title', title)
+
             column.header().replaceChildren(input)
     
             input.addEventListener('keyup', function() {
