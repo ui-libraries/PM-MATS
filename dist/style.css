@@ -445,7 +445,7 @@ figcaption {
 
 /* 2. Style the Skip Link */
 .skip-link {
-    /* Apply visual hiding properties */
+    /* Apply visual hiding properties. */
     position: absolute !important;
     overflow: hidden;
     width: 1px;
