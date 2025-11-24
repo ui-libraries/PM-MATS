@@ -219,14 +219,14 @@ function generateAllRows(pmNumber) {
   const proves = node.proves || []
   
   // --- START OF NEW COUNTER LOGIC ---
-  const provenByCount = provenBy.length
-  const provesCount = proves.length
+  // const provenByCount = provenBy.length
+  // const provesCount = proves.length
   
   // Update the left header (Its Proof Cites...)
-  $('#left-svg-container h3').text(`Its Proof Cites... (${provenByCount})`)
+  // $('#left-svg-container h3').text(`Its Proof Cites... (${provenByCount})`)
   
   // Update the right header (Cited in Proof of...)
-  $('#right-svg-container h3').text(`Cited in Proof of... (${provesCount})`)
+  // $('#right-svg-container h3').text(`Cited in Proof of... (${provesCount})`)
   // --- END OF NEW COUNTER LOGIC ---
 
   provenBy.sort((a, b) => parseFloat(a) - parseFloat(b))
