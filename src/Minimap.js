@@ -65,8 +65,7 @@ export class Minimap {
 
     /**
      * Initializes the visualization by calculating dimensions and drawing elements.
-     * 
-     * @private
+     * * @private
      */
     init() {
         // Calculate minimum and maximum x and y coordinates
@@ -89,10 +88,22 @@ export class Minimap {
         const svgWidth = maxX - minX + this.xOffset
         const svgHeight = maxY - minY + this.yOffset
 
-        // Set SVG dimensions
+        // Set SVG dimensions and ARIA attributes
         this.svg
             .attr('width', svgWidth)
             .attr('height', svgHeight)
+            .attr('role', 'img')
+            .attr('aria-labelledby', 'minimap-title minimap-desc') // Link Title and Description
+
+        // Programmatically inject Title and Description
+        this.svg.append('title')
+            .attr('id', 'minimap-title')
+            .text('Chapter map visualization.')
+
+        this.svg.append('desc')
+            .attr('id', 'minimap-desc')
+            .text('Displays the node relationships within a single chapter, highlighting the relevant starred number.')
+
 
         this._drawShape(minX, minY)
         this._drawChapterMarker(minX, minY)

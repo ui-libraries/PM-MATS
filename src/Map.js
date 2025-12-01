@@ -61,8 +61,7 @@ export class Map {
 
     /**
      * Initializes the visualization by calculating dimensions and drawing elements.
-     * 
-     * @private
+     * * @private
      */
     init() {
         // Calculate minimum and maximum x and y coordinates
@@ -85,10 +84,21 @@ export class Map {
         const svgWidth = maxX - minX + this.xOffset
         const svgHeight = maxY - minY + this.yOffset
 
-        // Set SVG dimensions
+        // Set SVG dimensions and ARIA attributes
         this.svg
             .attr('width', svgWidth)
             .attr('height', svgHeight)
+            .attr('role', 'img') 
+            .attr('aria-labelledby', 'map-title map-desc') // Link Title and Description
+
+        // Programmatically inject Title and Description
+        this.svg.append('title')
+            .attr('id', 'map-title')
+            .text('Interactive map of Principia starred numbers')
+
+        this.svg.append('desc')
+            .attr('id', 'map-desc')
+            .text('Interactive map of Principia starred numbers; use Left/Right to pan, Tab to move between nodes.')
 
         this._drawShape(minX, minY)
         this._drawTextLabels(minX, minY)
