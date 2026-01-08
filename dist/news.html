@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head lang="en">
+   <!--Combined Analytics - Google tag (gtag.js) --> <script async src="https://www.googletagmanager.com/gtag/js?id=G-DWD47TCY4T"></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-DWD47TCY4T'); </script>
+   <!--Site Specific - Google tag (gtag.js) --> <script async src="https://www.googletagmanager.com/gtag/js?id=G-TLL8DVCRRB"></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-TLL8DVCRRB'); </script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Principia Mathematica">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://principia.lib.uiowa.edu">
+    <meta property="og:image" content="https://principia.lib.uiowa.edu/images/card.jpg">
+    <meta property="og:description" content="Digital tools to make clear structural connections between different parts of Whitehead and Russells's Principia Mathematica and to make analyzable data about the theorems, definitions, and primitive postulates in its text.">
+
+    <!-- Optional Meta Tags -->
+    <meta property="og:site_name" content="Principia Mathematica">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css" />
+    <title>Principia Mathematica</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+         <div class="navbar-brand">Principia Mathematica</div>
+         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+         <span class="navbar-toggler-icon"></span>
+         </button>
+         <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+               <li class="nav-item">
+                  <a class="nav-link" aria-current="page" href="map.html">map</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link" href="table.html">table</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link" href="about.html">about</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link" href="people.html">people</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link" href="guide.html">guide</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link active" href="news.html">news</a>
+               </li>
+            </ul>
+         </div>
+      </div>
+   </nav>
+      <div class="container py-5">
+        <div class="row">
+          <div class="text-center mb-4">
+            <h3>News</h3>
+          </div>
+          <div class="col-12 col-md-8 offset-md-2">
+            <!-- Editors: To add a story, place an HTML file in /data/news (e.g., data/news/2025-12-10-sample.html)
+                 and add an entry to /data/news.json with { "title", "author", "date", "slug" } referencing that file. -->
+            <div id="news-list" class="d-flex flex-column gap-5">
+              <div class="text-center text-muted">Loading stories…</div>
+            </div>
+          </div>
+        </div>
+     </div>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="js/news.js" defer></script>
+  </body>
+</html>
+
+
