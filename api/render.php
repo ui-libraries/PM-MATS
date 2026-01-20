@@ -20,9 +20,10 @@ if (!isset($input['latex']) || trim($input['latex']) === '') {
     sendError('No LaTeX input provided');
 }
 $latexCode = trim($input['latex']);
+$mathMode = isset($input['mathMode']) ? (bool)$input['mathMode'] : true; // Default to math mode
 
-// 2. CACHE
-$hash = md5($latexCode);
+// 2. CACHE (include mode in hash so math/text versions are cached separately)
+$hash = md5($latexCode . ($mathMode ? '_math' : '_text'));
 $cacheFile = $CACHE_DIR . '/' . $hash . '.svg';
 
 if (file_exists($cacheFile)) {
@@ -36,23 +37,43 @@ $workDir = $TEMP_BASE . '/' . $jobId;
 if (!mkdir($workDir)) sendError("Server cannot create temp dir");
 
 try {
-    // Write TeX
-    $tex = "\\documentclass[preview]{standalone}\n" .
-           "\\usepackage{amsmath}\n" . // Ensure amsmath is here
-           "\\usepackage{principia}\n" . 
-           "\\begin{document}\n" .
-           "$\\displaystyle\n" .      // Force "Display Mode" (bigger, nicer symbols)
-           "\\begin{aligned}\n" .      // START alignment environment
-           $latexCode . "\n" .         // Inject user code
-           "\\end{aligned}\n" .        // END alignment environment
-           "$\n" . 
-           "\\end{document}\n";
+    // Write TeX - conditionally wrap in math mode
+    if ($mathMode) {
+        $tex = "\\documentclass[preview]{standalone}\n" .
+               "\\usepackage{amsmath}\n" .
+               "\\usepackage{principia}\n" . 
+               "\\begin{document}\n" .
+               "$\\displaystyle\n" .
+               "\\begin{aligned}\n" .
+               $latexCode . "\n" .
+               "\\end{aligned}\n" .
+               "$\n" . 
+               "\\end{document}\n";
+    } else {
+        // Text mode - for tabular and other text-mode environments
+        $tex = "\\documentclass[preview]{standalone}\n" .
+               "\\usepackage{amsmath}\n" .
+               "\\usepackage{principia}\n" . 
+               "\\begin{document}\n" .
+               $latexCode . "\n" .
+               "\\end{document}\n";
+    }
     file_put_contents($workDir . '/input.tex', $tex);
 
     // Compile PDF
     $cmd = "timeout $TIMEOUT_SEC pdflatex -interaction=nonstopmode -no-shell-escape -output-directory=" . escapeshellarg($workDir) . " " . escapeshellarg($workDir . '/input.tex');
     exec($cmd . " 2>&1", $out, $ret);
-    if ($ret !== 0) throw new Exception("LaTeX Error: " . implode(" ", $out));
+    if ($ret !== 0) {
+        $errorOutput = implode(" ", $out);
+        
+        // Check if this looks like a math-mode error when math mode is disabled
+        $hasPrincipiaCommands = preg_match('/\\\\pm(thm|imp|and|or|not|all|some|eq|df|ast|assert)/', $latexCode);
+        if (!$mathMode && $hasPrincipiaCommands) {
+            throw new Exception("LaTeX compilation failed. Hint: Your input contains Principia math commands but Math mode is unchecked. Try enabling Math mode.");
+        }
+        
+        throw new Exception("LaTeX Error: " . $errorOutput);
+    }
 
     // Convert to SVG
     $cmdSvg = "dvisvgm --pdf --no-fonts --optimize " . escapeshellarg($workDir . '/input.pdf') . " -o " . escapeshellarg($workDir . '/output.svg');

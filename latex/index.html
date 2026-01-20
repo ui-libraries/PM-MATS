@@ -136,6 +136,36 @@
             margin-top: 16px;
         }
 
+        .mode-toggle {
+            margin-top: 12px;
+        }
+
+        .toggle-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .toggle-label input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            accent-color: var(--accent);
+            cursor: pointer;
+        }
+
+        .toggle-text {
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        .toggle-hint {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
         .btn {
             display: inline-flex;
             align-items: center;
@@ -661,6 +691,14 @@
                 <div class="panel-body">
                     <textarea id="latex-input" placeholder="Enter Principia LaTeX notation..." spellcheck="false">\pmthm p \pmimp \pmnot p</textarea>
                     
+                    <div class="mode-toggle">
+                        <label class="toggle-label">
+                            <input type="checkbox" id="math-mode" checked>
+                            <span class="toggle-text">Math mode</span>
+                            <span class="toggle-hint">(uncheck for tabular/text environments)</span>
+                        </label>
+                    </div>
+
                     <div class="btn-row">
                         <button id="render-btn" class="btn btn-primary">
                             <svg class="icon" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
@@ -779,6 +817,7 @@
         // ============ DOM Elements ============
         const $ = id => document.getElementById(id);
         const latexInput = $('latex-input');
+        const mathModeCheckbox = $('math-mode');
         const renderBtn = $('render-btn');
         const downloadBtn = $('download-btn');
         const copyBtn = $('copy-btn');
@@ -801,11 +840,11 @@
         // ============ API ============
         const API_URL = '/api/render.php';
 
-        async function renderLatex(latex) {
+        async function renderLatex(latex, mathMode) {
             const response = await fetch(API_URL, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ latex })
+                body: JSON.stringify({ latex, mathMode })
             });
             const text = await response.text();
             debugLog(`Response: ${text.substring(0, 500)}...`);
@@ -963,10 +1002,11 @@
             setButtonsEnabled(false);
             showStatus('Rendering...');
             debugOutput.textContent = '';
-            debugLog(`Sending: ${latex}`);
+            const mathMode = mathModeCheckbox.checked;
+            debugLog(`Sending: ${latex} (mathMode: ${mathMode})`);
 
             try {
-                const result = await renderLatex(latex);
+                const result = await renderLatex(latex, mathMode);
                 
                 if (result.success) {
                     displaySvg(result.svg);
