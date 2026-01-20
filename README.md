@@ -23,3 +23,8 @@ This project includes a self-hosted microservice for converting LaTeX formulas t
 * **System Packages:** A lightweight TeX Live installation including `texlive-scheme-basic`, `texlive-dvisvgm`, and `texlive-collection-latexextra`.
 * **Custom Logic:** The `principia.sty` file must be installed to the system TeX path (e.g., `/usr/share/texmf/tex/latex/principia/`) and registered via `texhash`.
 * **Backend:** The `api/render.php` script handles requests, and the `api/cache` directory must be writable by the web server user to store generated assets.
+
+sudo dnf install -y texlive-scheme-basic texlive-collection-latexextra texlive-dvisvgm
+sudo mkdir -p /usr/share/texmf/tex/latex/principia
+sudo cp principia.sty /usr/share/texmf/tex/latex/principia/
+sudo texhash
