@@ -16,3 +16,10 @@ A no-fillings bun starter project. https://bun.sh/
 `bun test` - run unit tests
 
 `bun docs` - generate docs for all comments in valid JSDoc format
+
+## LaTeX Rendering Engine
+This project includes a self-hosted microservice for converting LaTeX formulas to SVGs. For this feature to work, the hosting server requires the following:
+
+* **System Packages:** A lightweight TeX Live installation including `texlive-scheme-basic`, `texlive-dvisvgm`, and `texlive-collection-latexextra`.
+* **Custom Logic:** The `principia.sty` file must be installed to the system TeX path (e.g., `/usr/share/texmf/tex/latex/principia/`) and registered via `texhash`.
+* **Backend:** The `api/render.php` script handles requests, and the `api/cache` directory must be writable by the web server user to store generated assets.

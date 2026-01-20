@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PMifier - Principia LaTeX to SVG</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-page: #F8F0E3;
+            --bg-panel: rgb(240, 247, 255);
+            --bg-input: #ffffff;
+            --bg-toolbar: #f5f5f5;
+            --accent: rgb(98, 28, 28);
+            --accent-hover: rgb(170, 34, 34);
+            --text-primary: #2c2c2c;
+            --text-secondary: #555;
+            --text-muted: #888;
+            --border: #ccc;
+            --border-light: #ddd;
+            --success: #2e7d32;
+            --warning: #ed6c02;
+            --error: rgb(170, 34, 34);
+            --shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'EB Garamond', Georgia, serif;
+            background-color: var(--bg-page);
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            color: var(--text-primary);
+        }
+
+        .app-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 24px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 500;
+            margin: 0 0 8px 0;
+            color: var(--accent);
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin: 0;
+        }
+
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 24px;
+        }
+
+        @media (max-width: 1000px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .panel {
+            background: var(--bg-panel);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        .panel-header {
+            background: var(--bg-toolbar);
+            padding: 14px 20px;
+            border-bottom: 1px solid var(--border-light);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .panel-header h2 {
+            margin: 0;
+            font-size: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-secondary);
+        }
+
+        .panel-body {
+            padding: 20px;
+        }
+
+        /* Input Panel */
+        textarea {
+            width: 100%;
+            height: 180px;
+            padding: 16px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            resize: vertical;
+            background: var(--bg-input);
+            color: var(--text-primary);
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(98, 28, 28, 0.15);
+        }
+
+        textarea::placeholder {
+            color: var(--text-muted);
+        }
+
+        .btn-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 16px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            border: none;
+            border-radius: 6px;
+            font-family: 'EB Garamond', serif;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            line-height: 1;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            background: var(--accent-hover);
+        }
+
+        .btn-secondary {
+            background: var(--bg-toolbar);
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover:not(:disabled) {
+            background: #e8e8e8;
+            color: var(--text-primary);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .btn .icon {
+            width: 18px;
+            height: 18px;
+            flex-shrink: 0;
+            display: block;
+        }
+
+        /* Output Panel */
+        .output-panel {
+            display: flex;
+            flex-direction: column;
+            min-height: 400px;
+        }
+
+        .output-panel .panel-body {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 0;
+        }
+
+        /* Zoom Controls */
+        .zoom-toolbar {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 20px;
+            background: var(--bg-toolbar);
+            border-bottom: 1px solid var(--border-light);
+            flex-wrap: wrap;
+        }
+
+        .zoom-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .zoom-btn {
+            height: 30px;
+            padding: 0 10px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.2s;
+            flex-shrink: 0;
+        }
+
+        .zoom-btn:hover {
+            background: #e8e8e8;
+            color: var(--text-primary);
+            border-color: var(--accent);
+        }
+
+        .zoom-btn .icon {
+            width: 16px;
+            height: 16px;
+            flex-shrink: 0;
+            display: block;
+        }
+
+        .zoom-slider {
+            width: 120px;
+            height: 6px;
+            -webkit-appearance: none;
+            appearance: none;
+            background: var(--border);
+            border-radius: 3px;
+            outline: none;
+        }
+
+        .zoom-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 16px;
+            height: 16px;
+            background: var(--accent);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .zoom-slider::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+        }
+
+        .zoom-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            color: var(--text-secondary);
+            min-width: 45px;
+            text-align: center;
+        }
+
+        .toolbar-divider {
+            width: 1px;
+            height: 20px;
+            background: var(--border);
+        }
+
+        .fit-btn {
+            padding: 0 10px;
+            font-size: 11px;
+            font-family: 'JetBrains Mono', monospace;
+            white-space: nowrap;
+        }
+
+        /* Global icon styles */
+        .icon {
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            fill: none;
+        }
+
+        /* SVG Viewport */
+        .svg-viewport {
+            flex: 1;
+            overflow: auto;
+            background: 
+                linear-gradient(45deg, #e8e0d5 25%, transparent 25%),
+                linear-gradient(-45deg, #e8e0d5 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, #e8e0d5 75%),
+                linear-gradient(-45deg, transparent 75%, #e8e0d5 75%);
+            background-size: 16px 16px;
+            background-position: 0 0, 0 8px, 8px -8px, -8px 0px;
+            background-color: #efe7da;
+            position: relative;
+            min-height: 300px;
+        }
+
+        .svg-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100%;
+            padding: 40px;
+        }
+
+        .svg-container svg {
+            background: white;
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            transform-origin: center center;
+            transition: transform 0.1s ease-out;
+        }
+
+        /* Empty State */
+        .empty-state {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            min-height: 300px;
+            color: var(--text-muted);
+            text-align: center;
+            padding: 40px;
+        }
+
+        .empty-state .empty-icon {
+            width: 64px;
+            height: 64px;
+            stroke: var(--border);
+            stroke-width: 1.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            fill: none;
+            margin-bottom: 16px;
+        }
+
+        .empty-state p {
+            margin: 0;
+            font-size: 1.1rem;
+        }
+
+        .empty-state .hint {
+            font-size: 0.9rem;
+            margin-top: 8px;
+            color: var(--text-muted);
+        }
+
+        /* Status Messages */
+        .status-bar {
+            padding: 10px 20px;
+            background: var(--bg-toolbar);
+            border-top: 1px solid var(--border-light);
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .status-bar.loading {
+            color: var(--warning);
+        }
+
+        .status-bar.success {
+            color: var(--success);
+        }
+
+        .status-bar.error {
+            color: var(--error);
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: currentColor;
+        }
+
+        .status-bar.loading .status-dot {
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        /* Fullscreen Modal */
+        .fullscreen-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(248, 240, 227, 0.98);
+            z-index: 1000;
+            display: none;
+            flex-direction: column;
+        }
+
+        .fullscreen-overlay.active {
+            display: flex;
+        }
+
+        .fullscreen-toolbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 24px;
+            background: var(--bg-toolbar);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .fullscreen-viewport {
+            flex: 1;
+            overflow: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+        }
+
+        .fullscreen-viewport svg {
+            background: white;
+            border-radius: 4px;
+            box-shadow: var(--shadow);
+            max-width: none;
+            max-height: none;
+        }
+
+        .close-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 6px;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .close-btn:hover {
+            background: #e8e8e8;
+            color: var(--accent);
+        }
+
+        .close-btn .icon {
+            width: 24px;
+            height: 24px;
+        }
+
+        /* Sample Buttons */
+        .samples-section {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-light);
+        }
+
+        .samples-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .sample-btns {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .sample-btn {
+            padding: 6px 12px;
+            font-size: 0.85rem;
+            font-family: 'EB Garamond', serif;
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .sample-btn:hover {
+            background: #e8e8e8;
+            color: var(--accent);
+            border-color: var(--accent);
+        }
+
+        /* Debug Panel (collapsible) */
+        .debug-section {
+            margin-top: 24px;
+        }
+
+        .debug-toggle {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            cursor: pointer;
+            padding: 8px 0;
+        }
+
+        .debug-toggle:hover {
+            color: var(--text-secondary);
+        }
+
+        .debug-toggle .icon {
+            width: 16px;
+            height: 16px;
+            transition: transform 0.2s;
+        }
+
+        .debug-toggle.open .icon {
+            transform: rotate(90deg);
+        }
+
+        .debug-panel {
+            display: none;
+            margin-top: 12px;
+            padding: 16px;
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            color: var(--text-muted);
+            max-height: 200px;
+            overflow: auto;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+
+        .debug-panel.open {
+            display: block;
+        }
+
+        /* Keyboard hint */
+        kbd {
+            display: inline-block;
+            padding: 2px 6px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            color: var(--text-muted);
+        }
+
+        /* Navbar styles to match main site */
+        .navbar {
+            padding-top: 0.2rem;
+            padding-bottom: 0.2rem;
+            font-family: 'EB Garamond', serif;
+        }
+
+        .navbar-brand {
+            font-size: 1.5rem;
+            text-decoration: none !important;
+        }
+
+        .nav-link {
+            font-size: 0.8rem;
+            padding: 0 15px;
+            text-decoration: none;
+            color: whitesmoke;
+            display: inline-block;
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background-color: currentColor;
+            opacity: 0;
+            transition: opacity 0.3s, transform 0.3s;
+            transform: scale(0, 1);
+            transform-origin: center bottom;
+        }
+
+        .nav-link:hover::after,
+        .nav-link:focus::after,
+        .nav-link.active::after {
+            opacity: 1;
+            transform: scale(1, 1);
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+         <a class="navbar-brand" href="../dist/map.html">Principia Mathematica</a>
+         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+         <span class="navbar-toggler-icon"></span>
+         </button>
+         <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+               <li class="nav-item">
+                  <a class="nav-link" href="../dist/map.html">map</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link" href="../dist/table.html">table</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link" href="../dist/about.html">about</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link" href="../dist/people.html">people</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link" href="../dist/guide.html">guide</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link" href="../dist/news.html">news</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link active" href="index.html">pmifier</a>
+               </li>
+            </ul>
+         </div>
+      </div>
+   </nav>
+
+    <div class="app-container">
+        <header>
+            <h1>PMifier</h1>
+            <p class="subtitle">Convert Principia Mathematica notation to SVG</p>
+        </header>
+
+        <div class="main-grid">
+            <!-- Input Panel -->
+            <div class="panel">
+                <div class="panel-header">
+                    <h2>LaTeX Input</h2>
+                    <span style="font-size: 12px; color: var(--text-muted);"><kbd>Ctrl</kbd>+<kbd>Enter</kbd> to render</span>
+                </div>
+                <div class="panel-body">
+                    <textarea id="latex-input" placeholder="Enter Principia LaTeX notation..." spellcheck="false">\pmthm p \pmimp \pmnot p</textarea>
+                    
+                    <div class="btn-row">
+                        <button id="render-btn" class="btn btn-primary">
+                            <svg class="icon" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+                            Render
+                        </button>
+                        <button id="download-btn" class="btn btn-secondary" disabled>
+                            <svg class="icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
+                            Download
+                        </button>
+                        <button id="copy-btn" class="btn btn-secondary" disabled>
+                            <svg class="icon" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                            Copy SVG
+                        </button>
+                    </div>
+
+                    <div class="samples-section">
+                        <div class="samples-label">Quick Examples</div>
+                        <div class="sample-btns" id="sample-buttons">
+                            <button class="sample-btn" data-latex="\pmthm p \pmimp q">Simple</button>
+                            <button class="sample-btn" data-latex="\pmthm p \pmimp \pmnot\pmnot p">Double Neg</button>
+                            <button class="sample-btn" data-latex="\pmthm (p \pmimp q) \pmand (q \pmimp r) \pmdot\pmimp\pmdot p \pmimp r">Syllogism</button>
+                            <button class="sample-btn" data-latex="\pmthm (\pmall x)\pmhat\phi x \pmimp \phi y">Universal</button>
+                        </div>
+                    </div>
+
+                    <div class="debug-section">
+                        <button class="debug-toggle" id="debug-toggle">
+                            <svg class="icon" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+                            Debug Console
+                        </button>
+                        <div class="debug-panel" id="debug-output"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Output Panel -->
+            <div class="panel output-panel">
+                <div class="panel-header">
+                    <h2>Rendered Output</h2>
+                    <button id="fullscreen-btn" class="zoom-btn" title="Fullscreen" disabled>
+                        <svg class="icon" viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 00-2 2v3m18 0V5a2 2 0 00-2-2h-3m0 18h3a2 2 0 002-2v-3M3 16v3a2 2 0 002 2h3"/></svg>
+                    </button>
+                </div>
+
+                <div class="zoom-toolbar" id="zoom-toolbar" style="display: none;">
+                    <div class="zoom-group">
+                        <button class="zoom-btn" id="zoom-out" title="Zoom Out">
+                            <svg class="icon" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                        </button>
+                        <input type="range" class="zoom-slider" id="zoom-slider" min="10" max="400" value="100">
+                        <button class="zoom-btn" id="zoom-in" title="Zoom In">
+                            <svg class="icon" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                        </button>
+                        <span class="zoom-value" id="zoom-value">100%</span>
+                    </div>
+
+                    <div class="toolbar-divider"></div>
+
+                    <button class="zoom-btn fit-btn" id="fit-width" title="Fit to Width">Width</button>
+                    <button class="zoom-btn fit-btn" id="fit-height" title="Fit to Height">Height</button>
+                    <button class="zoom-btn fit-btn" id="zoom-reset" title="Reset Zoom">100%</button>
+                </div>
+
+                <div class="panel-body">
+                    <div class="svg-viewport" id="svg-viewport">
+                        <div class="empty-state" id="empty-state">
+                            <svg class="empty-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><circle cx="12" cy="17" r="0.5"/></svg>
+                            <p>Enter LaTeX and click Render</p>
+                            <p class="hint">The rendered SVG will appear here</p>
+                        </div>
+                        <div class="svg-container" id="svg-container" style="display: none;"></div>
+                    </div>
+                </div>
+
+                <div class="status-bar" id="status-bar" style="display: none;">
+                    <span class="status-dot"></span>
+                    <span class="status-text"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Fullscreen Modal -->
+    <div class="fullscreen-overlay" id="fullscreen-overlay">
+        <div class="fullscreen-toolbar">
+            <div class="zoom-group">
+                <button class="zoom-btn" id="fs-zoom-out" title="Zoom Out">
+                    <svg class="icon" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                </button>
+                <input type="range" class="zoom-slider" id="fs-zoom-slider" min="10" max="400" value="100">
+                <button class="zoom-btn" id="fs-zoom-in" title="Zoom In">
+                    <svg class="icon" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                </button>
+                <span class="zoom-value" id="fs-zoom-value">100%</span>
+                <div class="toolbar-divider"></div>
+                <button class="zoom-btn fit-btn" id="fs-fit-width">Width</button>
+                <button class="zoom-btn fit-btn" id="fs-fit-height">Height</button>
+                <button class="zoom-btn fit-btn" id="fs-zoom-reset">100%</button>
+            </div>
+            <button class="close-btn" id="close-fullscreen" title="Close (Esc)">
+                <svg class="icon" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+        </div>
+        <div class="fullscreen-viewport" id="fullscreen-viewport"></div>
+    </div>
+
+    <script>
+        // ============ State ============
+        const state = {
+            lastSvg: null,
+            lastSvgDimensions: { width: 0, height: 0 },
+            zoom: 100,
+            fsZoom: 100
+        };
+
+        // ============ DOM Elements ============
+        const $ = id => document.getElementById(id);
+        const latexInput = $('latex-input');
+        const renderBtn = $('render-btn');
+        const downloadBtn = $('download-btn');
+        const copyBtn = $('copy-btn');
+        const fullscreenBtn = $('fullscreen-btn');
+        const sampleButtons = $('sample-buttons');
+        const svgViewport = $('svg-viewport');
+        const svgContainer = $('svg-container');
+        const emptyState = $('empty-state');
+        const statusBar = $('status-bar');
+        const zoomToolbar = $('zoom-toolbar');
+        const zoomSlider = $('zoom-slider');
+        const zoomValue = $('zoom-value');
+        const debugToggle = $('debug-toggle');
+        const debugOutput = $('debug-output');
+        const fullscreenOverlay = $('fullscreen-overlay');
+        const fullscreenViewport = $('fullscreen-viewport');
+        const fsZoomSlider = $('fs-zoom-slider');
+        const fsZoomValue = $('fs-zoom-value');
+
+        // ============ API ============
+        const API_URL = '/api/render.php';
+
+        async function renderLatex(latex) {
+            const response = await fetch(API_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ latex })
+            });
+            const text = await response.text();
+            debugLog(`Response: ${text.substring(0, 500)}...`);
+            return JSON.parse(text);
+        }
+
+        // ============ UI Helpers ============
+        function showStatus(message, type = 'loading') {
+            statusBar.style.display = 'flex';
+            statusBar.className = `status-bar ${type}`;
+            statusBar.querySelector('.status-text').textContent = message;
+            
+            if (type === 'success') {
+                setTimeout(() => { statusBar.style.display = 'none'; }, 3000);
+            }
+        }
+
+        function hideStatus() {
+            statusBar.style.display = 'none';
+        }
+
+        function debugLog(msg) {
+            const time = new Date().toLocaleTimeString();
+            debugOutput.textContent += `[${time}] ${msg}\n`;
+            debugOutput.scrollTop = debugOutput.scrollHeight;
+        }
+
+        function setButtonsEnabled(enabled) {
+            renderBtn.disabled = !enabled;
+            const hasOutput = !!state.lastSvg;
+            downloadBtn.disabled = !hasOutput;
+            copyBtn.disabled = !hasOutput;
+            fullscreenBtn.disabled = !hasOutput;
+        }
+
+        // ============ SVG Display ============
+        function displaySvg(svgString) {
+            state.lastSvg = svgString;
+            
+            // Parse SVG to get dimensions
+            const parser = new DOMParser();
+            const svgDoc = parser.parseFromString(svgString, 'image/svg+xml');
+            const svgEl = svgDoc.documentElement;
+            
+            // Extract original dimensions
+            let width = parseFloat(svgEl.getAttribute('width')) || 100;
+            let height = parseFloat(svgEl.getAttribute('height')) || 100;
+            
+            // Handle pt units (convert to px roughly)
+            const widthAttr = svgEl.getAttribute('width') || '';
+            const heightAttr = svgEl.getAttribute('height') || '';
+            if (widthAttr.includes('pt')) width *= 1.33;
+            if (heightAttr.includes('pt')) height *= 1.33;
+            
+            state.lastSvgDimensions = { width, height };
+            
+            // Remove width/height attributes for CSS control
+            svgEl.removeAttribute('width');
+            svgEl.removeAttribute('height');
+            
+            // Set viewBox if not present
+            if (!svgEl.getAttribute('viewBox')) {
+                svgEl.setAttribute('viewBox', `0 0 ${width} ${height}`);
+            }
+            
+            // Display
+            emptyState.style.display = 'none';
+            svgContainer.style.display = 'flex';
+            svgContainer.innerHTML = '';
+            svgContainer.appendChild(svgEl);
+            
+            // Show zoom toolbar
+            zoomToolbar.style.display = 'flex';
+            
+            // Auto-fit on first render
+            fitToWidth();
+            
+            setButtonsEnabled(true);
+        }
+
+        function applyZoom(level, isFullscreen = false) {
+            const container = isFullscreen ? fullscreenViewport : svgContainer;
+            const svg = container.querySelector('svg');
+            if (!svg) return;
+            
+            const { width, height } = state.lastSvgDimensions;
+            const scale = level / 100;
+            
+            svg.style.width = `${width * scale}px`;
+            svg.style.height = `${height * scale}px`;
+            
+            if (isFullscreen) {
+                state.fsZoom = level;
+                fsZoomSlider.value = level;
+                fsZoomValue.textContent = `${level}%`;
+            } else {
+                state.zoom = level;
+                zoomSlider.value = level;
+                zoomValue.textContent = `${level}%`;
+            }
+        }
+
+        function fitToWidth(isFullscreen = false) {
+            const viewport = isFullscreen ? fullscreenViewport : svgViewport;
+            const availableWidth = viewport.clientWidth - 80; // padding
+            const { width } = state.lastSvgDimensions;
+            const level = Math.min(400, Math.max(10, Math.round((availableWidth / width) * 100)));
+            applyZoom(level, isFullscreen);
+        }
+
+        function fitToHeight(isFullscreen = false) {
+            const viewport = isFullscreen ? fullscreenViewport : svgViewport;
+            const availableHeight = viewport.clientHeight - 80;
+            const { height } = state.lastSvgDimensions;
+            const level = Math.min(400, Math.max(10, Math.round((availableHeight / height) * 100)));
+            applyZoom(level, isFullscreen);
+        }
+
+        function resetZoom(isFullscreen = false) {
+            applyZoom(100, isFullscreen);
+        }
+
+        // ============ Fullscreen ============
+        function openFullscreen() {
+            if (!state.lastSvg) return;
+            
+            const parser = new DOMParser();
+            const svgDoc = parser.parseFromString(state.lastSvg, 'image/svg+xml');
+            const svgEl = svgDoc.documentElement;
+            svgEl.removeAttribute('width');
+            svgEl.removeAttribute('height');
+            
+            fullscreenViewport.innerHTML = '';
+            fullscreenViewport.appendChild(svgEl);
+            fullscreenOverlay.classList.add('active');
+            
+            // Apply same zoom as main view
+            applyZoom(state.zoom, true);
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeFullscreen() {
+            fullscreenOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // ============ Actions ============
+        async function handleRender() {
+            const latex = latexInput.value.trim();
+            if (!latex) {
+                showStatus('Please enter some LaTeX code', 'error');
+                return;
+            }
+
+            setButtonsEnabled(false);
+            showStatus('Rendering...');
+            debugOutput.textContent = '';
+            debugLog(`Sending: ${latex}`);
+
+            try {
+                const result = await renderLatex(latex);
+                
+                if (result.success) {
+                    displaySvg(result.svg);
+                    showStatus(result.cached ? 'Loaded from cache' : 'Rendered successfully', 'success');
+                } else {
+                    showStatus(`Error: ${result.error}`, 'error');
+                    setButtonsEnabled(true);
+                }
+            } catch (err) {
+                debugLog(`Error: ${err.message}`);
+                showStatus(`Request failed: ${err.message}`, 'error');
+                setButtonsEnabled(true);
+            }
+        }
+
+        function handleDownload() {
+            if (!state.lastSvg) return;
+            
+            const blob = new Blob([state.lastSvg], { type: 'image/svg+xml;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `pmifier-${Date.now()}.svg`;
+            link.click();
+            URL.revokeObjectURL(url);
+            showStatus('SVG downloaded', 'success');
+        }
+
+        async function handleCopy() {
+            if (!state.lastSvg) return;
+            
+            try {
+                await navigator.clipboard.writeText(state.lastSvg);
+                showStatus('SVG copied to clipboard', 'success');
+            } catch (err) {
+                showStatus(`Copy failed: ${err.message}`, 'error');
+            }
+        }
+
+        // ============ Event Listeners ============
+        renderBtn.addEventListener('click', handleRender);
+        downloadBtn.addEventListener('click', handleDownload);
+        copyBtn.addEventListener('click', handleCopy);
+        fullscreenBtn.addEventListener('click', openFullscreen);
+        $('close-fullscreen').addEventListener('click', closeFullscreen);
+
+        latexInput.addEventListener('keydown', e => {
+            if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) {
+                e.preventDefault();
+                handleRender();
+            }
+        });
+
+        // Sample buttons
+        sampleButtons.addEventListener('click', e => {
+            const btn = e.target.closest('.sample-btn');
+            if (btn) {
+                latexInput.value = btn.dataset.latex;
+                latexInput.focus();
+            }
+        });
+
+        // Debug toggle
+        debugToggle.addEventListener('click', () => {
+            debugToggle.classList.toggle('open');
+            debugOutput.classList.toggle('open');
+        });
+
+        // Zoom controls - main view
+        zoomSlider.addEventListener('input', () => applyZoom(parseInt(zoomSlider.value)));
+        $('zoom-in').addEventListener('click', () => applyZoom(Math.min(400, state.zoom + 25)));
+        $('zoom-out').addEventListener('click', () => applyZoom(Math.max(10, state.zoom - 25)));
+        $('fit-width').addEventListener('click', () => fitToWidth());
+        $('fit-height').addEventListener('click', () => fitToHeight());
+        $('zoom-reset').addEventListener('click', () => resetZoom());
+
+        // Zoom controls - fullscreen
+        fsZoomSlider.addEventListener('input', () => applyZoom(parseInt(fsZoomSlider.value), true));
+        $('fs-zoom-in').addEventListener('click', () => applyZoom(Math.min(400, state.fsZoom + 25), true));
+        $('fs-zoom-out').addEventListener('click', () => applyZoom(Math.max(10, state.fsZoom - 25), true));
+        $('fs-fit-width').addEventListener('click', () => fitToWidth(true));
+        $('fs-fit-height').addEventListener('click', () => fitToHeight(true));
+        $('fs-zoom-reset').addEventListener('click', () => resetZoom(true));
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape' && fullscreenOverlay.classList.contains('active')) {
+                closeFullscreen();
+            }
+        });
+
+        // Mouse wheel zoom
+        svgViewport.addEventListener('wheel', e => {
+            if (e.ctrlKey || e.metaKey) {
+                e.preventDefault();
+                const delta = e.deltaY > 0 ? -10 : 10;
+                applyZoom(Math.min(400, Math.max(10, state.zoom + delta)));
+            }
+        }, { passive: false });
+
+        fullscreenViewport.addEventListener('wheel', e => {
+            if (e.ctrlKey || e.metaKey) {
+                e.preventDefault();
+                const delta = e.deltaY > 0 ? -10 : 10;
+                applyZoom(Math.min(400, Math.max(10, state.fsZoom + delta)), true);
+            }
+        }, { passive: false });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>
