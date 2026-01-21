@@ -176,7 +176,7 @@ function createSummaryLink(pmNumber) {
       return
   }
 
-  $('#minimap-title').append(`<a class="summary-link active" href="${link}" target="_blank">original text</a>`)
+  $('#minimap-title').append(`<a class="summary-link active" href="${link}" target="_blank" rel="noopener noreferrer">original text</a>`)
 }
 
 /**

@@ -6,6 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="description" content="Searchable data table of all theorems, definitions, and propositions in Principia Mathematica with citation relationships.">
       <meta property="og:title" content="Principia Mathematica">
       <meta property="og:type" content="website">
       <meta property="og:url" content="https://principia.lib.uiowa.edu">
@@ -20,24 +21,24 @@
       <link rel="stylesheet" href="vendor/jquery.dataTables-1.13.6.css" />
       <link rel="stylesheet" href="vendor/eb-garamond.css">
       <link rel="stylesheet" href="style.css" />
-      <title>Principia Mathematica</title>
+      <title>Data Table | Principia Mathematica</title>
    </head>
    <body id="table-body">
       <a class="skip-link" href="#main">Skip to main content</a>
       <div class="fixed-top-container">
-         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+         <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Main navigation">
             <div class="container-fluid">
-               <div class="navbar-brand">Principia Mathematica</div>
+               <a class="navbar-brand" href="map.html">Principia Mathematica</a>
                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                <span class="navbar-toggler-icon"></span>
                </button>
                <div class="collapse navbar-collapse" id="navbarSupportedContent">
                   <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                      <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="map.html">map</a>
+                        <a class="nav-link" href="map.html">map</a>
                      </li>
                      <li class="nav-item">
-                        <a class="nav-link active" href="table.html">table</a>
+                        <a class="nav-link active" aria-current="page" href="table.html">table</a>
                      </li>
                      <li class="nav-item">
                         <a class="nav-link" href="about.html">about</a>
@@ -58,36 +59,37 @@
       </div>
       
       <main id="main" role="main">
+         <h1 class="visually-hidden">Principia Mathematica Data Table</h1>
          <table id="principia-table" class="display">
             <caption>
                Table of Principia entries, showing type, volume, section, and citation relationships.
             </caption>
             <thead>
                <tr>
-                  <th>ID</th>
-                  <th>Type</th>
-                  <th>Volume</th>
-                  <th>Part</th>
-                  <th>Section</th>
-                  <th>Chapter</th>
-                  <th>Number</th>
-                  <th>Page</th>
-                  <th>Its proof cites...</th>
-                  <th>Cited in proof of...</th>
+                  <th scope="col">ID</th>
+                  <th scope="col">Type</th>
+                  <th scope="col">Volume</th>
+                  <th scope="col">Part</th>
+                  <th scope="col">Section</th>
+                  <th scope="col">Chapter</th>
+                  <th scope="col">Number</th>
+                  <th scope="col">Page</th>
+                  <th scope="col">Its proof cites...</th>
+                  <th scope="col">Cited in proof of...</th>
                </tr>
             </thead>
             <tfoot>
                <tr>
-                  <th>ID</th>
-                  <th>Type</th>
-                  <th>Volume</th>
-                  <th>Part</th>
-                  <th>Section</th>
-                  <th>Chapter</th>
-                  <th>Number</th>
-                  <th>Page</th>
-                  <th>Its proof cites...</th>
-                  <th>Cited in proof of...</th>
+                  <th scope="col">ID</th>
+                  <th scope="col">Type</th>
+                  <th scope="col">Volume</th>
+                  <th scope="col">Part</th>
+                  <th scope="col">Section</th>
+                  <th scope="col">Chapter</th>
+                  <th scope="col">Number</th>
+                  <th scope="col">Page</th>
+                  <th scope="col">Its proof cites...</th>
+                  <th scope="col">Cited in proof of...</th>
                </tr>
             </tfoot>
          </table>

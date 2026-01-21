@@ -6,6 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="description" content="Interactive visual map of all 9,944 starred numbers in Whitehead and Russell's Principia Mathematica, showing theorem relationships.">
       <meta property="og:title" content="Principia Mathematica">
       <meta property="og:type" content="website">
       <meta property="og:url" content="https://principia.lib.uiowa.edu">
@@ -20,15 +21,15 @@
       <link rel="stylesheet" href="vendor/bootstrap-5.0.2.min.css">
       <link rel="stylesheet" href="vendor/eb-garamond.css">
       <link rel="stylesheet" href="style.css">
-      <title>Principia Mathematica</title>
+      <title>Interactive Map | Principia Mathematica</title>
 </head>
    <body>
       <a class="skip-link" href="#main">Skip to main content</a> 
       <div id="announce-move" class="visually-hidden" aria-live="polite"></div>
       <div class="fixed-top-container">
-         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+         <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Main navigation">
             <div class="container-fluid">
-               <div class="navbar-brand">Principia Mathematica</div>
+               <a class="navbar-brand" href="map.html">Principia Mathematica</a>
                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                <span class="navbar-toggler-icon"></span>
                </button>
@@ -58,6 +59,7 @@
          </nav>
       </div>
       <main id="main" role="main">
+      <h1 class="visually-hidden">Interactive Map of Principia Mathematica</h1>
       <div class="content-container" tabindex="0" role="region" aria-label="Map canvas">
          <p class="visually-hidden">
             Interactive map region. Use the left and right arrow keys to pan horizontally. Use the Tab key to move between interactive numbered nodes.
