@@ -18,7 +18,7 @@
     const article = document.createElement('article');
     article.className = 'pb-4 border-bottom';
 
-    const heading = document.createElement('h4');
+    const heading = document.createElement('h2');
     heading.textContent = story.title || 'Untitled';
     heading.className = 'mb-2';
 

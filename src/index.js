@@ -111,7 +111,7 @@ if (mapScrollContainer) {
  */
 function chapterTitle(chapterNumber, excluded) {
   let title = findLabel(chapterNumber, processChapters({ excluded }), labels)
-  document.querySelector('#minimap-title h3').textContent = title['chap-label']
+  document.querySelector('#minimap-heading h2').textContent = title['chap-label']
 }
 
 /**
@@ -126,8 +126,8 @@ function minimapTemplate() {
         <div class="col"></div>
         <div class="col">
             <div class="row">
-              <div id="minimap-title" class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                  <h3></h3>
+              <div id="minimap-heading" class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                  <h2></h2>
               </div>
               <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
                   <svg id="main-minimap"></svg>
@@ -138,11 +138,11 @@ function minimapTemplate() {
       </div>
       <div class="row proofs-svg">
         <div class="col" id="left-svg-container">
-            <h3>Its Proof Cites...</h3>
+            <h2>Its Proof Cites...</h2>
             <div id="left-svgs"></div>
         </div>
         <div class="col" id="right-svg-container">
-            <h3>Cited in Proof of...</h3>
+            <h2>Cited in Proof of...</h2>
             <div id="right-svgs"></div>
         </div>
       </div>
@@ -177,7 +177,7 @@ function createSummaryLink(pmNumber) {
       return
   }
 
-  $('#minimap-title').append(`<a class="summary-link active" href="${link}" target="_blank" rel="noopener noreferrer">original text</a>`)
+  $('#minimap-heading').append(`<a class="summary-link active" href="${link}" target="_blank" rel="noopener noreferrer">original text</a>`)
 }
 
 /**
@@ -224,20 +224,20 @@ function generateAllRows(pmNumber) {
   // const provesCount = proves.length
   
   // Update the left header (Its Proof Cites...)
-  // $('#left-svg-container h3').text(`Its Proof Cites... (${provenByCount})`)
+  // $('#left-svg-container h2').text(`Its Proof Cites... (${provenByCount})`)
   
   // Update the right header (Cited in Proof of...)
-  // $('#right-svg-container h3').text(`Cited in Proof of... (${provesCount})`)
+  // $('#right-svg-container h2').text(`Cited in Proof of... (${provesCount})`)
   // --- END OF NEW COUNTER LOGIC ---
 
   provenBy.sort((a, b) => parseFloat(a) - parseFloat(b))
   proves.sort((a, b) => parseFloat(a) - parseFloat(b))
 
   if (provenBy.length === 0) {
-    $('#left-svg-container h3').text('no demonstration appears in text')
+    $('#left-svg-container h2').text('no demonstration appears in text')
   }
   if (proves.length === 0) {
-    $('#right-svg-container h3').text('does not appear in any demonstration')
+    $('#right-svg-container h2').text('does not appear in any demonstration')
   }
 
   provenBy.forEach((proven) => insertChapterSvgs(proven, true))

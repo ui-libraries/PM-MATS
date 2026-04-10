@@ -16,7 +16,7 @@
             --accent-hover: rgb(170, 34, 34);
             --text-primary: #2c2c2c;
             --text-secondary: #555;
-            --text-muted: #888;
+            --text-muted: #595959;
             --border: #ccc;
             --border-light: #ddd;
             --success: #2e7d32;
@@ -638,10 +638,34 @@
             opacity: 1;
             transform: scale(1, 1);
         }
+
+        .skip-link {
+            position: absolute !important;
+            overflow: hidden;
+            width: 1px;
+            height: 1px;
+            margin: -1px;
+            padding: 0;
+            border: 0;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            z-index: 9999;
+        }
+        .skip-link:focus {
+            position: static !important;
+            width: auto !important;
+            height: auto !important;
+            margin: 0;
+            padding: 10px;
+            background: #fff;
+            color: #000;
+            border: 1px solid #000;
+        }
     </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="skip-link" href="#main">Skip to main content</a>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Main navigation">
       <div class="container-fluid">
          <a class="navbar-brand" href="../map.html">Principia Mathematica</a>
          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -675,6 +699,7 @@
       </div>
    </nav>
 
+    <main id="main">
     <div class="app-container">
         <header>
             <h1>PMifier</h1>
@@ -782,6 +807,7 @@
             </div>
         </div>
     </div>
+    </main>
 
     <!-- Fullscreen Modal -->
     <div class="fullscreen-overlay" id="fullscreen-overlay">
