@@ -11,8 +11,7 @@ const data = Object.values(pm.nodes)
  * @returns {boolean} True if all input fields are empty, otherwise false.
  */
 function allInputsEmpty() {
-    console.log('allInputsEmpty')
-    let inputs = document.querySelectorAll('#principia-table input')
+    let inputs = document.querySelectorAll('#principia-table thead input')
     for (let input of inputs) {
         if (input.value.trim() !== '') {
             return false
@@ -74,6 +73,17 @@ function exportCsv() {
 export let table = new DataTable('#principia-table', {
     data: data,
     responsive: true,
+    // Without this, ~10k <tr> are created on first load and the page hangs.
+    deferRender: true,
+    columnDefs: [
+        {
+            targets: '_all',
+            createdCell: function(td, _cellData, _rowData, _rowIdx, colIdx) {
+                if (!td || typeof colIdx !== 'number') return
+                td.setAttribute('headers', `principia-col-${colIdx}`)
+            },
+        },
+    ],
     pageLength: 250,
     pagingType: 'simple_numbers',
     dom: 'pBfrtip',
@@ -144,15 +154,26 @@ export let table = new DataTable('#principia-table', {
         const api = this.api()
         api.columns().every(function() {
             const column = this
-            const title = column.header().textContent
+            const colIdx = column.index()
+            const title = column.header().textContent.trim()
+            const th = column.header()
+            const thId = `principia-col-${colIdx}`
+            th.id = thId
+            th.setAttribute('scope', 'col')
+
+            const nameId = `${thId}-name`
+            const nameSpan = document.createElement('span')
+            nameSpan.id = nameId
+            nameSpan.className = 'visually-hidden'
+            nameSpan.textContent = title
+
             const input = document.createElement('input')
             input.placeholder = title
-
-            input.setAttribute('aria-label', title)
+            input.setAttribute('aria-labelledby', nameId)
             input.setAttribute('title', title)
 
-            column.header().replaceChildren(input)
-    
+            th.replaceChildren(nameSpan, input)
+
             input.addEventListener('keyup', function() {
                 let searchTerm = this.value.trim()
                 let isExactMatch = false

@@ -85,21 +85,22 @@ document.addEventListener('DOMContentLoaded', (event) => {
   }
 })
 
-const container = document.querySelector('.content-container');
-const SCROLL_AMOUNT = 80;
+const SCROLL_AMOUNT = 80
+const mapScrollContainer = document.querySelector('.content-container')
 
-container.setAttribute('tabindex', '0');
-
-container.addEventListener('keydown', function(event) {
-  if (event.key === 'ArrowRight') {
-    event.preventDefault();
-    container.scrollLeft += SCROLL_AMOUNT;
-  }
-  if (event.key === 'ArrowLeft') {
-    event.preventDefault();
-    container.scrollLeft -= SCROLL_AMOUNT;
-  }
-});
+if (mapScrollContainer) {
+  mapScrollContainer.setAttribute('tabindex', '0')
+  mapScrollContainer.addEventListener('keydown', function(event) {
+    if (event.key === 'ArrowRight') {
+      event.preventDefault()
+      mapScrollContainer.scrollLeft += SCROLL_AMOUNT
+    }
+    if (event.key === 'ArrowLeft') {
+      event.preventDefault()
+      mapScrollContainer.scrollLeft -= SCROLL_AMOUNT
+    }
+  })
+}
 
 
 /**
